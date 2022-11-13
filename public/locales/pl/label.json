@@ -1,0 +1,20 @@
+{
+  "firstName": "Imię",
+  "lastName": "Nazwisko",
+  "email": "Adres E-Mail",
+  "password": "Hasło",
+  "signUp": "Zarejestruj się",
+  "signIn": "Zaloguj się",
+  "alreadyHaveAnAccount": "Posiadasz już konto? Zaloguj się.",
+  "success": "Powodzenie",
+  "close": "Blisko",
+  "error": "Błąd",
+  "dontYouHaveAnAccount": "Nie masz konta? Zarejestruj się.",
+  "addNewItem": "Dodaj nową pozycję",
+  "cancel": "Anuluj",
+  "save": "Ratować",
+  "easy": "Łatwy",
+  "fast": "Szybki",
+  "free": "Darmowy",
+  "rememberMe": "Zapamiętaj mnie"
+}

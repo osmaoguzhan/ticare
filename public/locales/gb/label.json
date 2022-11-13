@@ -1,0 +1,20 @@
+{
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "email": "E-Mail Address",
+  "password": "Password",
+  "signUp": "Sign Up",
+  "signIn": "Sign In",
+  "alreadyHaveAnAccount": "Already have an account? Sign in.",
+  "success": "Success",
+  "close": "Close",
+  "error": "Error",
+  "dontYouHaveAnAccount": "Don't have an account? Sign Up.",
+  "addNewItem": "Add New Item",
+  "cancel": "Cancel",
+  "save": "Save",
+  "easy": "Easy",
+  "fast": "Fast",
+  "free": "Free",
+  "rememberMe": "Remember Me"
+}

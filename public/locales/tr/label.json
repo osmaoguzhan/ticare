@@ -1,0 +1,20 @@
+{
+  "firstName": "Ad",
+  "lastName": "Soyad",
+  "email": "E-Posta Adresi",
+  "password": "Parola",
+  "signUp": "Kayıt Ol",
+  "signIn": "Giriş Yap",
+  "alreadyHaveAnAccount": "Zaten bir hesabın var mı? Giriş yap.",
+  "success": "Başarılı",
+  "close": "Kapat",
+  "error": "Hata",
+  "dontYouHaveAnAccount": "Hesabın yok mu? Kayıt ol.",
+  "addNewItem": "Yeni Öğe Ekle",
+  "cancel": "İptal",
+  "save": "Kaydet",
+  "easy": "Kolay",
+  "fast": "Hızlı",
+  "free": "Ücretsiz",
+  "rememberMe": "Beni Hatırla"
+}

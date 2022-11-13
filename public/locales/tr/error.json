@@ -1,0 +1,15 @@
+{
+  "requiredFirstname": "Ad boş bırakılamaz.",
+  "requiredLastname": "Soyad boş bırakılamaz.",
+  "requiredEmail": "E-Posta boş bırakılamaz.",
+  "requiredPassword": "Parola boş bırakılamaz.",
+  "firstNameMinLength": "Ad en az <<placeholder>> karakter olmalıdır.",
+  "firstNameMaxLength": "Ad en fazla <<placeholder>> karakter olmalıdır.",
+  "lastNameMinLength": "Soyad en az <<placeholder>> karakter olmalıdır.",
+  "lastNameMaxLength": "Soyad en fazla <<placeholder>> karakter olmalıdır.",
+  "invalidEmail": "E-Posta formatı geçersiz.",
+  "passwordMinLength": "Parola en az <<placeholder>> karakter olmalıdır.",
+  "passwordMaxLength": "Parola en fazla <<placeholder>> karakter olmalıdır.",
+  "wentWrong": "Bir şeyler ters gitti.",
+  "wrongCredentials": "Kullanıcı bilgileri yanlış."
+}
