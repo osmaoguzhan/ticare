@@ -12,7 +12,13 @@ export default function SignUp() {
   const { t } = useTranslation("label");
   const validator = Validator("signup");
   const handleOnSubmit = (formData) => {
-    console.log(formData);
+    fetch("/api/hello", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
   };
 
   return (
