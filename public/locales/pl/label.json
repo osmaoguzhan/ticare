@@ -3,6 +3,7 @@
   "lastName": "Nazwisko",
   "email": "Adres E-Mail",
   "password": "Hasło",
+  "passwordRepeat": "Powtórz hasło",
   "signUp": "Zarejestruj się",
   "signIn": "Zaloguj się",
   "alreadyHaveAnAccount": "Posiadasz już konto? Zaloguj się.",

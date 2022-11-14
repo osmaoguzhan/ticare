@@ -3,6 +3,7 @@
   "lastName": "Soyad",
   "email": "E-Posta Adresi",
   "password": "Parola",
+  "passwordRepeat": "Parola Tekrar",
   "signUp": "Kayıt Ol",
   "signIn": "Giriş Yap",
   "alreadyHaveAnAccount": "Zaten bir hesabın var mı? Giriş yap.",

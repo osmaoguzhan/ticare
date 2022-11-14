@@ -18,8 +18,6 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
     control,
     clearErrors,
     formState: { errors },
-    getValues,
-    watch,
   } = useForm();
   const router = useRouter();
 
@@ -103,7 +101,7 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
                   autoComplete={"passwordRepeat"}
                   name={"passwordRepeat"}
                   id={"passwordRepeat"}
-                  label={t("password")}
+                  label={t("passwordRepeat")}
                   fullWidth
                   type={"password"}
                   control={control}

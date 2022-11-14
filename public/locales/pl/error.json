@@ -10,6 +10,5 @@
   "invalidEmail": "E-mail jest nie prawidłowy.",
   "passwordMinLength": "Hasło powinno zawierać co najmniej <<placeholder>> znaków.",
   "passwordMaxLength": "Hasło powinno zawierać maksymalnie <<placeholder>> znaków.",
-  "wentWrong": "Coś poszło nie tak.",
-  "wrongCredentials": "Podane dane uwierzytelniające są nieprawidłowe."
+  "passwordsNotMatch": "Hasła nie pasują do siebie."
 }
