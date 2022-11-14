@@ -13,7 +13,7 @@ const SelectLanguage = () => {
 
   return (
     <Select
-      defaultValue={router.locale || "en"}
+      value={router.locale || "gb"}
       sx={{
         boxShadow: "none",
         ".MuiOutlinedInput-notchedOutline": { border: 0 },

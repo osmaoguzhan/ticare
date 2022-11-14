@@ -11,5 +11,6 @@
   "passwordMinLength": "Parola en az <<placeholder>> karakter olmalıdır.",
   "passwordMaxLength": "Parola en fazla <<placeholder>> karakter olmalıdır.",
   "wentWrong": "Bir şeyler ters gitti.",
-  "wrongCredentials": "Kullanıcı bilgileri yanlış."
+  "wrongCredentials": "Kullanıcı bilgileri yanlış.",
+  "passwordsNotMatch": "Parolalar eşleşmiyor."
 }

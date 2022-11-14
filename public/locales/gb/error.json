@@ -9,5 +9,6 @@
   "lastNameMaxLength": "Last Name should be maximally <<placeholder>> characters.",
   "invalidEmail": "E-Mail format is invalid.",
   "passwordMinLength": "Password should be minimum <<placeholder>> characters.",
-  "passwordMaxLength": "Password should be maximally <<placeholder>> characters."
+  "passwordMaxLength": "Password should be maximally <<placeholder>> characters.",
+  "passwordsNotMatch": "Passwords do not match."
 }

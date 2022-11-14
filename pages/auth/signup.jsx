@@ -5,10 +5,12 @@ import { Box, Card } from "@mui/material";
 import Footer from "@/components/footer/Footer";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import Validator from "@/utils/validator/Validator";
 // import { useForm } from "react-hook-form";
 
 export default function SignUp() {
   const { t } = useTranslation("label");
+  const validator = Validator("signup");
   const handleOnSubmit = (formData) => {
     console.log(formData);
   };
@@ -31,7 +33,11 @@ export default function SignUp() {
             border: "2px solid #f0eeeb",
             borderRadius: "30px",
           }}>
-          <SignupForm handleOnSubmit={handleOnSubmit} t={t} />
+          <SignupForm
+            handleOnSubmit={handleOnSubmit}
+            t={t}
+            validator={validator}
+          />
         </Card>
       </Box>
       <Footer />

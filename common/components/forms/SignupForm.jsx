@@ -1,7 +1,5 @@
 import {
   Button,
-  FormControlLabel,
-  Checkbox,
   Grid,
   Box,
   Typography,
@@ -9,17 +7,26 @@ import {
   darken,
 } from "@mui/material/";
 import Link from "next/link";
-import Validator from "@/utils/validator/Validator";
 import FormInput from "../inputs/FormInput";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-const SignupForm = ({ handleOnSubmit, t }) => {
+const SignupForm = ({ handleOnSubmit, t, validator }) => {
   const {
     handleSubmit,
     control,
+    clearErrors,
     formState: { errors },
+    getValues,
+    watch,
   } = useForm();
-  const validator = Validator("signup");
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(router.locale);
+    clearErrors();
+  }, [router?.locale]);
 
   return (
     <Container component={"main"} maxWidth={"xs"}>
@@ -42,7 +49,7 @@ const SignupForm = ({ handleOnSubmit, t }) => {
                 name={"firstName"}
                 fullWidth
                 id={"firstName"}
-                label={t("label:firstName")}
+                label={t("firstName")}
                 autoFocus
                 control={control}
                 errors={errors}
@@ -54,7 +61,7 @@ const SignupForm = ({ handleOnSubmit, t }) => {
                 autoComplete={"lastName"}
                 name={"lastName"}
                 id={"lastName"}
-                label={t("label:lastName")}
+                label={t("lastName")}
                 fullWidth
                 control={control}
                 errors={errors}
@@ -66,7 +73,7 @@ const SignupForm = ({ handleOnSubmit, t }) => {
                 autoComplete={"email"}
                 name={"email"}
                 id={"email"}
-                label={t("label:email")}
+                label={t("email")}
                 fullWidth
                 control={control}
                 errors={errors}
@@ -83,7 +90,7 @@ const SignupForm = ({ handleOnSubmit, t }) => {
                   autoComplete={"password"}
                   name={"password"}
                   id={"password"}
-                  label={t("label:password")}
+                  label={t("password")}
                   fullWidth
                   type={"password"}
                   control={control}
@@ -93,15 +100,15 @@ const SignupForm = ({ handleOnSubmit, t }) => {
               </Grid>
               <Grid item xs={5.9}>
                 <FormInput
-                  autoComplete={"password-repeat"}
-                  name={"password-repeat"}
-                  id={"password-repeat"}
-                  label={t("label:password")}
+                  autoComplete={"passwordRepeat"}
+                  name={"passwordRepeat"}
+                  id={"passwordRepeat"}
+                  label={t("password")}
                   fullWidth
                   type={"password"}
                   control={control}
                   errors={errors}
-                  validation={validator.password}
+                  validation={validator.passwordRepeat}
                 />
               </Grid>
             </Grid>

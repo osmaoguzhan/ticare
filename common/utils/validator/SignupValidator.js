@@ -1,23 +1,27 @@
 import Constants from "@/utils/Constants";
-import Messages from "@/utils/Messages";
+import { useTranslation } from "next-i18next";
+import { useForm } from "react-hook-form";
 
 const SignupValidator = () => {
+  const { t } = useTranslation("error");
+  const { watch } = useForm();
+
   return {
     firstName: {
       required: {
         value: true,
-        message: Messages.error.requiredFirstname,
+        message: t("requiredFirstname"),
       },
       minLength: {
         value: Constants.firstNameMin,
-        message: Messages.error.firstNameMinLength.replace(
+        message: t("firstNameMinLength").replace(
           "<<placeholder>>",
           Constants.firstNameMin.toString()
         ),
       },
       maxLength: {
         value: Constants.firstNameMax,
-        message: Messages.error.firstNameMinLength.replace(
+        message: t("firstNameMinLength").replace(
           "<<placeholder>>",
           Constants.firstNameMax.toString()
         ),
@@ -26,18 +30,18 @@ const SignupValidator = () => {
     lastName: {
       required: {
         value: true,
-        message: Messages.error.requiredLastname,
+        message: t("requiredLastname"),
       },
       minLength: {
         value: Constants.lastNameMin,
-        message: Messages.error.lastNameMinLength.replace(
+        message: t("lastNameMinLength").replace(
           "<<placeholder>>",
           Constants.lastNameMin.toString()
         ),
       },
       maxLength: {
         value: Constants.lastNameMax,
-        message: Messages.error.lastNameMaxLength.replace(
+        message: t("lastNameMaxLength").replace(
           "<<placeholder>>",
           Constants.lastNameMax.toString()
         ),
@@ -46,31 +50,39 @@ const SignupValidator = () => {
     email: {
       required: {
         value: true,
-        message: Messages.error.requiredEmail,
+        message: t("requiredEmail"),
       },
       pattern: {
         value: Constants.emailRegex,
-        message: Messages.error.invalidEmail,
+        message: t("invalidEmail"),
       },
     },
     password: {
       required: {
         value: true,
-        message: Messages.error.requiredPassword,
+        message: t("requiredPassword"),
       },
       minLength: {
         value: Constants.passwordMin,
-        message: Messages.error.passwordMinLength.replace(
+        message: t("passwordMinLength").replace(
           "<<placeholder>>",
           Constants.passwordMin.toString()
         ),
       },
       maxLength: {
         value: Constants.passwordMax,
-        message: Messages.error.passwordMaxLength.replace(
+        message: t("passwordMaxLength").replace(
           "<<placeholder>>",
           Constants.passwordMax.toString()
         ),
+      },
+    },
+    passwordRepeat: {
+      required: true,
+      validate: (val) => {
+        if (watch("password") !== val) {
+          return "Your passwords do no match";
+        }
       },
     },
   };

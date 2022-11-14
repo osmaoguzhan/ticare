@@ -1,0 +1,15 @@
+{
+  "requiredFirstname": "Imię jest wymagane.",
+  "requiredLastname": "Nazwisko jest wymagane.",
+  "requiredEmail": "Email jest wymagany.",
+  "requiredPassword": "Hasło jest wymagane.",
+  "firstNameMinLength": "Imię powinno zawierać co najmniej <<placeholder>> znaków.",
+  "firstNameMaxLength": "Imię powinno zawierać maksymalnie <<placeholder>> znaków.",
+  "lastNameMinLength": "Nazwisko powinno zawierać co najmniej <<placeholder>> znaków.",
+  "lastNameMaxLength": "Nazwisko powinno zawierać maksymalnie <<placeholder>> znaków.",
+  "invalidEmail": "E-mail jest nie prawidłowy.",
+  "passwordMinLength": "Hasło powinno zawierać co najmniej <<placeholder>> znaków.",
+  "passwordMaxLength": "Hasło powinno zawierać maksymalnie <<placeholder>> znaków.",
+  "wentWrong": "Coś poszło nie tak.",
+  "wrongCredentials": "Podane dane uwierzytelniające są nieprawidłowe."
+}
