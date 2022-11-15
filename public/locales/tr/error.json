@@ -10,5 +10,6 @@
   "invalidEmail": "E-Posta formatı geçersiz.",
   "passwordMinLength": "Parola en az <<placeholder>> karakter olmalıdır.",
   "passwordMaxLength": "Parola en fazla <<placeholder>> karakter olmalıdır.",
-  "passwordsNotMatch": "Parolalar eşleşmiyor."
+  "passwordsNotMatch": "Parolalar eşleşmiyor.",
+  "requiredPasswordRepeat": "Parola tekrarı boş bırakılamaz."
 }

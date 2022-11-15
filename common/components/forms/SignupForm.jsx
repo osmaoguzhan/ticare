@@ -17,13 +17,20 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
     handleSubmit,
     control,
     clearErrors,
+    watch,
+    reset,
     formState: { errors },
   } = useForm();
   const router = useRouter();
 
   useEffect(() => {
-    console.log(router.locale);
     clearErrors();
+    reset(
+      {},
+      {
+        keepValues: false,
+      }
+    );
   }, [router?.locale]);
 
   return (
@@ -106,7 +113,7 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
                   type={"password"}
                   control={control}
                   errors={errors}
-                  validation={validator.passwordRepeat}
+                  validation={validator.passwordRepeat(watch("password"))}
                 />
               </Grid>
             </Grid>

@@ -10,5 +10,6 @@
   "invalidEmail": "E-mail jest nie prawidłowy.",
   "passwordMinLength": "Hasło powinno zawierać co najmniej <<placeholder>> znaków.",
   "passwordMaxLength": "Hasło powinno zawierać maksymalnie <<placeholder>> znaków.",
-  "passwordsNotMatch": "Hasła nie pasują do siebie."
+  "passwordsNotMatch": "Hasła nie pasują do siebie.",
+  "requiredPasswordRepeat": "Proszę powtórzyć hasło."
 }

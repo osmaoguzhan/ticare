@@ -6,13 +6,18 @@ import Footer from "@/components/footer/Footer";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import Validator from "@/utils/validator/Validator";
-// import { useForm } from "react-hook-form";
 
 export default function SignUp() {
   const { t } = useTranslation("label");
   const validator = Validator("signup");
   const handleOnSubmit = (formData) => {
-    console.log(formData);
+    fetch("/api/hello", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
   };
 
   return (

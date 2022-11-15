@@ -1,10 +1,8 @@
 import Constants from "@/utils/Constants";
 import { useTranslation } from "next-i18next";
-import { useForm } from "react-hook-form";
 
 const SignupValidator = () => {
   const { t } = useTranslation("error");
-  const { watch } = useForm();
 
   return {
     firstName: {
@@ -77,13 +75,14 @@ const SignupValidator = () => {
         ),
       },
     },
-    passwordRepeat: {
-      required: true,
-      validate: (val) => {
-        if (watch("password") !== val) {
-          return t("passwordsNotMatch");
-        }
-      },
+    passwordRepeat: (current) => {
+      return {
+        required: {
+          value: true,
+          message: t("requiredPasswordRepeat"),
+        },
+        validate: (value) => value === current || t("passwordsNotMatch"),
+      };
     },
   };
 };
