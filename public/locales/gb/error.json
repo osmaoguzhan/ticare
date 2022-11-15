@@ -10,5 +10,6 @@
   "invalidEmail": "E-Mail format is invalid.",
   "passwordMinLength": "Password should be minimum <<placeholder>> characters.",
   "passwordMaxLength": "Password should be maximally <<placeholder>> characters.",
-  "passwordsNotMatch": "Passwords do not match."
+  "passwordsNotMatch": "Passwords do not match.",
+  "requiredPasswordRepeat": "Please repeat your password."
 }
