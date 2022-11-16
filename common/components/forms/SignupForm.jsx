@@ -5,12 +5,14 @@ import {
   Typography,
   Container,
   darken,
+  InputAdornment,
 } from "@mui/material/";
 import Link from "next/link";
 import FormInput from "../inputs/FormInput";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import PasswordInput from "../inputs/PasswordInput";
 
 const SignupForm = ({ handleOnSubmit, t, validator }) => {
   const {
@@ -91,26 +93,24 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
               xs={12}
               sx={{ display: "flex", justifyContent: "space-between" }}>
               <Grid item xs={5.9}>
-                <FormInput
+                <PasswordInput
                   autoComplete={"password"}
                   name={"password"}
                   id={"password"}
                   label={t("password")}
                   fullWidth
-                  type={"password"}
                   control={control}
                   errors={errors}
                   validation={validator.password}
                 />
               </Grid>
               <Grid item xs={5.9}>
-                <FormInput
+                <PasswordInput
                   autoComplete={"passwordRepeat"}
                   name={"passwordRepeat"}
                   id={"passwordRepeat"}
                   label={t("passwordRepeat")}
                   fullWidth
-                  type={"password"}
                   control={control}
                   errors={errors}
                   validation={validator.passwordRepeat(watch("password"))}
