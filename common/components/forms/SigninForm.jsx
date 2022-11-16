@@ -10,6 +10,7 @@ import {
 } from "@mui/material/";
 import Link from "next/link";
 import FormInput from "../inputs/FormInput";
+import PasswordInput from "../inputs/PasswordInput";
 import { useForm } from "react-hook-form";
 
 const SigninForm = ({ handleOnSubmit, t }) => {
@@ -50,13 +51,12 @@ const SigninForm = ({ handleOnSubmit, t }) => {
               container
               xs={12}
               sx={{ display: "flex", justifyContent: "space-between" }}>
-              <FormInput
-                autoComplete={"password-repeat"}
-                name={"password-repeat"}
-                id={"password-repeat"}
-                label={t("label:password")}
+              <PasswordInput
+                autoComplete={"password"}
+                name={"password"}
+                id={"password"}
+                label={t("password")}
                 fullWidth
-                type={"password"}
                 control={control}
                 errors={errors}
               />
