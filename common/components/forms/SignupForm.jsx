@@ -5,7 +5,6 @@ import {
   Typography,
   Container,
   darken,
-  InputAdornment,
 } from "@mui/material/";
 import Link from "next/link";
 import FormInput from "../inputs/FormInput";
