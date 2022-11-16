@@ -1,6 +1,6 @@
 {
-  "firstName": "Ad",
-  "lastName": "Soyad",
+  "name": "Ad",
+  "surname": "Soyad",
   "email": "E-Posta Adresi",
   "password": "Parola",
   "passwordRepeat": "Parola Tekrar",

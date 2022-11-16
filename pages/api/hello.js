@@ -4,11 +4,11 @@ import sendMail from "@/utils/helpers/mailer";
 
 export default function handler(req, res) {
   if (req.method === "POST") {
-    const { email, firstName, lastName } = req.body;
+    const { email, name, surname } = req.body;
     sendMail(
       email,
       "From Ticare App",
-      `Hello ${firstName} ${lastName}, welcome to Ticare App.`
+      `Hello ${name} ${surname}, welcome to Ticare App.`
     );
   }
 }

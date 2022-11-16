@@ -1,6 +1,6 @@
 {
-  "firstName": "Imię",
-  "lastName": "Nazwisko",
+  "name": "Imię",
+  "surname": "Nazwisko",
   "email": "Adres E-Mail",
   "password": "Hasło",
   "passwordRepeat": "Powtórz hasło",

@@ -7,6 +7,7 @@ const nextConfig = {
     EMAIL_SERVICE: process.env.EMAIL_SERVICE,
     EMAIL: process.env.EMAIL,
     EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
+    DATABASE_URL: process.env.DATABASE_URL,
   },
 };
 

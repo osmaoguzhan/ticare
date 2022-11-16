@@ -5,43 +5,43 @@ const SignupValidator = () => {
   const { t } = useTranslation("error");
 
   return {
-    firstName: {
+    name: {
       required: {
         value: true,
-        message: t("requiredFirstname"),
+        message: t("requiredName"),
       },
       minLength: {
-        value: Constants.firstNameMin,
-        message: t("firstNameMinLength").replace(
+        value: Constants.nameMin,
+        message: t("nameMinLength").replace(
           "<<placeholder>>",
-          Constants.firstNameMin.toString()
+          Constants.nameMin.toString()
         ),
       },
       maxLength: {
-        value: Constants.firstNameMax,
-        message: t("firstNameMinLength").replace(
+        value: Constants.nameMax,
+        message: t("nameMaxLength").replace(
           "<<placeholder>>",
-          Constants.firstNameMax.toString()
+          Constants.nameMax.toString()
         ),
       },
     },
-    lastName: {
+    surname: {
       required: {
         value: true,
-        message: t("requiredLastname"),
+        message: t("requiredSurname"),
       },
       minLength: {
-        value: Constants.lastNameMin,
-        message: t("lastNameMinLength").replace(
+        value: Constants.surnameMin,
+        message: t("surnameMinLength").replace(
           "<<placeholder>>",
-          Constants.lastNameMin.toString()
+          Constants.surnameMin.toString()
         ),
       },
       maxLength: {
-        value: Constants.lastNameMax,
-        message: t("lastNameMaxLength").replace(
+        value: Constants.surnameMax,
+        message: t("surnameMaxLength").replace(
           "<<placeholder>>",
-          Constants.lastNameMax.toString()
+          Constants.surnameMax.toString()
         ),
       },
     },

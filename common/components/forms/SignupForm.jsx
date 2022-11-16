@@ -50,27 +50,27 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <FormInput
-                autoComplete={"firstName"}
-                name={"firstName"}
+                autoComplete={"name"}
+                name={"name"}
                 fullWidth
-                id={"firstName"}
-                label={t("firstName")}
+                id={"name"}
+                label={t("name")}
                 autoFocus
                 control={control}
                 errors={errors}
-                validation={validator.firstName}
+                validation={validator.name}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormInput
-                autoComplete={"lastName"}
-                name={"lastName"}
-                id={"lastName"}
-                label={t("lastName")}
+                autoComplete={"surname"}
+                name={"surname"}
+                id={"surname"}
+                label={t("surname")}
                 fullWidth
                 control={control}
                 errors={errors}
-                validation={validator.lastName}
+                validation={validator.surname}
               />
             </Grid>
             <Grid item xs={12}>

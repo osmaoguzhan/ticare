@@ -6,18 +6,47 @@ import Footer from "@/components/footer/Footer";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import Validator from "@/utils/validator/Validator";
+import bcrypt from "bcryptjs";
 
 export default function SignUp() {
   const { t } = useTranslation("label");
   const validator = Validator("signup");
-  const handleOnSubmit = (formData) => {
-    fetch("/api/hello", {
-      method: "POST",
+  const handleOnSubmit = async (formData) => {
+    formData.password = await bcrypt.hash(formData.password, 10);
+    delete formData.passwordRepeat;
+    const response = await fetch("/api/auth/signup", {
       headers: {
         "Content-Type": "application/json",
       },
+      method: "POST",
       body: JSON.stringify(formData),
     });
+    const result = await response.json();
+    console.log(result);
+    // .then((res) => {
+    //   console.log((await res.json()));
+    //   console.log("====================================");
+    //   console.log("Account created successfully");
+    //   console.log("====================================");
+    // Swal.fire({
+    //   title: "Success!",
+    //   text: Messages.success.accountCreated,
+    //   icon: "success",
+    //   confirmButtonText: "OK",
+    // }).then(() => router.replace("/auth/signin"));
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    //   console.log("====================================");
+    //   console.log("Account creation failed");
+    //   console.log("====================================");
+    //   reset(
+    //     {},
+    //     {
+    //       keepValues: false,
+    //     }
+    //   );
+    // });
   };
 
   return (
