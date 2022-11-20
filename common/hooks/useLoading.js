@@ -1,10 +1,10 @@
-import { LoadingContext } from "@/contexts/loadingContext";
 import { useContext } from "react";
+import { LoadingContext } from "../contexts/LoadingContext";
 
 const useLoading = () => {
   const context = useContext(LoadingContext);
   if (!context) {
-    throw new Error("Missing provider");
+    throw new Error("useLoading must be used within LoadingProvider");
   }
   return context;
 };

@@ -4,8 +4,9 @@ import Footer from "@/components/footer/Footer";
 import { Box, Card } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import useLoading from "@/hooks/useLoading";
 
-const siginin = () => {
+const Signin = () => {
   const { t } = useTranslation("label");
   const handleOnSubmit = (formData) => {
     console.log(formData);
@@ -44,4 +45,4 @@ export const getStaticProps = async ({ locale }) => {
   };
 };
 
-export default siginin;
+export default Signin;

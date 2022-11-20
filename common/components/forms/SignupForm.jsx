@@ -43,7 +43,7 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
           flexDirection: "column",
           alignItems: "center",
         }}>
-        <Typography variant={"h4"}>{t("label:signUp")}</Typography>
+        <Typography variant={"h4"}>{t("signUp")}</Typography>
         <Box
           component={"form"}
           onSubmit={handleSubmit((d) => handleOnSubmit(d))}

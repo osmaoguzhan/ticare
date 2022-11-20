@@ -1,25 +1,37 @@
 import nodemailer from "nodemailer";
 
-const sendMail = (to, subject, message) => {
-  const transporter = nodemailer.createTransport({
-    service: process.env.EMAIL_SERVICE,
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PASSWORD,
-    },
-  });
+const send = async (options) => {
+  try {
+    let returnData = {};
+    const transporter = nodemailer.createTransport({
+      service: process.env.EMAIL_SERVICE,
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
 
-  const options = {
-    from: process.env.EMAIL,
-    to,
-    subject,
-    text: message,
-  };
+    options = {
+      ...options,
+      from: process.env.EMAIL,
+    };
 
-  transporter.sendMail(options, (error, info) => {
-    if (error) return { error: true, message: "E-Mail couldn't sent." };
-    else return { error: false, message: "E-Mail sent successfully." };
-  });
+    let mail = await transporter.sendMail(options);
+    if (mail?.messageId) {
+      returnData = {
+        success: true,
+        message: "Email sent successfully.",
+      };
+    } else {
+      returnData = {
+        success: false,
+        message: "Email not sent.",
+      };
+    }
+    return returnData;
+  } catch (err) {
+    return { success: false, message: "E-Mail couldn't sent." };
+  }
 };
 
-export default sendMail;
+export default send;
