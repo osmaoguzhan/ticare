@@ -1,14 +1,17 @@
 import { createContext, useState } from "react";
+import Loading from "@/components/Loading";
 
 export const LoadingContext = createContext({
-  loading: true,
+  isLoading: true,
   setLoading: null,
 });
 
-export function LoadingProvider({ children }) {
-  const [loading, setLoading] = useState(false);
-  const value = { loading, setLoading };
+export const LoadingProvider = ({ children }) => {
+  const [isLoading, setLoading] = useState(false);
+  const value = { isLoading, setLoading };
   return (
-    <LoadingContext.Provider value={value}>{children}</LoadingContext.Provider>
+    <LoadingContext.Provider value={value}>
+      {isLoading ? <Loading /> : children}
+    </LoadingContext.Provider>
   );
-}
+};

@@ -1,29 +1,42 @@
 import prisma from "@/lib/Prisma";
+import Constants from "@/utils/Constants";
+import send from "@/utils/helpers/mailer";
+import { Messages } from "@/utils/Messages";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { name, surname, email, password } = req.body;
+    const { locale } = req.headers;
     try {
-      await prisma.user.create({
+      const { id, settings } = await prisma.user.create({
         data: {
           name,
           surname,
           email,
           password,
+          settings: Constants.defaultSettings(locale),
         },
       });
-      console.log("====================================");
-      console.log(req.body);
-      console.log("====================================");
-      res.status(200).send({
-        success: true,
-        message: "Successfully added.",
-        data: { name, surname, email },
+      const response = await send({
+        to: email,
+        ...Constants.getMailTemplate(locale, `${name} ${surname}`, id),
       });
+      if (response.success) {
+        res.status(200).json({
+          success: true,
+          message: Messages[locale].successfullyAdded,
+          data: { id, name, surname, email, settings },
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: Messages[locale].somethingWentWrong,
+        });
+      }
     } catch (err) {
-      res.status(400).send({
+      res.status(500).send({
         success: false,
-        message: "Error occured.",
+        message: Messages[locale].errorOccurred,
         data: null,
       });
     }

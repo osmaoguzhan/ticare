@@ -20,8 +20,9 @@ model User {
   password String
   role Role @default(USER)
   picture String?
-  phoneNumber String? @unique
+  phoneNumber String?
   settings Json @default("{\"language\": \"en\", \"currency\": \"USD\",  \"timezone\": \"UTC\", \"theme\": \"light\"}")
+  isActivated Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

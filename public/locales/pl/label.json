@@ -17,5 +17,7 @@
   "easy": "Łatwy",
   "fast": "Szybki",
   "free": "Darmowy",
-  "rememberMe": "Zapamiętaj mnie"
+  "rememberMe": "Zapamiętaj mnie",
+  "accountActivated": "Swoje konto zostało aktywowane. Możesz się teraz zalogować.",
+  "goToYourAccount": "Przejdź do swojego konta"
 }
