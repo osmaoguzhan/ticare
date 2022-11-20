@@ -4,8 +4,7 @@ import { appWithTranslation } from "next-i18next";
 function Ticare({ Component, pageProps }) {
   return (
     <LoadingProvider>
-      {" "}
-      <Component {...pageProps} />{" "}
+      <Component {...pageProps} />
     </LoadingProvider>
   );
 }
