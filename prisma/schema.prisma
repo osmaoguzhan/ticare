@@ -23,7 +23,39 @@ model User {
   phoneNumber String?
   settings Json @default("{\"language\": \"en\", \"currency\": \"USD\",  \"timezone\": \"UTC\", \"theme\": \"light\"}")
   isActivated Boolean @default(false)
+  company Company?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
+model Company {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  description String?
+  address String
+  city String
+  country String
+  zipCode String
+  phoneNumber String
+  email String
+  website String?
+  owner User @relation(fields: [ownerId], references: [id])
+  ownerId String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Country {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  phone_code String
+  currency String
+  currency_name String
+  currency_symbol String
+  region String
+  subregion String
+  timezones Json[]
+  latitude String
+  longitude String
+  states Json[]
+}

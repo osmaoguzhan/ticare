@@ -8,6 +8,7 @@ export const Messages = {
     successfullyAdded: "Successfully signed up. Please check your email.",
     somethingWentWrong: "Something went wrong. Please try again later.",
     errorOccured: "Error occured.",
+    pleaseCheckCredentials: "Please check your credentials.",
   },
   tr: {
     userActivated: "Kullanıcı başarıyla aktifleştirildi.",
@@ -19,6 +20,7 @@ export const Messages = {
     somethingWentWrong:
       "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin.",
     errorOccured: "Bir hata oluştu.",
+    pleaseCheckCredentials: "Lütfen kimlik bilgilerinizi kontrol edin.",
   },
   pl: {
     userActivated: "Użytkownik został pomyślnie aktywowany.",
@@ -28,5 +30,7 @@ export const Messages = {
       "<a href='mailto:ticare.inventory.control@outlook.com'> Skontaktuj się z obsługą</a>.<br><a href='/pl'>Wróć do strony głównej</a>",
     successfullyAdded: "Pomyślnie dodano. Proszę sprawdzić swoją pocztę.",
     somethingWentWrong: "Coś poszło nie tak. Spróbuj ponownie później.",
+    errorOccured: "Wystąpił błąd.",
+    pleaseCheckCredentials: "Proszę sprawdzić dane logowania.",
   },
 };

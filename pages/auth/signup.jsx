@@ -1,8 +1,5 @@
-import { useEffect } from "react";
 import SignupForm from "@/components/forms/SignupForm";
-import Navbar from "@/components/navbar/MainPageNavbar";
 import { Box, Card } from "@mui/material";
-import Footer from "@/components/footer/Footer";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import Validator from "@/utils/validator/Validator";
@@ -10,6 +7,7 @@ import bcrypt from "bcryptjs";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import useLoading from "@/hooks/useLoading";
+import AuthLayout from "@/components/layouts/AuthLayout";
 
 const SignUp = () => {
   const { t } = useTranslation("label");
@@ -48,36 +46,30 @@ const SignUp = () => {
   };
 
   return (
-    <>
-      <Navbar />
-      <Box
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "85vh",
+        bgcolor: "rgb(78,115,223)",
+      }}>
+      <Card
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          minHeight: "85vh",
-          bgcolor: "rgb(78,115,223)",
+          padding: 5,
+          border: "2px solid #f0eeeb",
+          borderRadius: "30px",
         }}>
-        <Card
-          sx={{
-            padding: 5,
-            border: "2px solid #f0eeeb",
-            borderRadius: "30px",
-          }}>
-          <SignupForm
-            handleOnSubmit={handleOnSubmit}
-            t={t}
-            validator={validator}
-          />
-        </Card>
-      </Box>
-      <Footer />
-    </>
+        <SignupForm
+          handleOnSubmit={handleOnSubmit}
+          t={t}
+          validator={validator}
+        />
+      </Card>
+    </Box>
   );
 };
-
-export default SignUp;
 
 export const getStaticProps = async ({ locale }) => {
   return {
@@ -86,3 +78,6 @@ export const getStaticProps = async ({ locale }) => {
     },
   };
 };
+
+SignUp.Layout = AuthLayout;
+export default SignUp;

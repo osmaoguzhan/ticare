@@ -1,4 +1,4 @@
-import prisma from "@/lib/Prisma";
+import prisma from "@/lib/prismaConnector";
 import { Messages } from "@/utils/Messages";
 
 export default async function handler(req, res) {

@@ -1,4 +1,4 @@
-import prisma from "@/lib/Prisma";
+import prisma from "@/lib/prismaConnector";
 import Constants from "@/utils/Constants";
 import send from "@/utils/helpers/mailer";
 import { Messages } from "@/utils/Messages";

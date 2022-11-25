@@ -9,6 +9,8 @@ const nextConfig = {
     EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
     DATABASE_URL: process.env.DATABASE_URL,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    ALGORITHM: process.env.ALGORITHM,
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   },
 };
 
