@@ -19,5 +19,11 @@
   "free": "Darmowy",
   "rememberMe": "Zapamiętaj mnie",
   "accountActivated": "Swoje konto zostało aktywowane. Możesz się teraz zalogować.",
-  "goToYourAccount": "Przejdź do swojego konta"
+  "goToYourAccount": "Przejdź do swojego konta",
+  "dashboard": "Deska rozdzielcza",
+  "brands": "Marki",
+  "stores": "Sklepy",
+  "orders": "Zamówienia",
+  "products": "Produkty",
+  "settings": "Ustawienia"
 }

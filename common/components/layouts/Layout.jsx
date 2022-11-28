@@ -20,19 +20,22 @@ import {
   faStore,
   faTags,
 } from "@fortawesome/free-solid-svg-icons";
-import Navbar from "../navbar/MainPageNavbar";
 import { Avatar, Grid } from "@mui/material";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 const drawerWidth = 240;
 
-export default function PermanentDrawerLeft({ children }) {
+const Sidebar = ({ children, ppicture }) => {
+  const { t } = useTranslation("label");
+  const router = useRouter();
   const menuItems = [
-    { text: "Dashboard", icon: faDashboard },
-    { text: "Brands", icon: faTags },
-    { text: "Stores", icon: faStore },
-    { text: "Orders", icon: faEuro },
-    { text: "Products", icon: faCubes },
-    { text: "Settings", icon: faCogs },
+    { key: "dashboard", text: t("dashboard"), icon: faDashboard },
+    { key: "brands", text: t("brands"), icon: faTags },
+    { key: "stores", text: t("stores"), icon: faStore },
+    { key: "orders", text: t("orders"), icon: faEuro },
+    { key: "products", text: t("products"), icon: faCubes },
+    { key: "settings", text: t("settings"), icon: faCogs },
   ];
 
   return (
@@ -64,14 +67,25 @@ export default function PermanentDrawerLeft({ children }) {
             </Grid>
             <Grid item margin={2}>
               <Avatar sx={{ width: 48, height: 48 }}>
-                <Box
-                  component={"img"}
-                  alt={"ppicture"}
-                  src={"https://picsum.photos/200"}
-                  sx={{
-                    cursor: "pointer",
-                  }}
-                />
+                {ppicture ? (
+                  <Box
+                    component={"img"}
+                    alt={"ppicture"}
+                    src={ppicture}
+                    sx={{
+                      cursor: "pointer",
+                    }}
+                  />
+                ) : (
+                  <Box
+                    component={"div"}
+                    sx={{
+                      cursor: "pointer",
+                    }}>
+                    {" "}
+                    O{" "}
+                  </Box>
+                )}
               </Avatar>
             </Grid>
           </Grid>
@@ -129,9 +143,9 @@ export default function PermanentDrawerLeft({ children }) {
           </Box>
         </List>
         <List>
-          {menuItems.map(({ text, icon }) => (
+          {menuItems.map(({ text, icon, key }) => (
             <ListItem key={text}>
-              <ListItemButton>
+              <ListItemButton onClick={() => router.replace(`/${key}`)}>
                 <FontAwesomeIcon icon={icon} />
                 <ListItemText primary={text} sx={{ marginLeft: 1 }} />
               </ListItemButton>
@@ -153,4 +167,14 @@ export default function PermanentDrawerLeft({ children }) {
       </Box>
     </Box>
   );
-}
+};
+
+export const getStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? "gb", ["label", "error"])),
+    },
+  };
+};
+
+export default Sidebar;

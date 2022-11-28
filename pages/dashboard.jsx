@@ -6,8 +6,6 @@ import { useEffect } from "react";
 
 const Dashboard = () => {
   const { data: session } = useSession();
-
-  console.log(session);
   const { setLoading } = useLoading();
   useEffect(() => {
     setLoading(false);
