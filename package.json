@@ -24,6 +24,7 @@
     "apexcharts": "3.36.3",
     "aws-sdk": "2.1251.0",
     "bcryptjs": "2.4.3",
+    "crypto": "1.0.1",
     "exceljs": "4.3.0",
     "formidable": "2.0.1",
     "i18next": "22.0.5",
