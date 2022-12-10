@@ -1,3 +1,12 @@
+import {
+  faCogs,
+  faCubes,
+  faDashboard,
+  faEuro,
+  faStore,
+  faTags,
+} from "@fortawesome/free-solid-svg-icons";
+
 const Constants = {
   languageOptions: ["pl", "tr", "gb"],
   nameMin: 2,
@@ -69,6 +78,14 @@ const Constants = {
         };
     }
   },
+  menuItems: [
+    { key: "dashboard", icon: faDashboard },
+    { key: "brands", icon: faTags },
+    { key: "stores", icon: faStore },
+    { key: "orders", icon: faEuro },
+    { key: "products", icon: faCubes },
+    { key: "settings", icon: faCogs },
+  ],
 };
 
 module.exports = Constants;

@@ -1,15 +1,19 @@
 import { styled, useTheme } from "@mui/material/styles";
-import { Box, Drawer } from "@mui/material";
+import {
+  Box,
+  Drawer,
+  Toolbar,
+  List,
+  Typography,
+  IconButton,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Avatar,
+  Grid,
+} from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "@fortawesome/fontawesome-svg-core/styles.css";
 import {
   faBars,
   faBoxOpen,
@@ -22,15 +26,12 @@ import {
   faTags,
 } from "@fortawesome/free-solid-svg-icons";
 import useScreen from "@/hooks/useScreen";
-import { useState, useEffect } from "react";
-import { Avatar, Grid } from "@mui/material";
+import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { useCallback } from "react";
-import Main from "../Main";
-import Footer from "../footer/Footer";
-
-const drawerwidth = 245;
+import Main from "@/components/Main";
+import Constants from "@/utils/Constants";
+import { useSession } from "next-auth/react";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -40,8 +41,8 @@ const AppBar = styled(MuiAppBar, {
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
-    width: `calc(100% - ${drawerwidth}px)`,
-    marginLeft: `${drawerwidth}px`,
+    width: `calc(100% - 245px)`,
+    marginLeft: `245px`,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
@@ -49,7 +50,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const DrawerHeader = styled("div")(({ theme }) => ({
+const DrawerHeader = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.spacing(0, 1),
@@ -62,21 +63,9 @@ const ResponsiveSidebar = ({ ppicture, children }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
   const { t } = useTranslation("label");
-  const menuItems = [
-    {
-      key: "dashboard",
-      text: t("dashboard"),
-      icon: faDashboard,
-      link: "/dashboard",
-    },
-    { key: "brands", text: t("brands"), icon: faTags, link: "/brands" },
-    { key: "stores", text: t("stores"), icon: faStore, link: "/stores" },
-    { key: "orders", text: t("orders"), icon: faEuro, link: "/orders" },
-    { key: "products", text: t("products"), icon: faCubes, link: "/products" },
-    { key: "settings", text: t("settings"), icon: faCogs, link: "/settings" },
-  ];
-
   const router = useRouter();
+  const { data: session } = useSession();
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -132,8 +121,7 @@ const ResponsiveSidebar = ({ ppicture, children }) => {
                     sx={{
                       cursor: "pointer",
                     }}>
-                    {" "}
-                    O{" "}
+                    {session.user.name.charAt(0).toUpperCase()}
                   </Box>
                 )}
               </Avatar>
@@ -143,10 +131,10 @@ const ResponsiveSidebar = ({ ppicture, children }) => {
       </AppBar>
       <Drawer
         sx={{
-          width: drawerwidth,
+          width: "245px",
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            width: drawerwidth,
+            width: "245px",
             boxSizing: "border-box",
             backgroundColor: "rgb(78,115,223)",
           },
@@ -207,12 +195,12 @@ const ResponsiveSidebar = ({ ppicture, children }) => {
           </Grid>
         </DrawerHeader>
         <List>
-          {menuItems.map(({ text, icon, link }) => (
-            <ListItem key={text}>
-              <ListItemButton onClick={() => router.push(link)}>
+          {Constants.menuItems.map(({ key, icon }) => (
+            <ListItem key={t(key)}>
+              <ListItemButton onClick={() => router.push(`/${key}`)}>
                 <FontAwesomeIcon icon={icon} fixedWidth color={"#f4f4f4"} />
                 <ListItemText
-                  primary={text}
+                  primary={t(key)}
                   sx={{ marginLeft: 1, color: "#f4f4f4" }}
                 />
               </ListItemButton>
@@ -220,7 +208,7 @@ const ResponsiveSidebar = ({ ppicture, children }) => {
           ))}
         </List>
       </Drawer>
-      <Main open={open} drawerwidth={drawerwidth}>
+      <Main open={open}>
         <Toolbar />
         {children}
       </Main>

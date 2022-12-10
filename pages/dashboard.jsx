@@ -6,20 +6,39 @@ import {
   faCube,
   faMoneyCheckDollar,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  Avatar,
-  Box,
-} from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect } from "react";
 
 const Dashboard = () => {
+  const cardData = [
+    {
+      text: "Total Products",
+      value: 0,
+      color: "#1cc88a",
+      icon: faCube,
+    },
+    {
+      text: "Total Value",
+      value: 0,
+      color: "#858796",
+      icon: faMoneyCheckDollar,
+    },
+    {
+      text: "Out of Stock",
+      value: 0,
+      color: "#e74a3b",
+      icon: faChevronDown,
+    },
+    {
+      text: "Pending",
+      value: 0,
+      color: "#4e73df",
+      icon: faChevronDown,
+    },
+  ];
+
   const { data: session } = useSession();
   const { setLoading } = useLoading();
   useEffect(() => {
@@ -34,18 +53,16 @@ const Dashboard = () => {
       </Grid>
       <Grid item xs={12}>
         <Grid container spacing={4}>
-          <Grid item xs={3} md={3}>
-            <InfoCard text={"Total Products"} color={"#1cc88a"} />
-          </Grid>
-          <Grid item xs={3} md={3}>
-            <InfoCard text={"Total Value"} color={"#858796"} />
-          </Grid>
-          <Grid item xs={3} md={3}>
-            <InfoCard text={"Out of Stock"} color={"#e74a3b"} />
-          </Grid>
-          <Grid item xs={3} md={3}>
-            <InfoCard text={"Pending"} color={"#4e73df"} />
-          </Grid>
+          {cardData.map((card, index) => (
+            <Grid item xs={3} md={3} key={index}>
+              <InfoCard
+                text={card.text}
+                color={card.color}
+                value={card.value}
+                icon={card.icon}
+              />
+            </Grid>
+          ))}
         </Grid>
       </Grid>
     </Grid>
