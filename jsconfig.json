@@ -5,6 +5,7 @@
       "@/components/*": ["./common/components/*"],
       "@/contexts/*": ["./common/contexts/*"],
       "@/hooks/*": ["./common/hooks/*"],
+      "@/styles/*": ["./common/styles/*"],
       "@/lib/*": ["./common/lib/*"],
       "@/utils/*": ["./common/utils/*"],
       "@/validator": ["./common/utils/validator/validator"]
