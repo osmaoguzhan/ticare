@@ -42,11 +42,7 @@ const Dashboard = () => {
 
   const { data: session } = useSession();
   const { setLoading } = useLoading();
-  const [value, setValue] = useLocalStorage("user", session?.user);
 
-  // useEffect(() => {
-  //   setValue(session?.user);
-  // }, []);
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} sx={{ m: 1.5 }}>
