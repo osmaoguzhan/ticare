@@ -1,4 +1,4 @@
-import ResponsiveSidebar from "@/components/layouts/ResponsiveSidebar";
+import Layout from "@/components/layouts/Layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Orders = () => {
@@ -13,6 +13,6 @@ export const getStaticProps = async ({ locale }) => {
   };
 };
 
-Orders.Layout = ResponsiveSidebar;
+Orders.Layout = Layout;
 
 export default Orders;

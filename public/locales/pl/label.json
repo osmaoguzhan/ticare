@@ -25,5 +25,7 @@
   "stores": "Sklepy",
   "orders": "Zamówienia",
   "products": "Produkty",
-  "settings": "Ustawienia"
+  "settings": "Ustawienia",
+  "logout": "Wyloguj",
+  "profile": "Profil"
 }

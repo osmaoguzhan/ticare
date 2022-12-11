@@ -1,4 +1,4 @@
-import ResponsiveSidebar from "@/components/layouts/ResponsiveSidebar";
+import Layout from "@/components/layouts/Layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Profile = () => {
@@ -13,6 +13,6 @@ export const getStaticProps = async ({ locale }) => {
   };
 };
 
-Profile.Layout = ResponsiveSidebar;
+Profile.Layout = Layout;
 
 export default Profile;

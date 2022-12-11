@@ -25,5 +25,7 @@
   "stores": "Mağazalar",
   "orders": "Siparişler",
   "products": "Ürünler",
-  "settings": "Ayarlar"
+  "settings": "Ayarlar",
+  "logout": "Çıkış Yap",
+  "profile": "Profil"
 }

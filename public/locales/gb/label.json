@@ -25,5 +25,7 @@
   "stores": "Stores",
   "orders": "Orders",
   "products": "Products",
-  "settings": "Settings"
+  "settings": "Settings",
+  "logout": "Logout",
+  "profile": "Profile"
 }
