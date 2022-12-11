@@ -10,13 +10,12 @@ import { useRouter } from "next/router";
 import AuthLayout from "@/components/layouts/AuthLayout";
 import { useSession } from "next-auth/react";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import { redirect } from "@/utils/helpers/redirect";
 
 const Signin = () => {
   const { setLoading } = useLoading();
   const { t } = useTranslation("label");
   const router = useRouter();
-  const { data: session } = useSession();
-  const [_, setValue] = useLocalStorage("user", {});
 
   const handleOnSubmit = async (formData) => {
     setLoading(true);
@@ -28,7 +27,6 @@ const Signin = () => {
       locale: router.locale,
     });
     if (ok) {
-      setValue(session?.user);
       router.replace("/dashboard").then(() => setLoading(false));
     }
     if (error) {
@@ -63,10 +61,12 @@ const Signin = () => {
   );
 };
 
-export const getStaticProps = async ({ locale }) => {
+export const getServerSideProps = async (ctx) => {
+  const shouldRedirect = await redirect(ctx);
+  if (shouldRedirect) return shouldRedirect;
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "gb", ["label", "error"])),
+      ...(await serverSideTranslations(ctx.locale ?? "gb", ["label", "error"])),
     },
   };
 };

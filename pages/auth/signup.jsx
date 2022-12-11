@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import useLoading from "@/hooks/useLoading";
 import AuthLayout from "@/components/layouts/AuthLayout";
+import { redirect } from "@/utils/helpers/redirect";
 
 const SignUp = () => {
   const { t } = useTranslation("label");
@@ -71,10 +72,12 @@ const SignUp = () => {
   );
 };
 
-export const getStaticProps = async ({ locale }) => {
+export const getServerSideProps = async (ctx) => {
+  const shouldRedirect = redirect(ctx);
+  if (shouldRedirect) return shouldRedirect;
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "gb", ["label", "error"])),
+      ...(await serverSideTranslations(ctx.locale ?? "gb", ["label", "error"])),
     },
   };
 };

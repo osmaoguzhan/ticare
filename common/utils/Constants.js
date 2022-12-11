@@ -5,6 +5,8 @@ import {
   faEuro,
   faStore,
   faTags,
+  faSignOut,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Constants = {
@@ -85,6 +87,10 @@ const Constants = {
     { key: "orders", icon: faEuro },
     { key: "products", icon: faCubes },
     { key: "settings", icon: faCogs },
+  ],
+  avatarOnClick: [
+    { key: "profile", icon: faUser },
+    { key: "logout", icon: faSignOut },
   ],
 };
 

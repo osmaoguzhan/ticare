@@ -1,6 +1,7 @@
 import InfoCard from "@/components/dashboard/InfoCard";
-import ResponsiveSidebar from "@/components/layouts/ResponsiveSidebar";
+import Layout from "@/components/layouts/Layout";
 import useLoading from "@/hooks/useLoading";
+import useLocalStorage from "@/hooks/useLocalStorage";
 import {
   faChevronDown,
   faCube,
@@ -9,6 +10,7 @@ import {
 import { Typography, Grid } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useEffect } from "react";
 
 const Dashboard = () => {
   const cardData = [
@@ -40,6 +42,7 @@ const Dashboard = () => {
 
   const { data: session } = useSession();
   const { setLoading } = useLoading();
+
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} sx={{ m: 1.5 }}>
@@ -73,6 +76,6 @@ export const getStaticProps = async ({ locale }) => {
   };
 };
 
-Dashboard.Layout = ResponsiveSidebar;
+Dashboard.Layout = Layout;
 
 export default Dashboard;

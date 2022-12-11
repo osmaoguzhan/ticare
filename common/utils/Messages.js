@@ -9,6 +9,7 @@ export const Messages = {
     somethingWentWrong: "Something went wrong. Please try again later.",
     errorOccured: "Error occured.",
     pleaseCheckCredentials: "Please check your credentials.",
+    pleaseLogin: "Please login.",
   },
   tr: {
     userActivated: "Kullanıcı başarıyla aktifleştirildi.",
@@ -21,6 +22,7 @@ export const Messages = {
       "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin.",
     errorOccured: "Bir hata oluştu.",
     pleaseCheckCredentials: "Lütfen kimlik bilgilerinizi kontrol edin.",
+    pleaseLogin: "Lütfen giriş yapın.",
   },
   pl: {
     userActivated: "Użytkownik został pomyślnie aktywowany.",
@@ -32,5 +34,6 @@ export const Messages = {
     somethingWentWrong: "Coś poszło nie tak. Spróbuj ponownie później.",
     errorOccured: "Wystąpił błąd.",
     pleaseCheckCredentials: "Proszę sprawdzić dane logowania.",
+    pleaseLogin: "Proszę się zalogować.",
   },
 };

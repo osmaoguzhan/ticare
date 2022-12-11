@@ -11,6 +11,8 @@ import {
   ListItemText,
   Avatar,
   Grid,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,7 +27,8 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import Main from "@/components/Main";
 import Constants from "@/utils/Constants";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -52,13 +55,15 @@ const DrawerHeader = styled(Box)(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-const ResponsiveSidebar = ({ ppicture, children }) => {
+const Layout = ({ ppicture, children }) => {
   const { width } = useScreen();
   const theme = useTheme();
   const [open, setOpen] = useState(true);
+  const [userMenu, setUserMenu] = useState(null);
   const { t } = useTranslation("label");
   const router = useRouter();
   const { data: session } = useSession();
+  const [_, setUser, clear] = useLocalStorage("user", session?.user);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -67,6 +72,26 @@ const ResponsiveSidebar = ({ ppicture, children }) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleOpenUserMenu = (event) => {
+    setUserMenu(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = (e) => {
+    setUserMenu(null);
+    if (e.target.textContent === "Logout") {
+      clear("user");
+      signOut({ callbackUrl: "/auth/signin" });
+    } else if (e.target.textContent === "Profile") {
+      router.push("/profile");
+    }
+  };
+
+  useEffect(() => {
+    if (session?.user) {
+      setUser(session?.user);
+    }
+  }, []);
 
   const cb = useCallback(() => setOpen(width > 600), [width]);
 
@@ -99,7 +124,9 @@ const ResponsiveSidebar = ({ ppicture, children }) => {
             justifyContent={"flex-end"}
             alignContent={"center"}>
             <Grid item margin={2}>
-              <Avatar sx={{ width: 48, height: 48 }}>
+              <Avatar
+                sx={{ width: 48, height: 48, cursor: "pointer" }}
+                onClick={handleOpenUserMenu}>
                 {ppicture ? (
                   <Box
                     component={"img"}
@@ -206,8 +233,30 @@ const ResponsiveSidebar = ({ ppicture, children }) => {
         <Toolbar />
         {children}
       </Main>
+      <Menu
+        sx={{ mt: "45px" }}
+        anchorEl={userMenu}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={Boolean(userMenu)}
+        onClose={handleCloseUserMenu}>
+        {Constants.avatarOnClick.map(({ key, icon }) => (
+          <MenuItem key={key} onClick={handleCloseUserMenu}>
+            <Grid container>
+              <Grid item xs={10}>
+                <Typography textAlign='center'>{t(key)}</Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <FontAwesomeIcon icon={icon} fixedWidth />
+              </Grid>
+            </Grid>
+          </MenuItem>
+        ))}
+      </Menu>
     </Box>
   );
 };
 
-export default ResponsiveSidebar;
+export default Layout;

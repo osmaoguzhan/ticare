@@ -22,7 +22,14 @@ const useLocalStorage = (key, initialValue) => {
       }
     } catch (e) {}
   };
-  return [storedValue, setValue];
+  const clearKey = () => {
+    try {
+      if (typeof window !== "undefined") {
+        window.localStorage.removeItem(key);
+      }
+    } catch (e) {}
+  };
+  return [storedValue, setValue, clearKey];
 };
 
 export default useLocalStorage;
