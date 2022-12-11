@@ -27,14 +27,21 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async session({ session }) {
-      let sessionUser = await prisma.user.findUnique({
-        where: {
-          email: session.user.email,
-        },
-      });
-      session._id = sessionUser.id;
+    async session({ session, user, token }) {
+      session.user = token.user;
       return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token["user"] = {};
+        token.user.id = user.id;
+        token.user.email = user.email;
+        token.user.name = user.name;
+        token.user.surname = user.surname;
+        token.user.role = user.role;
+        token.user.settings = user.settings;
+      }
+      return token;
     },
   },
   pages: {

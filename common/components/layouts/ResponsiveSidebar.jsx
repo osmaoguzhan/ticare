@@ -18,12 +18,6 @@ import {
   faBars,
   faBoxOpen,
   faChevronLeft,
-  faCogs,
-  faCubes,
-  faDashboard,
-  faEuro,
-  faStore,
-  faTags,
 } from "@fortawesome/free-solid-svg-icons";
 import useScreen from "@/hooks/useScreen";
 import { useState, useEffect, useCallback } from "react";

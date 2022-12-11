@@ -8,11 +8,16 @@ import useLoading from "@/hooks/useLoading";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import AuthLayout from "@/components/layouts/AuthLayout";
+import { useSession } from "next-auth/react";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 const Signin = () => {
   const { setLoading } = useLoading();
   const { t } = useTranslation("label");
   const router = useRouter();
+  const { data: session } = useSession();
+  const [_, setValue] = useLocalStorage("user", {});
+
   const handleOnSubmit = async (formData) => {
     setLoading(true);
     formData.password = encrypt(formData.password);
@@ -23,6 +28,7 @@ const Signin = () => {
       locale: router.locale,
     });
     if (ok) {
+      setValue(session?.user);
       router.replace("/dashboard").then(() => setLoading(false));
     }
     if (error) {
@@ -66,4 +72,5 @@ export const getStaticProps = async ({ locale }) => {
 };
 
 Signin.Layout = AuthLayout;
+
 export default Signin;

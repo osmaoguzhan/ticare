@@ -9,7 +9,6 @@ import {
 import { Typography, Grid } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useEffect } from "react";
 
 const Dashboard = () => {
   const cardData = [
@@ -41,9 +40,6 @@ const Dashboard = () => {
 
   const { data: session } = useSession();
   const { setLoading } = useLoading();
-  useEffect(() => {
-    setLoading(false);
-  }, []);
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} sx={{ m: 1.5 }}>
