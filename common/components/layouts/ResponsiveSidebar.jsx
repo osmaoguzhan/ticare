@@ -121,7 +121,7 @@ const ResponsiveSidebar = ({ ppicture, children }) => {
                     sx={{
                       cursor: "pointer",
                     }}>
-                    {session.user.name.charAt(0).toUpperCase()}
+                    {session?.user?.name.charAt(0).toUpperCase()}
                   </Box>
                 )}
               </Avatar>
