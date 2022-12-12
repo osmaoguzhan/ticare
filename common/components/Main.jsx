@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-  ({ theme, open, drawerwidth }) => ({
+  ({ theme, open }) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
@@ -15,6 +15,8 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
         duration: theme.transitions.duration.enteringScreen,
       }),
       marginLeft: 0,
+      marginRight: 0,
+      backgroundColor: "#f8f9fc",
     }),
   })
 );

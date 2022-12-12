@@ -44,6 +44,7 @@ const AppBar = styled(MuiAppBar, {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    backgroundColor: "#fff",
   }),
 }));
 
@@ -102,7 +103,8 @@ const Layout = ({ ppicture, children }) => {
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar position='fixed' open={open}>
-        <Toolbar sx={{ backgroundColor: "#fff" }}>
+        <Toolbar
+          sx={{ backgroundColor: "#fff", marginLeft: 0, marginRight: 0 }}>
           <IconButton
             color='inherit'
             aria-label='open drawer'
