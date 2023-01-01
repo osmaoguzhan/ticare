@@ -7,11 +7,11 @@ import {
   darken,
 } from "@mui/material/";
 import Link from "next/link";
-import FormInput from "../inputs/FormInput";
+import FormInput from "../../inputs/FormInput";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import PasswordInput from "../inputs/PasswordInput";
+import PasswordInput from "../../inputs/PasswordInput";
 
 const SignupForm = ({ handleOnSubmit, t, validator }) => {
   const {
