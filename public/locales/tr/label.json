@@ -27,5 +27,9 @@
   "products": "Ürünler",
   "settings": "Ayarlar",
   "logout": "Çıkış Yap",
-  "profile": "Profil"
+  "profile": "Profil",
+  "phone": "Telefon Numarası",
+  "saveSettings": "Ayarları Kaydet",
+  "userSettings": "Kullanıcı Ayarları",
+  "changePassword": "Parola Değiştir"
 }

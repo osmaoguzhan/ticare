@@ -27,5 +27,9 @@
   "products": "Produkty",
   "settings": "Ustawienia",
   "logout": "Wyloguj",
-  "profile": "Profil"
+  "profile": "Profil",
+  "phone": "Numer telefonu",
+  "saveSettings": "Zapisz ustawienia",
+  "userSettings": "Ustawienia użytkownika",
+  "changePassword": "Zmień hasło"
 }

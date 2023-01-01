@@ -1,58 +1,110 @@
+import SelectInput from "@/components/inputs/SelectInput";
 import { Button, FormLabel, Grid, TextField } from "@mui/material";
+import Constants from "@/utils/Constants";
+import FormInput from "@/components/inputs/FormInput";
+import { useTranslation } from "next-i18next";
+import { useForm } from "react-hook-form";
 
-const UserSettingsForm = () => {
+const UserSettingsForm = ({ locale }) => {
+  const { t } = useTranslation("label");
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={6}>
-        <FormLabel sx={{ color: "black" }}>First Name</FormLabel>
-        <TextField
+    <Grid container spacing={1}>
+      <Grid item xs={12} md={6} lg={6}>
+        <FormInput
+          autoComplete={"name"}
+          name={"name"}
           fullWidth
-          label='First Name'
-          name='firstName'
-          type='text'
-          placeholder='First Name'
-          required
+          id={"name"}
+          label={t("name")}
+          control={control}
+          errors={errors}
+          // validation={validator.name}
         />
       </Grid>
-      <Grid item xs={6}>
-        <FormLabel sx={{ color: "black" }}>Last Name</FormLabel>
-        <TextField
+      <Grid item xs={12} md={6} lg={6}>
+        <FormInput
+          autoComplete={"surname"}
+          name={"surname"}
+          id={"surname"}
+          label={t("surname")}
           fullWidth
-          label='Last Name'
-          name='lastName'
-          type='text'
-          placeholder='Last Name'
-          required
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <FormLabel sx={{ color: "black" }}>Email</FormLabel>
-        <TextField
-          fullWidth
-          label='Email'
-          name='email'
-          type='email'
-          placeholder='Email'
-          required
+          control={control}
+          errors={errors}
+          // validation={validator.surname}
         />
       </Grid>
       <Grid item xs={12}>
-        <FormLabel sx={{ color: "black" }}>Phone</FormLabel>
-        <TextField
+        <FormInput
+          autoComplete={"email"}
+          name={"email"}
+          id={"email"}
+          label={t("email")}
           fullWidth
-          label='Phone'
-          name='phone'
-          type='text'
-          placeholder='Phone'
-          required
+          control={control}
+          errors={errors}
+          disabled
+          // validation={validator.email}
         />
+      </Grid>
+      <Grid item xs={12}>
+        <FormInput
+          autoComplete={"phone"}
+          name={"phone"}
+          id={"phone"}
+          label={t("phone")}
+          fullWidth
+          control={control}
+          errors={errors}
+          // validation={validator.email}
+        />
+      </Grid>
+      <Grid item container spacing={2}>
+        <Grid item xs={12} md={4} lg={4} mt={1.5}>
+          <SelectInput
+            name={"language"}
+            label={"Language"}
+            id={"language"}
+            control={control}
+            options={Constants.languageOptions[locale]}
+          />
+        </Grid>
+        <Grid item xs={12} md={4} lg={4} mt={1.5}>
+          <SelectInput
+            name={"currency"}
+            label={"Currency"}
+            id={"currency"}
+            control={control}
+            options={Constants.languageOptions[locale]}
+          />
+        </Grid>
+        <Grid item xs={12} md={4} lg={4} mt={1.5}>
+          <SelectInput
+            name={"timezone"}
+            label={"Timezone"}
+            id={"timezone"}
+            control={control}
+            options={Constants.languageOptions[locale]}
+          />
+        </Grid>
       </Grid>
       <Grid item xs={12}>
         <Button
           fullWidth
-          variant='contained'
-          sx={{ backgroundColor: "#4e73df" }}>
-          Save Settings
+          variant="contained"
+          sx={{ backgroundColor: "#4e73df", mt: 2 }}
+          onClick={handleSubmit(onSubmit)}
+        >
+          {t("saveSettings")}
         </Button>
       </Grid>
     </Grid>

@@ -15,8 +15,10 @@ import {
   Typography,
 } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
-const Profile = () => {
+const Profile = ({ locale }) => {
+  const { t } = useTranslation("label");
   return (
     <Grid
       container
@@ -24,16 +26,18 @@ const Profile = () => {
         display: "flex",
         justifyContent: "space-between",
         backgroundColor: "#f8f9fc",
-      }}>
+      }}
+    >
       <Grid item xs={12}>
         <Typography
-          variant='h4'
-          component='h1'
+          variant="h4"
+          component="h1"
           sx={{
             color: "#3a3b45",
             fontFamily: "Nunito, sans-serif",
-          }}>
-          Profile
+          }}
+        >
+          {t("profile")}
         </Typography>
       </Grid>
       <Grid
@@ -41,7 +45,8 @@ const Profile = () => {
         xs={12}
         md={12}
         lg={4}
-        sx={{ p: 1, display: "flex", flexDirection: "column" }}>
+        sx={{ p: 1, display: "flex", flexDirection: "column" }}
+      >
         <Grid item xs={12} sx={{ p: 1 }}>
           <Paper
             sx={{
@@ -49,7 +54,8 @@ const Profile = () => {
               pt: 10,
               pb: 10,
               textAlign: "center",
-            }}>
+            }}
+          >
             <Avatar
               alt={"Profile Picture"}
               src={"/images/linkedin.jpeg"}
@@ -61,13 +67,14 @@ const Profile = () => {
             />
             <Button
               fullWidth
-              variant='contained'
+              variant="contained"
               sx={{
                 backgroundColor: "#4e73df",
                 width: "50%",
                 color: "white",
                 mt: 4,
-              }}>
+              }}
+            >
               Change
             </Button>
           </Paper>
@@ -75,14 +82,15 @@ const Profile = () => {
         <Grid item xs={12} sx={{ p: 1 }}>
           <Card sx={{ p: 2 }}>
             <CardHeader
-              title='Change Password'
+              title="Change Password"
               sx={{ backgroundColor: "#f8f9fc", color: "#4e73df" }}
             />
             <CardContent
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-              }}>
+              }}
+            >
               <NewPasswordForm />
             </CardContent>
           </Card>
@@ -94,34 +102,21 @@ const Profile = () => {
         md={12}
         lg={8}
         p={1}
-        sx={{ display: "flex", flexDirection: "column" }}>
+        sx={{ display: "flex", flexDirection: "column" }}
+      >
         <Grid item xs={12} sx={{ p: 1 }}>
           <Card sx={{ p: 2 }}>
             <CardHeader
-              title='User Settings'
+              title={t("userSettings")}
               sx={{ backgroundColor: "#f8f9fc", color: "#4e73df" }}
             />
             <CardContent
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-              }}>
-              <UserSettingsForm />
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sx={{ p: 1 }}>
-          <Card sx={{ p: 2 }}>
-            <CardHeader
-              title='User Settings'
-              sx={{ backgroundColor: "#f8f9fc", color: "#4e73df" }}
-            />
-            <CardContent
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}>
-              <UserSettingsForm />
+              }}
+            >
+              <UserSettingsForm locale={locale} />
             </CardContent>
           </Card>
         </Grid>
@@ -133,6 +128,7 @@ const Profile = () => {
 export const getStaticProps = async ({ locale }) => {
   return {
     props: {
+      locale,
       ...(await serverSideTranslations(locale ?? "gb", ["label", "error"])),
     },
   };

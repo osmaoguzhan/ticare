@@ -9,53 +9,53 @@ const NewPasswordForm = () => {
     formState: { errors },
   } = useForm();
 
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <PasswordInput
           fullWidth
-          label='Current Password'
-          name='currentPassword'
-          type='password'
-          placeholder='Current Password'
+          label="Current Password"
+          name="currentPassword"
+          type="password"
           control={control}
           errors={errors}
-          required
         />
       </Grid>
       <Grid item xs={12}>
         <PasswordInput
           fullWidth
-          label='New Password'
-          name='newPassword'
-          type='password'
-          placeholder='New Password'
+          label="New Password"
+          name="newPassword"
+          type="password"
           control={control}
           errors={errors}
-          required
         />
       </Grid>
       <Grid item xs={12}>
         <PasswordInput
           fullWidth
-          label='Confirm Password'
-          name='confirmPassword'
-          type='password'
-          placeholder='Confirm Password'
+          label="Confirm Password"
+          name="confirmPassword"
+          type="password"
           control={control}
           errors={errors}
-          required
         />
       </Grid>
       <Grid item xs={12}>
         <Button
           fullWidth
-          variant='contained'
+          variant="contained"
+          onClick={handleSubmit(onSubmit)}
           sx={{
             backgroundColor: "#4e73df",
             color: "white",
             mt: 2,
-          }}>
+          }}
+        >
           Change
         </Button>
       </Grid>

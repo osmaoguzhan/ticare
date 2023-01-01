@@ -92,6 +92,23 @@ const Constants = {
     { key: "profile", icon: faUser },
     { key: "logout", icon: faSignOut },
   ],
+  languageOptions: {
+    pl: [
+      { key: "pl", label: "Polski" },
+      { key: "gb", label: "Angielski" },
+      { key: "tr", label: "Turecki" },
+    ],
+    tr: [
+      { key: "tr", label: "Türkçe" },
+      { key: "pl", label: "Lehçe" },
+      { key: "gb", label: "İngilizce" },
+    ],
+    gb: [
+      { key: "gb", label: "English" },
+      { key: "pl", label: "Polish" },
+      { key: "tr", label: "Turkish" },
+    ],
+  },
 };
 
 module.exports = Constants;
