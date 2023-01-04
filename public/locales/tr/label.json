@@ -31,5 +31,9 @@
   "phone": "Telefon Numarası",
   "saveSettings": "Ayarları Kaydet",
   "userSettings": "Kullanıcı Ayarları",
-  "changePassword": "Parola Değiştir"
+  "changePassword": "Parola Değiştir",
+  "currentPassword": "Mevcut Parola",
+  "newPassword": "Yeni Parola",
+  "confirmPassword": "Parola Onayı",
+  "updatePassword": "Parolayı Güncelle"
 }

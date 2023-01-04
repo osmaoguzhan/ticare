@@ -102,18 +102,20 @@ const Layout = ({ ppicture, children }) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar position='fixed' open={open}>
+      <AppBar position="fixed" open={open}>
         <Toolbar
-          sx={{ backgroundColor: "#fff", marginLeft: 0, marginRight: 0 }}>
+          sx={{ backgroundColor: "#fff", marginLeft: 0, marginRight: 0 }}
+        >
           <IconButton
-            color='inherit'
-            aria-label='open drawer'
+            color="inherit"
+            aria-label="open drawer"
             onClick={handleDrawerOpen}
-            edge='start'
+            edge="start"
             sx={{
               mr: 2,
               ...(open && { display: "none" }),
-            }}>
+            }}
+          >
             <FontAwesomeIcon
               icon={faBars}
               color={"rgb(78,115,223)"}
@@ -124,11 +126,13 @@ const Layout = ({ ppicture, children }) => {
             container
             display={"flex"}
             justifyContent={"flex-end"}
-            alignContent={"center"}>
+            alignContent={"center"}
+          >
             <Grid item margin={2}>
               <Avatar
                 sx={{ width: 48, height: 48, cursor: "pointer" }}
-                onClick={handleOpenUserMenu}>
+                onClick={handleOpenUserMenu}
+              >
                 {ppicture ? (
                   <Box
                     component={"img"}
@@ -143,7 +147,8 @@ const Layout = ({ ppicture, children }) => {
                     component={"div"}
                     sx={{
                       cursor: "pointer",
-                    }}>
+                    }}
+                  >
                     {session?.user?.name.charAt(0).toUpperCase()}
                   </Box>
                 )}
@@ -162,9 +167,10 @@ const Layout = ({ ppicture, children }) => {
             backgroundColor: "rgb(78,115,223)",
           },
         }}
-        variant='persistent'
-        anchor='left'
-        open={open}>
+        variant="persistent"
+        anchor="left"
+        open={open}
+      >
         <DrawerHeader>
           <Grid container>
             <Grid item xs={10}>
@@ -173,18 +179,20 @@ const Layout = ({ ppicture, children }) => {
                   display: "flex",
                   justifyContent: "center",
                   mt: 2,
-                }}>
+                }}
+              >
                 <Box
                   sx={{
                     rotate: "-14deg",
                     color: "#f8f8f8e6",
-                  }}>
-                  <FontAwesomeIcon icon={faBoxOpen} size='3x' fixedWidth />
+                  }}
+                >
+                  <FontAwesomeIcon icon={faBoxOpen} size="3x" fixedWidth />
                 </Box>
                 <Typography
-                  variant='h6'
+                  variant="h6"
                   noWrap
-                  component='h6'
+                  component="h6"
                   sx={{
                     mr: 2,
                     mt: 0.6,
@@ -195,7 +203,8 @@ const Layout = ({ ppicture, children }) => {
                     fontSize: "1.3rem",
                     fontWeight: "bold",
                     textDecoration: "none",
-                  }}>
+                  }}
+                >
                   TICARE
                 </Typography>
               </Box>
@@ -207,12 +216,14 @@ const Layout = ({ ppicture, children }) => {
                   mt: 2,
                   color: "#e1dfe1",
                   ":hover": { backgroundColor: "rgb(78,118,223)" },
-                }}>
-                {theme.direction === "ltr" ? (
-                  <FontAwesomeIcon icon={faChevronLeft} fixedWidth />
-                ) : (
-                  <FontAwesomeIcon icon={faBars} fixedWidth />
-                )}
+                }}
+              >
+                {width < 600 &&
+                  (theme.direction === "ltr" ? (
+                    <FontAwesomeIcon icon={faChevronLeft} fixedWidth />
+                  ) : (
+                    <FontAwesomeIcon icon={faBars} fixedWidth />
+                  ))}
               </IconButton>
             </Grid>
           </Grid>
@@ -243,12 +254,13 @@ const Layout = ({ ppicture, children }) => {
           horizontal: "right",
         }}
         open={Boolean(userMenu)}
-        onClose={handleCloseUserMenu}>
+        onClose={handleCloseUserMenu}
+      >
         {Constants.avatarOnClick.map(({ key, icon }) => (
           <MenuItem key={key} onClick={handleCloseUserMenu}>
             <Grid container>
               <Grid item xs={10}>
-                <Typography textAlign='center'>{t(key)}</Typography>
+                <Typography textAlign="center">{t(key)}</Typography>
               </Grid>
               <Grid item xs={2}>
                 <FontAwesomeIcon icon={icon} fixedWidth />

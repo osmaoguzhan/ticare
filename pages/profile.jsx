@@ -44,65 +44,9 @@ const Profile = ({ locale }) => {
         item
         xs={12}
         md={12}
-        lg={4}
-        sx={{ p: 1, display: "flex", flexDirection: "column" }}
-      >
-        <Grid item xs={12} sx={{ p: 1 }}>
-          <Paper
-            sx={{
-              p: 2,
-              pt: 10,
-              pb: 10,
-              textAlign: "center",
-            }}
-          >
-            <Avatar
-              alt={"Profile Picture"}
-              src={"/images/linkedin.jpeg"}
-              sx={{
-                width: 200,
-                height: 200,
-                margin: "0 auto",
-              }}
-            />
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{
-                backgroundColor: "#4e73df",
-                width: "50%",
-                color: "white",
-                mt: 4,
-              }}
-            >
-              Change
-            </Button>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sx={{ p: 1 }}>
-          <Card sx={{ p: 2 }}>
-            <CardHeader
-              title="Change Password"
-              sx={{ backgroundColor: "#f8f9fc", color: "#4e73df" }}
-            />
-            <CardContent
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <NewPasswordForm />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        md={12}
-        lg={8}
+        lg={12}
         p={1}
-        sx={{ display: "flex", flexDirection: "column" }}
+        sx={{ display: "flex", flexDirection: "row" }}
       >
         <Grid item xs={12} sx={{ p: 1 }}>
           <Card sx={{ p: 2 }}>
@@ -117,6 +61,22 @@ const Profile = ({ locale }) => {
               }}
             >
               <UserSettingsForm locale={locale} />
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sx={{ p: 1 }}>
+          <Card sx={{ p: 2 }}>
+            <CardHeader
+              title={t("changePassword")}
+              sx={{ backgroundColor: "#f8f9fc", color: "#4e73df" }}
+            />
+            <CardContent
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <NewPasswordForm />
             </CardContent>
           </Card>
         </Grid>

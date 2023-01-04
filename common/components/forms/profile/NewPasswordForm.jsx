@@ -1,8 +1,10 @@
 import PasswordInput from "@/components/inputs/PasswordInput";
 import { Button, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "next-i18next";
 
 const NewPasswordForm = () => {
+  const { t } = useTranslation("label");
   const {
     handleSubmit,
     control,
@@ -18,7 +20,7 @@ const NewPasswordForm = () => {
       <Grid item xs={12}>
         <PasswordInput
           fullWidth
-          label="Current Password"
+          label={t("currentPassword")}
           name="currentPassword"
           type="password"
           control={control}
@@ -28,7 +30,7 @@ const NewPasswordForm = () => {
       <Grid item xs={12}>
         <PasswordInput
           fullWidth
-          label="New Password"
+          label={t("newPassword")}
           name="newPassword"
           type="password"
           control={control}
@@ -38,7 +40,7 @@ const NewPasswordForm = () => {
       <Grid item xs={12}>
         <PasswordInput
           fullWidth
-          label="Confirm Password"
+          label={t("confirmPassword")}
           name="confirmPassword"
           type="password"
           control={control}
@@ -56,7 +58,7 @@ const NewPasswordForm = () => {
             mt: 2,
           }}
         >
-          Change
+          {t("updatePassword")}
         </Button>
       </Grid>
     </Grid>

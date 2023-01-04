@@ -31,5 +31,9 @@
   "phone": "Numer telefonu",
   "saveSettings": "Zapisz ustawienia",
   "userSettings": "Ustawienia użytkownika",
-  "changePassword": "Zmień hasło"
+  "changePassword": "Zmień Hasło",
+  "currentPassword": "Aktualne hasło",
+  "newPassword": "Nowe hasło",
+  "confirmPassword": "Potwierdź hasło",
+  "updatePassword": "Zaktualizuj hasło"
 }

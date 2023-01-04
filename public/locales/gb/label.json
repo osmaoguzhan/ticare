@@ -31,5 +31,9 @@
   "phone": "Phone Number",
   "saveSettings": "Save Settings",
   "userSettings": "User Settings",
-  "changePassword": "Change Password"
+  "changePassword": "Change Password",
+  "currentPassword": "Current Password",
+  "newPassword": "New Password",
+  "confirmPassword": "Confirm Password",
+  "updatePassword": "Update Password"
 }
