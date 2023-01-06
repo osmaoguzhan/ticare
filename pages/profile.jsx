@@ -55,15 +55,8 @@ const Profile = ({ locale }) => {
           components={[
             <UserSettingsForm locale={locale} />,
             <NewPasswordForm />,
-            <NewPasswordForm />,
-            <NewPasswordForm />,
           ]}
-          labels={[
-            "User Settings",
-            "Change Password",
-            "Company Settings",
-            "Delete Account",
-          ]}
+          labels={["User Settings", "Change Password"]}
         />
       </Grid>
     </Grid>

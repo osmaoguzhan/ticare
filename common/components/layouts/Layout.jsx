@@ -56,10 +56,11 @@ const DrawerHeader = styled(Box)(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-const Layout = ({ ppicture, children }) => {
+const Layout = ({ children }) => {
   const { width } = useScreen();
+  const [variant, setVariant] = useState("permanent");
   const theme = useTheme();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [userMenu, setUserMenu] = useState(null);
   const { t } = useTranslation("label");
   const router = useRouter();
@@ -70,7 +71,13 @@ const Layout = ({ ppicture, children }) => {
     setOpen(true);
   };
 
-  const handleDrawerClose = () => {
+  const handleDrawerClose = (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
     setOpen(false);
   };
 
@@ -78,12 +85,14 @@ const Layout = ({ ppicture, children }) => {
     setUserMenu(event.currentTarget);
   };
 
-  const handleCloseUserMenu = (e) => {
+  const handleCloseUserMenu = (key) => {
     setUserMenu(null);
-    if (e.target.textContent === "Logout") {
+    if (key === "logout") {
       clear("user");
-      signOut({ callbackUrl: "/auth/signin" });
-    } else if (e.target.textContent === "Profile") {
+      signOut({
+        callbackUrl: `/${session?.user.settings.language}/auth/signin`,
+      });
+    } else if (key === "profile") {
       router.push("/profile");
     }
   };
@@ -94,14 +103,17 @@ const Layout = ({ ppicture, children }) => {
     }
   }, []);
 
-  const cb = useCallback(() => setOpen(width > 600), [width]);
+  const cb = useCallback(() => {
+    setOpen(width > 600);
+    setVariant(width > 600 ? "permanent" : "temporary");
+  }, [width]);
 
   useEffect(() => {
     cb();
   }, [cb]);
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box component={"div"} sx={{ display: "flex", overflowY: "hidden" }}>
       <AppBar position="fixed" open={open}>
         <Toolbar
           sx={{ backgroundColor: "#fff", marginLeft: 0, marginRight: 0 }}
@@ -133,25 +145,9 @@ const Layout = ({ ppicture, children }) => {
                 sx={{ width: 48, height: 48, cursor: "pointer" }}
                 onClick={handleOpenUserMenu}
               >
-                {ppicture ? (
-                  <Box
-                    component={"img"}
-                    alt={"ppicture"}
-                    src={ppicture}
-                    sx={{
-                      cursor: "pointer",
-                    }}
-                  />
-                ) : (
-                  <Box
-                    component={"div"}
-                    sx={{
-                      cursor: "pointer",
-                    }}
-                  >
-                    {session?.user?.name.charAt(0).toUpperCase()}
-                  </Box>
-                )}
+                <Box component={"div"}>
+                  {session?.user?.name.charAt(0).toUpperCase()}
+                </Box>
               </Avatar>
             </Grid>
           </Grid>
@@ -163,13 +159,13 @@ const Layout = ({ ppicture, children }) => {
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: "245px",
-            boxSizing: "border-box",
             backgroundColor: "rgb(78,115,223)",
           },
         }}
-        variant="persistent"
+        variant={variant}
         anchor="left"
         open={open}
+        onClose={handleDrawerClose}
       >
         <DrawerHeader>
           <Grid container>
@@ -213,7 +209,7 @@ const Layout = ({ ppicture, children }) => {
               item
               xs={2}
               sx={{
-                display: { lg: "none", md: "none", sm: "block", xs: "block" },
+                display: { lg: "none", md: "none", sm: "none", xs: "block" },
               }}
             >
               <IconButton
@@ -262,7 +258,7 @@ const Layout = ({ ppicture, children }) => {
         onClose={handleCloseUserMenu}
       >
         {Constants.avatarOnClick.map(({ key, icon }) => (
-          <MenuItem key={key} onClick={handleCloseUserMenu}>
+          <MenuItem key={key} onClick={() => handleCloseUserMenu(key)}>
             <Grid container>
               <Grid item xs={10}>
                 <Typography textAlign="center">{t(key)}</Typography>
