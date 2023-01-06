@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Constants = {
-  languageOptions: ["pl", "tr", "gb"],
+  languages: ["pl", "tr", "gb"],
   nameMin: 2,
   nameMax: 30,
   surnameMin: 2,

@@ -10,12 +10,14 @@ import {
   CardHeader,
   FormLabel,
   Grid,
+  Box,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import TabMenu from "@/components/profile/TabMenu";
 
 const Profile = ({ locale }) => {
   const { t } = useTranslation("label");
@@ -25,7 +27,7 @@ const Profile = ({ locale }) => {
       sx={{
         display: "flex",
         justifyContent: "space-between",
-        backgroundColor: "#f8f9fc",
+        backgroundColor: "#ffffff",
       }}
     >
       <Grid item xs={12}>
@@ -43,43 +45,26 @@ const Profile = ({ locale }) => {
       <Grid
         item
         xs={12}
-        md={12}
-        lg={12}
         p={1}
-        sx={{ display: "flex", flexDirection: "row" }}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+        }}
       >
-        <Grid item xs={12} sx={{ p: 1 }}>
-          <Card sx={{ p: 2 }}>
-            <CardHeader
-              title={t("userSettings")}
-              sx={{ backgroundColor: "#f8f9fc", color: "#4e73df" }}
-            />
-            <CardContent
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <UserSettingsForm locale={locale} />
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sx={{ p: 1 }}>
-          <Card sx={{ p: 2 }}>
-            <CardHeader
-              title={t("changePassword")}
-              sx={{ backgroundColor: "#f8f9fc", color: "#4e73df" }}
-            />
-            <CardContent
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <NewPasswordForm />
-            </CardContent>
-          </Card>
-        </Grid>
+        <TabMenu
+          components={[
+            <UserSettingsForm locale={locale} />,
+            <NewPasswordForm />,
+            <NewPasswordForm />,
+            <NewPasswordForm />,
+          ]}
+          labels={[
+            "User Settings",
+            "Change Password",
+            "Company Settings",
+            "Delete Account",
+          ]}
+        />
       </Grid>
     </Grid>
   );

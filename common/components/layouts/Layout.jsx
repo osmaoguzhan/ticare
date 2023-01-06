@@ -209,7 +209,13 @@ const Layout = ({ ppicture, children }) => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={2}>
+            <Grid
+              item
+              xs={2}
+              sx={{
+                display: { lg: "none", md: "none", sm: "block", xs: "block" },
+              }}
+            >
               <IconButton
                 onClick={handleDrawerClose}
                 sx={{
@@ -218,12 +224,11 @@ const Layout = ({ ppicture, children }) => {
                   ":hover": { backgroundColor: "rgb(78,118,223)" },
                 }}
               >
-                {width < 600 &&
-                  (theme.direction === "ltr" ? (
-                    <FontAwesomeIcon icon={faChevronLeft} fixedWidth />
-                  ) : (
-                    <FontAwesomeIcon icon={faBars} fixedWidth />
-                  ))}
+                {theme.direction === "ltr" ? (
+                  <FontAwesomeIcon icon={faChevronLeft} fixedWidth />
+                ) : (
+                  <FontAwesomeIcon icon={faBars} fixedWidth />
+                )}
               </IconButton>
             </Grid>
           </Grid>

@@ -68,34 +68,32 @@ const UserSettingsForm = ({ locale }) => {
           // validation={validator.email}
         />
       </Grid>
-      <Grid item container spacing={2}>
-        <Grid item xs={12} md={4} lg={4} mt={1.5}>
-          <SelectInput
-            name={"language"}
-            label={"Language"}
-            id={"language"}
-            control={control}
-            options={Constants.languageOptions[locale]}
-          />
-        </Grid>
-        <Grid item xs={12} md={4} lg={4} mt={1.5}>
-          <SelectInput
-            name={"currency"}
-            label={"Currency"}
-            id={"currency"}
-            control={control}
-            options={Constants.languageOptions[locale]}
-          />
-        </Grid>
-        <Grid item xs={12} md={4} lg={4} mt={1.5}>
-          <SelectInput
-            name={"timezone"}
-            label={"Timezone"}
-            id={"timezone"}
-            control={control}
-            options={Constants.languageOptions[locale]}
-          />
-        </Grid>
+      <Grid item xs={12} mt={1.5}>
+        <SelectInput
+          name={"language"}
+          label={"Language"}
+          id={"language"}
+          control={control}
+          options={Constants.languageOptions[locale]}
+        />
+      </Grid>
+      <Grid item xs={12} mt={2}>
+        <SelectInput
+          name={"language"}
+          label={"Language"}
+          id={"language"}
+          control={control}
+          options={Constants.languageOptions[locale]}
+        />
+      </Grid>
+      <Grid item xs={12} mt={2}>
+        <SelectInput
+          name={"language"}
+          label={"Language"}
+          id={"language"}
+          control={control}
+          options={Constants.languageOptions[locale]}
+        />
       </Grid>
       <Grid item xs={12}>
         <Button
