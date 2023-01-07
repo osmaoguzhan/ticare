@@ -1,26 +1,14 @@
 import NewPasswordForm from "@/components/forms/profile/NewPasswordForm";
 import UserSettingsForm from "@/components/forms/profile/UserSettingsForm";
-import FormInput from "@/components/inputs/FormInput";
 import Layout from "@/components/layouts/Layout";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  FormLabel,
-  Grid,
-  Box,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import TabMenu from "@/components/profile/TabMenu";
 
 const Profile = ({ locale }) => {
   const { t } = useTranslation("label");
+
   return (
     <Grid
       container
@@ -63,10 +51,12 @@ const Profile = ({ locale }) => {
   );
 };
 
-export const getStaticProps = async ({ locale }) => {
+export const getServerSideProps = async (ctx) => {
+  const { locale, req } = ctx;
   return {
     props: {
       locale,
+      userid: req.headers.userid,
       ...(await serverSideTranslations(locale ?? "gb", ["label", "error"])),
     },
   };
