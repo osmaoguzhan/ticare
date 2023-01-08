@@ -5,9 +5,18 @@ import { Grid, Typography } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import TabMenu from "@/components/profile/TabMenu";
+import { useProfile } from "@/hooks/query/useProfile";
+import Loading from "@/components/Loading";
 
-const Profile = ({ locale }) => {
+const Profile = ({ userid, locale }) => {
   const { t } = useTranslation("label");
+  const { profile, isProfileError, isProfileLoading } = useProfile(
+    userid,
+    locale
+  );
+
+  if (isProfileLoading) return <Loading />;
+  if (isProfileError) return <div>Something went wrong.</div>;
 
   return (
     <Grid
@@ -41,7 +50,7 @@ const Profile = ({ locale }) => {
       >
         <TabMenu
           components={[
-            <UserSettingsForm locale={locale} />,
+            <UserSettingsForm profile={profile} locale={locale} />,
             <NewPasswordForm />,
           ]}
           labels={["User Settings", "Change Password"]}

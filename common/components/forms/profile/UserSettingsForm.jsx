@@ -4,14 +4,23 @@ import Constants from "@/utils/Constants";
 import FormInput from "@/components/inputs/FormInput";
 import { useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form";
+import { useTimezone } from "@/hooks/query/useTimezone";
+import { useCurrency } from "@/hooks/query/useCurrency";
+import Loading from "@/components/Loading";
 
-const UserSettingsForm = ({ locale }) => {
+const UserSettingsForm = ({ locale, profile }) => {
   const { t } = useTranslation("label");
   const {
     control,
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const { timezones, isTimezoneError, isTimezoneLoading } = useTimezone(locale);
+  const { currencies, isCurrencyError, isCurrencyLoading } =
+    useCurrency(locale);
+  if (isTimezoneLoading || isCurrencyLoading) return <Loading />;
+  if (isTimezoneError || isCurrencyError)
+    return <div>Something went wrong.</div>;
 
   const onSubmit = (data) => {
     console.log(data);
@@ -28,6 +37,7 @@ const UserSettingsForm = ({ locale }) => {
           label={t("name")}
           control={control}
           errors={errors}
+          value={profile?.name}
           // validation={validator.name}
         />
       </Grid>
@@ -40,6 +50,7 @@ const UserSettingsForm = ({ locale }) => {
           fullWidth
           control={control}
           errors={errors}
+          value={profile?.surname}
           // validation={validator.surname}
         />
       </Grid>
@@ -53,6 +64,7 @@ const UserSettingsForm = ({ locale }) => {
           control={control}
           errors={errors}
           disabled
+          value={profile?.email}
           // validation={validator.email}
         />
       </Grid>
@@ -65,6 +77,7 @@ const UserSettingsForm = ({ locale }) => {
           fullWidth
           control={control}
           errors={errors}
+          value={profile?.phoneNumber}
           // validation={validator.email}
         />
       </Grid>
@@ -74,25 +87,28 @@ const UserSettingsForm = ({ locale }) => {
           label={"Language"}
           id={"language"}
           control={control}
+          value={Constants.languageOptions[locale][profile.settings.language]}
           options={Constants.languageOptions[locale]}
         />
       </Grid>
       <Grid item xs={12} mt={2}>
         <SelectInput
-          name={"language"}
-          label={"Language"}
-          id={"language"}
+          name={"timezones"}
+          label={"Timezone"}
+          id={"timezones"}
           control={control}
-          options={Constants.languageOptions[locale]}
+          value={timezones?.find((t) => t.key === profile.settings.timezone)}
+          options={timezones}
         />
       </Grid>
       <Grid item xs={12} mt={2}>
         <SelectInput
-          name={"language"}
-          label={"Language"}
-          id={"language"}
+          name={"currency"}
+          label={"Currency"}
+          id={"currency"}
           control={control}
-          options={Constants.languageOptions[locale]}
+          value={currencies?.find((c) => c.key === profile.settings.currency)}
+          options={currencies}
         />
       </Grid>
       <Grid item xs={12}>

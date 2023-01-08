@@ -9,6 +9,31 @@ export default async function handler(req, res) {
       message: Messages[locale || "gb"].pleaseLogin,
     });
   } else {
-    res.status(200).send();
+    if (req.method === "GET") {
+      try {
+        const profile = await prisma.user.findUnique({
+          where: {
+            id: userid,
+          },
+          select: {
+            id: true,
+            name: true,
+            surname: true,
+            email: true,
+            role: true,
+            settings: true,
+            phoneNumber: true,
+          },
+        });
+        res.status(200).json({ success: true, data: profile });
+      } catch (error) {
+        res
+          .status(500)
+          .json({
+            success: false,
+            message: Messages[locale].somethingWentWrong,
+          });
+      }
+    }
   }
 }
