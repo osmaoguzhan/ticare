@@ -46,7 +46,7 @@ const Dashboard = () => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} sx={{ m: 1.5 }}>
-        <Typography variant='h4' component='h1' sx={{ color: "#3a3b45" }}>
+        <Typography variant="h4" component="h1" sx={{ color: "#3a3b45" }}>
           Dashboard
         </Typography>
       </Grid>

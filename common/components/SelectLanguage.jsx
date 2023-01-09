@@ -17,14 +17,16 @@ const SelectLanguage = () => {
       sx={{
         boxShadow: "none",
         ".MuiOutlinedInput-notchedOutline": { border: 0 },
-      }}>
-      {Constants.languageOptions.map((language) => {
+      }}
+    >
+      {Constants.languages.map((language) => {
         return (
           <MenuItem
             key={uuidv4()}
             value={language}
             sx={{ display: "flex", justifyContent: "center" }}
-            onClick={() => flagOnclick(language)}>
+            onClick={() => flagOnclick(language)}
+          >
             <ReactCountryFlag
               key={language}
               name={language}

@@ -19,7 +19,6 @@ model User {
   email String @unique
   password String
   role Role @default(USER)
-  picture String?
   phoneNumber String?
   settings Json @default("{\"language\": \"en\", \"currency\": \"USD\",  \"timezone\": \"UTC\", \"theme\": \"light\"}")
   isActivated Boolean @default(false)
@@ -58,4 +57,14 @@ model Country {
   latitude String
   longitude String
   states Json[]
+}
+
+model Timezone {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  value String
+  abbr String
+  offset Int
+  isdst Boolean
+  text String
+  utc Json[]
 }

@@ -1,4 +1,4 @@
-import SigninForm from "@/components/forms/SigninForm";
+import SigninForm from "@/components/forms/auth/SigninForm";
 import { Box, Card } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";

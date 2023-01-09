@@ -27,5 +27,16 @@
   "products": "Products",
   "settings": "Settings",
   "logout": "Logout",
-  "profile": "Profile"
+  "profile": "Profile",
+  "phone": "Phone Number",
+  "saveSettings": "Save Settings",
+  "userSettings": "User Settings",
+  "changePassword": "Change Password",
+  "currentPassword": "Current Password",
+  "newPassword": "New Password",
+  "confirmPassword": "Confirm Password",
+  "updatePassword": "Update Password",
+  "language": "Language",
+  "timezone": "Timezone",
+  "currency": "Currency"
 }

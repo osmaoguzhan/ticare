@@ -9,8 +9,8 @@ import {
   darken,
 } from "@mui/material/";
 import Link from "next/link";
-import FormInput from "../inputs/FormInput";
-import PasswordInput from "../inputs/PasswordInput";
+import FormInput from "../../inputs/FormInput";
+import PasswordInput from "../../inputs/PasswordInput";
 import { useForm } from "react-hook-form";
 
 const SigninForm = ({ handleOnSubmit, t }) => {

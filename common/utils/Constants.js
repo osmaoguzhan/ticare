@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Constants = {
-  languageOptions: ["pl", "tr", "gb"],
+  languages: ["pl", "tr", "gb"],
   nameMin: 2,
   nameMax: 30,
   surnameMin: 2,
@@ -18,6 +18,7 @@ const Constants = {
   emailRegex: /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/,
   passwordMin: 6,
   passwordMax: 18,
+  phoneNumberRegex: /^\+[1-9]\d{1,14}$/,
   defaultSettings: (language) => {
     let defaultSettings = {
       theme: "light",
@@ -92,6 +93,23 @@ const Constants = {
     { key: "profile", icon: faUser },
     { key: "logout", icon: faSignOut },
   ],
+  languageOptions: {
+    pl: [
+      { key: "pl", label: "Polski" },
+      { key: "gb", label: "Angielski" },
+      { key: "tr", label: "Turecki" },
+    ],
+    tr: [
+      { key: "tr", label: "Türkçe" },
+      { key: "pl", label: "Lehçe" },
+      { key: "gb", label: "İngilizce" },
+    ],
+    gb: [
+      { key: "gb", label: "English" },
+      { key: "pl", label: "Polish" },
+      { key: "tr", label: "Turkish" },
+    ],
+  },
 };
 
 module.exports = Constants;

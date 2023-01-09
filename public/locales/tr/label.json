@@ -27,5 +27,16 @@
   "products": "Ürünler",
   "settings": "Ayarlar",
   "logout": "Çıkış Yap",
-  "profile": "Profil"
+  "profile": "Profil",
+  "phone": "Telefon Numarası",
+  "saveSettings": "Ayarları Kaydet",
+  "userSettings": "Kullanıcı Ayarları",
+  "changePassword": "Parola Değiştir",
+  "currentPassword": "Mevcut Parola",
+  "newPassword": "Yeni Parola",
+  "confirmPassword": "Parola Onayı",
+  "updatePassword": "Parolayı Güncelle",
+  "language": "Dil",
+  "timezone": "Zaman Dilimi",
+  "currency": "Para Birimi"
 }

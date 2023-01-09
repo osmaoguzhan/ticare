@@ -1,4 +1,4 @@
-import SignupForm from "@/components/forms/SignupForm";
+import SignupForm from "@/components/forms/auth/SignupForm";
 import { Box, Card } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
@@ -73,7 +73,7 @@ const SignUp = () => {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const shouldRedirect = redirect(ctx);
+  const shouldRedirect = await redirect(ctx);
   if (shouldRedirect) return shouldRedirect;
   return {
     props: {

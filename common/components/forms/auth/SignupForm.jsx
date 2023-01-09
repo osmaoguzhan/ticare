@@ -7,11 +7,11 @@ import {
   darken,
 } from "@mui/material/";
 import Link from "next/link";
-import FormInput from "../inputs/FormInput";
+import FormInput from "../../inputs/FormInput";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import PasswordInput from "../inputs/PasswordInput";
+import PasswordInput from "../../inputs/PasswordInput";
 
 const SignupForm = ({ handleOnSubmit, t, validator }) => {
   const {
@@ -42,12 +42,14 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        }}>
+        }}
+      >
         <Typography variant={"h4"}>{t("signUp")}</Typography>
         <Box
           component={"form"}
           onSubmit={handleSubmit((d) => handleOnSubmit(d))}
-          sx={{ mt: 3 }}>
+          sx={{ mt: 3 }}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <FormInput
@@ -90,7 +92,8 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
               item
               container
               xs={12}
-              sx={{ display: "flex", justifyContent: "space-between" }}>
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
               <Grid item xs={5.9}>
                 <PasswordInput
                   autoComplete={"password"}
@@ -118,9 +121,9 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
             </Grid>
           </Grid>
           <Button
-            type='submit'
+            type="submit"
             fullWidth
-            variant='contained'
+            variant="contained"
             sx={{
               mt: 3,
               mb: 1,
@@ -129,7 +132,8 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
               "&:hover": {
                 backgroundColor: darken("rgb(78,115,223)", 0.4),
               },
-            }}>
+            }}
+          >
             {t("signUp")}
           </Button>
           <Grid container justifyContent={"flex-end"}>

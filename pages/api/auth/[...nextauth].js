@@ -22,6 +22,8 @@ export const authOptions = {
         if (!user) throw new Error(Messages[locale].pleaseCheckCredentials);
         let match = await bcrypt.compare(password, user.password);
         if (!match) throw new Error(Messages[locale].pleaseCheckCredentials);
+        if (!user.isActivated)
+          throw new Error(Messages[locale].pleaseCheckCredentials);
         return user;
       },
     }),

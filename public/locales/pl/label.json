@@ -27,5 +27,16 @@
   "products": "Produkty",
   "settings": "Ustawienia",
   "logout": "Wyloguj",
-  "profile": "Profil"
+  "profile": "Profil",
+  "phone": "Numer telefonu",
+  "saveSettings": "Zapisz ustawienia",
+  "userSettings": "Ustawienia użytkownika",
+  "changePassword": "Zmień Hasło",
+  "currentPassword": "Aktualne hasło",
+  "newPassword": "Nowe hasło",
+  "confirmPassword": "Potwierdź hasło",
+  "updatePassword": "Zaktualizuj hasło",
+  "language": "Język",
+  "timezone": "Strefa czasowa",
+  "currency": "Waluta"
 }

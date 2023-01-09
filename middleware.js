@@ -34,19 +34,12 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    "/api/dashboard",
     "/dashboard",
-    "/api/brands",
     "/brands",
-    "/api/profile",
     "/profile",
-    "/api/stores",
     "/stores",
-    "/api/products",
     "/products",
-    "/api/orders",
     "/orders",
-    "/api/settings",
     "/settings",
   ],
 };
