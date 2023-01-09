@@ -70,9 +70,9 @@ const UserSettingsForm = ({ locale, profile }) => {
       </Grid>
       <Grid item xs={12}>
         <FormInput
-          autoComplete={"phone"}
-          name={"phone"}
-          id={"phone"}
+          autoComplete={"phoneNumber"}
+          name={"phoneNumber"}
+          id={"phoneNumber"}
           label={t("phone")}
           fullWidth
           control={control}
