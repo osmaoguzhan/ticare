@@ -18,6 +18,7 @@ const Constants = {
   emailRegex: /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/,
   passwordMin: 6,
   passwordMax: 18,
+  phoneNumberRegex: /^\+[1-9]\d{1,14}$/,
   defaultSettings: (language) => {
     let defaultSettings = {
       theme: "light",

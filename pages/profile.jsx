@@ -53,7 +53,7 @@ const Profile = ({ userid, locale }) => {
             <UserSettingsForm profile={profile} locale={locale} />,
             <NewPasswordForm />,
           ]}
-          labels={["User Settings", "Change Password"]}
+          labels={[t("userSettings"), t("changePassword")]}
         />
       </Grid>
     </Grid>

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useTimezone } from "@/hooks/query/useTimezone";
 import { useCurrency } from "@/hooks/query/useCurrency";
 import Loading from "@/components/Loading";
+import Validator from "@/utils/validator/Validator";
 
 const UserSettingsForm = ({ locale, profile }) => {
   const { t } = useTranslation("label");
@@ -15,6 +16,7 @@ const UserSettingsForm = ({ locale, profile }) => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const validator = Validator("profile");
   const { timezones, isTimezoneError, isTimezoneLoading } = useTimezone(locale);
   const { currencies, isCurrencyError, isCurrencyLoading } =
     useCurrency(locale);
@@ -38,7 +40,7 @@ const UserSettingsForm = ({ locale, profile }) => {
           control={control}
           errors={errors}
           value={profile?.name}
-          // validation={validator.name}
+          validation={validator.name}
         />
       </Grid>
       <Grid item xs={12} md={6} lg={6}>
@@ -51,7 +53,7 @@ const UserSettingsForm = ({ locale, profile }) => {
           control={control}
           errors={errors}
           value={profile?.surname}
-          // validation={validator.surname}
+          validation={validator.surname}
         />
       </Grid>
       <Grid item xs={12}>
@@ -65,7 +67,6 @@ const UserSettingsForm = ({ locale, profile }) => {
           errors={errors}
           disabled
           value={profile?.email}
-          // validation={validator.email}
         />
       </Grid>
       <Grid item xs={12}>
@@ -78,13 +79,13 @@ const UserSettingsForm = ({ locale, profile }) => {
           control={control}
           errors={errors}
           value={profile?.phoneNumber}
-          // validation={validator.email}
+          validation={validator.phoneNumber}
         />
       </Grid>
       <Grid item xs={12} mt={1.5}>
         <SelectInput
           name={"language"}
-          label={"Language"}
+          label={t("language")}
           id={"language"}
           control={control}
           value={Constants.languageOptions[locale][profile.settings.language]}
@@ -94,7 +95,7 @@ const UserSettingsForm = ({ locale, profile }) => {
       <Grid item xs={12} mt={2}>
         <SelectInput
           name={"timezones"}
-          label={"Timezone"}
+          label={t("timezone")}
           id={"timezones"}
           control={control}
           value={timezones?.find((t) => t.key === profile.settings.timezone)}
@@ -104,7 +105,7 @@ const UserSettingsForm = ({ locale, profile }) => {
       <Grid item xs={12} mt={2}>
         <SelectInput
           name={"currency"}
-          label={"Currency"}
+          label={t("currency")}
           id={"currency"}
           control={control}
           value={currencies?.find((c) => c.key === profile.settings.currency)}

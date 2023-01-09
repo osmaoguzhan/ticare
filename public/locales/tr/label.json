@@ -35,5 +35,8 @@
   "currentPassword": "Mevcut Parola",
   "newPassword": "Yeni Parola",
   "confirmPassword": "Parola Onayı",
-  "updatePassword": "Parolayı Güncelle"
+  "updatePassword": "Parolayı Güncelle",
+  "language": "Dil",
+  "timezone": "Zaman Dilimi",
+  "currency": "Para Birimi"
 }

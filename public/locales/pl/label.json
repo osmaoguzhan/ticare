@@ -35,5 +35,8 @@
   "currentPassword": "Aktualne hasło",
   "newPassword": "Nowe hasło",
   "confirmPassword": "Potwierdź hasło",
-  "updatePassword": "Zaktualizuj hasło"
+  "updatePassword": "Zaktualizuj hasło",
+  "language": "Język",
+  "timezone": "Strefa czasowa",
+  "currency": "Waluta"
 }

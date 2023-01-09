@@ -41,7 +41,8 @@ const PasswordInput = (props) => {
                   },
                 };
               })
-            }>
+            }
+          >
             <FontAwesomeIcon icon={showPassword.icon} />
           </InputAdornment>
         ),

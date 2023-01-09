@@ -11,5 +11,6 @@
   "passwordMinLength": "Hasło powinno zawierać co najmniej <<placeholder>> znaków.",
   "passwordMaxLength": "Hasło powinno zawierać maksymalnie <<placeholder>> znaków.",
   "passwordsNotMatch": "Hasła nie pasują do siebie.",
-  "requiredPasswordRepeat": "Proszę powtórzyć hasło."
+  "requiredPasswordRepeat": "Proszę powtórzyć hasło.",
+  "invalidPhoneNumber": "Numer telefonu jest nieprawidłowy. Format musi być zgodny ze standardem E.164."
 }

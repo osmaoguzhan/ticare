@@ -11,5 +11,6 @@
   "passwordMinLength": "Password should be minimum <<placeholder>> characters.",
   "passwordMaxLength": "Password should be maximally <<placeholder>> characters.",
   "passwordsNotMatch": "Passwords do not match.",
-  "requiredPasswordRepeat": "Please repeat your password."
+  "requiredPasswordRepeat": "Please repeat your password.",
+  "invalidPhoneNumber": "Phone number format is invalid. The format must comply with the E.164 standard."
 }

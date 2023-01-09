@@ -35,5 +35,8 @@
   "currentPassword": "Current Password",
   "newPassword": "New Password",
   "confirmPassword": "Confirm Password",
-  "updatePassword": "Update Password"
+  "updatePassword": "Update Password",
+  "language": "Language",
+  "timezone": "Timezone",
+  "currency": "Currency"
 }

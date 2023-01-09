@@ -2,6 +2,7 @@ import PasswordInput from "@/components/inputs/PasswordInput";
 import { Button, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
+import Validator from "@/utils/validator/Validator";
 
 const NewPasswordForm = () => {
   const { t } = useTranslation("label");
@@ -9,7 +10,9 @@ const NewPasswordForm = () => {
     handleSubmit,
     control,
     formState: { errors },
+    watch,
   } = useForm();
+  const validator = Validator("password");
 
   const onSubmit = (data) => {
     console.log(data);
@@ -22,7 +25,6 @@ const NewPasswordForm = () => {
           fullWidth
           label={t("currentPassword")}
           name="currentPassword"
-          type="password"
           control={control}
           errors={errors}
         />
@@ -32,9 +34,9 @@ const NewPasswordForm = () => {
           fullWidth
           label={t("newPassword")}
           name="newPassword"
-          type="password"
           control={control}
           errors={errors}
+          validation={validator.password}
         />
       </Grid>
       <Grid item xs={12}>
@@ -42,9 +44,9 @@ const NewPasswordForm = () => {
           fullWidth
           label={t("confirmPassword")}
           name="confirmPassword"
-          type="password"
           control={control}
           errors={errors}
+          validation={validator.passwordRepeat(watch("newPassword"))}
         />
       </Grid>
       <Grid item xs={12}>
