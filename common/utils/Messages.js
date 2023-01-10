@@ -10,6 +10,7 @@ export const Messages = {
     errorOccured: "Error occured.",
     pleaseCheckCredentials: "Please check your credentials.",
     pleaseLogin: "Please login.",
+    profileUpdated: "Profile updated successfully.",
   },
   tr: {
     userActivated: "Kullanıcı başarıyla aktifleştirildi.",
@@ -23,6 +24,7 @@ export const Messages = {
     errorOccured: "Bir hata oluştu.",
     pleaseCheckCredentials: "Lütfen kimlik bilgilerinizi kontrol edin.",
     pleaseLogin: "Lütfen giriş yapın.",
+    profileUpdated: "Profil başarıyla güncellendi.",
   },
   pl: {
     userActivated: "Użytkownik został pomyślnie aktywowany.",
@@ -35,5 +37,6 @@ export const Messages = {
     errorOccured: "Wystąpił błąd.",
     pleaseCheckCredentials: "Proszę sprawdzić dane logowania.",
     pleaseLogin: "Proszę się zalogować.",
+    profileUpdated: "Profil został pomyślnie zaktualizowany.",
   },
 };

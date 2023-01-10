@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const getProfile = async (userid, locale) => {
   const res = await fetch("/api/profile", {
@@ -9,17 +9,39 @@ const getProfile = async (userid, locale) => {
   });
   return res.json();
 };
-
+const updateProfile = async ({ userid, locale, data }) => {
+  const res = await fetch("/api/profile", {
+    method: "PUT",
+    headers: {
+      userid,
+      locale,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return res.json();
+};
 export const useProfile = (userid, locale) => {
   const { isLoading, isError, data } = useQuery(
     ["profile"],
     () => getProfile(userid, locale),
     {
-      refetchOnMount: false,
       refetchOnReconnect: false,
+      refetchOnMount: false,
       refetchOnWindowFocus: false,
     }
   );
   const profile = data?.data;
   return { isProfileLoading: isLoading, isProfileError: isError, profile };
+};
+
+export const useUpdateProfile = ({ onSuccess, onError }) => {
+  const queryClient = useQueryClient();
+  return useMutation(updateProfile, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries("profile");
+      onSuccess(data.lang, data.message);
+    },
+    onError: onError,
+  });
 };

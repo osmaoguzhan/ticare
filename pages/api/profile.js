@@ -27,12 +27,36 @@ export default async function handler(req, res) {
         });
         res.status(200).json({ success: true, data: profile });
       } catch (error) {
-        res
-          .status(500)
-          .json({
-            success: false,
-            message: Messages[locale].somethingWentWrong,
-          });
+        res.status(500).json({
+          success: false,
+          message: Messages[locale].somethingWentWrong,
+        });
+      }
+    } else if (req.method === "PUT") {
+      try {
+        const { name, surname, phoneNumber, settings } = req.body;
+        await prisma.user.update({
+          where: {
+            id: userid,
+          },
+          data: {
+            name,
+            surname,
+            phoneNumber,
+            settings,
+          },
+        });
+        res.status(200).json({
+          success: true,
+          message: Messages[settings.language].profileUpdated,
+          lang: settings.language,
+        });
+      } catch (error) {
+        res.status(500).json({
+          success: false,
+          message: Messages[locale].somethingWentWrong,
+          lang: settings.language,
+        });
       }
     }
   }
