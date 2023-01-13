@@ -29,7 +29,8 @@ export default function Home() {
           minHeight: "86vh",
           bgcolor: "rgb(78,115,223)",
           color: "text.primary",
-        }}>
+        }}
+      >
         <Grid
           container
           spacing={2}
@@ -40,7 +41,8 @@ export default function Home() {
             },
             display: "flex",
             justifyContent: "space-between",
-          }}>
+          }}
+        >
           <Grid item xs={12} md={6}>
             <Card style={{ borderRadius: "20px" }}>
               <CardMedia
@@ -55,17 +57,19 @@ export default function Home() {
               <CardContent>
                 <FontAwesomeIcon
                   icon={faBaby}
-                  size='3x'
+                  size="3x"
                   style={{ color: "rgb(78,115,223)" }}
                 />
                 <Typography
                   component={"div"}
-                  color='text.secondary'
-                  style={{ marginBottom: "10%" }}>
+                  color="text.secondary"
+                  style={{ marginBottom: "10%" }}
+                >
                   <Typography
-                    variant='h6'
-                    color='text.secondary'
-                    fontFamily={"Nunito, sans-serif"}>
+                    variant="h6"
+                    color="text.secondary"
+                    fontFamily={"Nunito, sans-serif"}
+                  >
                     {t("easy").toUpperCase()}
                   </Typography>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -73,17 +77,19 @@ export default function Home() {
                 </Typography>
                 <FontAwesomeIcon
                   icon={faTruckFast}
-                  size='3x'
+                  size="3x"
                   style={{ color: "rgb(78,115,223)" }}
                 />
                 <Typography
                   component={"div"}
-                  color='text.secondary'
-                  style={{ marginBottom: "10%" }}>
+                  color="text.secondary"
+                  style={{ marginBottom: "10%" }}
+                >
                   <Typography
-                    variant='h6'
-                    color='text.secondary'
-                    fontFamily={"Nunito, sans-serif"}>
+                    variant="h6"
+                    color="text.secondary"
+                    fontFamily={"Nunito, sans-serif"}
+                  >
                     {t("fast").toUpperCase()}
                   </Typography>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -92,17 +98,19 @@ export default function Home() {
                 </Typography>
                 <FontAwesomeIcon
                   icon={faCreativeCommonsNcEu}
-                  size='3x'
+                  size="3x"
                   style={{ color: "rgb(78,115,223)" }}
                 />
                 <Typography
                   component={"div"}
-                  color='text.secondary'
-                  style={{ marginBottom: "10%" }}>
+                  color="text.secondary"
+                  style={{ marginBottom: "10%" }}
+                >
                   <Typography
-                    variant='h6'
-                    color='text.secondary'
-                    fontFamily={"Nunito, sans-serif"}>
+                    variant="h6"
+                    color="text.secondary"
+                    fontFamily={"Nunito, sans-serif"}
+                  >
                     {t("free").toUpperCase()}
                   </Typography>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.

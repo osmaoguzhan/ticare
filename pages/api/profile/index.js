@@ -1,12 +1,14 @@
 import { Messages } from "@/utils/Messages";
 import prisma from "@/lib/prismaConnector";
+import { getSession } from "next-auth/react";
 
 export default async function handler(req, res) {
+  const session = await getSession({ req });
   const { userid, locale } = req.headers;
-  if (!userid) {
+  if (!session || !userid) {
     res.status(401).send({
       success: false,
-      message: Messages[locale || "gb"].pleaseLogin,
+      message: Messages[locale || "gb"].notPermitted,
     });
   } else {
     if (req.method === "GET") {
@@ -29,7 +31,7 @@ export default async function handler(req, res) {
       } catch (error) {
         res.status(500).json({
           success: false,
-          message: Messages[locale].somethingWentWrong,
+          message: Messages[locale || "gb"].somethingWentWrong,
         });
       }
     } else if (req.method === "PUT") {
@@ -54,7 +56,7 @@ export default async function handler(req, res) {
       } catch (error) {
         res.status(500).json({
           success: false,
-          message: Messages[locale].somethingWentWrong,
+          message: Messages[locale || "gb"].somethingWentWrong,
           lang: settings.language,
         });
       }

@@ -3,7 +3,7 @@ import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
 export default withAuth(
-  function middleware(req) {
+  async function middleware(req) {
     const { token } = req.nextauth;
     let locale = getLocale(req.url);
     if (token) {
@@ -18,9 +18,6 @@ export default withAuth(
           headers: headers,
         },
       });
-    } else {
-      locale = locale || "gb";
-      return NextResponse.redirect(`${locale}/auth/signin`);
     }
   },
   {

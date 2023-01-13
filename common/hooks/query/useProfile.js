@@ -10,16 +10,21 @@ const getProfile = async (userid, locale) => {
   return res.json();
 };
 const updateProfile = async ({ userid, locale, data }) => {
-  const res = await fetch("/api/profile", {
-    method: "PUT",
-    headers: {
-      userid,
-      locale,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return res.json();
+  const response = await (
+    await fetch("/api/profile", {
+      method: "PUT",
+      headers: {
+        userid,
+        locale,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+  ).json();
+  if (!response.success) {
+    throw new Error(response.message);
+  }
+  return response;
 };
 export const useProfile = (userid, locale) => {
   const { isLoading, isError, data } = useQuery(
@@ -42,6 +47,8 @@ export const useUpdateProfile = ({ onSuccess, onError }) => {
       queryClient.invalidateQueries("profile");
       onSuccess(data.lang, data.message);
     },
-    onError: onError,
+    onError: (error) => {
+      onError(error.message);
+    },
   });
 };

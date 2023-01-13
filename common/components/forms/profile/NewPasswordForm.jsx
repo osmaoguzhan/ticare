@@ -3,9 +3,16 @@ import { Button, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import Validator from "@/utils/validator/Validator";
+import { usePasswordMutation } from "@/hooks/query/usePasswordMutation";
+import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
+import bcrypt from "bcryptjs";
+import Loading from "@/components/Loading";
+import { encrypt } from "@/utils/helpers/cipher";
 
-const NewPasswordForm = () => {
+const NewPasswordForm = ({ userid }) => {
   const { t } = useTranslation("label");
+  usePasswordMutation;
   const {
     handleSubmit,
     control,
@@ -13,9 +20,24 @@ const NewPasswordForm = () => {
     watch,
   } = useForm();
   const validator = Validator("password");
+  const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+  const { mutate: updatePassword, isLoading: isPasswordLoading } =
+    usePasswordMutation({
+      onSuccess: (message) => {
+        enqueueSnackbar(message, { variant: "success" });
+      },
+      onError: (error) => {
+        enqueueSnackbar(error, { variant: "error" });
+      },
+    });
+  if (isPasswordLoading) return <Loading />;
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    delete data.confirmPassword;
+    data.newPassword = await bcrypt.hash(data.newPassword, 10);
+    data.currentPassword = JSON.stringify(encrypt(data.currentPassword));
+    updatePassword({ userid, locale: router.locale, data });
   };
 
   return (
@@ -36,7 +58,7 @@ const NewPasswordForm = () => {
           name="newPassword"
           control={control}
           errors={errors}
-          validation={validator.password}
+          validation={validator.password(watch("currentPassword"))}
         />
       </Grid>
       <Grid item xs={12}>

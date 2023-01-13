@@ -12,10 +12,9 @@ import { useUpdateProfile } from "@/hooks/query/useProfile";
 import { useRouter } from "next/router";
 import LanguageSelectInput from "@/components/inputs/LanguageSelectInput";
 import { useSnackbar } from "notistack";
-import { changeLanguage } from "i18next";
 
 const UserSettingsForm = ({ profile }) => {
-  const { t, i18n } = useTranslation("label");
+  const { t } = useTranslation(["label", "error"]);
   const {
     control,
     formState: { errors },
@@ -35,8 +34,8 @@ const UserSettingsForm = ({ profile }) => {
       enqueueSnackbar(message, { variant: "success" });
       router.replace(router.asPath, router.asPath, { locale: lang });
     },
-    onError: () => {
-      enqueueSnackbar(t("profileUpdateError"), { variant: "error" });
+    onError: (message) => {
+      enqueueSnackbar(message, { variant: "error" });
     },
   });
 
@@ -45,8 +44,9 @@ const UserSettingsForm = ({ profile }) => {
     useCurrency(locale);
   if (isTimezoneLoading || isCurrencyLoading || isUpdateLoading)
     return <Loading />;
-  if (isTimezoneError || isCurrencyError || isUpdateError)
-    return <div>Something went wrong.</div>;
+  if (isTimezoneError || isCurrencyError || isUpdateError) {
+    enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
+  }
 
   const onSubmit = (data) => {
     updateProfile({

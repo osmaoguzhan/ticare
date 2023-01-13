@@ -1,7 +1,5 @@
 import {
   Button,
-  FormControlLabel,
-  Checkbox,
   Grid,
   Box,
   Typography,
@@ -28,12 +26,14 @@ const SigninForm = ({ handleOnSubmit, t }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        }}>
+        }}
+      >
         <Typography variant={"h4"}>{t("signIn")}</Typography>
         <Box
           component={"form"}
           onSubmit={handleSubmit((d) => handleOnSubmit(d))}
-          sx={{ mt: 3 }}>
+          sx={{ mt: 3 }}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <FormInput
@@ -50,7 +50,8 @@ const SigninForm = ({ handleOnSubmit, t }) => {
               item
               container
               xs={12}
-              sx={{ display: "flex", justifyContent: "space-between" }}>
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
               <PasswordInput
                 autoComplete={"password"}
                 name={"password"}
@@ -61,17 +62,11 @@ const SigninForm = ({ handleOnSubmit, t }) => {
                 errors={errors}
               />
             </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value='allowExtraEmails' color='primary' />}
-                label={t("rememberMe")}
-              />
-            </Grid>
           </Grid>
           <Button
-            type='submit'
+            type="submit"
             fullWidth
-            variant='contained'
+            variant="contained"
             sx={{
               mt: 3,
               mb: 1,
@@ -80,7 +75,8 @@ const SigninForm = ({ handleOnSubmit, t }) => {
               "&:hover": {
                 backgroundColor: darken("rgb(78,115,223)", 0.4),
               },
-            }}>
+            }}
+          >
             {t("signIn")}
           </Button>
           <Grid container justifyContent={"flex-end"}>
