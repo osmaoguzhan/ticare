@@ -90,7 +90,7 @@ const Layout = ({ children }) => {
     if (key === "logout") {
       clear("user");
       signOut({
-        callbackUrl: `/${session?.user.settings.language}/auth/signin`,
+        callbackUrl: `/${router.locale}/auth/signin`,
       });
     } else if (key === "profile") {
       router.push("/profile");

@@ -1,5 +1,5 @@
 import SelectInput from "@/components/inputs/SelectInput";
-import { Button, FormLabel, Grid, TextField } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import Constants from "@/utils/Constants";
 import FormInput from "@/components/inputs/FormInput";
 import { useTranslation } from "next-i18next";
@@ -8,24 +8,62 @@ import { useTimezone } from "@/hooks/query/useTimezone";
 import { useCurrency } from "@/hooks/query/useCurrency";
 import Loading from "@/components/Loading";
 import Validator from "@/utils/validator/Validator";
+import { useUpdateProfile } from "@/hooks/query/useProfile";
+import { useRouter } from "next/router";
+import LanguageSelectInput from "@/components/inputs/LanguageSelectInput";
+import { useSnackbar } from "notistack";
 
-const UserSettingsForm = ({ locale, profile }) => {
-  const { t } = useTranslation("label");
+const UserSettingsForm = ({ profile }) => {
+  const { t } = useTranslation(["label", "error"]);
   const {
     control,
     formState: { errors },
     handleSubmit,
   } = useForm();
   const validator = Validator("profile");
+  const router = useRouter();
+  const { locale } = router;
+  const { enqueueSnackbar } = useSnackbar();
+
+  const {
+    mutate: updateProfile,
+    isLoading: isUpdateLoading,
+    isError: isUpdateError,
+  } = useUpdateProfile({
+    onSuccess: (lang, message) => {
+      enqueueSnackbar(message, { variant: "success" });
+      router.replace(router.asPath, router.asPath, { locale: lang });
+    },
+    onError: (message) => {
+      enqueueSnackbar(message, { variant: "error" });
+    },
+  });
+
   const { timezones, isTimezoneError, isTimezoneLoading } = useTimezone(locale);
   const { currencies, isCurrencyError, isCurrencyLoading } =
     useCurrency(locale);
-  if (isTimezoneLoading || isCurrencyLoading) return <Loading />;
-  if (isTimezoneError || isCurrencyError)
-    return <div>Something went wrong.</div>;
+  if (isTimezoneLoading || isCurrencyLoading || isUpdateLoading)
+    return <Loading />;
+  if (isTimezoneError || isCurrencyError || isUpdateError) {
+    enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
+  }
 
   const onSubmit = (data) => {
-    console.log(data);
+    updateProfile({
+      userid: profile.id,
+      locale,
+      data: {
+        name: data.name,
+        surname: data.surname,
+        phoneNumber: data.phoneNumber,
+        settings: {
+          ...profile.settings,
+          language: data.language.key,
+          timezone: data.timezones.key,
+          currency: data.currency.key,
+        },
+      },
+    });
   };
 
   return (
@@ -83,13 +121,12 @@ const UserSettingsForm = ({ locale, profile }) => {
         />
       </Grid>
       <Grid item xs={12} mt={1.5}>
-        <SelectInput
-          name={"language"}
-          label={t("language")}
-          id={"language"}
+        <LanguageSelectInput
           control={control}
-          value={Constants.languageOptions[locale][profile.settings.language]}
-          options={Constants.languageOptions[locale]}
+          label={t("language")}
+          value={Constants.languageOptions?.find(
+            (l) => l.key === profile.settings.language
+          )}
         />
       </Grid>
       <Grid item xs={12} mt={2}>

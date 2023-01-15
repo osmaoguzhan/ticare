@@ -5,7 +5,7 @@ export const redirect = async (ctx) => {
   if (session) {
     return {
       redirect: {
-        destination: `${process.env.NEXTAUTH_URL}/${ctx.locale}/dashboard`,
+        destination: `${process.env.NEXTAUTH_URL}/${session?.user?.settings?.language}/dashboard`,
         permanent: false,
       },
     };

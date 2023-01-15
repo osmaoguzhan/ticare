@@ -12,5 +12,9 @@
   "passwordMaxLength": "Parola en fazla <<placeholder>> karakter olmalıdır.",
   "passwordsNotMatch": "Parolalar eşleşmiyor.",
   "requiredPasswordRepeat": "Parola tekrarı boş bırakılamaz.",
-  "invalidPhoneNumber": "Telefon numarası formatı geçersiz. Format E.164 standartına uygun olmalıdır."
+  "invalidPhoneNumber": "Telefon numarası formatı geçersiz. Format E.164 standartına uygun olmalıdır.",
+  "somethingWentWrong": "Bir şeyler ters gitti.",
+  "passwordsCantBeSame": "Yeni parola eski parolayla aynı olamaz.",
+  "newPasswordIsRequired": "Yeni parola boş bırakılamaz.",
+  "currentPasswordIsRequired": "Mevcut parola boş bırakılamaz."
 }

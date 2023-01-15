@@ -2,14 +2,12 @@ import SigninForm from "@/components/forms/auth/SigninForm";
 import { Box, Card } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { encrypt } from "@/utils/helpers/cipher";
 import useLoading from "@/hooks/useLoading";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import AuthLayout from "@/components/layouts/AuthLayout";
-import { useSession } from "next-auth/react";
-import useLocalStorage from "@/hooks/useLocalStorage";
 import { redirect } from "@/utils/helpers/redirect";
 
 const Signin = () => {
@@ -20,24 +18,29 @@ const Signin = () => {
   const handleOnSubmit = async (formData) => {
     setLoading(true);
     formData.password = encrypt(formData.password);
-    const { ok, error } = await signIn("credentials", {
+    signIn("credentials", {
       redirect: false,
       email: formData.email,
       password: JSON.stringify(formData.password),
       locale: router.locale,
+    }).then(async (res) => {
+      if (res.status !== 200) {
+        setLoading(false);
+        Swal.fire({
+          title: t("error"),
+          text: res.error,
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      } else {
+        const session = await getSession();
+        router
+          .replace({
+            locale: `${session?.user?.settings?.language}/dashboard`,
+          })
+          .then(() => setLoading(false));
+      }
     });
-    if (ok) {
-      router.replace("/dashboard").then(() => setLoading(false));
-    }
-    if (error) {
-      setLoading(false);
-      Swal.fire({
-        title: t("error"),
-        text: error,
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-    }
   };
   return (
     <Box
@@ -48,13 +51,15 @@ const Signin = () => {
         justifyContent: "center",
         minHeight: "85vh",
         bgcolor: "rgb(78,115,223)",
-      }}>
+      }}
+    >
       <Card
         sx={{
           padding: 5,
           border: "2px solid #f0eeeb",
           borderRadius: "30px",
-        }}>
+        }}
+      >
         <SigninForm handleOnSubmit={handleOnSubmit} t={t} />
       </Card>
     </Box>

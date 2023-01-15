@@ -5,25 +5,39 @@ const PasswordValidator = () => {
   const { t } = useTranslation("error");
 
   return {
-    password: {
+    currentPassword: {
       required: {
         value: true,
-        message: t("requiredPassword"),
+        message: t("currentPasswordIsRequired"),
       },
-      minLength: {
-        value: Constants.passwordMin,
-        message: t("passwordMinLength").replace(
-          "<<placeholder>>",
-          Constants.passwordMin.toString()
-        ),
-      },
-      maxLength: {
-        value: Constants.passwordMax,
-        message: t("passwordMaxLength").replace(
-          "<<placeholder>>",
-          Constants.passwordMax.toString()
-        ),
-      },
+    },
+    password: (current) => {
+      return {
+        required: {
+          value: true,
+          message: t("newPasswordIsRequired"),
+        },
+
+        minLength: {
+          value: Constants.passwordMin,
+          message: t("passwordMinLength").replace(
+            "<<placeholder>>",
+            Constants.passwordMin.toString()
+          ),
+        },
+        maxLength: {
+          value: Constants.passwordMax,
+          message: t("passwordMaxLength").replace(
+            "<<placeholder>>",
+            Constants.passwordMax.toString()
+          ),
+        },
+        validate: (value) => {
+          if (value === current) {
+            return t("passwordsCantBeSame");
+          }
+        },
+      };
     },
     passwordRepeat: (current) => {
       return {

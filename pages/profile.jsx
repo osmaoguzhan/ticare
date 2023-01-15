@@ -50,8 +50,8 @@ const Profile = ({ userid, locale }) => {
       >
         <TabMenu
           components={[
-            <UserSettingsForm profile={profile} locale={locale} />,
-            <NewPasswordForm />,
+            <UserSettingsForm profile={profile} />,
+            <NewPasswordForm userid={userid} />,
           ]}
           labels={[t("userSettings"), t("changePassword")]}
         />
