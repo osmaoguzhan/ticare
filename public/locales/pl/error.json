@@ -14,5 +14,7 @@
   "requiredPasswordRepeat": "Proszę powtórzyć hasło.",
   "invalidPhoneNumber": "Numer telefonu jest nieprawidłowy. Format musi być zgodny ze standardem E.164.",
   "somethingWentWrong": "Coś poszło nie tak.",
-  "passwordsCantBeSame": "Nowe hasło nie może być takie samo jak stare."
+  "passwordsCantBeSame": "Nowe hasło nie może być takie samo jak stare.",
+  "newPasswordIsRequired": "Nowe hasło jest wymagane.",
+  "currentPasswordIsRequired": "Aktualne hasło jest wymagane."
 }

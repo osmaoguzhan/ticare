@@ -18,6 +18,7 @@ const NewPasswordForm = ({ userid }) => {
     control,
     formState: { errors },
     watch,
+    reset,
   } = useForm();
   const validator = Validator("password");
   const router = useRouter();
@@ -26,6 +27,12 @@ const NewPasswordForm = ({ userid }) => {
     usePasswordMutation({
       onSuccess: (message) => {
         enqueueSnackbar(message, { variant: "success" });
+        reset(
+          {},
+          {
+            keepValues: false,
+          }
+        );
       },
       onError: (error) => {
         enqueueSnackbar(error, { variant: "error" });
@@ -49,6 +56,7 @@ const NewPasswordForm = ({ userid }) => {
           name="currentPassword"
           control={control}
           errors={errors}
+          validation={validator.currentPassword}
         />
       </Grid>
       <Grid item xs={12}>

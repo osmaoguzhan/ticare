@@ -14,5 +14,7 @@
   "requiredPasswordRepeat": "Please repeat your password.",
   "invalidPhoneNumber": "Phone number format is invalid. The format must comply with the E.164 standard.",
   "somethingWentWrong": "Something went wrong.",
-  "passwordsCantBeSame": "New password can't be the same as the old one."
+  "passwordsCantBeSame": "New password can't be the same as the old one.",
+  "newPasswordIsRequired": "New password is required.",
+  "currentPasswordIsRequired": "Current password is required."
 }

@@ -5,11 +5,17 @@ const PasswordValidator = () => {
   const { t } = useTranslation("error");
 
   return {
+    currentPassword: {
+      required: {
+        value: true,
+        message: t("currentPasswordIsRequired"),
+      },
+    },
     password: (current) => {
       return {
         required: {
           value: true,
-          message: t("requiredPassword"),
+          message: t("newPasswordIsRequired"),
         },
 
         minLength: {
