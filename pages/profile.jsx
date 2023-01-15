@@ -6,7 +6,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import TabMenu from "@/components/profile/TabMenu";
 import { useProfile } from "@/hooks/query/useProfile";
-import Loading from "@/components/Loading";
+import Loading from "@/components/general/Loading";
 
 const Profile = ({ userid, locale }) => {
   const { t } = useTranslation("label");
@@ -24,7 +24,7 @@ const Profile = ({ userid, locale }) => {
       sx={{
         display: "flex",
         justifyContent: "space-between",
-        backgroundColor: "#ffffff",
+        backgroundColor: "primary.white",
       }}
     >
       <Grid item xs={12}>

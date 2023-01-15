@@ -50,7 +50,7 @@ const Signin = () => {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "85vh",
-        bgcolor: "rgb(78,115,223)",
+        bgcolor: "primary.main",
       }}
     >
       <Card

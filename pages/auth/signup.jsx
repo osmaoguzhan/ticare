@@ -54,14 +54,16 @@ const SignUp = () => {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "85vh",
-        bgcolor: "rgb(78,115,223)",
-      }}>
+        bgcolor: "primary.main",
+      }}
+    >
       <Card
         sx={{
           padding: 5,
           border: "2px solid #f0eeeb",
           borderRadius: "30px",
-        }}>
+        }}
+      >
         <SignupForm
           handleOnSubmit={handleOnSubmit}
           t={t}

@@ -36,7 +36,7 @@ const Activate = ({ success, message }) => {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "98vh",
-        bgcolor: "rgb(78,115,223)",
+        bgcolor: "primary",
       }}
     />
   );

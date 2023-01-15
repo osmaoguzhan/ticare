@@ -1,4 +1,4 @@
-import { styled, useTheme } from "@mui/material/styles";
+import { lighten, styled, useTheme } from "@mui/material/styles";
 import {
   Box,
   Drawer,
@@ -25,7 +25,7 @@ import useScreen from "@/hooks/useScreen";
 import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import Main from "@/components/Main";
+import Main from "@/components/general/Main";
 import Constants from "@/utils/Constants";
 import { signOut, useSession } from "next-auth/react";
 import useLocalStorage from "@/hooks/useLocalStorage";
@@ -130,7 +130,7 @@ const Layout = ({ children }) => {
           >
             <FontAwesomeIcon
               icon={faBars}
-              color={"rgb(78,115,223)"}
+              color={theme.palette.primary.main}
               fixedWidth
             />
           </IconButton>
@@ -159,7 +159,7 @@ const Layout = ({ children }) => {
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: "245px",
-            backgroundColor: "rgb(78,115,223)",
+            backgroundColor: "primary.main",
           },
         }}
         variant={variant}
@@ -217,7 +217,9 @@ const Layout = ({ children }) => {
                 sx={{
                   mt: 2,
                   color: "#e1dfe1",
-                  ":hover": { backgroundColor: "rgb(78,118,223)" },
+                  ":hover": {
+                    backgroundColor: lighten(theme.palette.primary.main, 0.1),
+                  },
                 }}
               >
                 {theme.direction === "ltr" ? (

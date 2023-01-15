@@ -6,7 +6,7 @@ import { useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form";
 import { useTimezone } from "@/hooks/query/useTimezone";
 import { useCurrency } from "@/hooks/query/useCurrency";
-import Loading from "@/components/Loading";
+import Loading from "@/components/general/Loading";
 import Validator from "@/utils/validator/Validator";
 import { useUpdateProfile } from "@/hooks/query/useProfile";
 import { useRouter } from "next/router";

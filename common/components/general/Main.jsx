@@ -15,7 +15,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
       }),
       marginLeft: 0,
       marginRight: 0,
-      backgroundColor: "#ffffff",
+      backgroundColor: theme.palette.primary.white,
     }),
   })
 );

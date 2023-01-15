@@ -13,9 +13,11 @@ import Navbar from "@/components/navbar/MainPageNavbar";
 import Footer from "@/components/footer/Footer";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTheme } from "@emotion/react";
 
 export default function Home() {
   const { t } = useTranslation("label");
+  const theme = useTheme();
 
   return (
     <>
@@ -27,7 +29,7 @@ export default function Home() {
           alignItems: "center",
           justifyContent: "center",
           minHeight: "86vh",
-          bgcolor: "rgb(78,115,223)",
+          bgcolor: "primary.main",
           color: "text.primary",
         }}
       >
@@ -58,18 +60,14 @@ export default function Home() {
                 <FontAwesomeIcon
                   icon={faBaby}
                   size="3x"
-                  style={{ color: "rgb(78,115,223)" }}
+                  style={{ color: theme.palette.primary.main }}
                 />
                 <Typography
                   component={"div"}
-                  color="text.secondary"
+                  color={theme.palette.primary.text}
                   style={{ marginBottom: "10%" }}
                 >
-                  <Typography
-                    variant="h6"
-                    color="text.secondary"
-                    fontFamily={"Nunito, sans-serif"}
-                  >
+                  <Typography variant="h6" fontFamily={"Nunito, sans-serif"}>
                     {t("easy").toUpperCase()}
                   </Typography>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -78,16 +76,16 @@ export default function Home() {
                 <FontAwesomeIcon
                   icon={faTruckFast}
                   size="3x"
-                  style={{ color: "rgb(78,115,223)" }}
+                  style={{ color: theme.palette.primary.main }}
                 />
                 <Typography
                   component={"div"}
-                  color="text.secondary"
+                  color={theme.palette.primary.text}
                   style={{ marginBottom: "10%" }}
                 >
                   <Typography
                     variant="h6"
-                    color="text.secondary"
+                    color={theme.palette.primary.text}
                     fontFamily={"Nunito, sans-serif"}
                   >
                     {t("fast").toUpperCase()}
@@ -99,16 +97,16 @@ export default function Home() {
                 <FontAwesomeIcon
                   icon={faCreativeCommonsNcEu}
                   size="3x"
-                  style={{ color: "rgb(78,115,223)" }}
+                  style={{ color: theme.palette.primary.main }}
                 />
                 <Typography
                   component={"div"}
-                  color="text.secondary"
+                  color={theme.palette.primary.text}
                   style={{ marginBottom: "10%" }}
                 >
                   <Typography
                     variant="h6"
-                    color="text.secondary"
+                    color={theme.palette.primary.text}
                     fontFamily={"Nunito, sans-serif"}
                   >
                     {t("free").toUpperCase()}

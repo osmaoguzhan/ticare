@@ -1,6 +1,8 @@
+import { useTheme } from "@emotion/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Typography, Grid, Card, CardContent } from "@mui/material";
 const InfoCard = ({ text, value, color, icon }) => {
+  const theme = useTheme();
   return (
     <Card sx={{ height: "100%", backgroundColor: color }}>
       <CardContent>
@@ -20,7 +22,11 @@ const InfoCard = ({ text, value, color, icon }) => {
               alignItems: "center",
             }}
           >
-            <FontAwesomeIcon icon={icon} color={"#ffffff"} size={"2x"} />
+            <FontAwesomeIcon
+              icon={icon}
+              color={theme.palette.primary.white}
+              size={"2x"}
+            />
           </Grid>
         </Grid>
       </CardContent>

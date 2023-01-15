@@ -7,7 +7,7 @@ import { usePasswordMutation } from "@/hooks/query/usePasswordMutation";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import bcrypt from "bcryptjs";
-import Loading from "@/components/Loading";
+import Loading from "@/components/general/Loading";
 import { encrypt } from "@/utils/helpers/cipher";
 
 const NewPasswordForm = ({ userid }) => {
