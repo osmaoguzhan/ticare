@@ -1,7 +1,6 @@
 import InfoCard from "@/components/dashboard/InfoCard";
 import Layout from "@/components/layouts/Layout";
 import useLoading from "@/hooks/useLoading";
-import useLocalStorage from "@/hooks/useLocalStorage";
 import {
   faChevronDown,
   faCube,
@@ -10,7 +9,6 @@ import {
 import { Typography, Grid } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useEffect } from "react";
 
 const Dashboard = () => {
   const cardData = [
@@ -39,9 +37,6 @@ const Dashboard = () => {
       icon: faChevronDown,
     },
   ];
-
-  const { data: session } = useSession();
-  const { setLoading } = useLoading();
 
   return (
     <Grid container spacing={4}>

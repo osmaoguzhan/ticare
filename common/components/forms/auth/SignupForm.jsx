@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import PasswordInput from "../../inputs/PasswordInput";
+import { useTheme } from "@emotion/react";
 
 const SignupForm = ({ handleOnSubmit, t, validator }) => {
   const {
@@ -23,6 +24,7 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
     formState: { errors },
   } = useForm();
   const router = useRouter();
+  const theme = useTheme();
 
   useEffect(() => {
     clearErrors();
@@ -127,10 +129,10 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
             sx={{
               mt: 3,
               mb: 1,
-              backgroundColor: "rgb(78,115,223)",
+              backgroundColor: "primary.main",
               borderRadius: "10px",
               "&:hover": {
-                backgroundColor: darken("rgb(78,115,223)", 0.4),
+                backgroundColor: darken(theme.palette.primary.main, 0.4),
               },
             }}
           >

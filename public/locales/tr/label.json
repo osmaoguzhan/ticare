@@ -37,5 +37,19 @@
   "updatePassword": "Parolayı Güncelle",
   "language": "Dil",
   "timezone": "Zaman Dilimi",
-  "currency": "Para Birimi"
+  "currency": "Para Birimi",
+  "add": "Ekle",
+  "edit": "Düzenle",
+  "delete": "Sil",
+  "active": "Aktif",
+  "inactive": "Pasif",
+  "isActive": "Aktif mi?",
+  "brandName": "Marka Adı",
+  "addANewBrand": "Yeni Marka Ekle",
+  "editBrand": "Markayı Düzenle",
+  "description": "Açıklama",
+  "status": "Durum",
+  "deleteConfirmation": "Silmek istediğinize emin misiniz?",
+  "yes": "Evet",
+  "no": "Hayır"
 }

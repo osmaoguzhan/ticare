@@ -35,7 +35,7 @@ const Signin = () => {
       } else {
         const session = await getSession();
         router
-          .replace({
+          .push({
             locale: `${session?.user?.settings?.language}/dashboard`,
           })
           .then(() => setLoading(false));
@@ -50,7 +50,7 @@ const Signin = () => {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "85vh",
-        bgcolor: "rgb(78,115,223)",
+        bgcolor: "primary.main",
       }}
     >
       <Card

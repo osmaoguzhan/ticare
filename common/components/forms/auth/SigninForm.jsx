@@ -10,6 +10,7 @@ import Link from "next/link";
 import FormInput from "../../inputs/FormInput";
 import PasswordInput from "../../inputs/PasswordInput";
 import { useForm } from "react-hook-form";
+import { useTheme } from "@emotion/react";
 
 const SigninForm = ({ handleOnSubmit, t }) => {
   const {
@@ -17,6 +18,7 @@ const SigninForm = ({ handleOnSubmit, t }) => {
     control,
     formState: { errors },
   } = useForm();
+  const theme = useTheme();
 
   return (
     <Container component={"main"} maxWidth={"xs"}>
@@ -70,10 +72,10 @@ const SigninForm = ({ handleOnSubmit, t }) => {
             sx={{
               mt: 3,
               mb: 1,
-              backgroundColor: "rgb(78,115,223)",
+              backgroundColor: "primary.main",
               borderRadius: "10px",
               "&:hover": {
-                backgroundColor: darken("rgb(78,115,223)", 0.4),
+                backgroundColor: darken(theme.palette.primary.main, 0.4),
               },
             }}
           >

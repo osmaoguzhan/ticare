@@ -16,5 +16,10 @@
   "somethingWentWrong": "Bir şeyler ters gitti.",
   "passwordsCantBeSame": "Yeni parola eski parolayla aynı olamaz.",
   "newPasswordIsRequired": "Yeni parola boş bırakılamaz.",
-  "currentPasswordIsRequired": "Mevcut parola boş bırakılamaz."
+  "currentPasswordIsRequired": "Mevcut parola boş bırakılamaz.",
+  "brandNameRequired": "Marka adı boş bırakılamaz.",
+  "brandNameMinLength": "Marka adı en az <<placeholder>> karakter olmalıdır.",
+  "brandNameMaxLength": "Marka adı en fazla <<placeholder>> karakter olmalıdır.",
+  "brandDescriptionMinLength": "Marka açıklaması en az <<placeholder>> karakter olmalıdır.",
+  "brandDescriptionMaxLength": "Marka açıklaması en fazla <<placeholder>> karakter olmalıdır."
 }

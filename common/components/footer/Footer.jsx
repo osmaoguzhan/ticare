@@ -5,8 +5,11 @@ import {
   faLinkedin,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { useTheme } from "@emotion/react";
 
 const Footer = () => {
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
@@ -14,15 +17,17 @@ const Footer = () => {
         justifyContent: "center",
         alignItems: "center",
         mt: 2,
-        backgroundColor: "white",
+        backgroundColor: theme.palette.primary.white,
         textAlign: "center",
         height: "50px",
-      }}>
+      }}
+    >
       <Box
         sx={{
           flex: 1,
-        }}>
-        <Typography variant='h6' color='gray'>
+        }}
+      >
+        <Typography variant="h6" color="gray">
           Copyright © 2022 Ticare
         </Typography>
       </Box>
@@ -31,8 +36,9 @@ const Footer = () => {
           flex: 1,
           display: "flex",
           justifyContent: "space-evenly",
-        }}>
-        <Typography variant='h5' color='primary'>
+        }}
+      >
+        <Typography variant="h5" color="primary">
           <FontAwesomeIcon
             icon={faTwitter}
             style={{ marginRight: "10px", cursor: "pointer" }}

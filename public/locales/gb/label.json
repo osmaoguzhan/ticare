@@ -37,5 +37,19 @@
   "updatePassword": "Update Password",
   "language": "Language",
   "timezone": "Timezone",
-  "currency": "Currency"
+  "currency": "Currency",
+  "add": "Add",
+  "edit": "Edit",
+  "delete": "Delete",
+  "active": "Active",
+  "inactive": "Inactive",
+  "isActive": "Is Active?",
+  "brandName": "Brand Name",
+  "addANewBrand": "Add a New Brand",
+  "editBrand": "Edit Brand",
+  "description": "Description",
+  "status": "Status",
+  "deleteConfirmation": "Are you sure you want to delete this item?",
+  "yes": "Yes",
+  "no": "No"
 }

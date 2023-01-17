@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeLowVision } from "@fortawesome/free-solid-svg-icons";
 import FormInput from "./FormInput";
 import { darken, InputAdornment } from "@mui/material/";
+import { useTheme } from "@emotion/react";
 
 const PasswordInput = (props) => {
   const { name, label, control, value, errors, validation, ...other } = props;
@@ -11,6 +12,7 @@ const PasswordInput = (props) => {
     type: "password",
     icon: faEye,
   });
+  const theme = useTheme();
 
   return (
     <FormInput
@@ -28,7 +30,7 @@ const PasswordInput = (props) => {
             sx={{
               cursor: "pointer",
               "&:hover": {
-                color: darken("rgb(78,115,223)", 0.4),
+                color: darken(theme.palette.primary.main, 0.4),
               },
             }}
             onClick={() =>
