@@ -5,11 +5,8 @@ import {
   faLinkedin,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { useTheme } from "@emotion/react";
 
 const Footer = () => {
-  const theme = useTheme();
-
   return (
     <Box
       sx={{
@@ -17,7 +14,7 @@ const Footer = () => {
         justifyContent: "center",
         alignItems: "center",
         mt: 2,
-        backgroundColor: theme.palette.primary.white,
+        backgroundColor: "primary.white",
         textAlign: "center",
         height: "50px",
       }}

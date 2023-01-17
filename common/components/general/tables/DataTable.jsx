@@ -48,7 +48,7 @@ const DataTable = ({ columns, rows, ...other }) => {
           {selectedRows.length === 0 ? (
             <Button
               startIcon={<FontAwesomeIcon icon={faAdd} />}
-              sx={{ fontSize: "0.8rem", color: theme.palette.primary.main }}
+              sx={{ fontSize: "0.8rem", color: "primary.main" }}
               onClick={() => {
                 router.push({
                   pathname: router.pathname + "/add",
@@ -101,11 +101,9 @@ const DataTable = ({ columns, rows, ...other }) => {
               {t("delete")}
             </Button>
           ) : null}
-          <GridToolbarFilterButton sx={{ color: theme.palette.primary.main }} />
-          <GridToolbarColumnsButton
-            sx={{ color: theme.palette.primary.main }}
-          />
-          <GridToolbarExport sx={{ color: theme.palette.primary.main }} />
+          <GridToolbarFilterButton />
+          <GridToolbarColumnsButton />
+          <GridToolbarExport />
         </ButtonGroup>
       </GridToolbarContainer>
     );
