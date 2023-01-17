@@ -1,4 +1,3 @@
-import { useTheme } from "@emotion/react";
 import Box from "@mui/material/Box";
 import { getGridBooleanOperators } from "@mui/x-data-grid";
 import { useTranslation } from "next-i18next";
@@ -6,7 +5,6 @@ import DataTable from "./DataTable";
 import { useMemo } from "react";
 
 const BrandTable = () => {
-  const theme = useTheme();
   const { t } = useTranslation("label");
 
   const columns = useMemo(() => {
@@ -25,11 +23,10 @@ const BrandTable = () => {
         renderCell: (params) => (
           <Box
             sx={{
-              backgroundColor:
-                theme.palette.primary[
-                  params.row.isActive ? "success" : "error"
-                ],
-              color: theme.palette.primary.white,
+              backgroundColor: params.row.isActive
+                ? "primary.success"
+                : "primary.error",
+              color: "primary.white",
               borderRadius: 3,
               boxShadow: 2,
               padding: 0.5,

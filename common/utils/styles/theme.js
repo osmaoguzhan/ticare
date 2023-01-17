@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+const { createTheme } = require("@mui/material");
 
 export const theme = createTheme({
   palette: {
