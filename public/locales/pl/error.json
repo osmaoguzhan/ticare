@@ -16,5 +16,10 @@
   "somethingWentWrong": "Coś poszło nie tak.",
   "passwordsCantBeSame": "Nowe hasło nie może być takie samo jak stare.",
   "newPasswordIsRequired": "Nowe hasło jest wymagane.",
-  "currentPasswordIsRequired": "Aktualne hasło jest wymagane."
+  "currentPasswordIsRequired": "Aktualne hasło jest wymagane.",
+  "brandNameRequired": "Nazwa marki jest wymagana.",
+  "brandNameMinLength": "Nazwa marki powinna zawierać co najmniej <<placeholder>> znaków."
+  "brandNameMaxLength": "Nazwa marki powinna zawierać maksymalnie <<placeholder>> znaków.",
+  "brandDescriptionMinLength": "Opis marki powinien zawierać co najmniej <<placeholder>> znaków.",
+  "brandDescriptionMaxLength": "Opis marki powinien zawierać maksymalnie <<placeholder>> znaków.",
 }

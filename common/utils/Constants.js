@@ -19,6 +19,10 @@ const Constants = {
   passwordMin: 6,
   passwordMax: 18,
   phoneNumberRegex: /^\+[1-9]\d{1,14}$/,
+  brandNameMin: 2,
+  brandNameMax: 30,
+  brandDescriptionMin: 3,
+  brandDescriptionMax: 100,
   defaultSettings: (language) => {
     let defaultSettings = {
       theme: "light",
@@ -98,6 +102,22 @@ const Constants = {
     { key: "pl", label: "Polski" },
     { key: "tr", label: "Türkçe" },
   ],
+  pagination: ({ from, to, count, locale }) => {
+    let text = "";
+    switch (locale) {
+      case "pl":
+        text = `Wyświetlanie ${from} do ${to} z ${count} wyników`;
+        break;
+      case "tr":
+        text = `${count} sonuçtan ${from} - ${to} arası gösteriliyor`;
+        break;
+      case "gb":
+      default:
+        text = `Showing ${from} to ${to} of ${count} results`;
+        break;
+    }
+    return text;
+  },
 };
 
 module.exports = Constants;

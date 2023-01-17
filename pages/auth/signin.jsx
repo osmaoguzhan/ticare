@@ -35,7 +35,7 @@ const Signin = () => {
       } else {
         const session = await getSession();
         router
-          .replace({
+          .push({
             locale: `${session?.user?.settings?.language}/dashboard`,
           })
           .then(() => setLoading(false));

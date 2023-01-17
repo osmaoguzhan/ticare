@@ -38,9 +38,6 @@ const Dashboard = () => {
     },
   ];
 
-  const { data: session } = useSession();
-  const { setLoading } = useLoading();
-
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} sx={{ m: 1.5 }}>

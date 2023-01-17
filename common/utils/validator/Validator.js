@@ -1,6 +1,7 @@
 import SignupValidator from "./SignupValidator";
 import ProfileValidator from "./ProfileValidator";
 import PasswordValidator from "./PasswordValidator";
+import BrandValidator from "./BrandValidator";
 
 const Validator = (type) => {
   switch (type) {
@@ -10,6 +11,8 @@ const Validator = (type) => {
       return ProfileValidator();
     case "password":
       return PasswordValidator();
+    case "brand":
+      return BrandValidator();
     default:
       return {};
   }

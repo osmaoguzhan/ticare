@@ -1,9 +1,12 @@
 import Layout from "@/components/layouts/Layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import BrandTable from "@/components/general/tables/BrandTable";
-import { Button, ButtonGroup, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
+import { useTranslation } from "next-i18next";
+import BrandsForm from "@/components/forms/brands/BrandsForm";
 
-const Brands = () => {
+const BrandsEdit = () => {
+  const { t } = useTranslation("label");
+
   return (
     <Grid
       container
@@ -15,18 +18,20 @@ const Brands = () => {
     >
       <Grid item xs={12}>
         <Typography
-          variant="h4"
-          component="h1"
+          variant="h5"
           sx={{
             color: "#3a3b45",
             fontFamily: "Nunito, sans-serif",
           }}
         >
-          Brands{" "}
+          {t("addANewBrand")}
         </Typography>
       </Grid>
       <Grid item xs={12} p={1}>
-        <BrandTable />
+        <BrandsForm
+          // TODO : Get data by id from API and pass it to the form
+          values={{ name: "test", status: false, description: "rwerewrewrew" }}
+        />
       </Grid>
     </Grid>
   );
@@ -40,6 +45,6 @@ export const getStaticProps = async ({ locale }) => {
   };
 };
 
-Brands.Layout = Layout;
+BrandsEdit.Layout = Layout;
 
-export default Brands;
+export default BrandsEdit;

@@ -37,5 +37,18 @@
   "updatePassword": "Zaktualizuj hasło",
   "language": "Język",
   "timezone": "Strefa czasowa",
-  "currency": "Waluta"
+  "currency": "Waluta",
+  "add": "Dodaj",
+  "edit": "Edytować",
+  "delete": "Kasować",
+  "active": "Aktywny",
+  "inactive": "Nieaktywny",
+  "isActive": "Jest aktywny?",
+  "brandName": "Nazwa marki",
+  "addANewBrand": "Dodaj nową markę",
+  "description": "Opis",
+  "status": "Status",
+  "deleteConfirmation": "Czy na pewno chcesz usunąć?",
+  "yes": "Tak",
+  "no": "Nie"
 }

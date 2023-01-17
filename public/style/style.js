@@ -8,7 +8,7 @@ export const theme = createTheme({
       menuText: "white",
       buttonColor: "#f8f8f8e6",
       success: "#008000",
-      error: "#ff0000",
+      error: "#d33",
       white: "#ffffff",
     },
   },
