@@ -10,6 +10,7 @@ export const theme = createTheme({
       success: "#008000",
       error: "#d33",
       white: "#ffffff",
+      pageTitle: "#3a3b45",
     },
   },
 });

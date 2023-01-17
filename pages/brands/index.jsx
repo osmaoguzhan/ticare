@@ -13,7 +13,7 @@ const Brands = () => {
       sx={{
         display: "flex",
         justifyContent: "space-between",
-        backgroundColor: "#ffffff",
+        backgroundColor: "primary.white",
       }}
     >
       <Grid item xs={12}>
@@ -21,8 +21,7 @@ const Brands = () => {
           variant="h4"
           component="h1"
           sx={{
-            color: "#3a3b45",
-            fontFamily: "Nunito, sans-serif",
+            color: "primary.pageTitle",
           }}
         >
           {t("brands")}

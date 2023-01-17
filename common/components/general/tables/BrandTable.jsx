@@ -3,49 +3,53 @@ import Box from "@mui/material/Box";
 import { getGridBooleanOperators } from "@mui/x-data-grid";
 import { useTranslation } from "next-i18next";
 import DataTable from "./DataTable";
-import BrandsForm from "@/components/forms/brands/BrandsForm";
+import { useMemo } from "react";
 
 const BrandTable = () => {
   const theme = useTheme();
   const { t } = useTranslation("label");
 
-  const columns = [
-    {
-      field: "name",
-      headerName: t("brandName"),
-      width: 100,
-      editable: false,
-    },
-    {
-      field: "isActive",
-      headerName: t("isActive"),
-      width: 100,
-      editable: false,
-      renderCell: (params) => (
-        <Box
-          sx={{
-            backgroundColor:
-              theme.palette.primary[params.row.isActive ? "success" : "error"],
-            color: theme.palette.primary.white,
-            borderRadius: 3,
-            boxShadow: 2,
-            padding: 0.5,
-            width: 80,
-            textAlign: "center",
-          }}
-        >
-          {params.row.isActive ? t("active") : t("inactive")}
-        </Box>
-      ),
-      filterOperators: getGridBooleanOperators(),
-    },
-    {
-      field: "description",
-      headerName: t("description"),
-      width: 250,
-      editable: false,
-    },
-  ];
+  const columns = useMemo(() => {
+    return [
+      {
+        field: "name",
+        headerName: t("brandName"),
+        width: 100,
+        editable: false,
+      },
+      {
+        field: "isActive",
+        headerName: t("isActive"),
+        width: 100,
+        editable: false,
+        renderCell: (params) => (
+          <Box
+            sx={{
+              backgroundColor:
+                theme.palette.primary[
+                  params.row.isActive ? "success" : "error"
+                ],
+              color: theme.palette.primary.white,
+              borderRadius: 3,
+              boxShadow: 2,
+              padding: 0.5,
+              width: 80,
+              textAlign: "center",
+            }}
+          >
+            {params.row.isActive ? t("active") : t("inactive")}
+          </Box>
+        ),
+        filterOperators: getGridBooleanOperators(),
+      },
+      {
+        field: "description",
+        headerName: t("description"),
+        width: 250,
+        editable: false,
+      },
+    ];
+  }, []);
 
   // TODO : Get data from API
   const rows = [

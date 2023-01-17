@@ -57,7 +57,6 @@ const Navbar = () => {
             sx={{
               mr: 2,
               display: "flex",
-              fontFamily: "Nunito, sans-serif",
               letterSpacing: ".2rem",
               color: "#f8f8f8e6",
               fontSize: "1.5rem",

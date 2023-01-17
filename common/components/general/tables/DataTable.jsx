@@ -141,7 +141,6 @@ const DataTable = ({ columns, rows, ...other }) => {
               }),
           },
         }}
-        selectionModel={selectedRows.map((item) => item["id"])}
         {...other}
       />
     </Box>

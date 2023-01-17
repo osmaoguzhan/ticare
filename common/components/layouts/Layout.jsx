@@ -193,7 +193,6 @@ const Layout = ({ children }) => {
                     mr: 2,
                     mt: 0.6,
                     display: "flex",
-                    fontFamily: "Nunito, sans-serif",
                     letterSpacing: ".2rem",
                     color: "#f8f8f8e6",
                     fontSize: "1.3rem",

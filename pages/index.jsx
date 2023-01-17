@@ -67,7 +67,7 @@ export default function Home() {
                   color={theme.palette.primary.text}
                   style={{ marginBottom: "10%" }}
                 >
-                  <Typography variant="h6" fontFamily={"Nunito, sans-serif"}>
+                  <Typography variant="h6">
                     {t("easy").toUpperCase()}
                   </Typography>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -83,11 +83,7 @@ export default function Home() {
                   color={theme.palette.primary.text}
                   style={{ marginBottom: "10%" }}
                 >
-                  <Typography
-                    variant="h6"
-                    color={theme.palette.primary.text}
-                    fontFamily={"Nunito, sans-serif"}
-                  >
+                  <Typography variant="h6" color={theme.palette.primary.text}>
                     {t("fast").toUpperCase()}
                   </Typography>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -104,11 +100,7 @@ export default function Home() {
                   color={theme.palette.primary.text}
                   style={{ marginBottom: "10%" }}
                 >
-                  <Typography
-                    variant="h6"
-                    color={theme.palette.primary.text}
-                    fontFamily={"Nunito, sans-serif"}
-                  >
+                  <Typography variant="h6" color={theme.palette.primary.text}>
                     {t("free").toUpperCase()}
                   </Typography>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.

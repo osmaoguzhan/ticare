@@ -33,7 +33,6 @@ const Profile = ({ userid, locale }) => {
           component="h1"
           sx={{
             color: "#3a3b45",
-            fontFamily: "Nunito, sans-serif",
           }}
         >
           {t("profile")}

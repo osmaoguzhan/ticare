@@ -4,7 +4,7 @@ import { Grid, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import BrandsForm from "@/components/forms/brands/BrandsForm";
 
-const Brands = () => {
+const BrandsAdd = () => {
   const { t } = useTranslation("label");
 
   return (
@@ -21,8 +21,7 @@ const Brands = () => {
         <Typography
           variant="h5"
           sx={{
-            color: "#3a3b45",
-            fontFamily: "Nunito, sans-serif",
+            color: "primary.pageTitle",
           }}
         >
           {t("addANewBrand")}
@@ -43,6 +42,6 @@ export const getStaticProps = async ({ locale }) => {
   };
 };
 
-Brands.Layout = Layout;
+BrandsAdd.Layout = Layout;
 
-export default Brands;
+export default BrandsAdd;

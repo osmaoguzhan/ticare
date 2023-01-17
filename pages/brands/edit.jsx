@@ -13,18 +13,17 @@ const BrandsEdit = () => {
       sx={{
         display: "flex",
         justifyContent: "space-between",
-        backgroundColor: "#ffffff",
+        backgroundColor: "primary.white",
       }}
     >
       <Grid item xs={12}>
         <Typography
           variant="h5"
           sx={{
-            color: "#3a3b45",
-            fontFamily: "Nunito, sans-serif",
+            color: "primary.pageTitle",
           }}
         >
-          {t("addANewBrand")}
+          {t("editBrand")}
         </Typography>
       </Grid>
       <Grid item xs={12} p={1}>

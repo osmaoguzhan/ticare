@@ -46,6 +46,7 @@
   "isActive": "Jest aktywny?",
   "brandName": "Nazwa marki",
   "addANewBrand": "Dodaj nową markę",
+  "editBrand": "Edytuj markę",
   "description": "Opis",
   "status": "Status",
   "deleteConfirmation": "Czy na pewno chcesz usunąć?",
