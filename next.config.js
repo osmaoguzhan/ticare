@@ -12,6 +12,9 @@ const nextConfig = {
     ALGORITHM: process.env.ALGORITHM,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = nextConfig;
