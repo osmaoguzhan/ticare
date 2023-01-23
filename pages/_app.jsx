@@ -1,4 +1,4 @@
-import { LoadingProvider } from "@/contexts/LoadingContext";
+import { LoadingProvider } from "@/contexts/loadingContext";
 import { appWithTranslation } from "next-i18next";
 import { SessionProvider } from "next-auth/react";
 import { CssBaseline } from "@mui/material";
