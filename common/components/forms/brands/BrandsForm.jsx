@@ -35,7 +35,7 @@ const BrandsForm = (props) => {
           control={control}
           value={{
             label: values?.status ? t("active") : t("inactive"),
-            key: values?.status,
+            key: !!values?.status,
           }}
           options={[
             { label: t("active"), key: true },
