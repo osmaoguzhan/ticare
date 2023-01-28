@@ -52,5 +52,11 @@
   "deleteConfirmation": "Silmek istediğinize emin misiniz?",
   "yes": "Evet",
   "no": "Hayır",
-  "companyName": "Şirket Adı"
+  "companyName": "Şirket Adı",
+  "country": "Ülke",
+  "city": "Şehir",
+  "address": "Adres",
+  "zipCode": "Posta Kodu",
+  "city-state": "Şehir/Eyalet",
+  "city-district": "Şehir/İlçe/Bölge"
 }

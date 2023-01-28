@@ -13,67 +13,69 @@ enum Role {
 }
 
 model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  surname String
-  email String @unique
-  password String
-  role Role @default(USER)
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  surname     String
+  email       String   @unique
+  password    String
+  role        Role     @default(USER)
   phoneNumber String?
-  settings Json @default("{\"language\": \"en\", \"currency\": \"USD\",  \"timezone\": \"UTC\", \"theme\": \"light\"}")
-  isActivated Boolean @default(false)
-  company Company?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  settings    Json     @default("{\"language\": \"en\", \"currency\": \"USD\",  \"timezone\": \"UTC\", \"theme\": \"light\"}")
+  isActivated Boolean  @default(false)
+  company     Company? @relation(fields: [companyId], references: [id])
+  companyId   String?  @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Company {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
   description String?
-  address String
-  city String
-  country String
-  zipCode String
+  address     String
+  city        String
+  country     Country  @relation(fields: [countryId], references: [id])
+  countryId   String   @db.ObjectId
+  zipCode     String
   phoneNumber String
-  email String
-  website String?
-  owner User @relation(fields: [ownerId], references: [id])
-  ownerId String @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  email       String
+  website     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User[]
 }
 
 model Country {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  phone_code String
-  currency String
-  currency_name String
-  currency_symbol String
-  region String
-  subregion String
-  timezones Json[]
-  latitude String
-  longitude String
-  states Json[]
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  phone_code       String
+  currency         String
+  currency_name    String
+  currency_symbol  String
+  translations     Json
+  flag              Json
+  postalCodeFormat String
+  postalCodeRegex  String
+  timezones        Json[]
+  states           Json[]
+  Company          Company[]
 }
 
 model Timezone {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  value String
-  abbr String
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  value  String
+  abbr   String
   offset Int
-  isdst Boolean
-  text String
-  utc Json[]
+  isdst  Boolean
+  text   String
+  utc    Json[]
 }
 
 model Brand {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  isActive Boolean @default(true)
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  isActive    Boolean  @default(true)
   description String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

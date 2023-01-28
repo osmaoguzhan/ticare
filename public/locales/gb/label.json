@@ -52,5 +52,11 @@
   "deleteConfirmation": "Are you sure you want to delete this item?",
   "yes": "Yes",
   "no": "No",
-  "companyName": "Company Name"
+  "companyName": "Company Name",
+  "country": "Country",
+  "city": "City",
+  "address": "Address",
+  "zipCode": "Zip Code",
+  "city-state": "City/State",
+  "city-district": "City/District/Province"
 }

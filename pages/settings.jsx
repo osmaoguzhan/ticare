@@ -5,7 +5,6 @@ import { Grid, Typography } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import TabMenu from "@/components/profile/TabMenu";
-import { useProfile } from "@/hooks/query/useProfile";
 import Loading from "@/components/general/Loading";
 import { useRouter } from "next/router";
 import SettingsForm from "@/components/forms/settings/SettingsForm";

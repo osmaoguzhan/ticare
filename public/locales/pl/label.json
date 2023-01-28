@@ -52,5 +52,11 @@
   "deleteConfirmation": "Czy na pewno chcesz usunąć?",
   "yes": "Tak",
   "no": "Nie",
-  "companyName": "Nazwa firmy"
+  "companyName": "Nazwa firmy",
+  "country": "Kraj",
+  "city": "Miasto",
+  "address": "Adres",
+  "zipCode": "Kod pocztowy",
+  "city-state": "Miasto/Stan",
+  "city-district": "Miasto/Dzielnica/Region"
 }
