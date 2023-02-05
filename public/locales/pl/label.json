@@ -24,7 +24,7 @@
   "stores": "Sklepy",
   "orders": "Zamówienia",
   "products": "Produkty",
-  "settings": "Ustawienia",
+  "settings": "Ustawienia firmy",
   "logout": "Wyloguj",
   "profile": "Profil",
   "phone": "Numer telefonu",
@@ -51,5 +51,15 @@
   "status": "Status",
   "deleteConfirmation": "Czy na pewno chcesz usunąć?",
   "yes": "Tak",
-  "no": "Nie"
+  "no": "Nie",
+  "companyName": "Nazwa firmy",
+  "country": "Kraj",
+  "city": "Miasto",
+  "address": "Adres",
+  "zipCode": "Kod pocztowy",
+  "city-state": "Miasto/Stan",
+  "city-district": "Miasto/Dzielnica/Region",
+  "website": "Strona internetowa",
+  "addressLine1": "Adres Linia 1",
+  "addressLine2": "Adres Linia 2"
 }

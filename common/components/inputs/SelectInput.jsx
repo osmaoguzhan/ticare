@@ -2,7 +2,9 @@ import { Autocomplete, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 
 const SelectInput = (props) => {
-  const { name, label, control, value, options, ...other } = props;
+  const { name, label, control, value, options, onChange, isEmpty, ...other } =
+    props;
+
   return (
     <Controller
       name={name}
@@ -12,6 +14,7 @@ const SelectInput = (props) => {
           options={options}
           disableClearable
           onChange={(_, value) => {
+            if (onChange) onChange(value.key);
             props.field.onChange(value);
           }}
           value={props.field.value}
@@ -21,7 +24,7 @@ const SelectInput = (props) => {
           {...other}
         />
       )}
-      defaultValue={value ? value : options[0]}
+      defaultValue={value ? value : isEmpty ? null : options[0]}
     />
   );
 };

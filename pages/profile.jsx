@@ -7,9 +7,12 @@ import { useTranslation } from "next-i18next";
 import TabMenu from "@/components/profile/TabMenu";
 import { useProfile } from "@/hooks/query/useProfile";
 import Loading from "@/components/general/Loading";
+import { useRouter } from "next/router";
 
-const Profile = ({ userid, locale }) => {
+const Profile = ({ userid }) => {
   const { t } = useTranslation("label");
+  const router = useRouter();
+  const { locale } = router;
   const { profile, isProfileError, isProfileLoading } = useProfile(
     userid,
     locale
@@ -63,7 +66,6 @@ export const getServerSideProps = async (ctx) => {
   const { locale, req } = ctx;
   return {
     props: {
-      locale,
       userid: req.headers.userid,
       ...(await serverSideTranslations(locale ?? "gb", ["label", "error"])),
     },

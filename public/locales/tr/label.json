@@ -24,7 +24,7 @@
   "stores": "Mağazalar",
   "orders": "Siparişler",
   "products": "Ürünler",
-  "settings": "Ayarlar",
+  "settings": "Şirket Ayarları",
   "logout": "Çıkış Yap",
   "profile": "Profil",
   "phone": "Telefon Numarası",
@@ -51,5 +51,15 @@
   "status": "Durum",
   "deleteConfirmation": "Silmek istediğinize emin misiniz?",
   "yes": "Evet",
-  "no": "Hayır"
+  "no": "Hayır",
+  "companyName": "Şirket Adı",
+  "country": "Ülke",
+  "city": "Şehir",
+  "address": "Adres",
+  "zipCode": "Posta Kodu",
+  "city-state": "Şehir/Eyalet",
+  "city-district": "Şehir/İlçe/Bölge",
+  "website": "Web Sitesi",
+  "addressLine1": "Adres Satırı 1",
+  "addressLine2": "Adres Satırı 2"
 }

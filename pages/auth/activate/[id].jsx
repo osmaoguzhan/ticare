@@ -26,7 +26,7 @@ const Activate = ({ success, message }) => {
         showConfirmButton: false,
       });
     }
-  }, []);
+  });
 
   return (
     <Box

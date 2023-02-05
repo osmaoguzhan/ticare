@@ -23,6 +23,7 @@ const Constants = {
   brandNameMax: 30,
   brandDescriptionMin: 3,
   brandDescriptionMax: 100,
+  postalCodeRegex: /^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]$/,
   defaultSettings: (language) => {
     let defaultSettings = {
       theme: "light",
