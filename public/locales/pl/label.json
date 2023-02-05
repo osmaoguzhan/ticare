@@ -58,5 +58,8 @@
   "address": "Adres",
   "zipCode": "Kod pocztowy",
   "city-state": "Miasto/Stan",
-  "city-district": "Miasto/Dzielnica/Region"
+  "city-district": "Miasto/Dzielnica/Region",
+  "website": "Strona internetowa",
+  "addressLine1": "Adres Linia 1",
+  "addressLine2": "Adres Linia 2"
 }

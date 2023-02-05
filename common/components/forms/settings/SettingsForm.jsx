@@ -14,6 +14,8 @@ import {
 import { useState } from "react";
 import { useEffect } from "react";
 import { useCallback } from "react";
+import _ from "lodash";
+import Constants from "@/utils/Constants";
 
 const SettingsForm = () => {
   const { t } = useTranslation(["label", "error"]);
@@ -23,6 +25,7 @@ const SettingsForm = () => {
     handleSubmit,
     reset,
   } = useForm();
+  const validator = Validator("company");
   const router = useRouter();
   const { locale } = router;
   const [countryId, setCountryId] = useState("");
@@ -35,10 +38,6 @@ const SettingsForm = () => {
     stateId,
     countryId
   );
-
-  console.log("====================================");
-  console.log(countryData);
-  console.log("====================================");
 
   const refetchStatesCallback = useCallback(() => {
     if (countryId) refetchCountryData();
@@ -61,85 +60,13 @@ const SettingsForm = () => {
     return <Loading />;
 
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={0.5}>
       <Grid item xs={12}>
         <FormInput
           name={"name"}
           fullWidth
           id={"name"}
           label={t("companyName")}
-          control={control}
-          errors={errors}
-        />
-      </Grid>
-      <Grid item xs={12} md={6} lg={6} sx={{ mt: 1.6 }}>
-        <SelectInput
-          name={"country"}
-          id={"country"}
-          label={t("country")}
-          fullWidth
-          control={control}
-          errors={errors}
-          options={countries}
-          value={countries.find((c) => c.key === countryId)} // TODO: this part will come from the backend
-          onChange={(value) => {
-            setCountryId(value);
-          }}
-          isEmpty={true}
-        />
-      </Grid>
-      <Grid item xs={12} md={6} lg={6} sx={{ mt: 1.6 }}>
-        <SelectInput
-          name={"state"}
-          id={"state"}
-          label={t("city-state")}
-          fullWidth
-          control={control}
-          errors={errors}
-          onChange={(value) => {
-            setStateId(value);
-          }}
-          value={null}
-          options={countryData?.states}
-          disabled={countryId === ""}
-          isEmpty={true}
-        />
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        sx={{ mt: 1.6, display: cities?.length === 0 ? "none" : "flex" }}
-      >
-        <SelectInput
-          name={"city"}
-          id={"city"}
-          label={t("city-district")}
-          fullWidth
-          control={control}
-          errors={errors}
-          options={cities}
-          disabled={countryId === ""}
-          isEmpty={true}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <FormInput
-          autoComplete={"zipCode"}
-          name={"zipCode"}
-          id={"zipCode"}
-          label={t("zipCode")}
-          fullWidth
-          control={control}
-          errors={errors}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <FormInput
-          autoComplete={"address"}
-          name={"address"}
-          id={"address"}
-          label={t("address")}
-          fullWidth
           control={control}
           errors={errors}
         />
@@ -162,6 +89,108 @@ const SettingsForm = () => {
           id={"phoneNumber"}
           label={t("phone")}
           fullWidth
+          control={control}
+          errors={errors}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormInput
+          autoComplete={"website"}
+          name={"website"}
+          id={"website"}
+          label={t("website")}
+          fullWidth
+          control={control}
+          errors={errors}
+        />
+      </Grid>
+      <Grid item xs={12} md={6} lg={6} sx={{ mt: 1.5 }}>
+        <SelectInput
+          name={"country"}
+          id={"country"}
+          label={t("country")}
+          fullWidth
+          control={control}
+          errors={errors}
+          options={countries}
+          value={countries.find((c) => c.key === countryId)} // TODO: this part will come from the backend
+          onChange={(value) => {
+            setCountryId(value);
+          }}
+          isEmpty={true}
+        />
+      </Grid>
+      <Grid item xs={12} md={6} lg={6} sx={{ mt: 1.5 }}>
+        <SelectInput
+          name={"state"}
+          id={"state"}
+          label={t("city-state")}
+          fullWidth
+          control={control}
+          errors={errors}
+          onChange={(value) => {
+            setStateId(value);
+          }}
+          value={null}
+          options={countryData?.states || []}
+          disabled={countryId === ""}
+          isEmpty={true}
+        />
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sx={{ mt: 1.6, display: cities?.length === 0 ? "none" : "flex" }}
+      >
+        <SelectInput
+          name={"city"}
+          id={"city"}
+          label={t("city-district")}
+          fullWidth
+          control={control}
+          errors={errors}
+          options={cities || []}
+          value={null}
+          disabled={_.isNil(cities)}
+          isEmpty={true}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormInput
+          autoComplete={"zipCode"}
+          name={"zipCode"}
+          id={"zipCode"}
+          label={t("zipCode")}
+          fullWidth
+          control={control}
+          errors={errors}
+          disabled={_.isNil(countryData)}
+          validation={validator.postalCode(countryData?.postalCodeRegex)}
+          placeholder={countryData?.postalCodeFormat || ""}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormInput
+          autoComplete={"addressLine1"}
+          name={"addressLine1"}
+          id={"addressLine1"}
+          label={t("addressLine1")}
+          fullWidth
+          rows={4}
+          multiline
+          control={control}
+          errors={errors}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormInput
+          autoComplete={"addressLine2"}
+          name={"addressLine2"}
+          id={"addressLine2"}
+          label={t("addressLine2")}
+          fullWidth
+          rows={4}
+          multiline
           control={control}
           errors={errors}
         />

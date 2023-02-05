@@ -58,5 +58,8 @@
   "address": "Address",
   "zipCode": "Zip Code",
   "city-state": "City/State",
-  "city-district": "City/District/Province"
+  "city-district": "City/District/Province",
+  "website": "Website",
+  "addressLine1": "Address Line 1",
+  "addressLine2": "Address Line 2"
 }

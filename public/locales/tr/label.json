@@ -58,5 +58,8 @@
   "address": "Adres",
   "zipCode": "Posta Kodu",
   "city-state": "Şehir/Eyalet",
-  "city-district": "Şehir/İlçe/Bölge"
+  "city-district": "Şehir/İlçe/Bölge",
+  "website": "Web Sitesi",
+  "addressLine1": "Adres Satırı 1",
+  "addressLine2": "Adres Satırı 2"
 }

@@ -18,7 +18,7 @@ export default async function handler(req, res) {
           country.states = country.states.filter(
             (state) => state.id === parseInt(stateId)
           );
-          result.cities = country.states[0].cities.map((city) => {
+          result = country.states[0].cities.map((city) => {
             return { key: city.id, label: city.name };
           });
         } else {

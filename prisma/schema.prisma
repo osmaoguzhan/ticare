@@ -32,11 +32,7 @@ model Company {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String?
-  address     String
-  city        String
-  country     Country  @relation(fields: [countryId], references: [id])
-  countryId   String   @db.ObjectId
-  zipCode     String
+  address     Json
   phoneNumber String
   email       String
   website     String?
@@ -58,7 +54,6 @@ model Country {
   postalCodeRegex  String
   timezones        Json[]
   states           Json[]
-  Company          Company[]
 }
 
 model Timezone {
