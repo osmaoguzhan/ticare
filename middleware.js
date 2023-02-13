@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export default withAuth(
   async function middleware(req) {
     const { token } = req.nextauth;
-    let locale = getLocale(req.url);
+    let { locale } = getLocale(req.url);
     if (token) {
       const headers = new Headers(req.headers);
       headers.set("userid", token.user.id);
@@ -13,6 +13,14 @@ export default withAuth(
         locale = token.user.settings.language || "gb";
       }
       headers.set("locale", locale);
+      if (
+        !!!token?.user?.companyId &&
+        req.nextUrl.pathname !== "/settings" &&
+        req.nextUrl.pathname !== "/profile"
+      ) {
+        req.nextUrl.pathname = `/settings`;
+        return NextResponse.redirect(req.nextUrl);
+      }
       return NextResponse.next({
         request: {
           headers: headers,

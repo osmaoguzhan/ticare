@@ -18,12 +18,19 @@ const Constants = {
   emailRegex: /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/,
   passwordMin: 6,
   passwordMax: 18,
-  phoneNumberRegex: /^\+[1-9]\d{1,14}$/,
+  phoneNumberRegex: /^\+[1-9]\d{10,14}$/,
   brandNameMin: 2,
   brandNameMax: 30,
   brandDescriptionMin: 3,
   brandDescriptionMax: 100,
   postalCodeRegex: /^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]$/,
+  websiteRegex:
+    /^(https?:\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(\#[-a-z\d_]*)?$/i,
+  companyNameMin: 2,
+  companyNameMax: 64,
+  addressLineMin: 3,
+  addressLineMax: 120,
+  descriptionMax: 1000,
   defaultSettings: (language) => {
     let defaultSettings = {
       theme: "light",
@@ -92,7 +99,7 @@ const Constants = {
     { key: "stores", icon: faStore },
     { key: "orders", icon: faEuro },
     { key: "products", icon: faCubes },
-    { key: "settings", icon: faCogs },
+    { key: "settings", icon: faCogs, divider: true },
   ],
   avatarOnClick: [
     { key: "profile", icon: faUser },

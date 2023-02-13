@@ -8,30 +8,69 @@ const CompanyValidator = () => {
     name: {
       required: {
         value: true,
-        message: t("requiredName"),
+        message: t("companyNameRequired"),
       },
       minLength: {
-        value: Constants.nameMin,
-        message: t("nameMinLength").replace(
+        value: Constants.companyNameMin,
+        message: t("companyNameMinLength").replace(
           "<<placeholder>>",
           Constants.nameMin.toString()
         ),
       },
       maxLength: {
-        value: Constants.nameMax,
-        message: t("nameMaxLength").replace(
+        value: Constants.companyNameMax,
+        message: t("companyNameMaxLength").replace(
           "<<placeholder>>",
           Constants.nameMax.toString()
         ),
       },
     },
-
+    email: {
+      required: {
+        value: true,
+        message: t("requiredEmail"),
+      },
+      pattern: {
+        value: Constants.emailRegex,
+        message: t("invalidEmail"),
+      },
+    },
     phoneNumber: {
-      required: false,
+      required: {
+        value: true,
+        message: t("phoneNumberRequired"),
+      },
       pattern: {
         value: Constants.phoneNumberRegex,
         message: t("invalidPhoneNumber"),
       },
+    },
+    website: {
+      required: false,
+      pattern: {
+        value: Constants.websiteRegex,
+        message: t("invalidWebsite"),
+      },
+    },
+    country: {
+      required: {
+        value: true,
+        message: t("countryRequired"),
+      },
+    },
+    "state-city": {
+      required: {
+        value: true,
+        message: t("cityStateRequired"),
+      },
+    },
+    "city-district": (value) => {
+      return {
+        required: {
+          value,
+          message: t("cityStateRequired"),
+        },
+      };
     },
     postalCode: (postalCodeRegex) => {
       return {
@@ -43,6 +82,53 @@ const CompanyValidator = () => {
           return true;
         },
       };
+    },
+    addressLine1: {
+      required: {
+        value: true,
+        message: t("addressLine1Required"),
+      },
+      minLength: {
+        value: Constants.addressLineMin,
+        message: t("addressLineMinLength").replace(
+          "<<placeholder>>",
+          Constants.addressLineMin.toString()
+        ),
+      },
+      maxLength: {
+        value: Constants.addressLineMax,
+        message: t("addressLineMaxLength").replace(
+          "<<placeholder>>",
+          Constants.addressLineMax.toString()
+        ),
+      },
+    },
+    addressLine2: {
+      required: false,
+      minLength: {
+        value: Constants.addressLineMin,
+        message: t("addressLineMinLength").replace(
+          "<<placeholder>>",
+          Constants.addressLineMin.toString()
+        ),
+      },
+      maxLength: {
+        value: Constants.addressLineMax,
+        message: t("addressLineMaxLength").replace(
+          "<<placeholder>>",
+          Constants.addressLineMax.toString()
+        ),
+      },
+    },
+    description: {
+      required: false,
+      maxLength: {
+        value: Constants.descriptionMax,
+        message: t("descriptionMaxLength").replace(
+          "<<placeholder>>",
+          Constants.descriptionMax.toString()
+        ),
+      },
     },
   };
 };

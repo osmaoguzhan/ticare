@@ -11,11 +11,8 @@ import {
   useCountries,
   useCountryData,
 } from "@/hooks/query/useCountry";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import _ from "lodash";
-import Constants from "@/utils/Constants";
 
 const SettingsForm = () => {
   const { t } = useTranslation(["label", "error"]);
@@ -24,7 +21,7 @@ const SettingsForm = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm();
+  } = useForm({ mode: "onChange" });
   const validator = Validator("company");
   const router = useRouter();
   const { locale } = router;
@@ -41,11 +38,26 @@ const SettingsForm = () => {
 
   const refetchStatesCallback = useCallback(() => {
     if (countryId) refetchCountryData();
-    reset({ state: null });
+    reset(
+      (formValues) => ({
+        ...formValues,
+        state: null,
+        city: null,
+      }),
+      { keepErrors: true }
+    );
+    setStateId("");
   }, [countryId]);
 
   const refetchCitiesCallback = useCallback(() => {
     if (stateId) refetchCities();
+    reset(
+      (formValues) => ({
+        ...formValues,
+        city: null,
+      }),
+      { keepErrors: true }
+    );
   }, [stateId]);
 
   useEffect(() => {
@@ -69,6 +81,7 @@ const SettingsForm = () => {
           label={t("companyName")}
           control={control}
           errors={errors}
+          validation={validator.name}
         />
       </Grid>
       <Grid item xs={12}>
@@ -80,6 +93,7 @@ const SettingsForm = () => {
           fullWidth
           control={control}
           errors={errors}
+          validation={validator.email}
         />
       </Grid>
       <Grid item xs={12}>
@@ -91,6 +105,7 @@ const SettingsForm = () => {
           fullWidth
           control={control}
           errors={errors}
+          validation={validator.phoneNumber}
         />
       </Grid>
       <Grid item xs={12}>
@@ -102,6 +117,7 @@ const SettingsForm = () => {
           fullWidth
           control={control}
           errors={errors}
+          validation={validator.website}
         />
       </Grid>
       <Grid item xs={12} md={6} lg={6} sx={{ mt: 1.5 }}>
@@ -118,6 +134,7 @@ const SettingsForm = () => {
             setCountryId(value);
           }}
           isEmpty={true}
+          validation={validator.country}
         />
       </Grid>
       <Grid item xs={12} md={6} lg={6} sx={{ mt: 1.5 }}>
@@ -135,6 +152,7 @@ const SettingsForm = () => {
           options={countryData?.states || []}
           disabled={countryId === ""}
           isEmpty={true}
+          validation={validator["state-city"]}
         />
       </Grid>
       <Grid
@@ -153,6 +171,7 @@ const SettingsForm = () => {
           value={null}
           disabled={_.isNil(cities)}
           isEmpty={true}
+          validation={validator["city-district"](!_.isNil(cities))}
         />
       </Grid>
       <Grid item xs={12}>
@@ -180,6 +199,7 @@ const SettingsForm = () => {
           multiline
           control={control}
           errors={errors}
+          validation={validator.addressLine1}
         />
       </Grid>
       <Grid item xs={12}>
@@ -193,6 +213,7 @@ const SettingsForm = () => {
           multiline
           control={control}
           errors={errors}
+          validation={validator.addressLine2}
         />
       </Grid>
       <Grid item xs={12}>
@@ -203,6 +224,7 @@ const SettingsForm = () => {
           errors={errors}
           rows={4}
           multiline
+          validation={validator.description}
         />
       </Grid>
       <Grid item xs={12}>
