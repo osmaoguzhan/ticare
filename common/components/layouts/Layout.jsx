@@ -231,8 +231,17 @@ const Layout = ({ children }) => {
           </Grid>
         </DrawerHeader>
         <List>
-          {Constants.menuItems.map(({ key, icon }) => (
-            <ListItem key={t(key)}>
+          {Constants.menuItems.map(({ key, icon, divider }) => (
+            <ListItem
+              key={t(key)}
+              sx={{
+                display: divider
+                  ? "flex "
+                  : !!session?.user?.companyId
+                  ? "flex"
+                  : "none",
+              }}
+            >
               <ListItemButton onClick={() => router.push(`/${key}`)}>
                 <FontAwesomeIcon icon={icon} fixedWidth color={"#f4f4f4"} />
                 <ListItemText

@@ -42,6 +42,7 @@ export const authOptions = {
         token.user.surname = user.surname;
         token.user.role = user.role;
         token.user.settings = user.settings;
+        token.user.companyId = user.companyId;
       }
       return token;
     },
