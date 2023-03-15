@@ -5,10 +5,9 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import SettingsForm from "@/components/forms/settings/SettingsForm";
 
-const Settings = ({ userid }) => {
+const Settings = () => {
   const { t } = useTranslation("label");
   const router = useRouter();
-  const { locale } = router;
 
   return (
     <Grid
@@ -39,17 +38,16 @@ const Settings = ({ userid }) => {
           justifyContent: "space-around",
         }}
       >
-        <SettingsForm userid={userid} />
+        <SettingsForm />
       </Grid>
     </Grid>
   );
 };
 
 export const getServerSideProps = async (ctx) => {
-  const { locale, req } = ctx;
+  const { locale } = ctx;
   return {
     props: {
-      userid: req.headers.userid,
       ...(await serverSideTranslations(locale ?? "gb", ["label", "error"])),
     },
   };

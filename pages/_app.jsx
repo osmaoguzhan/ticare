@@ -16,7 +16,7 @@ function Ticare({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <SessionProvider session={session}>
+      <SessionProvider session={session} refetchInterval={60 * 60}>
         <ThemeProvider theme={theme}>
           <SnackbarProvider
             maxSnack={3}
