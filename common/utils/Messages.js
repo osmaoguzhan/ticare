@@ -13,6 +13,8 @@ export const Messages = {
     profileUpdated: "Profile updated successfully.",
     passwordChanged: "Password changed successfully.",
     wrongPassword: "Old password is wrong.",
+    companyCreated: "Company created successfully.",
+    companyUpdated: "Company updated successfully.",
   },
   tr: {
     userActivated: "Kullanıcı başarıyla aktifleştirildi.",
@@ -29,6 +31,8 @@ export const Messages = {
     profileUpdated: "Profil başarıyla güncellendi.",
     passwordChanged: "Parola başarıyla değiştirildi.",
     wrongPassword: "Eski parola yanlış.",
+    companyCreated: "Şirket başarıyla oluşturuldu.",
+    companyUpdated: "Şirket başarıyla güncellendi.",
   },
   pl: {
     userActivated: "Użytkownik został pomyślnie aktywowany.",
@@ -44,5 +48,7 @@ export const Messages = {
     profileUpdated: "Profil został pomyślnie zaktualizowany.",
     passwordChanged: "Hasło zostało pomyślnie zmienione.",
     wrongPassword: "Stare hasło jest nieprawidłowe.",
+    companyCreated: "Firma została pomyślnie utworzona.",
+    companyUpdated: "Firma została pomyślnie zaktualizowana.",
   },
 };

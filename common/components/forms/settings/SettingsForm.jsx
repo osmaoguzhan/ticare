@@ -11,10 +11,13 @@ import {
   useCountries,
   useCountryData,
 } from "@/hooks/query/useCountry";
+import { useCompany, useSubmitCompany } from "@/hooks/query/useCompanySettings";
 import { useState, useCallback, useEffect } from "react";
 import _ from "lodash";
+import { useSnackbar } from "notistack";
 
 const SettingsForm = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation(["label", "error"]);
   const {
     control,
@@ -25,8 +28,11 @@ const SettingsForm = () => {
   const validator = Validator("company");
   const router = useRouter();
   const { locale } = router;
-  const [countryId, setCountryId] = useState("");
-  const [stateId, setStateId] = useState("");
+  const { company, isCompanyLoading, isCompanyError } = useCompany(locale);
+  const [countryId, setCountryId] = useState(
+    company?.address?.country?.key || ""
+  );
+  const [stateId, setStateId] = useState(company?.address?.state?.key || "");
   const { countries, isCountryLoading } = useCountries(locale);
   const { countryData, refetchCountryData, isCountryDataFetching } =
     useCountryData(locale, countryId);
@@ -36,28 +42,42 @@ const SettingsForm = () => {
     countryId
   );
 
+  const { mutate: submitCompany, isLoading: isSumbmitCompanyLoading } =
+    useSubmitCompany({
+      onSuccess: (message) => {
+        enqueueSnackbar(message, { variant: "success" });
+      },
+      onError: (message) => {
+        enqueueSnackbar(message, { variant: "error" });
+      },
+    });
+
   const refetchStatesCallback = useCallback(() => {
     if (countryId) refetchCountryData();
-    reset(
-      (formValues) => ({
-        ...formValues,
-        state: null,
-        city: null,
-      }),
-      { keepErrors: true }
-    );
-    setStateId("");
+    if (!!!company) {
+      reset(
+        (formValues) => ({
+          ...formValues,
+          state: null,
+          city: null,
+        }),
+        { keepErrors: true }
+      );
+      setStateId("");
+    }
   }, [countryId]);
 
   const refetchCitiesCallback = useCallback(() => {
     if (stateId) refetchCities();
-    reset(
-      (formValues) => ({
-        ...formValues,
-        city: null,
-      }),
-      { keepErrors: true }
-    );
+    if (!!!company) {
+      reset(
+        (formValues) => ({
+          ...formValues,
+          city: null,
+        }),
+        { keepErrors: true }
+      );
+    }
   }, [stateId]);
 
   useEffect(() => {
@@ -68,8 +88,18 @@ const SettingsForm = () => {
     refetchCitiesCallback();
   }, [refetchCitiesCallback]);
 
-  if (isCountryLoading || isCountryDataFetching || isCityFetching)
+  if (isCompanyError)
+    enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
+
+  if (
+    isCountryLoading ||
+    isCountryDataFetching ||
+    isCityFetching ||
+    isCompanyLoading ||
+    isSumbmitCompanyLoading
+  ) {
     return <Loading />;
+  }
 
   return (
     <Grid container spacing={0.5}>
@@ -79,6 +109,7 @@ const SettingsForm = () => {
           fullWidth
           id={"name"}
           label={t("companyName")}
+          value={company?.name || ""}
           control={control}
           errors={errors}
           validation={validator.name}
@@ -90,6 +121,7 @@ const SettingsForm = () => {
           name={"email"}
           id={"email"}
           label={t("email")}
+          value={company?.email || ""}
           fullWidth
           control={control}
           errors={errors}
@@ -102,6 +134,7 @@ const SettingsForm = () => {
           name={"phoneNumber"}
           id={"phoneNumber"}
           label={t("phone")}
+          value={company?.phoneNumber || ""}
           fullWidth
           control={control}
           errors={errors}
@@ -114,6 +147,7 @@ const SettingsForm = () => {
           name={"website"}
           id={"website"}
           label={t("website")}
+          value={company?.website || ""}
           fullWidth
           control={control}
           errors={errors}
@@ -129,7 +163,11 @@ const SettingsForm = () => {
           control={control}
           errors={errors}
           options={countries}
-          value={countries.find((c) => c.key === countryId)} // TODO: this part will come from the backend
+          value={
+            company
+              ? company?.address?.country
+              : countries.find((c) => c.key === countryId)
+          }
           onChange={(value) => {
             setCountryId(value);
           }}
@@ -148,10 +186,12 @@ const SettingsForm = () => {
           onChange={(value) => {
             setStateId(value);
           }}
-          value={null}
           options={countryData?.states || []}
-          disabled={countryId === ""}
-          isEmpty={true}
+          value={company ? company?.address?.state : null}
+          disabled={
+            company ? _.isNil(company?.address?.state) : countryId === ""
+          }
+          isEmpty={_.isNil(company?.address?.state)}
           validation={validator["state-city"]}
         />
       </Grid>
@@ -168,9 +208,9 @@ const SettingsForm = () => {
           control={control}
           errors={errors}
           options={cities || []}
-          value={null}
-          disabled={_.isNil(cities)}
-          isEmpty={true}
+          value={company ? company?.address?.city : null}
+          disabled={company ? _.isNil(company?.address?.city) : _.isNil(cities)}
+          isEmpty={_.isNil(company?.address?.city)}
           validation={validator["city-district"](!_.isNil(cities))}
         />
       </Grid>
@@ -183,7 +223,8 @@ const SettingsForm = () => {
           fullWidth
           control={control}
           errors={errors}
-          disabled={_.isNil(countryData)}
+          value={company?.address?.zipCode || ""}
+          disabled={company ? _.isNil(company) : _.isNil(countryData)}
           validation={validator.postalCode(countryData?.postalCodeRegex)}
           placeholder={countryData?.postalCodeFormat || ""}
         />
@@ -197,6 +238,7 @@ const SettingsForm = () => {
           fullWidth
           rows={4}
           multiline
+          value={company?.address?.addressLine1 || ""}
           control={control}
           errors={errors}
           validation={validator.addressLine1}
@@ -211,6 +253,7 @@ const SettingsForm = () => {
           fullWidth
           rows={4}
           multiline
+          value={company?.address?.addressLine2 || ""}
           control={control}
           errors={errors}
           validation={validator.addressLine2}
@@ -223,6 +266,7 @@ const SettingsForm = () => {
           control={control}
           errors={errors}
           rows={4}
+          value={company?.description || ""}
           multiline
           validation={validator.description}
         />
@@ -232,7 +276,9 @@ const SettingsForm = () => {
           fullWidth
           variant="contained"
           sx={{ backgroundColor: "#4e73df", mt: 2 }}
-          onClick={handleSubmit((data) => console.log(data))}
+          onClick={handleSubmit((data) =>
+            submitCompany({ locale, data, companyId: company?.id })
+          )}
         >
           {t("saveSettings")}
         </Button>

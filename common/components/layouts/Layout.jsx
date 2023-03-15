@@ -29,6 +29,7 @@ import Main from "@/components/general/Main";
 import Constants from "@/utils/Constants";
 import { signOut, useSession } from "next-auth/react";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import { useCompany } from "@/hooks/query/useCompanySettings";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -64,8 +65,10 @@ const Layout = ({ children }) => {
   const [userMenu, setUserMenu] = useState(null);
   const { t } = useTranslation("label");
   const router = useRouter();
+  const { locale } = router;
   const { data: session } = useSession();
   const [_, setUser, clear] = useLocalStorage("user", session?.user);
+  const { company } = useCompany(locale);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -235,11 +238,7 @@ const Layout = ({ children }) => {
             <ListItem
               key={t(key)}
               sx={{
-                display: divider
-                  ? "flex "
-                  : !!session?.user?.companyId
-                  ? "flex"
-                  : "none",
+                display: divider ? "flex " : !!company ? "flex" : "none",
               }}
             >
               <ListItemButton onClick={() => router.push(`/${key}`)}>
