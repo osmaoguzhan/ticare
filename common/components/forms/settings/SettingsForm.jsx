@@ -54,7 +54,7 @@ const SettingsForm = () => {
 
   const refetchStatesCallback = useCallback(() => {
     if (countryId) refetchCountryData();
-    if (!!company) {
+    if (!!!company) {
       reset(
         (formValues) => ({
           ...formValues,
@@ -69,7 +69,7 @@ const SettingsForm = () => {
 
   const refetchCitiesCallback = useCallback(() => {
     if (stateId) refetchCities();
-    if (!!company) {
+    if (!!!company) {
       reset(
         (formValues) => ({
           ...formValues,
