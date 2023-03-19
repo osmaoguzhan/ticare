@@ -166,7 +166,7 @@ const SettingsForm = () => {
           value={
             company
               ? company?.address?.country
-              : countries.find((c) => c.key === countryId)
+              : countries?.find((c) => c.key === countryId)
           }
           onChange={(value) => {
             setCountryId(value);
