@@ -14,7 +14,7 @@ export default withAuth(
       }
       headers.set("locale", locale);
       if (
-        !!!token?.user?.companyId &&
+        !token?.user?.company &&
         req.nextUrl.pathname !== "/settings" &&
         req.nextUrl.pathname !== "/profile"
       ) {
