@@ -17,16 +17,12 @@ export default async function handler(req, res) {
         try {
           const user = await prisma.user.findUnique({
             where: { id: userid },
+            include: { company: true },
           });
-          if (!user?.companyId) {
+          if (!user?.company) {
             res.status(200).json({ success: true, data: null });
           } else {
-            const company = await prisma.company.findUnique({
-              where: {
-                id: user.companyId,
-              },
-            });
-            res.status(200).json({ success: true, data: company });
+            res.status(200).json({ success: true, data: user?.company });
           }
         } catch (error) {
           res.status(500).json({
@@ -46,13 +42,8 @@ export default async function handler(req, res) {
               phoneNumber: data.phoneNumber,
               email: data.email,
               website: data.website,
+              userId: userid,
             },
-          });
-          await prisma.user.update({
-            where: {
-              id: userid,
-            },
-            data: { companyId: company.id },
           });
           res.status(200).json({
             success: true,
