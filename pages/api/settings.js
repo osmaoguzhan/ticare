@@ -18,7 +18,7 @@ export default async function handler(req, res) {
           const result = await prisma.user.findUnique({
             where: { id: userid },
             select: {
-              companyId: true,
+              company: true,
             },
           });
           if (!result?.companyId) {
