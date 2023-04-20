@@ -18,7 +18,7 @@ export default async function handler(req, res) {
           const user = await prisma.user.findUnique({
             where: { id: userid },
           });
-          if (!user?.company) {
+          if (!user?.companyId) {
             res.status(200).json({ success: true, data: null });
           } else {
             const company = await prisma.company.findUnique({
@@ -52,9 +52,7 @@ export default async function handler(req, res) {
             where: {
               id: userid,
             },
-            data: {
-              companyId: company.id,
-            },
+            data: { companyId: company.id },
           });
           res.status(200).json({
             success: true,
