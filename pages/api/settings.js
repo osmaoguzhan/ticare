@@ -15,18 +15,15 @@ export default async function handler(req, res) {
     switch (req.method) {
       case "GET":
         try {
-          const result = await prisma.user.findUnique({
+          const user = await prisma.user.findUnique({
             where: { id: userid },
-            select: {
-              company: true,
-            },
           });
-          if (!result?.companyId) {
+          if (!user?.company) {
             res.status(200).json({ success: true, data: null });
           } else {
             const company = await prisma.company.findUnique({
               where: {
-                id: companyId,
+                id: user.companyId,
               },
             });
             res.status(200).json({ success: true, data: company });
