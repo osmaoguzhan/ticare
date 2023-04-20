@@ -42,7 +42,9 @@ export const authOptions = {
         token.user.surname = user.surname;
         token.user.role = user.role;
         token.user.settings = user.settings;
-        token.user.company = user.company;
+        token.user.company = await prisma.company.findUnique({
+          where: { userId: user.id },
+        });
       }
       return token;
     },
