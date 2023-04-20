@@ -15,18 +15,22 @@ export default async function handler(req, res) {
     switch (req.method) {
       case "GET":
         try {
-          const { companyId } = await prisma.user.findUnique({
+          const result = await prisma.user.findUnique({
             where: { id: userid },
             select: {
               companyId: true,
             },
           });
-          const company = await prisma.company.findUnique({
-            where: {
-              id: companyId,
-            },
-          });
-          res.status(200).json({ success: true, data: company });
+          if (!result?.companyId) {
+            res.status(200).json({ success: true, data: null });
+          } else {
+            const company = await prisma.company.findUnique({
+              where: {
+                id: companyId,
+              },
+            });
+            res.status(200).json({ success: true, data: company });
+          }
         } catch (error) {
           res.status(500).json({
             success: false,
@@ -83,13 +87,11 @@ export default async function handler(req, res) {
               website: data.website,
             },
           });
-          res
-            .status(200)
-            .json({
-              success: true,
-              data: company,
-              message: Messages[locale || "gb"].companyUpdated,
-            });
+          res.status(200).json({
+            success: true,
+            data: company,
+            message: Messages[locale || "gb"].companyUpdated,
+          });
         } catch (error) {
           res.status(500).json({
             success: false,
