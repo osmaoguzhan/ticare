@@ -2,13 +2,10 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function main() {
-  let user = await prisma.user.findUnique({
-    where: { id: "63ac04e41b39c40b983419f6" },
-    select: {
-      company: true,
-    },
-  });
-  console.log(user);
+  let countries = await prisma.country.findMany();
+  console.log("====================================");
+  console.log("countries", countries);
+  console.log("====================================");
 }
 
 main()

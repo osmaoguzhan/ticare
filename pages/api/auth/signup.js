@@ -15,6 +15,7 @@ export default async function handler(req, res) {
           email,
           password,
           settings: Constants.defaultSettings(locale),
+          company: undefined,
         },
       });
       const response = await send({

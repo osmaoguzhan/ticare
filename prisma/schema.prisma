@@ -22,8 +22,7 @@ model User {
   phoneNumber String?
   settings    Json     @default("{\"language\": \"en\", \"currency\": \"USD\",  \"timezone\": \"UTC\", \"theme\": \"light\"}")
   isActivated Boolean  @default(false)
-  company     Company? @relation(fields: [companyId], references: [id])
-  companyId   String?  @db.ObjectId
+  company     Company?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -38,7 +37,8 @@ model Company {
   website     String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  User        User[]
+  User        User @relation(fields: [userId], references: [id])
+  userId      String @unique @db.ObjectId
 }
 
 model Country {
