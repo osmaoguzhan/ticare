@@ -19,26 +19,122 @@ model User {
   email       String   @unique
   password    String
   role        Role     @default(USER)
-  phoneNumber String?
+  phoneNumber String?  
   settings    Json     @default("{\"language\": \"en\", \"currency\": \"USD\",  \"timezone\": \"UTC\", \"theme\": \"light\"}")
   isActivated Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  Company     Company?
+  company     Company?
 }
 
 model Company {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String?
   address     Json
-  phoneNumber String
-  email       String
+  phoneNumber String     @unique
+  email       String     @unique
   website     String?
+  user        User       @relation(fields: [userId], references: [id])
+  userId      String     @unique @db.ObjectId
+  customers   Customer[]
+  suppliers   Supplier[]
+  products    Product[]
+  sales       Sale[]
+  purchases   Purchase[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Customer {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  surname     String
+  email       String   @unique
+  phoneNumber String   @unique
+  address     Json
+  company     Company  @relation(fields: [companyId], references: [id])
+  companyId   String   @db.ObjectId
+  sales       Sale[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  User        User     @relation(fields: [userId], references: [id])
-  userId      String   @unique @db.ObjectId
+}
+
+model Supplier {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  surname     String
+  email       String     @unique
+  phoneNumber String     @unique
+  address     Json
+  company     Company    @relation(fields: [companyId], references: [id])
+  companyId   String     @db.ObjectId
+  purchases   Purchase[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Product {
+  id              String            @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  description     String?
+  productType     String
+  purhcasePrice   Float
+  salePrice       Float
+  company         Company           @relation(fields: [companyId], references: [id])
+  companyId       String            @db.ObjectId
+  productSale     ProductSale[]
+  productPurchase ProductPurchase[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+}
+
+model Sale {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+  total_price Float
+  company     Company       @relation(fields: [companyId], references: [id])
+  companyId   String        @db.ObjectId
+  customer    Customer      @relation(fields: [customerId], references: [id])
+  customerId  String        @db.ObjectId
+  productSale ProductSale[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Purchase {
+  id              String            @id @default(auto()) @map("_id") @db.ObjectId
+  title           String
+  description     String?
+  total_price     Float
+  company         Company           @relation(fields: [companyId], references: [id])
+  companyId       String            @db.ObjectId
+  supplier        Supplier          @relation(fields: [supplierId], references: [id])
+  supplierId      String            @db.ObjectId
+  productPurchase ProductPurchase[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+}
+
+model ProductSale {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  sale      Sale    @relation(fields: [saleId], references: [id])
+  saleId    String  @db.ObjectId
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @db.ObjectId
+  quantity  Int
+  price     Float
+}
+
+model ProductPurchase {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  purchase   Purchase @relation(fields: [purchaseId], references: [id])
+  purchaseId String   @db.ObjectId
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  String   @db.ObjectId
+  quantity   Int
+  price      Float
 }
 
 model Country {
