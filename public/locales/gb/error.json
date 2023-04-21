@@ -39,6 +39,7 @@
   "zipCodeRequired": "Zip code is required.",
   "zipCodeInvalid": "Zip code format is invalid.",
   "addressLine1Required": "Address line 1 is required.",
+  "addressLine2Required": "Address line 2 is required.",
   "addressLineMinLength": "Should be minimum <<placeholder>> characters.",
   "addressLineMaxLength": "Should be maximally <<placeholder>> characters.",
   "descriptionMaxLength": "Description should be maximally <<placeholder>> characters."

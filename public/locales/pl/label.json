@@ -61,5 +61,12 @@
   "city-district": "Miasto/Dzielnica/Region",
   "website": "Strona internetowa",
   "addressLine1": "Adres Linia 1",
-  "addressLine2": "Adres Linia 2"
+  "addressLine2": "Adres Linia 2",
+  "suppliers": "Dostawcy",
+  "supplier": "Dostawca",
+  "supplierName": "Nazwa dostawcy",
+  "supplierSurname": "Nazwisko dostawcy",
+  "addANewSupplier": "Dodaj nowego dostawcę",
+  "editSupplier": "Edytuj dostawcę",
+  "searchAddress": "Wyszukaj adres..."
 }

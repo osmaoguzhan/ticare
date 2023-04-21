@@ -22,7 +22,7 @@ export default async function handler(req, res) {
           if (!user?.company) {
             res.status(200).json({ success: true, data: null });
           } else {
-            res.status(200).json({ success: true, data: user?.company });
+            res.status(200).json({ success: true, data: user.company });
           }
         } catch (error) {
           res.status(500).json({
@@ -37,7 +37,8 @@ export default async function handler(req, res) {
           const company = await prisma.company.create({
             data: {
               name: data.name,
-              address: data.address,
+              addressLine1: data.addressLine1,
+              addressLine2: data.addressLine2,
               description: data.description,
               phoneNumber: data.phoneNumber,
               email: data.email,

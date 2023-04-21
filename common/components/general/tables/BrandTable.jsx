@@ -12,13 +12,13 @@ const BrandTable = () => {
       {
         field: "name",
         headerName: t("brandName"),
-        width: 100,
+        flex: 1,
         editable: false,
       },
       {
         field: "isActive",
         headerName: t("isActive"),
-        width: 100,
+        flex: 1,
         editable: false,
         renderCell: (params) => (
           <Box
@@ -42,7 +42,7 @@ const BrandTable = () => {
       {
         field: "description",
         headerName: t("description"),
-        width: 250,
+        flex: 1,
         editable: false,
       },
     ];

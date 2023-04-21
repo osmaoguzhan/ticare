@@ -1,27 +1,47 @@
 import Constants from "@/utils/Constants";
 import { useTranslation } from "next-i18next";
 
-const CompanyValidator = () => {
+const SupplierValidator = () => {
   const { t } = useTranslation("error");
 
   return {
     name: {
       required: {
         value: true,
-        message: t("companyNameRequired"),
+        message: t("requiredName"),
       },
       minLength: {
-        value: Constants.companyNameMin,
-        message: t("companyNameMinLength").replace(
+        value: Constants.nameMin,
+        message: t("nameMinLength").replace(
           "<<placeholder>>",
           Constants.nameMin.toString()
         ),
       },
       maxLength: {
-        value: Constants.companyNameMax,
-        message: t("companyNameMaxLength").replace(
+        value: Constants.nameMax,
+        message: t("nameMaxLength").replace(
           "<<placeholder>>",
           Constants.nameMax.toString()
+        ),
+      },
+    },
+    surname: {
+      required: {
+        value: true,
+        message: t("requiredSurname"),
+      },
+      minLength: {
+        value: Constants.surnameMin,
+        message: t("surnameMinLength").replace(
+          "<<placeholder>>",
+          Constants.surnameMin.toString()
+        ),
+      },
+      maxLength: {
+        value: Constants.surnameMax,
+        message: t("surnameMaxLength").replace(
+          "<<placeholder>>",
+          Constants.surnameMax.toString()
         ),
       },
     },
@@ -45,13 +65,6 @@ const CompanyValidator = () => {
         message: t("invalidPhoneNumber"),
       },
     },
-    website: {
-      required: false,
-      pattern: {
-        value: Constants.websiteRegex,
-        message: t("invalidWebsite"),
-      },
-    },
     addressLine2: {
       required: {
         value: true,
@@ -72,17 +85,7 @@ const CompanyValidator = () => {
         ),
       },
     },
-    description: {
-      required: false,
-      maxLength: {
-        value: Constants.descriptionMax,
-        message: t("descriptionMaxLength").replace(
-          "<<placeholder>>",
-          Constants.descriptionMax.toString()
-        ),
-      },
-    },
   };
 };
 
-export default CompanyValidator;
+export default SupplierValidator;

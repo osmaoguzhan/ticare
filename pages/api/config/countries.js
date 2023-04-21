@@ -14,6 +14,8 @@ export default async function handler(req, res) {
             id: countryId,
           },
         });
+        let translationOfTheCountry =
+          locale === "gb" ? country.name : country.translations[locale];
         if (stateId) {
           country.states = country.states.filter(
             (state) => state.id === parseInt(stateId)
@@ -35,6 +37,7 @@ export default async function handler(req, res) {
             flag: country.flag,
             postalCodeRegex: country.postalCodeRegex,
             postalCodeFormat: country.postalCodeFormat,
+            name: translationOfTheCountry,
           };
         }
         res.status(200).json({ success: true, data: result });

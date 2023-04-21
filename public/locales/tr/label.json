@@ -61,5 +61,12 @@
   "city-district": "Şehir/İlçe/Bölge",
   "website": "Web Sitesi",
   "addressLine1": "Adres Satırı 1",
-  "addressLine2": "Adres Satırı 2"
+  "addressLine2": "Adres Satırı 2",
+  "suppliers": "Tedarikçiler",
+  "supplier": "Tedarikçi",
+  "supplierName": "Tedarikçi Adı",
+  "supplierSurname": "Tedarikçi Soyadı",
+  "addANewSupplier": "Yeni Tedarikçi Ekle",
+  "editSupplier": "Tedarikçiyi Düzenle",
+  "searchAddress": "Adres Ara..."
 }
