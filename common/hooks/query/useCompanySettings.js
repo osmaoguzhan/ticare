@@ -4,14 +4,8 @@ const submitCompany = async ({ locale, data, companyId }) => {
   data = {
     name: data.name.trim(),
     description: data.description.trim(),
-    address: {
-      country: data.country,
-      state: data.state,
-      city: data.city,
-      zipCode: data.zipCode.trim(),
-      addressLine1: data.addressLine1.trim(),
-      addressLine2: data.addressLine2.trim(),
-    },
+    addressLine1: data.addressLine1.trim(),
+    addressLine2: data.addressLine2.trim(),
     phoneNumber: data.phoneNumber.trim(),
     email: data.email.trim(),
     website: data.website.trim(),

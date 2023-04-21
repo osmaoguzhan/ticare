@@ -67,5 +67,6 @@
   "supplierName": "Supplier Name",
   "supplierSurname": "Supplier Surname",
   "addANewSupplier": "Add a New Supplier",
-  "editSupplier": "Edit Supplier"
+  "editSupplier": "Edit Supplier",
+  "searchAddress": "Search Address..."
 }

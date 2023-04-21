@@ -2,17 +2,17 @@ import { useTranslation } from "next-i18next";
 import FormInput from "@/components/inputs/FormInput";
 import { Button, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
-import SelectInput from "@/components/inputs/SelectInput";
 import Validator from "@/utils/validator/Validator";
+import AddressAutoComplete from "@/components/inputs/AddressAutoComplete";
 
-const BrandsForm = (props) => {
+const SuppliersForm = (props) => {
   const { t } = useTranslation("label");
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
-  const validator = Validator("brand");
+  const validator = Validator("supplier");
   const { values } = props;
 
   return (
@@ -20,7 +20,7 @@ const BrandsForm = (props) => {
       <Grid item xs={12}>
         <FormInput
           label={t("supplierName")}
-          name="supplierName"
+          name="name"
           control={control}
           errors={errors}
           validation={validator.name}
@@ -30,7 +30,7 @@ const BrandsForm = (props) => {
       <Grid item xs={12}>
         <FormInput
           label={t("supplierSurname")}
-          name="supplierSurname"
+          name="surname"
           control={control}
           errors={errors}
           validation={validator.surname}
@@ -49,7 +49,7 @@ const BrandsForm = (props) => {
       </Grid>
       <Grid item xs={12}>
         <FormInput
-          label={t("phoneNumber")}
+          label={t("phone")}
           name="phoneNumber"
           control={control}
           errors={errors}
@@ -57,6 +57,26 @@ const BrandsForm = (props) => {
           value={values?.phoneNumber || ""}
         />
       </Grid>
+      <Grid item xs={12} mt={2}>
+        <AddressAutoComplete
+          control={control}
+          errors={errors}
+          address={values?.addressLine1}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormInput
+          label={t("addressLine2")}
+          name="addressLine2"
+          control={control}
+          errors={errors}
+          rows={4}
+          value={values?.addressLine2 || ""}
+          multiline
+          validation={validator.addressLine2}
+        />
+      </Grid>
+
       <Grid item xs={12}>
         <Button
           fullWidth
@@ -71,4 +91,4 @@ const BrandsForm = (props) => {
   );
 };
 
-export default BrandsForm;
+export default SuppliersForm;

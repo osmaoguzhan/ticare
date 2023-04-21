@@ -39,6 +39,7 @@
   "zipCodeRequired": "Kod pocztowy jest wymagany.",
   "zipCodeInvalid": "Kod pocztowy jest nieprawidłowy.",
   "addressLine1Required": "Adres linia 1 jest wymagany.",
+  "addressLine2Required": "Adres linia 2 jest wymagany.",
   "addressLineMinLength": "Powinno zawierać co najmniej <<placeholder>> znaków.",
   "addressLineMaxLength": "Powinno zawierać maksymalnie <<placeholder>> znaków.",
   "descriptionMaxLength": "Opis powinien zawierać maksymalnie <<placeholder>> znaków."

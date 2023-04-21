@@ -4,7 +4,7 @@ import { Grid, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import SuppliersForm from "@/components/forms/suppliers/SuppliersForm";
 
-const SuppliersEdit = () => {
+const SuppliersAdd = () => {
   const { t } = useTranslation("label");
 
   return (
@@ -14,6 +14,7 @@ const SuppliersEdit = () => {
         display: "flex",
         justifyContent: "space-between",
         backgroundColor: "primary.white",
+        mt: 2,
       }}
     >
       <Grid item xs={12}>
@@ -23,14 +24,11 @@ const SuppliersEdit = () => {
             color: "primary.pageTitle",
           }}
         >
-          {t("editSupplier")}
+          {t("addANewSupplier")}
         </Typography>
       </Grid>
       <Grid item xs={12} p={1}>
-        <SuppliersForm
-          // TODO : Get data by id from API and pass it to the form
-          values={{ name: "test", status: false, description: "rwerewrewrew" }}
-        />
+        <SuppliersForm />
       </Grid>
     </Grid>
   );
@@ -44,6 +42,6 @@ export const getStaticProps = async ({ locale }) => {
   };
 };
 
-SuppliersEdit.Layout = Layout;
+SuppliersAdd.Layout = Layout;
 
-export default SuppliersEdit;
+export default SuppliersAdd;

@@ -67,5 +67,6 @@
   "supplierName": "Tedarikçi Adı",
   "supplierSurname": "Tedarikçi Soyadı",
   "addANewSupplier": "Yeni Tedarikçi Ekle",
-  "editSupplier": "Tedarikçiyi Düzenle"
+  "editSupplier": "Tedarikçiyi Düzenle",
+  "searchAddress": "Adres Ara..."
 }

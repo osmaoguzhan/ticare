@@ -67,5 +67,6 @@
   "supplierName": "Nazwa dostawcy",
   "supplierSurname": "Nazwisko dostawcy",
   "addANewSupplier": "Dodaj nowego dostawcę",
-  "editSupplier": "Edytuj dostawcę"
+  "editSupplier": "Edytuj dostawcę",
+  "searchAddress": "Wyszukaj adres..."
 }

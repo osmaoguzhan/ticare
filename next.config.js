@@ -11,6 +11,7 @@ const nextConfig = {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     ALGORITHM: process.env.ALGORITHM,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
   },
   eslint: {
     ignoreDuringBuilds: true,

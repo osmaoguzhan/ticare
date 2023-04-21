@@ -39,6 +39,7 @@
   "zipCodeRequired": "Posta kodu boş bırakılamaz.",
   "zipCodeInvalid": "Posta kodu formatı geçersiz.",
   "addressLine1Required": "Adres satırı 1 boş bırakılamaz.",
+  "addressLine2Required": "Adres satırı 2 boş bırakılamaz.",
   "addressLineMinLength": "En az <<placeholder>> karakter olmalıdır.",
   "addressLineMaxLength": "En fazla <<placeholder>> karakter olmalıdır.",
   "descriptionMaxLength": "Açıklama en fazla <<placeholder>> karakter olmalıdır."

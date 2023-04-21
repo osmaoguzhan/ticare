@@ -19,7 +19,7 @@ model User {
   email       String   @unique
   password    String
   role        Role     @default(USER)
-  phoneNumber String?  
+  phoneNumber String?
   settings    Json     @default("{\"language\": \"en\", \"currency\": \"USD\",  \"timezone\": \"UTC\", \"theme\": \"light\"}")
   isActivated Boolean  @default(false)
   createdAt   DateTime @default(now())
@@ -28,50 +28,53 @@ model User {
 }
 
 model Company {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  description String?
-  address     Json
-  phoneNumber String     @unique
-  email       String     @unique
-  website     String?
-  user        User       @relation(fields: [userId], references: [id])
-  userId      String     @unique @db.ObjectId
-  customers   Customer[]
-  suppliers   Supplier[]
-  products    Product[]
-  sales       Sale[]
-  purchases   Purchase[]
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  description  String?
+  addressLine1 String
+  addressLine2 String
+  phoneNumber  String     @unique
+  email        String     @unique
+  website      String?
+  user         User       @relation(fields: [userId], references: [id])
+  userId       String     @unique @db.ObjectId
+  customers    Customer[]
+  suppliers    Supplier[]
+  products     Product[]
+  sales        Sale[]
+  purchases    Purchase[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
 
 model Customer {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  surname     String
-  email       String   @unique
-  phoneNumber String   @unique
-  address     Json
-  company     Company  @relation(fields: [companyId], references: [id])
-  companyId   String   @db.ObjectId
-  sales       Sale[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  surname      String
+  email        String   @unique
+  phoneNumber  String   @unique
+  addressLine1 String
+  addressLine2 String
+  company      Company  @relation(fields: [companyId], references: [id])
+  companyId    String   @db.ObjectId
+  sales        Sale[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model Supplier {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  surname     String
-  email       String     @unique
-  phoneNumber String     @unique
-  address     Json
-  company     Company    @relation(fields: [companyId], references: [id])
-  companyId   String     @db.ObjectId
-  purchases   Purchase[]
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  surname      String
+  email        String     @unique
+  phoneNumber  String     @unique
+  addressLine1 String
+  addressLine2 String
+  company      Company    @relation(fields: [companyId], references: [id])
+  companyId    String     @db.ObjectId
+  purchases    Purchase[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
 
 model Product {
