@@ -61,5 +61,11 @@
   "city-district": "City/District/Province",
   "website": "Website",
   "addressLine1": "Address Line 1",
-  "addressLine2": "Address Line 2"
+  "addressLine2": "Address Line 2",
+  "suppliers": "Suppliers",
+  "supplier": "Supplier",
+  "supplierName": "Supplier Name",
+  "supplierSurname": "Supplier Surname",
+  "addANewSupplier": "Add a New Supplier",
+  "editSupplier": "Edit Supplier"
 }
