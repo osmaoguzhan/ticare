@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import { getGridBooleanOperators } from "@mui/x-data-grid";
 import { useTranslation } from "next-i18next";
 import DataTable from "./DataTable";
 import { useMemo } from "react";
