@@ -52,8 +52,8 @@ const Profile = ({ userid }) => {
       >
         <TabMenu
           components={[
-            <UserSettingsForm profile={profile} />,
-            <NewPasswordForm userid={userid} />,
+            <UserSettingsForm profile={profile} key={"profile"} />,
+            <NewPasswordForm userid={userid} key={"password"} />,
           ]}
           labels={[t("userSettings"), t("changePassword")]}
         />

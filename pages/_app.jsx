@@ -9,37 +9,43 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { SnackbarProvider } from "notistack";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "@/utils/styles/theme";
+import Head from "next/head";
 
 function Ticare({ Component, pageProps: { session, ...pageProps } }) {
   const [queryClient] = useState(() => new QueryClient());
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <SessionProvider session={session} refetchInterval={60 * 60}>
-        <ThemeProvider theme={theme}>
-          <SnackbarProvider
-            maxSnack={3}
-            autoHideDuration={2000}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-          >
-            <CssBaseline />
-            <LoadingProvider>
-              {Component.Layout ? (
-                <Component.Layout>
+    <>
+      <Head>
+        <title>Ticare </title>
+      </Head>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <SessionProvider session={session} refetchInterval={60 * 60}>
+          <ThemeProvider theme={theme}>
+            <SnackbarProvider
+              maxSnack={3}
+              autoHideDuration={2000}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+            >
+              <CssBaseline />
+              <LoadingProvider>
+                {Component.Layout ? (
+                  <Component.Layout>
+                    <Component {...pageProps} />
+                  </Component.Layout>
+                ) : (
                   <Component {...pageProps} />
-                </Component.Layout>
-              ) : (
-                <Component {...pageProps} />
-              )}
-            </LoadingProvider>
-          </SnackbarProvider>
-        </ThemeProvider>
-      </SessionProvider>
-    </QueryClientProvider>
+                )}
+              </LoadingProvider>
+            </SnackbarProvider>
+          </ThemeProvider>
+        </SessionProvider>
+      </QueryClientProvider>
+    </>
   );
 }
 

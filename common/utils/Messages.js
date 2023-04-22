@@ -15,6 +15,8 @@ export const Messages = {
     wrongPassword: "Old password is wrong.",
     companyCreated: "Company created successfully.",
     companyUpdated: "Company updated successfully.",
+    supplierAdded: "Supplier added successfully.",
+    supplierUpdated: "Supplier updated successfully.",
   },
   tr: {
     userActivated: "Kullanıcı başarıyla aktifleştirildi.",
@@ -33,6 +35,8 @@ export const Messages = {
     wrongPassword: "Eski parola yanlış.",
     companyCreated: "Şirket başarıyla oluşturuldu.",
     companyUpdated: "Şirket başarıyla güncellendi.",
+    supplierAdded: "Tedarikçi başarıyla eklendi.",
+    supplierUpdated: "Tedarikçi başarıyla güncellendi.",
   },
   pl: {
     userActivated: "Użytkownik został pomyślnie aktywowany.",
@@ -50,5 +54,7 @@ export const Messages = {
     wrongPassword: "Stare hasło jest nieprawidłowe.",
     companyCreated: "Firma została pomyślnie utworzona.",
     companyUpdated: "Firma została pomyślnie zaktualizowana.",
+    supplierAdded: "Dostawca został pomyślnie dodany.",
+    supplierUpdated: "Dostawca został pomyślnie zaktualizowany.",
   },
 };

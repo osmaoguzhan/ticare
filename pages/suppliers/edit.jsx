@@ -3,9 +3,11 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Grid, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import SuppliersForm from "@/components/forms/suppliers/SuppliersForm";
+import { useRouter } from "next/router";
 
 const SuppliersEdit = () => {
   const { t } = useTranslation("label");
+  const { query } = useRouter();
 
   return (
     <Grid
@@ -27,10 +29,7 @@ const SuppliersEdit = () => {
         </Typography>
       </Grid>
       <Grid item xs={12} p={1}>
-        <SuppliersForm
-          // TODO : Get data by id from API and pass it to the form
-          values={{ name: "test", status: false, description: "rwerewrewrew" }}
-        />
+        <SuppliersForm values={query?.data} />
       </Grid>
     </Grid>
   );
