@@ -12,7 +12,6 @@ import { encrypt } from "@/utils/helpers/cipher";
 
 const NewPasswordForm = ({ userid }) => {
   const { t } = useTranslation("label");
-  usePasswordMutation;
   const {
     handleSubmit,
     control,

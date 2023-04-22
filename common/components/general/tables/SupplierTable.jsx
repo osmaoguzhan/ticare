@@ -2,10 +2,11 @@ import Box from "@mui/material/Box";
 import { useTranslation } from "next-i18next";
 import DataTable from "./DataTable";
 import { useMemo } from "react";
+import { useSupplier } from "@/hooks/query/useSupplier";
+import Loading from "../Loading";
 
 const SupplierTable = () => {
   const { t } = useTranslation("label");
-
   const columns = useMemo(() => {
     return [
       {
@@ -33,65 +34,27 @@ const SupplierTable = () => {
         editable: false,
       },
       {
-        field: "address",
-        headerName: t("address"),
+        field: "addressLine1",
+        headerName: t("addressLine1"),
+        flex: 1,
+        editable: false,
+      },
+      {
+        field: "addressLine2",
+        headerName: t("addressLine2"),
         flex: 1,
         editable: false,
       },
     ];
   }, []);
 
-  // TODO : Get data from API
-  const rows = [
-    {
-      id: 1,
-      name: "Snow",
-      surname: "Snow",
-      email: " Snow",
-      phoneNumber: "Snow",
-      address: "Snow",
-    },
-    {
-      id: 2,
-      name: "Lannister",
-      surname: "Snow",
-      email: " Snow",
-      phoneNumber: "Snow",
-      address: "Snow",
-    },
-    {
-      id: 3,
-      name: "Lannister",
-      surname: "Snow",
-      email: " Snow",
-      phoneNumber: "Snow",
-      address: "Snow",
-    },
-    {
-      id: 4,
-      name: "Stark",
-      surname: "Snow",
-      email: " Snow",
-      phoneNumber: "Snow",
-      address: "Snow",
-    },
-    {
-      id: 5,
-      name: "Targaryen",
-      surname: "Snow",
-      email: " Snow",
-      phoneNumber: "Snow",
-      address: "Snow",
-    },
-    {
-      id: 6,
-      name: "Melisandre",
-      surname: "Snow",
-      email: " Snow",
-      phoneNumber: "Snow",
-      address: "Snow",
-    },
-  ];
+  const { isSupplierLoading, isSupplierError, suppliers } = useSupplier();
+
+  if (isSupplierLoading) return <Loading />;
+
+  if (isSupplierError)
+    enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
+
   return (
     <Box
       sx={{
@@ -99,7 +62,7 @@ const SupplierTable = () => {
         width: "100%",
       }}
     >
-      <DataTable rows={rows} columns={columns} />
+      <DataTable rows={suppliers} columns={columns} />
     </Box>
   );
 };

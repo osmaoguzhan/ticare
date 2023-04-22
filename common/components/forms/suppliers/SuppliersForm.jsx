@@ -4,16 +4,35 @@ import { Button, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Validator from "@/utils/validator/Validator";
 import AddressAutoComplete from "@/components/inputs/AddressAutoComplete";
+import { useSubmitSupplier } from "@/hooks/query/useSupplier";
+import { useSnackbar } from "notistack";
+import Loading from "@/components/general/Loading";
+import { useRouter } from "next/router";
 
-const SuppliersForm = (props) => {
+const SuppliersForm = ({ values }) => {
   const { t } = useTranslation("label");
+  const { enqueueSnackbar } = useSnackbar();
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
+  const router = useRouter();
+  const { locale } = router;
   const validator = Validator("supplier");
-  const { values } = props;
+  const { mutate: submitSupplier, isLoading: isSubmitSupplierLoading } =
+    useSubmitSupplier({
+      onSuccess: (message) => {
+        enqueueSnackbar(message, { variant: "success" });
+        router.push(`/${locale}/suppliers`);
+      },
+      onError: (message) => {
+        enqueueSnackbar(message, { variant: "error" });
+      },
+    });
+  if (values) values = JSON.parse(values);
+
+  if (isSubmitSupplierLoading) return <Loading />;
 
   return (
     <Grid container spacing={2}>
@@ -82,7 +101,13 @@ const SuppliersForm = (props) => {
           fullWidth
           variant="contained"
           color="primary"
-          onClick={handleSubmit((d) => console.log(d))}
+          onClick={handleSubmit((d) =>
+            submitSupplier({
+              data: d,
+              locale,
+              supplierId: values?.id,
+            })
+          )}
         >
           {t("save")}
         </Button>

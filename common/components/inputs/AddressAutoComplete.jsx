@@ -60,6 +60,8 @@ const ControlledAutoComplete = ({ address, errors, control }) => {
               props.field.onChange(value.description);
             }
           }}
+          loading={status === "OK" ? false : true}
+          loadingText={t("searching")}
           value={value}
           renderInput={(params) => (
             <TextField
@@ -79,7 +81,7 @@ const ControlledAutoComplete = ({ address, errors, control }) => {
       rules={{
         required: { value: true, message: t("error:addressLine1Required") },
       }}
-      defaultValue={address || ""}
+      defaultValue={address ? address : value || ""}
     />
   );
 };

@@ -2,12 +2,10 @@ import Layout from "@/components/layouts/Layout";
 import { Grid, Typography } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 import SettingsForm from "@/components/forms/settings/SettingsForm";
 
 const Settings = () => {
   const { t } = useTranslation("label");
-  const router = useRouter();
 
   return (
     <Grid

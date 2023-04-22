@@ -57,7 +57,7 @@ const DrawerHeader = styled(Box)(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-const Layout = ({ children }) => {
+const Layout = ({ children, title }) => {
   const { width } = useScreen();
   const [variant, setVariant] = useState("permanent");
   const theme = useTheme();
