@@ -25,7 +25,7 @@ const CustomersEdit = () => {
             color: "primary.pageTitle",
           }}
         >
-          {t("editSupplier")}
+          {t("editCustomer")}
         </Typography>
       </Grid>
       <Grid item xs={12} p={1}>
