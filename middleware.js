@@ -46,6 +46,7 @@ export const config = {
     "/products",
     "/orders",
     "/suppliers",
+    "/customers",
     "/settings",
   ],
 };

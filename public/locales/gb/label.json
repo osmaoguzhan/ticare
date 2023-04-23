@@ -69,5 +69,10 @@
   "addANewSupplier": "Add a New Supplier",
   "editSupplier": "Edit Supplier",
   "searchAddress": "Search Address...",
-  "searching": "Searching..."
+  "searching": "Searching...",
+  "customers": "Customers",
+  "customerName": "Customer Name",
+  "customerSurname": "Customer Surname",
+  "addANewCustomer": "Add a New Customer",
+  "editCustomer": "Edit Customer"
 }

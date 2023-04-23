@@ -69,5 +69,10 @@
   "addANewSupplier": "Yeni Tedarikçi Ekle",
   "editSupplier": "Tedarikçiyi Düzenle",
   "searchAddress": "Adres Ara...",
-  "searching": "Aranıyor..."
+  "searching": "Aranıyor...",
+  "customers": "Müşteriler",
+  "customerName": "Müşteri Adı",
+  "customerSurname": "Müşteri Soyadı",
+  "addANewCustomer": "Yeni Müşteri Ekle",
+  "editCustomer": "Müşteriyi Düzenle"
 }

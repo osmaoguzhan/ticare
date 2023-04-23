@@ -1,6 +1,6 @@
 import { Messages } from "@/utils/Messages";
-import prisma from "@/lib/prismaConnector";
 import { getSession } from "next-auth/react";
+import prisma from "@/lib/prismaConnector";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -13,15 +13,13 @@ export default async function handler(req, res) {
     });
   } else {
     try {
-      let data = req.body;
-      let { id } = req.query;
-      await prisma.supplier.update({
-        where: { id },
-        data,
-      });
+      const data = req.body;
+      data.companyId = session?.user?.company.id;
+      const customer = await prisma.customer.create({ data });
       res.status(200).json({
         success: true,
-        message: Messages[locale || "gb"].supplierUpdated,
+        message: Messages[locale || "gb"].customerAdded,
+        data: customer,
       });
     } catch (error) {
       res.status(500).json({

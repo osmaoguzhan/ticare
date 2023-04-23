@@ -2,24 +2,24 @@ import Box from "@mui/material/Box";
 import { useTranslation } from "next-i18next";
 import DataTable from "./DataTable";
 import { useMemo } from "react";
-import { useSupplier } from "@/hooks/query/useSupplier";
+import { useCustomer } from "@/hooks/query/useCustomer";
 import Loading from "../Loading";
 import { useSnackbar } from "notistack";
 
-const SupplierTable = () => {
+const CustomerTable = () => {
   const { t } = useTranslation("label");
   const { enqueueSnackbar } = useSnackbar();
   const columns = useMemo(() => {
     return [
       {
         field: "name",
-        headerName: t("supplierName"),
+        headerName: t("customerName"),
         flex: 1,
         editable: false,
       },
       {
         field: "surname",
-        headerName: t("supplierSurname"),
+        headerName: t("customerSurname"),
         flex: 1,
         editable: false,
       },
@@ -50,11 +50,11 @@ const SupplierTable = () => {
     ];
   }, []);
 
-  const { isSupplierLoading, isSupplierError, suppliers } = useSupplier();
+  const { isCustomerLoading, isCustomerError, customers } = useCustomer();
 
-  if (isSupplierLoading) return <Loading />;
+  if (isCustomerLoading) return <Loading />;
 
-  if (isSupplierError)
+  if (isCustomerError)
     enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
 
   return (
@@ -64,8 +64,8 @@ const SupplierTable = () => {
         width: "100%",
       }}
     >
-      <DataTable rows={suppliers} columns={columns} />
+      <DataTable rows={customers} columns={columns} />
     </Box>
   );
 };
-export default SupplierTable;
+export default CustomerTable;
