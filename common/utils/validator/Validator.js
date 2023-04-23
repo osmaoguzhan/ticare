@@ -17,7 +17,7 @@ const Validator = (type) => {
       return BrandValidator();
     case "company":
       return CompanyValidator();
-    case "supplier":
+    case "supplier/customer":
       return SupplierValidator();
     default:
       return {};

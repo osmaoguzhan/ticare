@@ -4,12 +4,12 @@ import { Button, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Validator from "@/utils/validator/Validator";
 import AddressAutoComplete from "@/components/inputs/AddressAutoComplete";
-import { useSubmitSupplier } from "@/hooks/query/useSupplier";
 import { useSnackbar } from "notistack";
 import Loading from "@/components/general/Loading";
 import { useRouter } from "next/router";
+import { useSubmitCustomer } from "@/hooks/query/useCustomer";
 
-const SuppliersForm = ({ values }) => {
+const CustomersForm = ({ values }) => {
   const { t } = useTranslation("label");
   const { enqueueSnackbar } = useSnackbar();
   const {
@@ -20,11 +20,11 @@ const SuppliersForm = ({ values }) => {
   const router = useRouter();
   const { locale } = router;
   const validator = Validator("supplier/customer");
-  const { mutate: submitSupplier, isLoading: isSubmitSupplierLoading } =
-    useSubmitSupplier({
+  const { mutate: submitCustomer, isLoading: isSubmitCustomerLoading } =
+    useSubmitCustomer({
       onSuccess: (message) => {
         enqueueSnackbar(message, { variant: "success" });
-        router.push(`/${locale}/suppliers`);
+        router.push(`/${locale}/customers`);
       },
       onError: (message) => {
         enqueueSnackbar(message, { variant: "error" });
@@ -32,13 +32,13 @@ const SuppliersForm = ({ values }) => {
     });
   if (values) values = JSON.parse(values);
 
-  if (isSubmitSupplierLoading) return <Loading />;
+  if (isSubmitCustomerLoading) return <Loading />;
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <FormInput
-          label={t("supplierName")}
+          label={t("customerName")}
           name="name"
           control={control}
           errors={errors}
@@ -48,7 +48,7 @@ const SuppliersForm = ({ values }) => {
       </Grid>
       <Grid item xs={12}>
         <FormInput
-          label={t("supplierSurname")}
+          label={t("customerSurname")}
           name="surname"
           control={control}
           errors={errors}
@@ -102,10 +102,10 @@ const SuppliersForm = ({ values }) => {
           variant="contained"
           color="primary"
           onClick={handleSubmit((d) =>
-            submitSupplier({
+            submitCustomer({
               data: d,
               locale,
-              supplierId: values?.id,
+              customerId: values?.id,
             })
           )}
         >
@@ -116,4 +116,4 @@ const SuppliersForm = ({ values }) => {
   );
 };
 
-export default SuppliersForm;
+export default CustomersForm;

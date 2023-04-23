@@ -15,13 +15,13 @@ export default async function handler(req, res) {
     try {
       let data = req.body;
       let { id } = req.query;
-      await prisma.supplier.update({
+      await prisma.customer.update({
         where: { id },
         data,
       });
       res.status(200).json({
         success: true,
-        message: Messages[locale || "gb"].supplierUpdated,
+        message: Messages[locale || "gb"].customerUpdated,
       });
     } catch (error) {
       res.status(500).json({

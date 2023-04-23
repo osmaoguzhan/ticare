@@ -69,5 +69,10 @@
   "addANewSupplier": "Dodaj nowego dostawcę",
   "editSupplier": "Edytuj dostawcę",
   "searchAddress": "Wyszukaj adres...",
-  "searching": "Wyszukiwanie..."
+  "searching": "Wyszukiwanie...",
+  "customers": "Klienci",
+  "customerName": "Imię klienta",
+  "customerSurname": "Nazwisko klienta",
+  "addANewCustomer": "Dodaj nowego klienta",
+  "editCustomer": "Edytuj klienta"
 }
