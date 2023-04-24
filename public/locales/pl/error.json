@@ -42,5 +42,7 @@
   "addressLine2Required": "Adres linia 2 jest wymagany.",
   "addressLineMinLength": "Powinno zawierać co najmniej <<placeholder>> znaków.",
   "addressLineMaxLength": "Powinno zawierać maksymalnie <<placeholder>> znaków.",
-  "descriptionMaxLength": "Opis powinien zawierać maksymalnie <<placeholder>> znaków."
+  "descriptionMaxLength": "Opis powinien zawierać maksymalnie <<placeholder>> znaków.",
+  "atLeastOneProduct": "Musisz dodać co najmniej jeden produkt.",
+  "quantityExceeds": "Ilość przekracza dostępną ilość."
 }

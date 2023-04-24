@@ -22,7 +22,7 @@
   "dashboard": "Dashboard",
   "brands": "Brands",
   "stores": "Stores",
-  "orders": "Orders",
+  "sales": "Sales",
   "products": "Products",
   "settings": "Company Settings",
   "logout": "Logout",
@@ -74,5 +74,16 @@
   "customerName": "Customer Name",
   "customerSurname": "Customer Surname",
   "addANewCustomer": "Add a New Customer",
-  "editCustomer": "Edit Customer"
+  "editCustomer": "Edit Customer",
+  "title": "Title",
+  "totalPrice": "Total Price",
+  "customer": "Customer",
+  "date": "Date",
+  "addANewSale": "Add a New Sale",
+  "editSale": "Edit Sale",
+  "productName": "Product Name",
+  "price": "Price",
+  "quantity": "Quantity",
+  "action": "Action",
+  "product": "Product"
 }

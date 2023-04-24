@@ -19,7 +19,6 @@ const FormInput = (props) => {
       control={control}
       render={(props) => (
         <TextField
-          margin="normal"
           fullWidth
           name={name}
           label={label}

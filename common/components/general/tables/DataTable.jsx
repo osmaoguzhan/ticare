@@ -19,11 +19,23 @@ import { useTranslation } from "next-i18next";
 import { Button, ButtonGroup } from "@mui/material";
 import Swal from "sweetalert2";
 
-const DataTable = ({ columns, rows, ...other }) => {
+const DataTable = ({
+  columns,
+  rows,
+  disabledCheckboxSelection = false,
+  ...other
+}) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const rowList = useArray(rows);
   const router = useRouter();
   const [localeText, setLocaleText] = useState({});
+
+  if (!disabledCheckboxSelection) {
+    other = {
+      ...other,
+      checkboxSelection: true,
+    };
+  }
 
   const tableLocale = useCallback(() => {
     if (router.locale === "tr") {
@@ -44,7 +56,6 @@ const DataTable = ({ columns, rows, ...other }) => {
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
-        checkboxSelection
         disableSelectionOnClick
         components={{
           Toolbar: () => (

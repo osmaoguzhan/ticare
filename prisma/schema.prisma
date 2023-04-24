@@ -110,7 +110,7 @@ model Purchase {
   id              String            @id @default(auto()) @map("_id") @db.ObjectId
   title           String
   description     String?
-  total_price     Float
+  totalPrice     Float
   company         Company           @relation(fields: [companyId], references: [id])
   companyId       String            @db.ObjectId
   supplier        Supplier          @relation(fields: [supplierId], references: [id])

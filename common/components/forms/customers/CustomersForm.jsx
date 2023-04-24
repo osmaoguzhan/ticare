@@ -76,7 +76,7 @@ const CustomersForm = ({ values }) => {
           value={values?.phoneNumber || ""}
         />
       </Grid>
-      <Grid item xs={12} mt={2}>
+      <Grid item xs={12}>
         <AddressAutoComplete
           control={control}
           errors={errors}

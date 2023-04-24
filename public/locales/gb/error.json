@@ -42,5 +42,7 @@
   "addressLine2Required": "Address line 2 is required.",
   "addressLineMinLength": "Should be minimum <<placeholder>> characters.",
   "addressLineMaxLength": "Should be maximally <<placeholder>> characters.",
-  "descriptionMaxLength": "Description should be maximally <<placeholder>> characters."
+  "descriptionMaxLength": "Description should be maximally <<placeholder>> characters.",
+  "atLeastOneProduct": "At least one product is required.",
+  "quantityExceeds": "Quantity exceeds the available amount."
 }

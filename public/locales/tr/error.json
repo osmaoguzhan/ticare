@@ -42,5 +42,7 @@
   "addressLine2Required": "Adres satırı 2 boş bırakılamaz.",
   "addressLineMinLength": "En az <<placeholder>> karakter olmalıdır.",
   "addressLineMaxLength": "En fazla <<placeholder>> karakter olmalıdır.",
-  "descriptionMaxLength": "Açıklama en fazla <<placeholder>> karakter olmalıdır."
+  "descriptionMaxLength": "Açıklama en fazla <<placeholder>> karakter olmalıdır.",
+  "atLeastOneProduct": "En azından bir ürün seçmelisiniz.",
+  "quantityExceeds": "Seçilen ürünlerin toplam stok miktarından fazla olamaz."
 }

@@ -22,7 +22,7 @@
   "dashboard": "Kontrol Paneli",
   "brands": "Markalar",
   "stores": "Mağazalar",
-  "orders": "Siparişler",
+  "sales": "Satışlar",
   "products": "Ürünler",
   "settings": "Şirket Ayarları",
   "logout": "Çıkış Yap",
@@ -74,5 +74,16 @@
   "customerName": "Müşteri Adı",
   "customerSurname": "Müşteri Soyadı",
   "addANewCustomer": "Yeni Müşteri Ekle",
-  "editCustomer": "Müşteriyi Düzenle"
+  "editCustomer": "Müşteriyi Düzenle",
+  "title": "Başlık",
+  "totalPrice": "Toplam Fiyat",
+  "customer": "Müşteri",
+  "date": "Tarih",
+  "addANewSale": "Yeni Satış Ekle",
+  "editSale": "Satışı Düzenle",
+  "productName": "Ürün Adı",
+  "price": "Fiyat",
+  "quantity": "Miktar",
+  "action": "İşlem",
+  "product": "Ürün"
 }
