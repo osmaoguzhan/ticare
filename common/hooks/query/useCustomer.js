@@ -9,6 +9,15 @@ const getCustomers = async (locale) => {
   return res.json();
 };
 
+const getCustomer = async ({ locale, customerId }) => {
+  const res = await fetch(`/api/customers/${customerId}`, {
+    headers: {
+      locale,
+    },
+  });
+  return res.json();
+};
+
 export const useCustomer = (locale) => {
   const { isError, isLoading, data } = useQuery(
     ["customers"],
@@ -21,6 +30,25 @@ export const useCustomer = (locale) => {
   );
   const customers = data?.data;
   return { isCustomerLoading: isLoading, isCustomerError: isError, customers };
+};
+
+export const useCustomerById = ({ locale, customerId }) => {
+  const { isError, isLoading, data, isFetching } = useQuery(
+    ["customerById"],
+    () => getCustomer({ locale, customerId }),
+    {
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: true,
+    }
+  );
+  const customer = data?.data;
+  return {
+    isCustomerLoading: isLoading,
+    isCustomerError: isError,
+    customer,
+    isFetching,
+  };
 };
 
 const submitCustomer = async ({ locale, data, customerId }) => {

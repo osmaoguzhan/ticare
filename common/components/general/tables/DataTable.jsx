@@ -50,40 +50,36 @@ const DataTable = ({
   }, [tableLocale]);
 
   return (
-    <Box sx={{ height: 600, width: "100%" }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        disableSelectionOnClick
-        components={{
-          Toolbar: () => (
-            <CustomToolbar selectedRows={selectedRows} router={router} />
-          ),
-        }}
-        onSelectionModelChange={(ids) => {
-          const selectedIDs = new Set(ids);
-          const selected = rowList.value.filter((row) =>
-            selectedIDs.has(row.id)
-          );
-          setSelectedRows(selected);
-        }}
-        localeText={{
-          ...localeText,
-          MuiTablePagination: {
-            labelDisplayedRows: ({ from, to, count }) =>
-              Constants.pagination({
-                from,
-                to,
-                count,
-                locale: router.locale,
-              }),
-          },
-        }}
-        {...other}
-      />
-    </Box>
+    <DataGrid
+      rows={rows}
+      columns={columns}
+      pageSize={10}
+      rowsPerPageOptions={[10]}
+      disableSelectionOnClick
+      components={{
+        Toolbar: () => (
+          <CustomToolbar selectedRows={selectedRows} router={router} />
+        ),
+      }}
+      onSelectionModelChange={(ids) => {
+        const selectedIDs = new Set(ids);
+        const selected = rowList.value.filter((row) => selectedIDs.has(row.id));
+        setSelectedRows(selected);
+      }}
+      localeText={{
+        ...localeText,
+        MuiTablePagination: {
+          labelDisplayedRows: ({ from, to, count }) =>
+            Constants.pagination({
+              from,
+              to,
+              count,
+              locale: router.locale,
+            }),
+        },
+      }}
+      {...other}
+    />
   );
 };
 
@@ -111,13 +107,10 @@ const CustomToolbar = ({ selectedRows, router }) => {
             startIcon={<FontAwesomeIcon icon={faEdit} />}
             sx={{ fontSize: "0.8rem", color: theme.palette.primary.main }}
             onClick={() => {
-              router.push(
-                {
-                  pathname: router.pathname + "/edit",
-                  query: { data: JSON.stringify(selectedRows[0]) },
-                },
-                router.pathname + "/edit"
-              );
+              router.push({
+                pathname: router.pathname + "/edit",
+                query: { id: selectedRows[0]?.id },
+              });
             }}
           >
             {t("edit")}

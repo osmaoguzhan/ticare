@@ -9,6 +9,29 @@ const getSales = async (locale) => {
   return res.json();
 };
 
+const getSaleById = async ({ locale, saleId }) => {
+  const res = await fetch(`/api/sales/${saleId}`, {
+    headers: {
+      locale,
+    },
+  });
+  return res.json();
+};
+
+export const useSaleById = ({ locale, saleId }) => {
+  const { isError, isLoading, data } = useQuery(
+    ["saleById"],
+    () => getSaleById({ locale, saleId }),
+    {
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: true,
+    }
+  );
+  const sale = data?.data;
+  return { isSaleLoading: isLoading, isSaleError: isError, sale };
+};
+
 export const useSales = (locale) => {
   const { isError, isLoading, data } = useQuery(
     ["sales"],
@@ -23,44 +46,34 @@ export const useSales = (locale) => {
   return { isSaleLoading: isLoading, isSaleError: isError, sales };
 };
 
-// const submitSupplier = async ({ locale, data, supplierId }) => {
-//   data = {
-//     name: data.name.trim(),
-//     surname: data.surname.trim(),
-//     phoneNumber: data.phoneNumber.trim(),
-//     email: data.email.trim(),
-//     addressLine1: data.addressLine1.trim(),
-//     addressLine2: data.addressLine2.trim(),
-//   };
-//   let ep = supplierId
-//     ? `/api/suppliers/edit/${supplierId}`
-//     : "/api/suppliers/add";
-//   let method = supplierId ? "PUT" : "POST";
-//   const response = await (
-//     await fetch(ep, {
-//       method,
-//       headers: {
-//         locale,
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(data),
-//     })
-//   ).json();
-//   if (!response.success) {
-//     throw new Error(response.message);
-//   }
-//   return response;
-// };
+const submitSale = async ({ locale, data, saleId = undefined }) => {
+  let ep = saleId ? `/api/sales/edit/${saleId}` : "/api/sales/add";
+  let method = saleId ? "PUT" : "POST";
+  const response = await (
+    await fetch(ep, {
+      method,
+      headers: {
+        locale,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+  ).json();
+  if (!response.success) {
+    throw new Error(response.message);
+  }
+  return response;
+};
 
-// export const useSubmitSupplier = ({ onSuccess, onError }) => {
-//   const queryClient = useQueryClient();
-//   return useMutation(submitSupplier, {
-//     onSuccess: (data) => {
-//       queryClient.invalidateQueries("suppliers");
-//       onSuccess(data.message);
-//     },
-//     onError: (error) => {
-//       onError(error.message);
-//     },
-//   });
-// };
+export const useSubmitSale = ({ onSuccess, onError }) => {
+  const queryClient = useQueryClient();
+  return useMutation(submitSale, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries("sales");
+      onSuccess(data.message);
+    },
+    onError: (error) => {
+      onError(error.message);
+    },
+  });
+};

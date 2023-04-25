@@ -85,5 +85,7 @@
   "price": "Fiyat",
   "quantity": "Miktar",
   "action": "İşlem",
-  "product": "Ürün"
+  "product": "Ürün",
+  "subtotal": "Ara Toplam",
+  "availableInStock": "Stoktaki Miktar"
 }

@@ -85,5 +85,7 @@
   "price": "Price",
   "quantity": "Quantity",
   "action": "Action",
-  "product": "Product"
+  "product": "Product",
+  "subtotal": "Subtotal",
+  "availableInStock": "Available in Stock"
 }

@@ -140,6 +140,7 @@ const Constants = {
           quantity: "Ilość",
           total: "Razem",
         };
+        break;
       case "tr":
         translations = {
           product: "Ürün",
@@ -147,6 +148,7 @@ const Constants = {
           quantity: "Miktar",
           total: "Toplam",
         };
+        break;
       case "gb":
       default:
         translations = {
@@ -156,7 +158,7 @@ const Constants = {
           total: "Total",
         };
     }
-    let totalPrice = products.reduce(
+    let totalPrice = products?.reduce(
       (total, product) => total + product.price * product.quantity,
       0
     );
@@ -178,7 +180,7 @@ const Constants = {
       </tr>
     </thead>
     <tbody>
-      ${products.map(
+      ${products?.map(
         (product) => `
         <tr>
             <td style="border: 1px solid #ddd; padding: 8px;">${product.name}

@@ -5,9 +5,9 @@ import {
   Grid,
   IconButton,
   MenuItem,
-  Select,
   Divider,
   Typography,
+  Tooltip,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Validator from "@/utils/validator/Validator";
@@ -17,11 +17,11 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import { uniqueId } from "lodash";
 import { useProducts } from "@/hooks/query/useProduct";
 import SelectInput from "@/components/inputs/SelectInput";
-import { DataGrid } from "@mui/x-data-grid";
 import DataTable from "@/components/general/tables/DataTable";
+import { useSubmitSale } from "@/hooks/query/useSales";
+import { useCustomer } from "@/hooks/query/useCustomer";
 
 const SalesForm = ({ values }) => {
   const { t } = useTranslation("label");
@@ -34,9 +34,21 @@ const SalesForm = ({ values }) => {
     getValues,
   } = useForm();
   const router = useRouter();
+  const { locale } = router;
   const { data, isProductLoading, isProductError } = useProducts();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(values?.products || []);
   const [currentSelected, setCurrentSelected] = useState(null);
+  const { mutate: submitSale, isLoading: isSubmitSaleLoading } = useSubmitSale({
+    onSuccess: (message) => {
+      enqueueSnackbar(message, { variant: "success" });
+      router.push(`/${locale}/sales`);
+    },
+    onError: (message) => {
+      enqueueSnackbar(message, { variant: "error" });
+    },
+  });
+  const { isCustomerLoading, isCustomerError, customers } = useCustomer(locale);
+
   const columns = [
     {
       field: "name",
@@ -88,7 +100,7 @@ const SalesForm = ({ values }) => {
   const shouldBeDisabled = () => {
     return (
       _.isNil(data) ||
-      products.reduce((a, b) => a + b.quantity, 0) ===
+      products?.reduce((a, b) => a + b.quantity, 0) ===
         data.reduce((a, b) => a + b.quantity, 0)
     );
   };
@@ -99,12 +111,11 @@ const SalesForm = ({ values }) => {
     }
   }, [data]);
 
-  if (isProductLoading) return <Loading />;
+  if (isProductLoading || isSubmitSaleLoading || isCustomerLoading)
+    return <Loading />;
 
-  if (isProductError)
+  if (isProductError || isCustomerError)
     return enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
-
-  const { locale } = router;
 
   return (
     <Grid container spacing={2}>
@@ -114,8 +125,7 @@ const SalesForm = ({ values }) => {
           name="title"
           control={control}
           errors={errors}
-          //   validation={validator.name}
-          //   value={values?.name || ""}
+          value={values?.title || ""}
         />
       </Grid>
       <Grid item xs={12}>
@@ -124,18 +134,24 @@ const SalesForm = ({ values }) => {
           name="description"
           control={control}
           errors={errors}
-          //   validation={validator.surname}
-          //   value={values?.surname || ""}
+          value={values?.description || ""}
         />
       </Grid>
       <Grid item xs={12}>
-        <FormInput
+        <SelectInput
           label={t("customer")}
-          name="customer"
+          name={`customer`}
           control={control}
           errors={errors}
-          //   validation={validator.phoneNumber}
-          //   value={values?.phoneNumber || ""}
+          fullWidth
+          options={
+            customers
+              ? customers.map((item) => ({
+                  key: item.id,
+                  label: `${item.name} ${item.surname}`,
+                }))
+              : []
+          }
         />
       </Grid>
       <Grid item xs={8} md={9.5} lg={9.5}>
@@ -151,14 +167,31 @@ const SalesForm = ({ values }) => {
           }}
           getOptionDisabled={(option) => {
             let fromData = data.find((item) => item.id === option.key);
-            let fromSelected = products.find((item) => item.id === option.key);
+            let fromSelected = products?.find((item) => item.id === option.key);
             return fromData?.quantity === fromSelected?.quantity;
           }}
+          renderOption={(props, option) => (
+            <Tooltip
+              title={`${t("availableInStock")}: ${
+                data.find((item) => option.key === item.id)?.quantity
+              }`}
+              placement="bottom"
+            >
+              <MenuItem
+                key={option.key}
+                value={option.key}
+                disabled={option.disabled}
+                {...props}
+              >
+                {option.label}
+              </MenuItem>
+            </Tooltip>
+          )}
           options={
             data
               ? data.map((item) => ({
                   key: item.id,
-                  label: item.name + ` (Max: ${item.quantity})`,
+                  label: item.name,
                 }))
               : []
           }
@@ -176,9 +209,14 @@ const SalesForm = ({ values }) => {
           InputProps={{
             inputProps: {
               min: 1,
-              max: currentSelected?.quantity,
-              onKeyDown: (event) => {
-                event.preventDefault();
+              max:
+                currentSelected?.quantity -
+                  products?.find((i) => i.id === currentSelected?.id)
+                    ?.quantity || 0,
+              onChange: (event) => {
+                if (event.target.value > currentSelected?.quantity) {
+                  event.target.value = currentSelected?.quantity;
+                }
               },
             },
           }}
@@ -203,7 +241,7 @@ const SalesForm = ({ values }) => {
           size="medium"
           aria-label="add"
           onClick={() => {
-            let isExist = products.find(
+            let isExist = products?.find(
               (item) => item.id === currentSelected?.id
             );
             if (isExist) {
@@ -237,7 +275,10 @@ const SalesForm = ({ values }) => {
               ]);
             }
             setCurrentSelected(data[0]);
-            reset({ quantity: 1 });
+            reset({
+              ...getValues(),
+              quantity: 1,
+            });
           }}
         >
           <FontAwesomeIcon icon={faCirclePlus} />
@@ -260,13 +301,12 @@ const SalesForm = ({ values }) => {
           disabledCheckboxSelection={true}
         />
       </Grid>
-
       <Grid item xs={12}>
         <Button
           fullWidth
           variant="contained"
           color="primary"
-          onClick={handleSubmit((d) => {
+          onClick={handleSubmit(async (d) => {
             if (_.isEmpty(products)) {
               enqueueSnackbar(t("error:atLeastOneProduct"), {
                 variant: "error",
@@ -278,8 +318,10 @@ const SalesForm = ({ values }) => {
             newData.description = d.description;
             newData.customer = d.customer;
             newData.products = products;
-
-            console.log(newData);
+            submitSale({
+              data: newData,
+              locale,
+            });
           })}
         >
           {t("save")}

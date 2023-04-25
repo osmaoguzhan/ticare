@@ -1,22 +1,40 @@
 import Box from "@mui/material/Box";
 import { useTranslation } from "next-i18next";
 import DataTable from "./DataTable";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useSales } from "@/hooks/query/useSales";
 import Loading from "../Loading";
 import { useSnackbar } from "notistack";
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton, colors, lighten } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileInvoice } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
-import { salesTemplate } from "@/utils/Constants";
+import useModal from "@/hooks/useModal";
+import { useTheme } from "@emotion/react";
 
 const SalesTable = () => {
   const { t } = useTranslation("label");
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
+
+  const theme = useTheme();
+
+  const style = {
+    "& .MuiDataGrid-row": {
+      cursor: "pointer",
+      ":hover": {
+        backgroundColor: lighten(theme.palette.primary.main, 0.9),
+      },
+    },
+    "&.MuiDataGrid-root .MuiDataGrid-columnHeader:focus, &.MuiDataGrid-root .MuiDataGrid-cell:focus":
+      {
+        outline: "none",
+      },
+  };
   const { locale } = router;
+  const [Modal, toggle, open] = useModal(false);
+  const [currentSelected, setCurrentSelected] = useState(null);
   const columns = useMemo(() => {
     return [
       {
@@ -49,27 +67,6 @@ const SalesTable = () => {
         flex: 1,
         editable: false,
       },
-      {
-        field: "details",
-        headerName: t("details"),
-        flex: 1,
-        editable: false,
-        renderCell: (params) => (
-          <IconButton
-            color="primary"
-            aria-label="details"
-            onClick={() => {
-              Swal.fire({
-                title: params.row.title,
-                html: salesTemplate(locale, params.row.products),
-                confirmButtonText: "Ok",
-              });
-            }}
-          >
-            <FontAwesomeIcon icon={faFileInvoice} />
-          </IconButton>
-        ),
-      },
     ];
   }, []);
 
@@ -87,7 +84,16 @@ const SalesTable = () => {
         width: "100%",
       }}
     >
-      <DataTable rows={sales} columns={columns} />
+      <DataTable
+        rows={sales}
+        columns={columns}
+        onRowClick={(params) => {
+          setCurrentSelected(params.row.products);
+          toggle(!open);
+        }}
+        sx={style}
+      />
+      <Modal title="Sale Details" content={currentSelected} />
     </Box>
   );
 };

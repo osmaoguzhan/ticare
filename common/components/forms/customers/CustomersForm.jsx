@@ -30,7 +30,6 @@ const CustomersForm = ({ values }) => {
         enqueueSnackbar(message, { variant: "error" });
       },
     });
-  if (values) values = JSON.parse(values);
 
   if (isSubmitCustomerLoading) return <Loading />;
 

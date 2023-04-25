@@ -85,5 +85,7 @@
   "price": "Cena",
   "quantity": "Ilość",
   "action": "Akcja",
-  "product": "Produkt"
+  "product": "Produkt",
+  "subtotal": "Suma częściowa",
+  "availableInStock": "Dostępne w magazynie"
 }

@@ -30,7 +30,6 @@ const SuppliersForm = ({ values }) => {
         enqueueSnackbar(message, { variant: "error" });
       },
     });
-  if (values) values = JSON.parse(values);
 
   if (isSubmitSupplierLoading) return <Loading />;
 

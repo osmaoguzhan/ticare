@@ -6,19 +6,19 @@ const getProducts = async (locale) => {
       id: 1,
       name: "Product 1",
       price: 100,
-      quantity: 4,
+      quantity: 100,
     },
     {
       id: 2,
       name: "Product 2",
       price: 200,
-      quantity: 2,
+      quantity: 100,
     },
     {
       id: 3,
       name: "Product 3",
       price: 300,
-      quantity: 1,
+      quantity: 100,
     },
   ];
   return products;
