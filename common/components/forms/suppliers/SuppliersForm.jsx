@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 import FormInput from "@/components/inputs/FormInput";
-import { Button, Grid } from "@mui/material";
+import { Button, Divider, Grid, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Validator from "@/utils/validator/Validator";
 import AddressAutoComplete from "@/components/inputs/AddressAutoComplete";
@@ -35,7 +35,11 @@ const SuppliersForm = ({ values }) => {
   if (isSubmitSupplierLoading) return <Loading />;
 
   return (
-    <Grid container spacing={2}>
+    <Grid container>
+      <Grid item xs={12} mt={2} mb={2}>
+        <Typography variant="h6">{t("generalInfo")}</Typography>
+        <Divider />
+      </Grid>
       <Grid item xs={12}>
         <FormInput
           label={t("supplierName")}
@@ -76,6 +80,10 @@ const SuppliersForm = ({ values }) => {
           value={values?.phoneNumber || ""}
         />
       </Grid>
+      <Grid item xs={12} mt={2} mb={2}>
+        <Typography variant="h6">{t("addressDetails")}</Typography>
+        <Divider />
+      </Grid>
       <Grid item xs={12} mt={2}>
         <AddressAutoComplete
           control={control}
@@ -83,7 +91,7 @@ const SuppliersForm = ({ values }) => {
           address={values?.addressLine1}
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} mt={1}>
         <FormInput
           label={t("addressLine2")}
           name="addressLine2"
@@ -96,7 +104,7 @@ const SuppliersForm = ({ values }) => {
         />
       </Grid>
 
-      <Grid item xs={12}>
+      <Grid item xs={12} mt={1}>
         <Button
           fullWidth
           variant="contained"

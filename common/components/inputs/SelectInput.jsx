@@ -27,6 +27,7 @@ const SelectInput = (props) => {
       control={control}
       render={(props) => (
         <Autocomplete
+          sx={{ mt: 2 }}
           options={options}
           disableClearable
           onChange={(_, value) => {

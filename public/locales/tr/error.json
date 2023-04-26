@@ -42,5 +42,21 @@
   "addressLine2Required": "Adres satırı 2 boş bırakılamaz.",
   "addressLineMinLength": "En az <<placeholder>> karakter olmalıdır.",
   "addressLineMaxLength": "En fazla <<placeholder>> karakter olmalıdır.",
-  "descriptionMaxLength": "Açıklama en fazla <<placeholder>> karakter olmalıdır."
+  "descriptionMaxLength": "Açıklama en fazla <<placeholder>> karakter olmalıdır.",
+  "productNameRequired": "Ürün adı boş bırakılamaz.",
+  "productNameMinLength": "Ürün adı en az <<placeholder>> karakter olmalıdır.",
+  "productNameMaxLength": "Ürün adı en fazla <<placeholder>> karakter olmalıdır.",
+  "productDescriptionMinLength": "Ürün açıklaması en az <<placeholder>> karakter olmalıdır.",
+  "productDescriptionMaxLength": "Ürün açıklaması en fazla <<placeholder>> karakter olmalıdır.",
+  "productTypeRequired": "Ürün tipi boş bırakılamaz.",
+  "productTypeMinLength": "Ürün tipi en az <<placeholder>> karakter olmalıdır.",
+  "productTypeMaxLength": "Ürün tipi en fazla <<placeholder>> karakter olmalıdır.",
+  "salePriceRequired": "Satış fiyatı boş bırakılamaz.",
+  "salePriceMin": "Satış fiyatı en az <<placeholder>> olmalıdır.",
+  "salePriceMax": "Satış fiyatı en fazla <<placeholder>> olmalıdır.",
+  "salePriceInvalid": "Satış fiyatı formatı geçersiz.",
+  "purchasePriceRequired": "Alış fiyatı boş bırakılamaz.",
+  "purchasePriceMin": "Alış fiyatı en az <<placeholder>> olmalıdır.",
+  "purchasePriceMax": "Alış fiyatı en fazla <<placeholder>> olmalıdır.",
+  "purchasePriceInvalid": "Alış fiyatı formatı geçersiz."
 }

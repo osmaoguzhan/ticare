@@ -42,5 +42,21 @@
   "addressLine2Required": "Adres linia 2 jest wymagany.",
   "addressLineMinLength": "Powinno zawierać co najmniej <<placeholder>> znaków.",
   "addressLineMaxLength": "Powinno zawierać maksymalnie <<placeholder>> znaków.",
-  "descriptionMaxLength": "Opis powinien zawierać maksymalnie <<placeholder>> znaków."
+  "descriptionMaxLength": "Opis powinien zawierać maksymalnie <<placeholder>> znaków.",
+  "productNameRequired": "Nazwa produktu jest wymagana.",
+  "productNameMinLength": "Nazwa produktu powinna zawierać co najmniej <<placeholder>> znaków.",
+  "productNameMaxLength": "Nazwa produktu powinna zawierać maksymalnie <<placeholder>> znaków.",
+  "productDescriptionMinLength": "Opis produktu powinien zawierać co najmniej <<placeholder>> znaków.",
+  "productDescriptionMaxLength": "Opis produktu powinien zawierać maksymalnie <<placeholder>> znaków.",
+  "productTypeRequired": "Typ produktu jest wymagany.",
+  "productTypeMinLength": "Typ produktu powinien zawierać co najmniej <<placeholder>> znaków.",
+  "productTypeMaxLength": "Typ produktu powinien zawierać maksymalnie <<placeholder>> znaków.",
+  "salePriceRequired": "Cena sprzedaży jest wymagana.",
+  "salePriceMin": "Cena sprzedaży powinna być większa niż <<placeholder>>.",
+  "salePriceMax": "Cena sprzedaży powinna być mniejsza niż <<placeholder>>.",
+  "salePriceInvalid": "Cena sprzedaży jest nieprawidłowa.",
+  "purchasePriceRequired": "Cena zakupu jest wymagana.",
+  "purchasePriceMin": "Cena zakupu powinna być większa niż <<placeholder>>.",
+  "purchasePriceMax": "Cena zakupu powinna być mniejsza niż <<placeholder>>.",
+  "purchasePriceInvalid": "Cena zakupu jest nieprawidłowa."
 }

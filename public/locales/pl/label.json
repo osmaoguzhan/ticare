@@ -74,5 +74,12 @@
   "customerName": "Imię klienta",
   "customerSurname": "Nazwisko klienta",
   "addANewCustomer": "Dodaj nowego klienta",
-  "editCustomer": "Edytuj klienta"
+  "editCustomer": "Edytuj klienta",
+  "productType": "Typ produktu",
+  "purchasePrice": "Cena zakupu",
+  "salePrice": "Cena sprzedaży",
+  "generalInfo": "Ogólne informacje",
+  "addressDetails": "Szczegóły adresu",
+  "addANewProduct": "Dodaj nowy produkt",
+  "editProduct": "Edytuj produkt"
 }
