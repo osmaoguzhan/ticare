@@ -100,13 +100,10 @@ const CustomToolbar = ({ selectedRows, router }) => {
             startIcon={<FontAwesomeIcon icon={faEdit} />}
             sx={{ fontSize: "0.8rem", color: theme.palette.primary.main }}
             onClick={() => {
-              router.push(
-                {
-                  pathname: router.pathname + "/edit",
-                  query: { data: JSON.stringify(selectedRows[0]) },
-                },
-                router.pathname + "/edit"
-              );
+              router.push({
+                pathname: router.pathname + "/edit",
+                query: { id: selectedRows[0].id },
+              });
             }}
           >
             {t("edit")}

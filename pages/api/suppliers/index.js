@@ -12,14 +12,21 @@ export default async function handler(req, res) {
       message: Messages[locale || "gb"].notPermitted,
     });
   } else {
-    const suppliers = await prisma.supplier.findMany({
-      where: {
-        companyId: session?.user?.companyId,
-      },
-    });
-    res.status(200).json({
-      success: true,
-      data: suppliers,
-    });
+    try {
+      const suppliers = await prisma.supplier.findMany({
+        where: {
+          companyId: session?.user?.companyId,
+        },
+      });
+      res.status(200).json({
+        success: true,
+        data: suppliers,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: Messages[locale || "gb"].somethingWentWrong,
+      });
+    }
   }
 }

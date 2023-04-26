@@ -56,8 +56,14 @@ const submitProduct = async ({ locale, data, productId }) => {
     name: data.name.trim(),
     description: data.description.trim(),
     productType: data.productType.trim(),
-    purchasePrice: Number(data.purchasePrice.trim()),
-    salePrice: Number(data.salePrice.trim()),
+    purchasePrice:
+      typeof data.purchasePrice === "string"
+        ? Number(data.purchasePrice.trim())
+        : data.purchasePrice,
+    salePrice:
+      typeof data.salePrice === "string"
+        ? Number(data.salePrice.trim())
+        : data.salePrice,
   };
   let ep = productId ? `/api/products/edit/${productId}` : "/api/products/add";
   let method = productId ? "PUT" : "POST";

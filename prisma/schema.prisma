@@ -82,7 +82,7 @@ model Product {
   name            String
   description     String?
   productType     String
-  purhcasePrice   Float
+  purchasePrice   Float
   salePrice       Float
   company         Company           @relation(fields: [companyId], references: [id])
   companyId       String            @db.ObjectId
