@@ -19,6 +19,8 @@ export const Messages = {
     supplierUpdated: "Supplier updated successfully.",
     customerAdded: "Customer added successfully.",
     customerUpdated: "Customer updated successfully.",
+    productAdded: "Product added successfully.",
+    productUpdated: "Product updated successfully.",
   },
   tr: {
     userActivated: "Kullanıcı başarıyla aktifleştirildi.",
@@ -41,6 +43,8 @@ export const Messages = {
     supplierUpdated: "Tedarikçi başarıyla güncellendi.",
     customerAdded: "Müşteri başarıyla eklendi.",
     customerUpdated: "Müşteri başarıyla güncellendi.",
+    productAdded: "Ürün başarıyla eklendi.",
+    productUpdated: "Ürün başarıyla güncellendi.",
   },
   pl: {
     userActivated: "Użytkownik został pomyślnie aktywowany.",
@@ -62,5 +66,7 @@ export const Messages = {
     supplierUpdated: "Dostawca został pomyślnie zaktualizowany.",
     customerAdded: "Klient został pomyślnie dodany.",
     customerUpdated: "Klient został pomyślnie zaktualizowany.",
+    productAdded: "Produkt został pomyślnie dodany.",
+    productUpdated: "Produkt został pomyślnie zaktualizowany.",
   },
 };

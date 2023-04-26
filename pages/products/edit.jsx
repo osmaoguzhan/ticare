@@ -2,13 +2,27 @@ import Layout from "@/components/layouts/Layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Grid, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
-import SuppliersForm from "@/components/forms/suppliers/SuppliersForm";
 import { useRouter } from "next/router";
 import ProductsForm from "@/components/forms/products/ProductsForm";
+import { useProductById } from "@/hooks/query/useProduct";
+import Loading from "@/components/general/Loading";
+import { useSnackbar } from "notistack";
 
 const ProductsEdit = () => {
   const { t } = useTranslation("label");
-  const { query } = useRouter();
+  const { query, locale } = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const { id } = query;
+  const { isProductLoading, isProductError, product } = useProductById({
+    productId: id,
+    locale,
+  });
+
+  if (isProductLoading) return <Loading />;
+
+  if (isProductError)
+    enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
 
   return (
     <Grid
@@ -30,7 +44,7 @@ const ProductsEdit = () => {
         </Typography>
       </Grid>
       <Grid item xs={12} p={1}>
-        <ProductsForm values={query?.data} />
+        <ProductsForm values={product} />
       </Grid>
     </Grid>
   );

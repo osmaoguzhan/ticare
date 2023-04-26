@@ -6,6 +6,7 @@ import Validator from "@/utils/validator/Validator";
 import { useSnackbar } from "notistack";
 import Loading from "@/components/general/Loading";
 import { useRouter } from "next/router";
+import { useSubmitProduct } from "@/hooks/query/useProduct";
 
 const ProductsForm = ({ values }) => {
   const { t } = useTranslation("label");
@@ -18,6 +19,19 @@ const ProductsForm = ({ values }) => {
   const router = useRouter();
   const { locale } = router;
   const validator = Validator("product");
+
+  const { mutateAsync: submitProduct, isLoading: isSubmitProductLoading } =
+    useSubmitProduct({
+      onSuccess: (message) => {
+        enqueueSnackbar(message, { variant: "success" });
+        router.push(`/${locale}/products`);
+      },
+      onError: (message) => {
+        enqueueSnackbar(message, { variant: "error" });
+      },
+    });
+
+  if (isSubmitProductLoading) return <Loading />;
 
   return (
     <Grid container spacing={0.5}>
@@ -76,6 +90,7 @@ const ProductsForm = ({ values }) => {
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
           validation={validator.purchasePrice}
+          type="number"
         />
       </Grid>
       <Grid item xs={12} mt={1}>
@@ -83,7 +98,12 @@ const ProductsForm = ({ values }) => {
           fullWidth
           variant="contained"
           color="primary"
-          onClick={handleSubmit((d) => console.log(d))}
+          onClick={handleSubmit(async (d) => {
+            await submitProduct({
+              locale,
+              data: d,
+            });
+          })}
         >
           {t("save")}
         </Button>
