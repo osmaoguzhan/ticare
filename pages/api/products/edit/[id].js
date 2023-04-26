@@ -1,6 +1,6 @@
 import { Messages } from "@/utils/Messages";
-import { getSession } from "next-auth/react";
 import prisma from "@/lib/prismaConnector";
+import { getSession } from "next-auth/react";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -13,14 +13,15 @@ export default async function handler(req, res) {
     });
   } else {
     try {
-      const customers = await prisma.customer.findMany({
-        where: {
-          companyId: session?.user?.companyId,
-        },
+      let data = req.body;
+      let { id } = req.query;
+      await prisma.product.update({
+        where: { id },
+        data,
       });
       res.status(200).json({
         success: true,
-        data: customers,
+        message: Messages[locale || "gb"].productUpdated,
       });
     } catch (error) {
       res.status(500).json({

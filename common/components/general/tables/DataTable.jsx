@@ -109,7 +109,7 @@ const CustomToolbar = ({ selectedRows, router }) => {
             onClick={() => {
               router.push({
                 pathname: router.pathname + "/edit",
-                query: { id: selectedRows[0]?.id },
+                query: { id: selectedRows[0].id },
               });
             }}
           >

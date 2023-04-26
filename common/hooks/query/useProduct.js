@@ -1,27 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 
 const getProducts = async (locale) => {
-  let products = [
-    {
-      id: 1,
-      name: "Product 1",
-      price: 100,
-      quantity: 100,
+  const res = await fetch("/api/products", {
+    headers: {
+      locale,
     },
-    {
-      id: 2,
-      name: "Product 2",
-      price: 200,
-      quantity: 100,
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      price: 300,
-      quantity: 100,
-    },
-  ];
-  return products;
+  });
+  return res.json();
 };
 
 export const useProducts = (locale) => {
@@ -30,9 +15,83 @@ export const useProducts = (locale) => {
     () => getProducts(locale),
     {
       refetchOnMount: true,
-      refetchOnReconnect: false,
+      refetchOnReconnect: true,
       refetchOnWindowFocus: true,
     }
   );
-  return { isProductLoading: isLoading, isProductError: isError, data };
+  const products = data?.data;
+  return { isProductLoading: isLoading, isProductError: isError, products };
+};
+
+const getProduct = async ({ locale, productId }) => {
+  const res = await fetch(`/api/products/${productId}`, {
+    headers: {
+      locale,
+    },
+  });
+  return res.json();
+};
+
+export const useProductById = ({ locale, productId }) => {
+  const { isError, isLoading, data, isFetching } = useQuery(
+    ["productById"],
+    () => getProduct({ locale, productId }),
+    {
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: true,
+    }
+  );
+  const product = data?.data;
+  return {
+    isProductLoading: isLoading,
+    isProductError: isError,
+    product,
+    isFetching,
+  };
+};
+
+const submitProduct = async ({ locale, data, productId }) => {
+  data = {
+    name: data.name.trim(),
+    description: data.description.trim(),
+    productType: data.productType.trim(),
+    purchasePrice:
+      typeof data.purchasePrice === "string"
+        ? Number(data.purchasePrice.trim())
+        : data.purchasePrice,
+    salePrice:
+      typeof data.salePrice === "string"
+        ? Number(data.salePrice.trim())
+        : data.salePrice,
+  };
+  let ep = productId ? `/api/products/edit/${productId}` : "/api/products/add";
+  let method = productId ? "PUT" : "POST";
+  const response = await (
+    await fetch(ep, {
+      method,
+      headers: {
+        locale,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+  ).json();
+  if (!response.success) {
+    throw new Error(response.message);
+  }
+  return response;
+};
+
+export const useSubmitProduct = ({ onSuccess, onError }) => {
+  const queryClient = useQueryClient();
+  return useMutation(submitProduct, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries("products");
+      onSuccess(data.message);
+    },
+    onError: (error) => {
+      onError(error.message);
+    },
+  });
 };

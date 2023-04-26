@@ -13,14 +13,13 @@ export default async function handler(req, res) {
     });
   } else {
     try {
-      const customers = await prisma.customer.findMany({
-        where: {
-          companyId: session?.user?.companyId,
-        },
-      });
+      const data = req.body;
+      data.companyId = session?.user?.company.id;
+      const product = await prisma.product.create({ data });
       res.status(200).json({
         success: true,
-        data: customers,
+        message: Messages[locale || "gb"].productAdded,
+        data: product,
       });
     } catch (error) {
       res.status(500).json({

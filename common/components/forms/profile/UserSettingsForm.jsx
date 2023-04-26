@@ -120,7 +120,7 @@ const UserSettingsForm = ({ profile }) => {
           validation={validator.phoneNumber}
         />
       </Grid>
-      <Grid item xs={12} mt={1.5}>
+      <Grid item xs={12}>
         <LanguageSelectInput
           control={control}
           label={t("language")}
@@ -129,7 +129,7 @@ const UserSettingsForm = ({ profile }) => {
           )}
         />
       </Grid>
-      <Grid item xs={12} mt={2}>
+      <Grid item xs={12}>
         <SelectInput
           name={"timezones"}
           label={t("timezone")}
@@ -139,7 +139,7 @@ const UserSettingsForm = ({ profile }) => {
           options={timezones}
         />
       </Grid>
-      <Grid item xs={12} mt={2}>
+      <Grid item xs={12}>
         <SelectInput
           name={"currency"}
           label={t("currency")}

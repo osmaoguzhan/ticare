@@ -33,6 +33,16 @@ const Constants = {
   addressLineMin: 3,
   addressLineMax: 120,
   descriptionMax: 1000,
+  productNameMin: 2,
+  productNameMax: 100,
+  productDescriptionMin: 3,
+  productDescriptionMax: 100,
+  productTypeMin: 2,
+  productTypeMax: 30,
+  productSalePriceMin: 0.01,
+  productSalePriceMax: 1000000,
+  productPurchasePriceMin: 0.01,
+  productPurchasePriceMax: 1000000,
   defaultSettings: (language) => {
     let defaultSettings = {
       theme: "light",
