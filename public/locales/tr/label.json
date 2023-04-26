@@ -74,5 +74,12 @@
   "customerName": "Müşteri Adı",
   "customerSurname": "Müşteri Soyadı",
   "addANewCustomer": "Yeni Müşteri Ekle",
-  "editCustomer": "Müşteriyi Düzenle"
+  "editCustomer": "Müşteriyi Düzenle",
+  "productType": "Ürün Tipi",
+  "purchasePrice": "Alış Fiyatı",
+  "salePrice": "Satış Fiyatı",
+  "generalInfo": "Genel Bilgiler",
+  "addressDetails": "Adres Detayları",
+  "addANewProduct": "Yeni Ürün Ekle",
+  "editProduct": "Ürünü Düzenle"
 }

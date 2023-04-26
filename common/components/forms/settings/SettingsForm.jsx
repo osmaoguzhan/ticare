@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Button, Divider, Grid, Typography } from "@mui/material";
 import FormInput from "@/components/inputs/FormInput";
 import { useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form";
@@ -40,7 +40,11 @@ const SettingsForm = () => {
   }
 
   return (
-    <Grid container spacing={0.5}>
+    <Grid container>
+      <Grid item xs={12} mt={2} mb={2}>
+        <Typography variant="h6">{t("generalInfo")}</Typography>
+        <Divider />
+      </Grid>
       <Grid item xs={12}>
         <FormInput
           name={"name"}
@@ -92,7 +96,24 @@ const SettingsForm = () => {
           validation={validator.website}
         />
       </Grid>
-      <Grid item xs={12} mt={2}>
+      <Grid item xs={12}>
+        <FormInput
+          label={t("description")}
+          name="description"
+          control={control}
+          errors={errors}
+          rows={4}
+          value={company?.description || ""}
+          multiline
+          validation={validator.description}
+        />
+      </Grid>
+      <Grid item xs={12} mt={2} mb={3}>
+        <Typography variant="h6">{t("addressDetails")}</Typography>
+        <Divider />
+      </Grid>
+
+      <Grid item xs={12}>
         <AddressAutoComplete
           control={control}
           errors={errors}
@@ -111,23 +132,11 @@ const SettingsForm = () => {
           validation={validator.addressLine2}
         />
       </Grid>
-      <Grid item xs={12}>
-        <FormInput
-          label={t("description")}
-          name="description"
-          control={control}
-          errors={errors}
-          rows={4}
-          value={company?.description || ""}
-          multiline
-          validation={validator.description}
-        />
-      </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} mt={1}>
         <Button
           fullWidth
           variant="contained"
-          sx={{ backgroundColor: "#4e73df", mt: 2 }}
+          color="primary"
           onClick={handleSubmit((data) => {
             return submitCompany({ locale, data, companyId: company?.id });
           })}
