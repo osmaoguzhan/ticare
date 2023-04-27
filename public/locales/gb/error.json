@@ -43,6 +43,8 @@
   "addressLineMinLength": "Should be minimum <<placeholder>> characters.",
   "addressLineMaxLength": "Should be maximally <<placeholder>> characters.",
   "descriptionMaxLength": "Description should be maximally <<placeholder>> characters.",
+  "atLeastOneProduct": "At least one product is required.",
+  "quantityExceeds": "Quantity exceeds the available amount.",
   "productNameRequired": "Product name is required.",
   "productNameMinLength": "Product name should be minimum <<placeholder>> characters.",
   "productNameMaxLength": "Product name should be maximally <<placeholder>> characters.",
@@ -58,5 +60,11 @@
   "purchasePriceRequired": "Purchase price is required.",
   "purchasePriceMin": "Purchase price should be minimum <<placeholder>>.",
   "purchasePriceMax": "Purchase price should be maximally <<placeholder>>.",
-  "purchasePriceInvalid": "Purchase price format is invalid."
+  "purchasePriceInvalid": "Purchase price format is invalid.",
+  "requiredSaleTitle": "Sale title is required.",
+  "saleTitleMinLength": "Sale title should be minimum <<placeholder>> characters.",
+  "saleTitleMaxLength": "Sale title should be maximally <<placeholder>> characters.",
+  "saleDescriptionMinLength": "Sale description should be minimum <<placeholder>> characters.",
+  "saleDescriptionMaxLength": "Sale description should be maximally <<placeholder>> characters.",
+  "requiredCustomer": "Customer is required."
 }

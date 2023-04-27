@@ -40,7 +40,7 @@ const SettingsForm = () => {
   }
 
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       <Grid item xs={12} mt={2} mb={2}>
         <Typography variant="h6">{t("generalInfo")}</Typography>
         <Divider />
@@ -108,7 +108,7 @@ const SettingsForm = () => {
           validation={validator.description}
         />
       </Grid>
-      <Grid item xs={12} mt={2} mb={3}>
+      <Grid item xs={12} mt={2} mb={1}>
         <Typography variant="h6">{t("addressDetails")}</Typography>
         <Divider />
       </Grid>

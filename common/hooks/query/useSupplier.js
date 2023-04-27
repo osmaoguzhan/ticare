@@ -9,6 +9,34 @@ const getSuppliers = async (locale) => {
   return res.json();
 };
 
+const getSupplier = async ({ locale, supplierId }) => {
+  const res = await fetch(`/api/suppliers/${supplierId}`, {
+    headers: {
+      locale,
+    },
+  });
+  return res.json();
+};
+
+export const useSupplierById = ({ locale, supplierId }) => {
+  const { isError, isLoading, data, isFetching } = useQuery(
+    ["supplierById"],
+    () => getSupplier({ locale, supplierId }),
+    {
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: true,
+    }
+  );
+  const supplier = data?.data;
+  return {
+    isSupplierLoading: isLoading,
+    isSupplierError: isError,
+    supplier,
+    isFetching,
+  };
+};
+
 export const useSupplier = (locale) => {
   const { isError, isLoading, data } = useQuery(
     ["suppliers"],

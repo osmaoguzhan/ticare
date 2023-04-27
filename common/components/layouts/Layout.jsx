@@ -28,8 +28,8 @@ import { useRouter } from "next/router";
 import Main from "@/components/general/Main";
 import Constants from "@/utils/Constants";
 import { signOut, useSession } from "next-auth/react";
-import useLocalStorage from "@/hooks/useLocalStorage";
 import { useCompany } from "@/hooks/query/useCompanySettings";
+import Loading from "../general/Loading";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -67,8 +67,7 @@ const Layout = ({ children, title }) => {
   const router = useRouter();
   const { locale } = router;
   const { data: session } = useSession();
-  const [_, setUser, clear] = useLocalStorage("user", session?.user);
-  const { company } = useCompany(locale);
+  const { company, isCompanyLoading } = useCompany(locale);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -100,12 +99,6 @@ const Layout = ({ children, title }) => {
     }
   };
 
-  useEffect(() => {
-    if (session?.user) {
-      setUser(session?.user);
-    }
-  }, []);
-
   const cb = useCallback(() => {
     setOpen(width > 600);
     setVariant(width > 600 ? "permanent" : "temporary");
@@ -114,6 +107,8 @@ const Layout = ({ children, title }) => {
   useEffect(() => {
     cb();
   }, [cb]);
+
+  if (isCompanyLoading) return <Loading />;
 
   return (
     <Box component={"div"} sx={{ display: "flex", overflowY: "hidden" }}>
@@ -238,10 +233,15 @@ const Layout = ({ children, title }) => {
             <ListItem
               key={t(key)}
               sx={{
-                display: divider ? "flex " : !!company ? "flex" : "none",
+                display: divider ? "flex" : company ? "flex" : "none",
               }}
             >
-              <ListItemButton onClick={() => router.push(`/${key}`)}>
+              <ListItemButton
+                onClick={() => {
+                  setOpen(false);
+                  router.push(`/${key}`);
+                }}
+              >
                 <FontAwesomeIcon icon={icon} fixedWidth color={"#f4f4f4"} />
                 <ListItemText
                   primary={t(key)}

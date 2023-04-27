@@ -43,6 +43,10 @@ const Constants = {
   productSalePriceMax: 1000000,
   productPurchasePriceMin: 0.01,
   productPurchasePriceMax: 1000000,
+  saleTitleMin: 2,
+  saleTitleMax: 100,
+  saleDescriptionMin: 3,
+  saleDescriptionMax: 100,
   defaultSettings: (language) => {
     let defaultSettings = {
       theme: "light",
@@ -109,7 +113,7 @@ const Constants = {
     { key: "dashboard", icon: faDashboard },
     { key: "brands", icon: faTags },
     { key: "stores", icon: faStore },
-    { key: "orders", icon: faEuro },
+    { key: "sales", icon: faEuro },
     { key: "products", icon: faCubes },
     { key: "customers", icon: faPerson },
     { key: "suppliers", icon: faTruck },
@@ -139,6 +143,82 @@ const Constants = {
         break;
     }
     return text;
+  },
+  salesTemplate: (language, products) => {
+    let translations = {};
+    switch (language) {
+      case "pl":
+        translations = {
+          product: "Produkt",
+          price: "Cena",
+          quantity: "Ilość",
+          total: "Razem",
+        };
+        break;
+      case "tr":
+        translations = {
+          product: "Ürün",
+          price: "Fiyat",
+          quantity: "Miktar",
+          total: "Toplam",
+        };
+        break;
+      case "gb":
+      default:
+        translations = {
+          product: "Product",
+          price: "Price",
+          quantity: "Quantity",
+          total: "Total",
+        };
+    }
+    let totalPrice = products?.reduce(
+      (total, product) => total + product.price * product.quantity,
+      0
+    );
+    let template = `<table style="border-collapse: collapse; width: 100%;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #ddd; padding: 8px;">${
+          translations.product
+        }</th>
+        <th style="border: 1px solid #ddd; padding: 8px;">${
+          translations.price
+        }</th>
+        <th style="border: 1px solid #ddd; padding: 8px;">${
+          translations.quantity
+        }</th>
+        <th style="border: 1px solid #ddd; padding: 8px;">${
+          translations.total
+        }</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${products?.map(
+        (product) => `
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">${product.name}
+            <td style="border: 1px solid #ddd; padding: 8px;">$${
+              product.price
+            }</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">${
+              product.quantity
+            }</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">$${
+              product.price * product.quantity
+            }</td>
+        </tr>
+        `
+      )}
+      <tr>
+        <td colspan="3" style="text-align: right; border: 1px solid #ddd; padding: 8px;">${
+          translations.total
+        }:</td>
+        <td style="border: 1px solid #ddd; padding: 8px;">${totalPrice}</td>
+      </tr>
+    </tbody>
+  </table>`;
+    return template;
   },
 };
 

@@ -58,5 +58,13 @@
   "purchasePriceRequired": "Alış fiyatı boş bırakılamaz.",
   "purchasePriceMin": "Alış fiyatı en az <<placeholder>> olmalıdır.",
   "purchasePriceMax": "Alış fiyatı en fazla <<placeholder>> olmalıdır.",
-  "purchasePriceInvalid": "Alış fiyatı formatı geçersiz."
+  "purchasePriceInvalid": "Alış fiyatı formatı geçersiz.",
+  "atLeastOneProduct": "En azından bir ürün seçmelisiniz.",
+  "quantityExceeds": "Seçilen ürünlerin toplam stok miktarından fazla olamaz.",
+  "requiredSaleTitle": "Satış başlığı boş bırakılamaz.",
+  "saleTitleMinLength": "Satış başlığı en az <<placeholder>> karakter olmalıdır.",
+  "saleTitleMaxLength": "Satış başlığı en fazla <<placeholder>> karakter olmalıdır.",
+  "saleDescriptionMinLength": "Satış açıklaması en az <<placeholder>> karakter olmalıdır.",
+  "saleDescriptionMaxLength": "Satış açıklaması en fazla <<placeholder>> karakter olmalıdır.",
+  "requiredCustomer": "Müşteri boş bırakılamaz."
 }

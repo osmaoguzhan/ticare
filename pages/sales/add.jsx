@@ -2,27 +2,10 @@ import Layout from "@/components/layouts/Layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Grid, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
-import SuppliersForm from "@/components/forms/suppliers/SuppliersForm";
-import { useRouter } from "next/router";
-import { useSupplierById } from "@/hooks/query/useSupplier";
-import Loading from "@/components/general/Loading";
-import { useSnackbar } from "notistack";
+import SalesForm from "@/components/forms/sales/SalesForm";
 
-const SuppliersEdit = () => {
+const SalesAdd = () => {
   const { t } = useTranslation("label");
-  const { query, locale } = useRouter();
-  const { enqueueSnackbar } = useSnackbar();
-
-  const { supplier, isSupplierLoading, isSupplierError, isFetching } =
-    useSupplierById({
-      locale,
-      supplierId: query?.id,
-    });
-
-  if (isSupplierLoading || isFetching) return <Loading />;
-
-  if (isSupplierError)
-    enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
 
   return (
     <Grid
@@ -31,6 +14,7 @@ const SuppliersEdit = () => {
         display: "flex",
         justifyContent: "space-between",
         backgroundColor: "primary.white",
+        mt: 2,
       }}
     >
       <Grid item xs={12}>
@@ -40,11 +24,11 @@ const SuppliersEdit = () => {
             color: "primary.pageTitle",
           }}
         >
-          {t("editSupplier")}
+          {t("addANewSale")}
         </Typography>
       </Grid>
       <Grid item xs={12} p={1}>
-        <SuppliersForm values={supplier} />
+        <SalesForm />
       </Grid>
     </Grid>
   );
@@ -58,6 +42,6 @@ export const getStaticProps = async ({ locale }) => {
   };
 };
 
-SuppliersEdit.Layout = Layout;
+SalesAdd.Layout = Layout;
 
-export default SuppliersEdit;
+export default SalesAdd;

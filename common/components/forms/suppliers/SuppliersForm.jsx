@@ -30,12 +30,11 @@ const SuppliersForm = ({ values }) => {
         enqueueSnackbar(message, { variant: "error" });
       },
     });
-  if (values) values = JSON.parse(values);
 
   if (isSubmitSupplierLoading) return <Loading />;
 
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       <Grid item xs={12} mt={2} mb={2}>
         <Typography variant="h6">{t("generalInfo")}</Typography>
         <Divider />
@@ -80,7 +79,7 @@ const SuppliersForm = ({ values }) => {
           value={values?.phoneNumber || ""}
         />
       </Grid>
-      <Grid item xs={12} mt={2} mb={2}>
+      <Grid item xs={12} mt={2} mb={1}>
         <Typography variant="h6">{t("addressDetails")}</Typography>
         <Divider />
       </Grid>

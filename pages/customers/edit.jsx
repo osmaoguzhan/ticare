@@ -4,10 +4,24 @@ import { Grid, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import CustomersForm from "@/components/forms/customers/CustomersForm";
 import { useRouter } from "next/router";
+import { useCustomerById } from "@/hooks/query/useCustomer";
+import { useSnackbar } from "notistack";
+import Loading from "@/components/general/Loading";
 
 const CustomersEdit = () => {
   const { t } = useTranslation("label");
-  const { query } = useRouter();
+  const { query, locale } = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+  const { customer, isCustomerLoading, isCustomerError, isFetching } =
+    useCustomerById({
+      locale,
+      customerId: query?.id,
+    });
+
+  if (isCustomerLoading || isFetching) return <Loading />;
+
+  if (isCustomerError)
+    enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
 
   return (
     <Grid
@@ -29,7 +43,7 @@ const CustomersEdit = () => {
         </Typography>
       </Grid>
       <Grid item xs={12} p={1}>
-        <CustomersForm values={query?.data} />
+        <CustomersForm values={customer} />
       </Grid>
     </Grid>
   );

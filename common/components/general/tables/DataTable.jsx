@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import {
   DataGrid,
   GridToolbarContainer,
@@ -19,11 +18,23 @@ import { useTranslation } from "next-i18next";
 import { Button, ButtonGroup } from "@mui/material";
 import Swal from "sweetalert2";
 
-const DataTable = ({ columns, rows, ...other }) => {
+const DataTable = ({
+  columns,
+  rows,
+  disabledCheckboxSelection = false,
+  ...other
+}) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const rowList = useArray(rows);
   const router = useRouter();
   const [localeText, setLocaleText] = useState({});
+
+  if (!disabledCheckboxSelection) {
+    other = {
+      ...other,
+      checkboxSelection: true,
+    };
+  }
 
   const tableLocale = useCallback(() => {
     if (router.locale === "tr") {
@@ -38,41 +49,36 @@ const DataTable = ({ columns, rows, ...other }) => {
   }, [tableLocale]);
 
   return (
-    <Box sx={{ height: 600, width: "100%" }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        checkboxSelection
-        disableSelectionOnClick
-        components={{
-          Toolbar: () => (
-            <CustomToolbar selectedRows={selectedRows} router={router} />
-          ),
-        }}
-        onSelectionModelChange={(ids) => {
-          const selectedIDs = new Set(ids);
-          const selected = rowList.value.filter((row) =>
-            selectedIDs.has(row.id)
-          );
-          setSelectedRows(selected);
-        }}
-        localeText={{
-          ...localeText,
-          MuiTablePagination: {
-            labelDisplayedRows: ({ from, to, count }) =>
-              Constants.pagination({
-                from,
-                to,
-                count,
-                locale: router.locale,
-              }),
-          },
-        }}
-        {...other}
-      />
-    </Box>
+    <DataGrid
+      rows={rows}
+      columns={columns}
+      pageSize={10}
+      rowsPerPageOptions={[10]}
+      disableSelectionOnClick
+      components={{
+        Toolbar: () => (
+          <CustomToolbar selectedRows={selectedRows} router={router} />
+        ),
+      }}
+      onSelectionModelChange={(ids) => {
+        const selectedIDs = new Set(ids);
+        const selected = rowList.value.filter((row) => selectedIDs.has(row.id));
+        setSelectedRows(selected);
+      }}
+      localeText={{
+        ...localeText,
+        MuiTablePagination: {
+          labelDisplayedRows: ({ from, to, count }) =>
+            Constants.pagination({
+              from,
+              to,
+              count,
+              locale: router.locale,
+            }),
+        },
+      }}
+      {...other}
+    />
   );
 };
 

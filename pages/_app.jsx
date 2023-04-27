@@ -17,7 +17,7 @@ function Ticare({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <>
       <Head>
-        <title>Ticare </title>
+        <title>TICARE </title>
       </Head>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />

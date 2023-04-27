@@ -34,7 +34,7 @@ const ProductsForm = ({ values }) => {
   if (isSubmitProductLoading) return <Loading />;
 
   return (
-    <Grid container spacing={0.5}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <FormInput
           label={t("name")}

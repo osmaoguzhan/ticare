@@ -5,10 +5,12 @@ import { useMemo } from "react";
 import { useCustomer } from "@/hooks/query/useCustomer";
 import Loading from "../Loading";
 import { useSnackbar } from "notistack";
+import { useRouter } from "next/router";
 
 const CustomerTable = () => {
   const { t } = useTranslation("label");
   const { enqueueSnackbar } = useSnackbar();
+  const { locale } = useRouter();
   const columns = useMemo(() => {
     return [
       {
@@ -50,7 +52,7 @@ const CustomerTable = () => {
     ];
   }, []);
 
-  const { isCustomerLoading, isCustomerError, customers } = useCustomer();
+  const { isCustomerLoading, isCustomerError, customers } = useCustomer(locale);
 
   if (isCustomerLoading) return <Loading />;
 
