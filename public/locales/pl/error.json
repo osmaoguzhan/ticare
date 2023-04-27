@@ -60,5 +60,11 @@
   "purchasePriceMax": "Cena zakupu powinna być mniejsza niż <<placeholder>>.",
   "purchasePriceInvalid": "Cena zakupu jest nieprawidłowa.",
   "atLeastOneProduct": "Musisz dodać co najmniej jeden produkt.",
-  "quantityExceeds": "Ilość przekracza dostępną ilość."
+  "quantityExceeds": "Ilość przekracza dostępną ilość.",
+  "requiredSaleTitle": "Tytuł sprzedaży jest wymagany.",
+  "saleTitleMinLength": "Tytuł sprzedaży powinien zawierać co najmniej <<placeholder>> znaków.",
+  "saleTitleMaxLength": "Tytuł sprzedaży powinien zawierać maksymalnie <<placeholder>> znaków.",
+  "saleDescriptionMinLength": "Opis sprzedaży powinien zawierać co najmniej <<placeholder>> znaków.",
+  "saleDescriptionMaxLength": "Opis sprzedaży powinien zawierać maksymalnie <<placeholder>> znaków.",
+  "requiredCustomer": "Klient jest wymagany."
 }

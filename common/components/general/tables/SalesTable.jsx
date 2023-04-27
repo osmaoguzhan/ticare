@@ -17,7 +17,6 @@ const SalesTable = () => {
   const { t } = useTranslation("label");
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
-
   const theme = useTheme();
 
   const style = {
@@ -70,7 +69,7 @@ const SalesTable = () => {
     ];
   }, []);
 
-  const { isSaleLoading, isSaleError, sales } = useSales();
+  const { isSaleLoading, isSaleError, sales } = useSales(locale);
 
   if (isSaleLoading) return <Loading />;
 
@@ -93,7 +92,7 @@ const SalesTable = () => {
         }}
         sx={style}
       />
-      <Modal title="Sale Details" content={currentSelected} />
+      <Modal title={t("saleDetails")} content={currentSelected} />
     </Box>
   );
 };

@@ -38,6 +38,7 @@ const SalesForm = ({ values }) => {
   const { data, isProductLoading, isProductError } = useProducts();
   const [products, setProducts] = useState(values?.products || []);
   const [currentSelected, setCurrentSelected] = useState(null);
+  const validator = Validator("sale");
   const { mutate: submitSale, isLoading: isSubmitSaleLoading } = useSubmitSale({
     onSuccess: (message) => {
       enqueueSnackbar(message, { variant: "success" });
@@ -125,6 +126,7 @@ const SalesForm = ({ values }) => {
           name="title"
           control={control}
           errors={errors}
+          validation={validator.title}
           value={values?.title || ""}
         />
       </Grid>
@@ -134,6 +136,7 @@ const SalesForm = ({ values }) => {
           name="description"
           control={control}
           errors={errors}
+          validation={validator.description}
           value={values?.description || ""}
         />
       </Grid>
@@ -152,6 +155,7 @@ const SalesForm = ({ values }) => {
                 }))
               : []
           }
+          validation={validator.customer}
         />
       </Grid>
       <Grid item xs={8} md={9.5} lg={9.5}>

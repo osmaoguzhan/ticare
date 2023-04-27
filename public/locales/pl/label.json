@@ -94,5 +94,6 @@
   "action": "Akcja",
   "product": "Produkt",
   "subtotal": "Suma częściowa",
-  "availableInStock": "Dostępne w magazynie"
+  "availableInStock": "Dostępne w magazynie",
+  "saleDetails": "Szczegóły sprzedaży"
 }

@@ -94,5 +94,6 @@
   "action": "Action",
   "product": "Product",
   "subtotal": "Subtotal",
-  "availableInStock": "Available in Stock"
+  "availableInStock": "Available in Stock",
+  "saleDetails": "Sale Details"
 }

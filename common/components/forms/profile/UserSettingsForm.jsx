@@ -67,7 +67,7 @@ const UserSettingsForm = ({ profile }) => {
   };
 
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={2}>
       <Grid item xs={12} md={6} lg={6}>
         <FormInput
           autoComplete={"name"}

@@ -12,10 +12,17 @@ export default async function handler(req, res) {
       message: Messages[locale || "gb"].notPermitted,
     });
   } else {
-    const { id } = req.query;
-    const supplier = await prisma.customer.findUnique({
-      where: { id },
-    });
-    res.status(200).json({ success: true, data: supplier });
+    try {
+      const { id } = req.query;
+      const customer = await prisma.customer.findUnique({
+        where: { id },
+      });
+      res.status(200).json({ success: true, data: customer });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: Messages[locale || "gb"].somethingWentWrong,
+      });
+    }
   }
 }

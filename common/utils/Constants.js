@@ -43,6 +43,10 @@ const Constants = {
   productSalePriceMax: 1000000,
   productPurchasePriceMin: 0.01,
   productPurchasePriceMax: 1000000,
+  saleTitleMin: 2,
+  saleTitleMax: 100,
+  saleDescriptionMin: 3,
+  saleDescriptionMax: 100,
   defaultSettings: (language) => {
     let defaultSettings = {
       theme: "light",

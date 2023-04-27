@@ -60,5 +60,11 @@
   "purchasePriceRequired": "Purchase price is required.",
   "purchasePriceMin": "Purchase price should be minimum <<placeholder>>.",
   "purchasePriceMax": "Purchase price should be maximally <<placeholder>>.",
-  "purchasePriceInvalid": "Purchase price format is invalid."
+  "purchasePriceInvalid": "Purchase price format is invalid.",
+  "requiredSaleTitle": "Sale title is required.",
+  "saleTitleMinLength": "Sale title should be minimum <<placeholder>> characters.",
+  "saleTitleMaxLength": "Sale title should be maximally <<placeholder>> characters.",
+  "saleDescriptionMinLength": "Sale description should be minimum <<placeholder>> characters.",
+  "saleDescriptionMaxLength": "Sale description should be maximally <<placeholder>> characters.",
+  "requiredCustomer": "Customer is required."
 }
