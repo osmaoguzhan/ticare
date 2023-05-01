@@ -30,6 +30,7 @@ import Constants from "@/utils/Constants";
 import { signOut, useSession } from "next-auth/react";
 import { useCompany } from "@/hooks/query/useCompanySettings";
 import Loading from "../general/Loading";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -68,6 +69,7 @@ const Layout = ({ children, title }) => {
   const { locale } = router;
   const { data: session } = useSession();
   const { company, isCompanyLoading } = useCompany(locale);
+  const [_, user, clear] = useLocalStorage("user", session?.user);
 
   const handleDrawerOpen = () => {
     setOpen(true);

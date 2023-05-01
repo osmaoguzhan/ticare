@@ -95,5 +95,9 @@
   "product": "Product",
   "subtotal": "Subtotal",
   "availableInStock": "Available in Stock",
-  "saleDetails": "Sale Details"
+  "saleDetails": "Sale Details",
+  "transactionIsPaid": "Transaction is paid.",
+  "returnToTable": "Return to Table",
+  "PENDING": "Pending",
+  "COMPLETED": "Completed"
 }

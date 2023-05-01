@@ -55,7 +55,7 @@ const TableModal = ({ title, content, isOpen, onClose }) => {
                 {content?.map((item, idx) => {
                   return (
                     <TableRow key={uniqueId()}>
-                      <TableCell align="center">{item.name}</TableCell>
+                      <TableCell align="center">{item.item.name}</TableCell>
                       <TableCell align="center">{item.price}</TableCell>
                       <TableCell align="center">{item.quantity}</TableCell>
                       <TableCell align="center">

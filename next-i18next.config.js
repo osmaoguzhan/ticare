@@ -4,7 +4,7 @@ module.exports = {
     locales: ["gb", "tr", "pl"],
     localeDetection: true,
   },
-  ns: ["label", "error"],
+  ns: ["label", "error", "tooltip"],
   defaultNS: "label",
   fallbackLng: {
     default: ["gb"],

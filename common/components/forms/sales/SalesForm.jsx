@@ -8,6 +8,8 @@ import {
   Divider,
   Typography,
   Tooltip,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Validator from "@/utils/validator/Validator";
@@ -22,9 +24,10 @@ import SelectInput from "@/components/inputs/SelectInput";
 import DataTable from "@/components/general/tables/DataTable";
 import { useSubmitSale } from "@/hooks/query/useSales";
 import { useCustomer } from "@/hooks/query/useCustomer";
+import { uniqueId } from "lodash";
 
 const SalesForm = ({ values }) => {
-  const { t } = useTranslation("label");
+  const { t } = useTranslation(["label", "tooltip"]);
   const { enqueueSnackbar } = useSnackbar();
   const {
     handleSubmit,
@@ -32,10 +35,16 @@ const SalesForm = ({ values }) => {
     formState: { errors },
     reset,
     getValues,
+    register,
   } = useForm();
   const router = useRouter();
   const { locale } = router;
-  const { data, isProductLoading, isProductError } = useProducts();
+  const {
+    products: stock,
+    isProductLoading,
+    isProductError,
+  } = useProducts(locale);
+
   const [products, setProducts] = useState(values?.products || []);
   const [currentSelected, setCurrentSelected] = useState(null);
   const validator = Validator("sale");
@@ -48,6 +57,7 @@ const SalesForm = ({ values }) => {
       enqueueSnackbar(message, { variant: "error" });
     },
   });
+
   const { isCustomerLoading, isCustomerError, customers } = useCustomer(locale);
 
   const columns = [
@@ -55,37 +65,30 @@ const SalesForm = ({ values }) => {
       field: "name",
       headerName: t("productName"),
       flex: 1,
-      headerAlign: "center",
-      align: "center",
     },
     {
       field: "quantity",
       headerName: t("quantity"),
       flex: 1,
-      headerAlign: "center",
-      align: "center",
     },
     {
-      field: "price",
+      field: "salePrice",
       headerName: t("price"),
       flex: 1,
-      headerAlign: "center",
-      align: "center",
     },
     {
       field: "action",
       headerName: t("action"),
       width: 75,
-      headerAlign: "center",
-      align: "center",
       renderCell: (params) => (
         <IconButton
           style={{
-            color: "red",
+            color: shouldBeReadOnly() ? "gray" : "red",
             backgroundColor: "transparent",
           }}
           size="medium"
           aria-label="add"
+          disabled={shouldBeReadOnly()}
           onClick={(e) => {
             setProducts((prev) => {
               return prev.filter((item) => item.id !== params.row.id);
@@ -99,18 +102,23 @@ const SalesForm = ({ values }) => {
   ];
 
   const shouldBeDisabled = () => {
+    let total = stock.reduce((a, b) => a + b.quantity, 0);
     return (
-      _.isNil(data) ||
-      products?.reduce((a, b) => a + b.quantity, 0) ===
-        data.reduce((a, b) => a + b.quantity, 0)
+      _.isNil(stock) ||
+      products?.reduce((a, b) => a + b.quantity, 0) === total ||
+      total === 0
     );
   };
 
+  const shouldBeReadOnly = () => {
+    return values?.status === "COMPLETED";
+  };
+
   useEffect(() => {
-    if (_.isNil(currentSelected) && !_.isNil(data)) {
-      setCurrentSelected(data[0]);
+    if (_.isNil(currentSelected) && !_.isNil(stock)) {
+      setCurrentSelected(stock[0]);
     }
-  }, [data]);
+  }, [stock]);
 
   if (isProductLoading || isSubmitSaleLoading || isCustomerLoading)
     return <Loading />;
@@ -128,6 +136,7 @@ const SalesForm = ({ values }) => {
           errors={errors}
           validation={validator.title}
           value={values?.title || ""}
+          disabled={shouldBeReadOnly()}
         />
       </Grid>
       <Grid item xs={12}>
@@ -138,6 +147,7 @@ const SalesForm = ({ values }) => {
           errors={errors}
           validation={validator.description}
           value={values?.description || ""}
+          disabled={shouldBeReadOnly()}
         />
       </Grid>
       <Grid item xs={12}>
@@ -156,6 +166,7 @@ const SalesForm = ({ values }) => {
               : []
           }
           validation={validator.customer}
+          disabled={shouldBeReadOnly()}
         />
       </Grid>
       <Grid item xs={8} md={9.5} lg={9.5}>
@@ -165,21 +176,25 @@ const SalesForm = ({ values }) => {
           control={control}
           errors={errors}
           fullWidth
-          disabled={shouldBeDisabled()}
+          disabled={shouldBeDisabled() || shouldBeReadOnly()}
           onChange={(key) => {
-            setCurrentSelected(data.find((i) => i.id === key));
+            setCurrentSelected(stock.find((i) => i.id === key));
           }}
           getOptionDisabled={(option) => {
-            let fromData = data.find((item) => item.id === option.key);
+            let fromData = stock.find((item) => item.id === option.key);
             let fromSelected = products?.find((item) => item.id === option.key);
-            return fromData?.quantity === fromSelected?.quantity;
+            return (
+              fromData?.quantity === fromSelected?.quantity ||
+              fromData?.quantity === 0
+            );
           }}
           renderOption={(props, option) => (
             <Tooltip
               title={`${t("availableInStock")}: ${
-                data.find((item) => option.key === item.id)?.quantity
+                stock.find((item) => option.key === item.id)?.quantity
               }`}
               placement="bottom"
+              key={uniqueId()}
             >
               <MenuItem
                 key={option.key}
@@ -192,8 +207,8 @@ const SalesForm = ({ values }) => {
             </Tooltip>
           )}
           options={
-            data
-              ? data.map((item) => ({
+            stock
+              ? stock.map((item) => ({
                   key: item.id,
                   label: item.name,
                 }))
@@ -209,7 +224,7 @@ const SalesForm = ({ values }) => {
           errors={errors}
           type="number"
           value={1}
-          disabled={shouldBeDisabled()}
+          disabled={shouldBeDisabled() || shouldBeReadOnly()}
           InputProps={{
             inputProps: {
               min: 1,
@@ -238,10 +253,10 @@ const SalesForm = ({ values }) => {
       >
         <IconButton
           style={{
-            color: shouldBeDisabled() ? "gray" : "green",
+            color: shouldBeDisabled() || shouldBeReadOnly() ? "gray" : "green",
             backgroundColor: "transparent",
           }}
-          disabled={shouldBeDisabled()}
+          disabled={shouldBeDisabled() || shouldBeReadOnly()}
           size="medium"
           aria-label="add"
           onClick={() => {
@@ -274,13 +289,15 @@ const SalesForm = ({ values }) => {
                   id: currentSelected?.id,
                   name: currentSelected?.name,
                   quantity: Number(getValues("quantity")),
-                  price: currentSelected?.price,
+                  salePrice: currentSelected?.salePrice,
                 },
               ]);
             }
-            setCurrentSelected(data[0]);
+            setCurrentSelected(stock[0]);
             reset({
-              ...getValues(),
+              title: getValues("title"),
+              description: getValues("description"),
+              customer: getValues("customer"),
               quantity: 1,
             });
           }}
@@ -288,6 +305,7 @@ const SalesForm = ({ values }) => {
           <FontAwesomeIcon icon={faCirclePlus} />
         </IconButton>
       </Grid>
+
       <Grid item xs={12}>
         <Divider />
       </Grid>
@@ -305,30 +323,52 @@ const SalesForm = ({ values }) => {
           disabledCheckboxSelection={true}
         />
       </Grid>
+      <Grid
+        item
+        xs={12}
+        sx={{
+          display: values?.status === "COMPLETED" ? "none" : "flex",
+        }}
+      >
+        <FormControlLabel
+          control={
+            <Tooltip title={t("tooltip:onceItsMarkedAsPaid")}>
+              <Checkbox name="status" {...register("paid")} />
+            </Tooltip>
+          }
+          label={t("transactionIsPaid")}
+        />
+      </Grid>
       <Grid item xs={12}>
         <Button
           fullWidth
           variant="contained"
           color="primary"
           onClick={handleSubmit(async (d) => {
-            if (_.isEmpty(products)) {
-              enqueueSnackbar(t("error:atLeastOneProduct"), {
-                variant: "error",
+            if (shouldBeReadOnly()) {
+              router.push(`/sales`);
+            } else {
+              if (_.isEmpty(products)) {
+                enqueueSnackbar(t("error:atLeastOneProduct"), {
+                  variant: "error",
+                });
+                return;
+              }
+              let newData = {};
+              newData.title = d.title;
+              newData.description = d.description;
+              newData.customer = d.customer;
+              newData.products = products;
+              newData.status = d.paid ? "COMPLETED" : "PENDING";
+              submitSale({
+                data: newData,
+                locale,
+                saleId: values?.id,
               });
-              return;
             }
-            let newData = {};
-            newData.title = d.title;
-            newData.description = d.description;
-            newData.customer = d.customer;
-            newData.products = products;
-            submitSale({
-              data: newData,
-              locale,
-            });
           })}
         >
-          {t("save")}
+          {shouldBeReadOnly() ? t("returnToTable") : t("save")}
         </Button>
       </Grid>
     </Grid>
