@@ -3,12 +3,12 @@ import {
   faCubes,
   faDashboard,
   faEuro,
-  faStore,
   faTags,
   faSignOut,
   faUser,
   faTruck,
   faPerson,
+  faCashRegister,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Constants = {
@@ -112,7 +112,7 @@ const Constants = {
   menuItems: [
     { key: "dashboard", icon: faDashboard },
     { key: "brands", icon: faTags },
-    { key: "stores", icon: faStore },
+    { key: "purchases", icon: faCashRegister },
     { key: "sales", icon: faEuro },
     { key: "products", icon: faCubes },
     { key: "customers", icon: faPerson },

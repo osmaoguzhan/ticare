@@ -1,37 +1,16 @@
 import Layout from "@/components/layouts/Layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { Grid, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import SalesTable from "@/components/general/tables/SalesTable";
+import { withHOC } from "@/hocs/ListHOC";
 
 const Sales = () => {
   const { t } = useTranslation("label");
 
-  return (
-    <Grid
-      container
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        backgroundColor: "primary.white",
-      }}
-    >
-      <Grid item xs={12}>
-        <Typography
-          variant="h4"
-          component="h1"
-          sx={{
-            color: "primary.pageTitle",
-          }}
-        >
-          {t("sales")}
-        </Typography>
-      </Grid>
-      <Grid item xs={12} p={1}>
-        <SalesTable />
-      </Grid>
-    </Grid>
-  );
+  return withHOC({
+    title: t("sales"),
+    component: <SalesTable />,
+  });
 };
 
 export const getStaticProps = async ({ locale }) => {

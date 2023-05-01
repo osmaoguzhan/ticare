@@ -1,45 +1,16 @@
 import Layout from "@/components/layouts/Layout";
-import { Grid, Typography } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import SettingsForm from "@/components/forms/settings/SettingsForm";
+import { withHOC } from "@/hocs/ListHOC";
 
 const Settings = () => {
   const { t } = useTranslation("label");
 
-  return (
-    <Grid
-      container
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        backgroundColor: "primary.white",
-      }}
-    >
-      <Grid item xs={12}>
-        <Typography
-          variant="h4"
-          component="h1"
-          sx={{
-            color: "#3a3b45",
-          }}
-        >
-          {t("settings")}
-        </Typography>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        p={1}
-        sx={{
-          display: "flex",
-          justifyContent: "space-around",
-        }}
-      >
-        <SettingsForm />
-      </Grid>
-    </Grid>
-  );
+  return withHOC({
+    title: t("settings"),
+    component: <SettingsForm />,
+  });
 };
 
 export const getServerSideProps = async (ctx) => {

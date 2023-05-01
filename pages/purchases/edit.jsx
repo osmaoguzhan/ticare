@@ -8,7 +8,7 @@ import { useSnackbar } from "notistack";
 import Loading from "@/components/general/Loading";
 import { withHOC } from "@/hocs/ListHOC";
 
-const SalesEdit = () => {
+const PurchasesEdit = () => {
   const { t } = useTranslation("label");
   const { query, locale } = useRouter();
   const { enqueueSnackbar } = useSnackbar();
@@ -24,7 +24,7 @@ const SalesEdit = () => {
     enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
 
   return withHOC({
-    title: t("editSale"),
+    title: t("editPurchase"),
     component: <SalesForm values={sale} />,
   });
 };
@@ -41,6 +41,6 @@ export const getStaticProps = async ({ locale }) => {
   };
 };
 
-SalesEdit.Layout = Layout;
+PurchasesEdit.Layout = Layout;
 
-export default SalesEdit;
+export default PurchasesEdit;

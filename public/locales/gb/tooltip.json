@@ -1,3 +1,4 @@
 {
-  "onceItsMarkedAsPaid": "Once it's marked as paid, you can't edit the sale anymore."
+  "onceSaleMarkedAsPaid": "Once it's marked as paid, you can't edit the sale anymore.",
+  "oncePurchaseMarkedAsPaid": "Once purchase is marked as paid, you can't edit it anymore."
 }

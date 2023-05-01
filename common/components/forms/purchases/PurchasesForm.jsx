@@ -22,11 +22,11 @@ import { useEffect, useState } from "react";
 import { useProducts } from "@/hooks/query/useProduct";
 import SelectInput from "@/components/inputs/SelectInput";
 import DataTable from "@/components/general/tables/DataTable";
-import { useSubmitSale } from "@/hooks/query/useSales";
-import { useCustomer } from "@/hooks/query/useCustomer";
 import { uniqueId } from "lodash";
+import { useSubmitPurchase } from "@/hooks/query/usePurchase";
+import { useSupplier } from "@/hooks/query/useSupplier";
 
-const SalesForm = ({ values }) => {
+const PurchasesForm = ({ values }) => {
   const { t } = useTranslation(["label", "tooltip"]);
   const { enqueueSnackbar } = useSnackbar();
   const {
@@ -47,18 +47,19 @@ const SalesForm = ({ values }) => {
 
   const [products, setProducts] = useState(values?.products || []);
   const [currentSelected, setCurrentSelected] = useState(null);
-  const validator = Validator("sale");
-  const { mutate: submitSale, isLoading: isSubmitSaleLoading } = useSubmitSale({
-    onSuccess: (message) => {
-      enqueueSnackbar(message, { variant: "success" });
-      router.push(`/${locale}/sales`);
-    },
-    onError: (message) => {
-      enqueueSnackbar(message, { variant: "error" });
-    },
-  });
+  const validator = Validator("purchase");
+  const { mutate: submitPurchase, isLoading: isSubmitPurchaseLoading } =
+    useSubmitPurchase({
+      onSuccess: (message) => {
+        enqueueSnackbar(message, { variant: "success" });
+        router.push(`/${locale}/purchases`);
+      },
+      onError: (message) => {
+        enqueueSnackbar(message, { variant: "error" });
+      },
+    });
 
-  const { isCustomerLoading, isCustomerError, customers } = useCustomer(locale);
+  const { isSupplierLoading, isSupplierError, suppliers } = useSupplier(locale);
 
   const columns = [
     {
@@ -72,7 +73,7 @@ const SalesForm = ({ values }) => {
       flex: 1,
     },
     {
-      field: "salePrice",
+      field: "purchasePrice",
       headerName: t("price"),
       flex: 1,
     },
@@ -101,15 +102,6 @@ const SalesForm = ({ values }) => {
     },
   ];
 
-  const shouldBeDisabled = () => {
-    let total = stock.reduce((a, b) => a + b.quantity, 0);
-    return (
-      _.isNil(stock) ||
-      products?.reduce((a, b) => a + b.quantity, 0) === total ||
-      total === 0
-    );
-  };
-
   const shouldBeReadOnly = () => {
     return values?.status === "COMPLETED";
   };
@@ -120,10 +112,10 @@ const SalesForm = ({ values }) => {
     }
   }, [stock]);
 
-  if (isProductLoading || isSubmitSaleLoading || isCustomerLoading)
+  if (isProductLoading || isSubmitPurchaseLoading || isSupplierLoading)
     return <Loading />;
 
-  if (isProductError || isCustomerError)
+  if (isProductError || isSupplierError)
     return enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
 
   return (
@@ -152,20 +144,20 @@ const SalesForm = ({ values }) => {
       </Grid>
       <Grid item xs={12}>
         <SelectInput
-          label={t("customer")}
-          name={`customer`}
+          label={t("supplier")}
+          name={`supplier`}
           control={control}
           errors={errors}
           fullWidth
           options={
-            customers
-              ? customers.map((item) => ({
+            suppliers
+              ? suppliers.map((item) => ({
                   key: item.id,
                   label: `${item.name} ${item.surname}`,
                 }))
               : []
           }
-          validation={validator.customer}
+          validation={validator.supplier}
           disabled={shouldBeReadOnly()}
         />
       </Grid>
@@ -176,17 +168,9 @@ const SalesForm = ({ values }) => {
           control={control}
           errors={errors}
           fullWidth
-          disabled={shouldBeDisabled() || shouldBeReadOnly()}
+          disabled={shouldBeReadOnly()}
           onChange={(key) => {
             setCurrentSelected(stock.find((i) => i.id === key));
-          }}
-          getOptionDisabled={(option) => {
-            let fromData = stock.find((item) => item.id === option.key);
-            let fromSelected = products?.find((item) => item.id === option.key);
-            return (
-              fromData?.quantity === fromSelected?.quantity ||
-              fromData?.quantity === 0
-            );
           }}
           renderOption={(props, option) => (
             <Tooltip
@@ -196,12 +180,7 @@ const SalesForm = ({ values }) => {
               placement="bottom"
               key={uniqueId()}
             >
-              <MenuItem
-                key={option.key}
-                value={option.key}
-                disabled={option.disabled}
-                {...props}
-              >
+              <MenuItem key={option.key} value={option.key} {...props}>
                 {option.label}
               </MenuItem>
             </Tooltip>
@@ -224,19 +203,10 @@ const SalesForm = ({ values }) => {
           errors={errors}
           type="number"
           value={1}
-          disabled={shouldBeDisabled() || shouldBeReadOnly()}
+          disabled={shouldBeReadOnly()}
           InputProps={{
             inputProps: {
               min: 1,
-              max:
-                currentSelected?.quantity -
-                  products?.find((i) => i.id === currentSelected?.id)
-                    ?.quantity || 0,
-              onChange: (event) => {
-                if (event.target.value > currentSelected?.quantity) {
-                  event.target.value = currentSelected?.quantity;
-                }
-              },
             },
           }}
         />
@@ -253,10 +223,10 @@ const SalesForm = ({ values }) => {
       >
         <IconButton
           style={{
-            color: shouldBeDisabled() || shouldBeReadOnly() ? "gray" : "green",
+            color: shouldBeReadOnly() ? "gray" : "green",
             backgroundColor: "transparent",
           }}
-          disabled={shouldBeDisabled() || shouldBeReadOnly()}
+          disabled={shouldBeReadOnly()}
           size="medium"
           aria-label="add"
           onClick={() => {
@@ -265,12 +235,6 @@ const SalesForm = ({ values }) => {
             );
             if (isExist) {
               let qty = isExist.quantity + Number(getValues("quantity"));
-              if (qty > currentSelected?.quantity) {
-                enqueueSnackbar(t("error:quantityExceeds"), {
-                  variant: "error",
-                });
-                qty = currentSelected?.quantity;
-              }
               setProducts((prev) => {
                 return prev.map((item) => {
                   if (item.id === currentSelected?.id) {
@@ -289,7 +253,7 @@ const SalesForm = ({ values }) => {
                   id: currentSelected?.id,
                   name: currentSelected?.name,
                   quantity: Number(getValues("quantity")),
-                  salePrice: currentSelected?.salePrice,
+                  purchasePrice: currentSelected?.purchasePrice,
                 },
               ]);
             }
@@ -332,7 +296,7 @@ const SalesForm = ({ values }) => {
       >
         <FormControlLabel
           control={
-            <Tooltip title={t("tooltip:onceSaleMarkedAsPaid")}>
+            <Tooltip title={t("tooltip:oncePurchaseMarkedAsPaid")}>
               <Checkbox name="status" {...register("paid")} />
             </Tooltip>
           }
@@ -346,7 +310,7 @@ const SalesForm = ({ values }) => {
           color="primary"
           onClick={handleSubmit(async (d) => {
             if (shouldBeReadOnly()) {
-              router.push(`/sales`);
+              router.push(`/purchases`);
             } else {
               if (_.isEmpty(products)) {
                 enqueueSnackbar(t("error:atLeastOneProduct"), {
@@ -357,13 +321,13 @@ const SalesForm = ({ values }) => {
               let newData = {};
               newData.title = d.title;
               newData.description = d.description;
-              newData.customer = d.customer;
+              newData.supplier = d.supplier;
               newData.products = products;
               newData.status = d.paid ? "COMPLETED" : "PENDING";
-              submitSale({
+              submitPurchase({
                 data: newData,
                 locale,
-                saleId: values?.id,
+                purchaseId: values?.id,
               });
             }
           })}
@@ -375,4 +339,4 @@ const SalesForm = ({ values }) => {
   );
 };
 
-export default SalesForm;
+export default PurchasesForm;

@@ -58,7 +58,7 @@ const DrawerHeader = styled(Box)(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-const Layout = ({ children, title }) => {
+const Layout = ({ children }) => {
   const { width } = useScreen();
   const [variant, setVariant] = useState("permanent");
   const theme = useTheme();
@@ -240,7 +240,7 @@ const Layout = ({ children, title }) => {
             >
               <ListItemButton
                 onClick={() => {
-                  setOpen(false);
+                  if (width < 600) setOpen(false);
                   router.push(`/${key}`);
                 }}
               >

@@ -8,9 +8,12 @@ import TabMenu from "@/components/profile/TabMenu";
 import { useProfile } from "@/hooks/query/useProfile";
 import Loading from "@/components/general/Loading";
 import { useRouter } from "next/router";
+import { withHOC } from "@/hocs/ListHOC";
+import { useSnackbar } from "notistack";
 
 const Profile = ({ userid }) => {
   const { t } = useTranslation("label");
+  const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const { locale } = router;
   const { profile, isProfileError, isProfileLoading } = useProfile(
@@ -19,47 +22,21 @@ const Profile = ({ userid }) => {
   );
 
   if (isProfileLoading) return <Loading />;
-  if (isProfileError) return <div>Something went wrong.</div>;
+  if (isProfileError)
+    enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
 
-  return (
-    <Grid
-      container
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        backgroundColor: "primary.white",
-      }}
-    >
-      <Grid item xs={12}>
-        <Typography
-          variant="h4"
-          component="h1"
-          sx={{
-            color: "#3a3b45",
-          }}
-        >
-          {t("profile")}
-        </Typography>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        p={1}
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        <TabMenu
-          components={[
-            <UserSettingsForm profile={profile} key={"profile"} />,
-            <NewPasswordForm userid={userid} key={"password"} />,
-          ]}
-          labels={[t("userSettings"), t("changePassword")]}
-        />
-      </Grid>
-    </Grid>
-  );
+  return withHOC({
+    title: t("profile"),
+    component: (
+      <TabMenu
+        components={[
+          <UserSettingsForm profile={profile} key={"profile"} />,
+          <NewPasswordForm userid={userid} key={"password"} />,
+        ]}
+        labels={[t("userSettings"), t("changePassword")]}
+      />
+    ),
+  });
 };
 
 export const getServerSideProps = async (ctx) => {

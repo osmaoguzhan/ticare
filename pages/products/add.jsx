@@ -3,35 +3,15 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Grid, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import ProductsForm from "@/components/forms/products/ProductsForm";
+import { withHOC } from "@/hocs/ListHOC";
 
 const ProductsAdd = () => {
   const { t } = useTranslation("label");
 
-  return (
-    <Grid
-      container
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        backgroundColor: "primary.white",
-        mt: 2,
-      }}
-    >
-      <Grid item xs={12}>
-        <Typography
-          variant="h5"
-          sx={{
-            color: "primary.pageTitle",
-          }}
-        >
-          {t("addANewProduct")}
-        </Typography>
-      </Grid>
-      <Grid item xs={12} p={1}>
-        <ProductsForm />
-      </Grid>
-    </Grid>
-  );
+  return withHOC({
+    title: t("addANewProduct"),
+    component: <ProductsForm />,
+  });
 };
 
 export const getStaticProps = async ({ locale }) => {

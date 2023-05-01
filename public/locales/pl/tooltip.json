@@ -1,3 +1,4 @@
 {
-  "onceItsMarkedAsPaid": "Gdy sprzedaż zostanie oznaczona jako opłacona, nie można już jej edytować."
+  "onceSaleMarkedAsPaid": "Gdy sprzedaż zostanie oznaczona jako opłacona, nie można już jej edytować.",
+  "oncePurchaseMarkedAsPaid": "Gdy zakup zostanie oznaczony jako opłacony, nie można już go edytować."
 }

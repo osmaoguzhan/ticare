@@ -1,3 +1,4 @@
 {
-  "onceItsMarkedAsPaid": "Ödendi olarak işaretlendikten sonra satışı artık düzenleyemezsiniz."
+  "onceSaleMarkedAsPaid": "Ödendi olarak işaretlendikten sonra satışı artık düzenleyemezsiniz.",
+  "oncePurchaseMarkedAsPaid": "Ödendi olarak işaretlendikten sonra satın alımı artık düzenleyemezsiniz."
 }
