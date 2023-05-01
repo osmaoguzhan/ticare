@@ -21,7 +21,7 @@
   "goToYourAccount": "Przejdź do swojego konta",
   "dashboard": "Deska rozdzielcza",
   "brands": "Marki",
-  "stores": "Sklepy",
+  "purchases": "Zakupy",
   "sales": "Sprzedaż",
   "products": "Produkty",
   "settings": "Ustawienia firmy",
@@ -99,5 +99,8 @@
   "transactionIsPaid": "Transakcja jest opłacona.",
   "returnToTable": "Powrót do tabeli",
   "PENDING": "W oczekiwaniu",
-  "COMPLETED": "Zakończone"
+  "COMPLETED": "Zakończone",
+  "addANewPurchase": "Dodaj nowy zakup",
+  "editPurchase": "Edytuj zakup",
+  "purchaseDetails": "Szczegóły zakupu"
 }

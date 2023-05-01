@@ -1,26 +1,30 @@
 import Layout from "@/components/layouts/Layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import SupplierTable from "@/components/general/tables/SupplierTable";
 import { useTranslation } from "next-i18next";
 import { withHOC } from "@/hocs/ListHOC";
+import PurchasesForm from "@/components/forms/purchases/PurchasesForm";
 
-const Suppliers = () => {
+const PurchasesAdd = () => {
   const { t } = useTranslation("label");
 
   return withHOC({
-    title: t("suppliers"),
-    component: <SupplierTable />,
+    title: t("addANewPurchase"),
+    component: <PurchasesForm />,
   });
 };
 
 export const getStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "gb", ["label", "error"])),
+      ...(await serverSideTranslations(locale ?? "gb", [
+        "label",
+        "error",
+        "tooltip",
+      ])),
     },
   };
 };
 
-Suppliers.Layout = Layout;
+PurchasesAdd.Layout = Layout;
 
-export default Suppliers;
+export default PurchasesAdd;

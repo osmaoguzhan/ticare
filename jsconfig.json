@@ -8,7 +8,8 @@
       "@/styles/*": ["./common/styles/*"],
       "@/lib/*": ["./common/lib/*"],
       "@/utils/*": ["./common/utils/*"],
-      "@/validator": ["./common/utils/validator/validator"]
+      "@/validator": ["./common/utils/validator/validator"],
+      "@/hocs/*": ["./common/hocs/*"]
     }
   }
 }

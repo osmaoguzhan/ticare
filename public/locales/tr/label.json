@@ -21,7 +21,7 @@
   "goToYourAccount": "Hesabınıza gidin",
   "dashboard": "Kontrol Paneli",
   "brands": "Markalar",
-  "stores": "Mağazalar",
+  "purchases": "Alışlar",
   "sales": "Satışlar",
   "products": "Ürünler",
   "settings": "Şirket Ayarları",
@@ -99,5 +99,8 @@
   "transactionIsPaid": "İşlem ödendi.",
   "returnToTable": "Tabloya Dön",
   "PENDING": "Beklemede",
-  "COMPLETED": "Tamamlandı"
+  "COMPLETED": "Tamamlandı",
+  "addANewPurchase": "Yeni Alış Ekle",
+  "editPurchase": "Alışı Düzenle",
+  "purchaseDetails": "Alış Detayları"
 }

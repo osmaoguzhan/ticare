@@ -21,7 +21,7 @@
   "goToYourAccount": "Go to your account",
   "dashboard": "Dashboard",
   "brands": "Brands",
-  "stores": "Stores",
+  "purchases": "Purchases",
   "sales": "Sales",
   "products": "Products",
   "settings": "Company Settings",
@@ -99,5 +99,8 @@
   "transactionIsPaid": "Transaction is paid.",
   "returnToTable": "Return to Table",
   "PENDING": "Pending",
-  "COMPLETED": "Completed"
+  "COMPLETED": "Completed",
+  "addANewPurchase": "Add a New Purchase",
+  "editPurchase": "Edit Purchase",
+  "purchaseDetails": "Purchase Details"
 }

@@ -1,5 +1,6 @@
 import InfoCard from "@/components/dashboard/InfoCard";
 import Layout from "@/components/layouts/Layout";
+import { useAnalytics } from "@/hooks/query/useAnalytics";
 import useLoading from "@/hooks/useLoading";
 import {
   faChevronDown,
@@ -11,14 +12,19 @@ import { uniqueId } from "lodash";
 import { useSession } from "next-auth/react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const Dashboard = () => {
+  const { locale } = useRouter();
+
+  const { analytics, isAnalyticLoading, isAnalyticError } =
+    useAnalytics(locale);
   const cardData = [
     {
       text: "Total Products",
-      value: 0,
+      value: analytics?.productCount || 0,
       color: "#1cc88a",
       icon: faCube,
     },

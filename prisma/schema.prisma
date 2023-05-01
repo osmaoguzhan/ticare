@@ -122,6 +122,7 @@ model Purchase {
   supplier        Supplier          @relation(fields: [supplierId], references: [id])
   supplierId      String            @db.ObjectId
   productPurchase ProductPurchase[]
+  status          Status            @default(PENDING)
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
 }
