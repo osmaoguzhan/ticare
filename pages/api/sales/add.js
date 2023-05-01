@@ -19,25 +19,26 @@ export default async function handler(req, res) {
           title: data.title,
           description: data.description,
           totalPrice: data.products.reduce(
-            (acc, product) => acc + product.price * product.quantity,
+            (acc, product) => acc + product.salePrice * product.quantity,
             0
           ),
+          status: data.status,
           customerId: data.customer.key,
           companyId: session?.user?.company.id,
         },
       });
       if (sale) {
         const productSales = await prisma.productSale.createMany({
-          data: data.products.map((product, idx) => ({
-            productId: "6447e72f2bab4537b8be2f1" + idx, // TODO: after product page is done, change this to product.id
+          data: data.products.map((product) => ({
+            productId: product.id,
             saleId: sale.id,
             quantity: product.quantity,
-            price: product.price,
+            price: product.salePrice,
           })),
         });
         res.status(200).json({
           success: true,
-          message: Messages[locale || "gb"].customerAdded,
+          message: Messages[locale || "gb"].saleCreated,
           data: [productSales, sale],
         });
       } else {

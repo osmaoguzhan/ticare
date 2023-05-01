@@ -12,6 +12,11 @@ enum Role {
   USER
 }
 
+enum Status {
+  PENDING
+  COMPLETED
+}
+
 model User {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
@@ -102,6 +107,7 @@ model Sale {
   customer    Customer      @relation(fields: [customerId], references: [id])
   customerId  String        @db.ObjectId
   productSale ProductSale[]
+  status      Status        @default(PENDING)
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 }

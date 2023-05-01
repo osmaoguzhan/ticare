@@ -13,34 +13,86 @@ export default async function handler(req, res) {
     });
   } else {
     const { id } = req.query;
-    const sale = {
-      id: 1,
-      title: "Sale 1",
-      description: "Sale 1 description",
-      totalPrice: 100 + 122 * 12 + 44 * 3,
-      customer: "Customer 1 name and surname",
-      products: [
-        {
-          id: 1,
-          name: "Product 1",
-          price: 100,
-          quantity: 1,
-        },
-        {
-          id: 2,
-          name: "Product 2",
-          price: 122,
-          quantity: 12,
-        },
-        {
-          id: 3,
-          name: "Product 3",
-          price: 44,
-          quantity: 3,
-        },
-      ],
-      date: "2021-01-01",
-    };
-    res.status(200).json({ success: true, data: sale });
+    let sale = (
+      await prisma.sale.aggregateRaw({
+        pipeline: [
+          {
+            $match: {
+              _id: { $oid: id },
+            },
+          },
+          {
+            $lookup: {
+              from: "ProductSale",
+              localField: "_id",
+              foreignField: "saleId",
+              as: "productSales",
+            },
+          },
+          {
+            $lookup: {
+              from: "Product",
+              localField: "productSales.productId",
+              foreignField: "_id",
+              as: "products",
+            },
+          },
+          {
+            $project: {
+              _id: 0,
+              id: { $toString: "$_id" },
+              title: 1,
+              description: 1,
+              totalPrice: 1,
+              status: 1,
+              companyId: { $toString: "$companyId" },
+              createdAt: { $toString: "$createdAt" },
+              products: {
+                $map: {
+                  input: "$products",
+                  as: "product",
+                  in: {
+                    id: { $toString: "$$product._id" },
+                    description: "$$product.description",
+                    name: "$$product.name",
+                    productType: "$$product.productType",
+                    purchasePrice: "$$product.purchasePrice",
+                    salePrice: "$$product.salePrice",
+                  },
+                },
+              },
+              productSales: {
+                $map: {
+                  input: "$productSales",
+                  as: "sale",
+                  in: {
+                    id: { $toString: "$$sale._id" },
+                    quantity: "$$sale.quantity",
+                    price: "$$sale.price",
+                    productId: {
+                      $toString: "$$sale.productId",
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      })
+    )[0];
+    if (!sale) {
+      res.status(404).json({
+        success: false,
+        message: Messages[locale || "gb"].saleNotFound,
+      });
+    } else {
+      sale.products.forEach((product) => {
+        const productSale = sale.productSales.find(
+          (productSale) => productSale.productId === product.id
+        );
+        product.quantity = productSale?.quantity;
+      });
+      res.status(200).json({ success: true, data: sale });
+    }
   }
 }

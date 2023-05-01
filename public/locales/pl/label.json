@@ -95,5 +95,9 @@
   "product": "Produkt",
   "subtotal": "Suma częściowa",
   "availableInStock": "Dostępne w magazynie",
-  "saleDetails": "Szczegóły sprzedaży"
+  "saleDetails": "Szczegóły sprzedaży",
+  "transactionIsPaid": "Transakcja jest opłacona.",
+  "returnToTable": "Powrót do tabeli",
+  "PENDING": "W oczekiwaniu",
+  "COMPLETED": "Zakończone"
 }

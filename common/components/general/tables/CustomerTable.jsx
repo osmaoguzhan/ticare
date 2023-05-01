@@ -6,6 +6,7 @@ import { useCustomer } from "@/hooks/query/useCustomer";
 import Loading from "../Loading";
 import { useSnackbar } from "notistack";
 import { useRouter } from "next/router";
+import { Tooltip, Typography } from "@mui/material";
 
 const CustomerTable = () => {
   const { t } = useTranslation("label");
@@ -42,12 +43,28 @@ const CustomerTable = () => {
         headerName: t("addressLine1"),
         flex: 1,
         editable: false,
+
+        renderCell: (params) => {
+          return (
+            <Tooltip title={params.row.addressLine1} placement="top">
+              <Typography noWrap>{params.row.addressLine1}</Typography>
+            </Tooltip>
+          );
+        },
       },
       {
         field: "addressLine2",
         headerName: t("addressLine2"),
         flex: 1,
         editable: false,
+
+        renderCell: (params) => {
+          return (
+            <Tooltip title={params.row.addressLine2} placement="top">
+              <Typography noWrap>{params.row.addressLine2}</Typography>
+            </Tooltip>
+          );
+        },
       },
     ];
   }, []);

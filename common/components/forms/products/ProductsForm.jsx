@@ -102,6 +102,7 @@ const ProductsForm = ({ values }) => {
             await submitProduct({
               locale,
               data: d,
+              productId: values?.id,
             });
           })}
         >

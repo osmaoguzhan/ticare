@@ -21,6 +21,8 @@ export const Messages = {
     customerUpdated: "Customer updated successfully.",
     productAdded: "Product added successfully.",
     productUpdated: "Product updated successfully.",
+    saleCreated: "Sale created successfully.",
+    saleUpdated: "Sale updated successfully.",
   },
   tr: {
     userActivated: "Kullanıcı başarıyla aktifleştirildi.",
@@ -45,6 +47,8 @@ export const Messages = {
     customerUpdated: "Müşteri başarıyla güncellendi.",
     productAdded: "Ürün başarıyla eklendi.",
     productUpdated: "Ürün başarıyla güncellendi.",
+    saleCreated: "Satış başarıyla oluşturuldu.",
+    saleUpdated: "Satış başarıyla güncellendi.",
   },
   pl: {
     userActivated: "Użytkownik został pomyślnie aktywowany.",
@@ -68,5 +72,7 @@ export const Messages = {
     customerUpdated: "Klient został pomyślnie zaktualizowany.",
     productAdded: "Produkt został pomyślnie dodany.",
     productUpdated: "Produkt został pomyślnie zaktualizowany.",
+    saleCreated: "Sprzedaż została pomyślnie utworzona.",
+    saleUpdated: "Sprzedaż została pomyślnie zaktualizowana.",
   },
 };
