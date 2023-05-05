@@ -102,5 +102,18 @@
   "COMPLETED": "Tamamlandı",
   "addANewPurchase": "Yeni Alış Ekle",
   "editPurchase": "Alışı Düzenle",
-  "purchaseDetails": "Alış Detayları"
+  "purchaseDetails": "Alış Detayları",
+  "singularProductAmount": "Tekil Ürün Miktarı",
+  "totalProfit": "Toplam Kâr",
+  "profit": "Kâr",
+  "outOfStock": "Stokta Yok",
+  "pendingSales": "Bekleyen Satışlar",
+  "dailyProfitGrowth": "Günlük Kâr Artışı (Son ay)",
+  "productTypeDistribution": "Ürün Tipi Dağılımı",
+  "latest5CompletedSales": "Son 5 Tamamlanan Satış",
+  "latest5CompletedPurchases": "Son 5 Tamamlanan Alış",
+  "top5Customers": "En Çok Alış Yapan 5 Müşteri",
+  "createdAt": "Oluşturulma Tarihi",
+  "amount": "Miktar",
+  "noDataAvailable": "Veri Yok"
 }

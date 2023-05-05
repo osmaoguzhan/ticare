@@ -102,5 +102,18 @@
   "COMPLETED": "Zakończone",
   "addANewPurchase": "Dodaj nowy zakup",
   "editPurchase": "Edytuj zakup",
-  "purchaseDetails": "Szczegóły zakupu"
+  "purchaseDetails": "Szczegóły zakupu",
+  "singularProductAmount": "Ilość pojedynczego produktu",
+  "totalProfit": "Całkowity zysk",
+  "profit": "Zysk",
+  "outOfStock": "Brak w magazynie",
+  "pendingSales": "Oczekujące sprzedaże",
+  "dailyProfitGrowth": "Dzienny wzrost zysków (W zeszłym miesiącu)",
+  "productTypeDistribution": "Rozkład typów produktów",
+  "latest5CompletedSales": "Ostatnie 5 zakończonych sprzedaży",
+  "latest5CompletedPurchases": "Ostatnie 5 zakończonych zakupów",
+  "top5Customers": "Top 5 klientów",
+  "createdAt": "Utworzono w",
+  "amount": "Ilość",
+  "noDataAvailable": "Brak dostępnych danych"
 }

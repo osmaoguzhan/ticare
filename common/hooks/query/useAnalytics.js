@@ -14,9 +14,9 @@ export const useAnalytics = (locale) => {
     ["analytics"],
     () => getAnalyticsData(locale),
     {
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false,
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: true,
     }
   );
   const analytics = data?.data;
