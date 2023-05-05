@@ -102,5 +102,18 @@
   "COMPLETED": "Completed",
   "addANewPurchase": "Add a New Purchase",
   "editPurchase": "Edit Purchase",
-  "purchaseDetails": "Purchase Details"
+  "purchaseDetails": "Purchase Details",
+  "singularProductAmount": "Singular Product Amount",
+  "totalProfit": "Total Profit",
+  "profit": "Profit",
+  "outOfStock": "Out of Stock",
+  "pendingSales": "Pending Sales",
+  "dailyProfitGrowth": "Daily Profit Growth (Last Month)",
+  "productTypeDistribution": "Product Type Distribution",
+  "latest5CompletedSales": "Latest 5 Completed Sales",
+  "latest5CompletedPurchases": "Latest 5 Completed Purchases",
+  "top5Customers": "Top 5 Customers",
+  "createdAt": "Created At",
+  "amount": "Amount",
+  "noDataAvailable": "No data available"
 }
