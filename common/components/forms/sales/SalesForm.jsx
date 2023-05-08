@@ -137,6 +137,7 @@ const SalesForm = ({ values }) => {
           validation={validator.title}
           value={values?.title || ""}
           disabled={shouldBeReadOnly()}
+          tooltip={t("tooltip:title")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -148,6 +149,7 @@ const SalesForm = ({ values }) => {
           validation={validator.description}
           value={values?.description || ""}
           disabled={shouldBeReadOnly()}
+          tooltip={t("tooltip:description")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -167,6 +169,7 @@ const SalesForm = ({ values }) => {
           }
           validation={validator.customer}
           disabled={shouldBeReadOnly()}
+          tooltip={t("tooltip:saleCustomer")}
         />
       </Grid>
       <Grid item xs={8} md={9.5} lg={9.5}>
@@ -214,6 +217,7 @@ const SalesForm = ({ values }) => {
                 }))
               : []
           }
+          tooltip={t("tooltip:saleProduct")}
         />
       </Grid>
       <Grid item xs={3} md={1.5} lg={1.5}>
@@ -239,6 +243,7 @@ const SalesForm = ({ values }) => {
               },
             },
           }}
+          tooltip={t("tooltip:saleQuantity")}
         />
       </Grid>
       <Grid

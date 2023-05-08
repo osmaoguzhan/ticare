@@ -129,6 +129,7 @@ const PurchasesForm = ({ values }) => {
           validation={validator.title}
           value={values?.title || ""}
           disabled={shouldBeReadOnly()}
+          tooltip={t("tooltip:title")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -140,6 +141,7 @@ const PurchasesForm = ({ values }) => {
           validation={validator.description}
           value={values?.description || ""}
           disabled={shouldBeReadOnly()}
+          tooltip={t("tooltip:description")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -159,6 +161,7 @@ const PurchasesForm = ({ values }) => {
           }
           validation={validator.supplier}
           disabled={shouldBeReadOnly()}
+          tooltip={t("tooltip:purchaseSupplier")}
         />
       </Grid>
       <Grid item xs={8} md={9.5} lg={9.5}>
@@ -193,6 +196,7 @@ const PurchasesForm = ({ values }) => {
                 }))
               : []
           }
+          tooltip={t("tooltip:purchaseProduct")}
         />
       </Grid>
       <Grid item xs={3} md={1.5} lg={1.5}>
@@ -207,8 +211,10 @@ const PurchasesForm = ({ values }) => {
           InputProps={{
             inputProps: {
               min: 1,
+              max: 999,
             },
           }}
+          tooltip={t("tooltip:purchaseQuantity")}
         />
       </Grid>
       <Grid

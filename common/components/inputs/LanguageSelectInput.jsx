@@ -4,7 +4,7 @@ import ReactCountryFlag from "react-country-flag";
 import SelectInput from "./SelectInput";
 
 const LanguageSelectInput = (props) => {
-  const { label, control, value } = props;
+  const { label, control, value, tooltip } = props;
   return (
     <SelectInput
       name={"language"}
@@ -13,6 +13,7 @@ const LanguageSelectInput = (props) => {
       control={control}
       value={value}
       options={Constants.languageOptions}
+      tooltip={tooltip}
       renderOption={(props, option) => (
         <Box
           component="li"

@@ -66,5 +66,11 @@
   "saleTitleMaxLength": "Tytuł sprzedaży powinien zawierać maksymalnie <<placeholder>> znaków.",
   "saleDescriptionMinLength": "Opis sprzedaży powinien zawierać co najmniej <<placeholder>> znaków.",
   "saleDescriptionMaxLength": "Opis sprzedaży powinien zawierać maksymalnie <<placeholder>> znaków.",
-  "requiredCustomer": "Klient jest wymagany."
+  "requiredCustomer": "Klient jest wymagany.",
+  "requiredPurchaseTitle": "Tytuł zakupu jest wymagany.",
+  "purchaseTitleMinLength": "Tytuł zakupu powinien zawierać co najmniej <<placeholder>> znaków.",
+  "purchaseTitleMaxLength": "Tytuł zakupu powinien zawierać maksymalnie <<placeholder>> znaków.",
+  "purchaseDescriptionMinLength": "Opis zakupu powinien zawierać co najmniej <<placeholder>> znaków.",
+  "purchaseDescriptionMaxLength": "Opis zakupu powinien zawierać maksymalnie <<placeholder>> znaków.",
+  "requiredSupplier": "Dostawca jest wymagany."
 }

@@ -16,7 +16,11 @@ const Sales = () => {
 export const getStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "gb", ["label", "error"])),
+      ...(await serverSideTranslations(locale ?? "gb", [
+        "label",
+        "error",
+        "tooltip",
+      ])),
     },
   };
 };

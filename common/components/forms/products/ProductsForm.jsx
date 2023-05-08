@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { useSubmitProduct } from "@/hooks/query/useProduct";
 
 const ProductsForm = ({ values }) => {
-  const { t } = useTranslation("label");
+  const { t } = useTranslation(["label", "tooltip"]);
   const { enqueueSnackbar } = useSnackbar();
   const {
     handleSubmit,
@@ -43,6 +43,7 @@ const ProductsForm = ({ values }) => {
           errors={errors}
           value={values?.name || ""}
           validation={validator.name}
+          tooltip={t("tooltip:productName")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -53,6 +54,7 @@ const ProductsForm = ({ values }) => {
           errors={errors}
           value={values?.description || ""}
           validation={validator.description}
+          tooltip={t("tooltip:productDescription")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -63,6 +65,7 @@ const ProductsForm = ({ values }) => {
           errors={errors}
           value={values?.productType || ""}
           validation={validator.productType}
+          tooltip={t("tooltip:productType")}
         />
       </Grid>
       <Grid item xs={12} md={6} lg={6}>
@@ -77,6 +80,7 @@ const ProductsForm = ({ values }) => {
           }}
           validation={validator.salePrice}
           type="number"
+          tooltip={t("tooltip:productSalePrice")}
         />
       </Grid>
       <Grid item xs={12} md={6} lg={6}>
@@ -91,6 +95,7 @@ const ProductsForm = ({ values }) => {
           }}
           validation={validator.purchasePrice}
           type="number"
+          tooltip={t("tooltip:productPurchasePrice")}
         />
       </Grid>
       <Grid item xs={12} mt={1}>

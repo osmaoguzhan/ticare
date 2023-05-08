@@ -11,7 +11,7 @@ import AddressAutoComplete from "../../inputs/AddressAutoComplete";
 
 const SettingsForm = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const { t } = useTranslation(["label", "error"]);
+  const { t } = useTranslation(["label", "error", "tooltip"]);
   const {
     control,
     formState: { errors },
@@ -55,6 +55,7 @@ const SettingsForm = () => {
           control={control}
           errors={errors}
           validation={validator.name}
+          tooltip={t("tooltip:companyName")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -68,6 +69,7 @@ const SettingsForm = () => {
           control={control}
           errors={errors}
           validation={validator.email}
+          tooltip={t("tooltip:emailAddress")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -81,6 +83,7 @@ const SettingsForm = () => {
           control={control}
           errors={errors}
           validation={validator.phoneNumber}
+          tooltip={t("tooltip:phoneNumber")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -94,6 +97,7 @@ const SettingsForm = () => {
           control={control}
           errors={errors}
           validation={validator.website}
+          tooltip={t("tooltip:companyWebsite")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -106,6 +110,7 @@ const SettingsForm = () => {
           value={company?.description || ""}
           multiline
           validation={validator.description}
+          tooltip={t("tooltip:companyDescription")}
         />
       </Grid>
       <Grid item xs={12} mt={2} mb={1}>
@@ -130,6 +135,7 @@ const SettingsForm = () => {
           value={company?.addressLine2 || ""}
           multiline
           validation={validator.addressLine2}
+          tooltip={t("tooltip:addressLine2")}
         />
       </Grid>
       <Grid item xs={12} mt={1}>

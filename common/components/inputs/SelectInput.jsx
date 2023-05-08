@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField, Tooltip } from "@mui/material";
 import { Controller } from "react-hook-form";
 
 const SelectInput = (props) => {
@@ -12,6 +12,7 @@ const SelectInput = (props) => {
     isEmpty,
     validation,
     errors,
+    tooltip,
     ...other
   } = props;
 
@@ -37,12 +38,14 @@ const SelectInput = (props) => {
           isOptionEqualToValue={(option, value) => option.key === value.key}
           getOptionLabel={(option) => option.label}
           renderInput={(params) => (
-            <TextField
-              {...params}
-              label={label}
-              helperText={errors && setError()}
-              error={!!(errors && setError())}
-            />
+            <Tooltip title={tooltip}>
+              <TextField
+                {...params}
+                label={label}
+                helperText={errors && setError()}
+                error={!!(errors && setError())}
+              />
+            </Tooltip>
           )}
           {...other}
         />
