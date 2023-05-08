@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { useSubmitCustomer } from "@/hooks/query/useCustomer";
 
 const CustomersForm = ({ values }) => {
-  const { t } = useTranslation("label");
+  const { t } = useTranslation(["label", "tooltip"]);
   const { enqueueSnackbar } = useSnackbar();
   const {
     handleSubmit,
@@ -47,6 +47,7 @@ const CustomersForm = ({ values }) => {
           errors={errors}
           validation={validator.name}
           value={values?.name || ""}
+          tooltip={t("tooltip:customerName")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -57,6 +58,7 @@ const CustomersForm = ({ values }) => {
           errors={errors}
           validation={validator.surname}
           value={values?.surname || ""}
+          tooltip={t("tooltip:customerSurname")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -67,6 +69,7 @@ const CustomersForm = ({ values }) => {
           errors={errors}
           validation={validator.email}
           value={values?.email || ""}
+          tooltip={t("tooltip:emailAddress")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -77,6 +80,7 @@ const CustomersForm = ({ values }) => {
           errors={errors}
           validation={validator.phoneNumber}
           value={values?.phoneNumber || ""}
+          tooltip={t("tooltip:phoneNumber")}
         />
       </Grid>
       <Grid item xs={12} mt={2} mb={1}>
@@ -100,6 +104,7 @@ const CustomersForm = ({ values }) => {
           value={values?.addressLine2 || ""}
           multiline
           validation={validator.addressLine2}
+          tooltip={t("tooltip:addressLine2")}
         />
       </Grid>
 

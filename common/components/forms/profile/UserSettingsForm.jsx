@@ -14,7 +14,7 @@ import LanguageSelectInput from "@/components/inputs/LanguageSelectInput";
 import { useSnackbar } from "notistack";
 
 const UserSettingsForm = ({ profile }) => {
-  const { t } = useTranslation(["label", "error"]);
+  const { t } = useTranslation(["label", "error", "tooltip"]);
   const {
     control,
     formState: { errors },
@@ -79,6 +79,7 @@ const UserSettingsForm = ({ profile }) => {
           errors={errors}
           value={profile?.name}
           validation={validator.name}
+          tooltip={t("tooltip:profileName")}
         />
       </Grid>
       <Grid item xs={12} md={6} lg={6}>
@@ -92,6 +93,7 @@ const UserSettingsForm = ({ profile }) => {
           errors={errors}
           value={profile?.surname}
           validation={validator.surname}
+          tooltip={t("tooltip:profileSurname")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -105,6 +107,7 @@ const UserSettingsForm = ({ profile }) => {
           errors={errors}
           disabled
           value={profile?.email}
+          tooltip={t("tooltip:profileEmail")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -118,6 +121,7 @@ const UserSettingsForm = ({ profile }) => {
           errors={errors}
           value={profile?.phoneNumber}
           validation={validator.phoneNumber}
+          tooltip={t("tooltip:profilePhoneNumber")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -127,6 +131,7 @@ const UserSettingsForm = ({ profile }) => {
           value={Constants.languageOptions?.find(
             (l) => l.key === profile.settings.language
           )}
+          tooltip={t("tooltip:language")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -137,6 +142,7 @@ const UserSettingsForm = ({ profile }) => {
           control={control}
           value={timezones?.find((t) => t.key === profile.settings.timezone)}
           options={timezones}
+          tooltip={t("tooltip:profileTimezone")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -147,6 +153,7 @@ const UserSettingsForm = ({ profile }) => {
           control={control}
           value={currencies?.find((c) => c.key === profile.settings.currency)}
           options={currencies}
+          tooltip={t("tooltip:profileCurrency")}
         />
       </Grid>
       <Grid item xs={12}>

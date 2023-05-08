@@ -66,5 +66,11 @@
   "saleTitleMaxLength": "Satış başlığı en fazla <<placeholder>> karakter olmalıdır.",
   "saleDescriptionMinLength": "Satış açıklaması en az <<placeholder>> karakter olmalıdır.",
   "saleDescriptionMaxLength": "Satış açıklaması en fazla <<placeholder>> karakter olmalıdır.",
-  "requiredCustomer": "Müşteri boş bırakılamaz."
+  "requiredCustomer": "Müşteri boş bırakılamaz.",
+  "requiredPurchaseTitle": "Alış başlığı boş bırakılamaz.",
+  "purchaseTitleMinLength": "Alış başlığı en az <<placeholder>> karakter olmalıdır.",
+  "purchaseTitleMaxLength": "Alış başlığı en fazla <<placeholder>> karakter olmalıdır.",
+  "purchaseDescriptionMinLength": "Alış açıklaması en az <<placeholder>> karakter olmalıdır.",
+  "purchaseDescriptionMaxLength": "Alış açıklaması en fazla <<placeholder>> karakter olmalıdır.",
+  "requiredSupplier": "Tedarikçi boş bırakılamaz."
 }

@@ -6,6 +6,7 @@ import CompanyValidator from "./CompanySettingsValidator";
 import SupplierValidator from "./SupplierValidator";
 import ProductValidator from "./ProductValidator";
 import SaleValidator from "./SaleValidator";
+import PurchaseValidator from "./PurchaseValidator";
 
 const Validator = (type) => {
   switch (type) {
@@ -25,6 +26,8 @@ const Validator = (type) => {
       return ProductValidator();
     case "sale":
       return SaleValidator();
+    case "purchase":
+      return PurchaseValidator();
     default:
       return {};
   }

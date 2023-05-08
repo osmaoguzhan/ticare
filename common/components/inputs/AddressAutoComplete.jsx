@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField, Tooltip } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import Loading from "../general/Loading";
 import { useLoadScript } from "@react-google-maps/api";
@@ -23,8 +23,8 @@ const AddressAutoComplete = ({ address, errors, control }) => {
   );
 };
 
-const ControlledAutoComplete = ({ address, errors, control }) => {
-  const { t } = useTranslation(["label", "error"]);
+const ControlledAutoComplete = ({ address, errors, control, ...other }) => {
+  const { t } = useTranslation(["label", "error", "tooltip"]);
   let {
     ready,
     value,
@@ -64,17 +64,19 @@ const ControlledAutoComplete = ({ address, errors, control }) => {
           loadingText={t("searching")}
           value={value}
           renderInput={(params) => (
-            <TextField
-              {...params}
-              label={t("addressLine1")}
-              variant="outlined"
-              fullWidth
-              onChange={(e) => setValue(e.target.value)}
-              disabled={!ready}
-              placeholder={t("searchAddress")}
-              helperText={setError()}
-              error={!!(errors && setError())}
-            />
+            <Tooltip title={t("tooltip:addressLine1")}>
+              <TextField
+                {...params}
+                label={t("addressLine1")}
+                variant="outlined"
+                fullWidth
+                onChange={(e) => setValue(e.target.value)}
+                disabled={!ready}
+                placeholder={t("searchAddress")}
+                helperText={setError()}
+                error={!!(errors && setError())}
+              />
+            </Tooltip>
           )}
         />
       )}

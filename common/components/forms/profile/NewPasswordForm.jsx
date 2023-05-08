@@ -11,7 +11,7 @@ import Loading from "@/components/general/Loading";
 import { encrypt } from "@/utils/helpers/cipher";
 
 const NewPasswordForm = ({ userid }) => {
-  const { t } = useTranslation("label");
+  const { t } = useTranslation(["label", "tooltip"]);
   const {
     handleSubmit,
     control,
@@ -56,6 +56,7 @@ const NewPasswordForm = ({ userid }) => {
           control={control}
           errors={errors}
           validation={validator.currentPassword}
+          tooltip={t("tooltip:currentPassword")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -66,6 +67,7 @@ const NewPasswordForm = ({ userid }) => {
           control={control}
           errors={errors}
           validation={validator.password(watch("currentPassword"))}
+          tooltip={t("tooltip:newPassword")}
         />
       </Grid>
       <Grid item xs={12}>
@@ -76,6 +78,7 @@ const NewPasswordForm = ({ userid }) => {
           control={control}
           errors={errors}
           validation={validator.passwordRepeat(watch("newPassword"))}
+          tooltip={t("tooltip:confirmPassword")}
         />
       </Grid>
       <Grid item xs={12}>

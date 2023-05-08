@@ -21,7 +21,7 @@ const CardGroup = ({
   const cardData = useMemo(() => {
     return [
       {
-        text: t("singularProductAmount"),
+        text: t("singularProduct"),
         value: productCount || 0,
         color: "#1cc88a",
         icon: faCube,

@@ -17,7 +17,11 @@ export const getServerSideProps = async (ctx) => {
   const { locale } = ctx;
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "gb", ["label", "error"])),
+      ...(await serverSideTranslations(locale ?? "gb", [
+        "label",
+        "error",
+        "tooltip",
+      ])),
     },
   };
 };

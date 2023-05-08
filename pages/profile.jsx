@@ -44,7 +44,11 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       userid: req.headers.userid,
-      ...(await serverSideTranslations(locale ?? "gb", ["label", "error"])),
+      ...(await serverSideTranslations(locale ?? "gb", [
+        "label",
+        "error",
+        "tooltip",
+      ])),
     },
   };
 };

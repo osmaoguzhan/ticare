@@ -66,5 +66,11 @@
   "saleTitleMaxLength": "Sale title should be maximally <<placeholder>> characters.",
   "saleDescriptionMinLength": "Sale description should be minimum <<placeholder>> characters.",
   "saleDescriptionMaxLength": "Sale description should be maximally <<placeholder>> characters.",
-  "requiredCustomer": "Customer is required."
+  "requiredCustomer": "Customer is required.",
+  "requiredPurchaseTitle": "Purchase title is required.",
+  "purchaseTitleMinLength": "Purchase title should be minimum <<placeholder>> characters.",
+  "purchaseTitleMaxLength": "Purchase title should be maximally <<placeholder>> characters.",
+  "purchaseDescriptionMinLength": "Purchase description should be minimum <<placeholder>> characters.",
+  "purchaseDescriptionMaxLength": "Purchase description should be maximally <<placeholder>> characters.",
+  "requiredSupplier": "Supplier is required."
 }
