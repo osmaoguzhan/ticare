@@ -47,6 +47,16 @@ export const usePurchases = (locale) => {
 };
 
 const submitPurchase = async ({ locale, data, purchaseId = undefined }) => {
+  let reformatted = {
+    supplierId: data.supplier.key.trim(),
+    products: data.products,
+    description: data.description.trim(),
+    title: data.title.trim(),
+    status: data.status,
+  };
+  if (data?.companies) {
+    reformatted.companyId = data.companies.key.trim();
+  }
   let ep = purchaseId
     ? `/api/purchases/edit/${purchaseId}`
     : "/api/purchases/add";
@@ -58,7 +68,7 @@ const submitPurchase = async ({ locale, data, purchaseId = undefined }) => {
         locale,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(reformatted),
     })
   ).json();
   if (!response.success) {

@@ -2,30 +2,30 @@ import Layout from "@/components/layouts/Layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import SalesForm from "@/components/forms/sales/SalesForm";
-import { useSaleById } from "@/hooks/query/useSales";
 import { useSnackbar } from "notistack";
 import Loading from "@/components/general/Loading";
 import { withHOC } from "@/hocs/ListHOC";
+import { usePurchaseById } from "@/hooks/query/usePurchase";
+import PurchasesForm from "@/components/forms/purchases/PurchasesForm";
 
 const PurchasesEdit = () => {
   const { t } = useTranslation("label");
   const { query, locale } = useRouter();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { isSaleLoading, isSaleError, sale } = useSaleById({
+  const { isPurchaseLoading, isPurchaseError, purchase } = usePurchaseById({
     locale,
-    saleId: query.id,
+    purchaseId: query.id,
   });
 
-  if (isSaleLoading) return <Loading />;
+  if (isPurchaseLoading) return <Loading />;
 
-  if (isSaleError)
+  if (isPurchaseError)
     enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
 
   return withHOC({
     title: t("editPurchase"),
-    component: <SalesForm values={sale} />,
+    component: <PurchasesForm values={purchase} />,
   });
 };
 

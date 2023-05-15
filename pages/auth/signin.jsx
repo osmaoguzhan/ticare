@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import AuthLayout from "@/components/layouts/AuthLayout";
 import { redirect } from "@/utils/helpers/redirect";
+import Constants from "@/utils/Constants";
 
 const Signin = () => {
   const { setLoading } = useLoading();
@@ -34,9 +35,13 @@ const Signin = () => {
         });
       } else {
         const session = await getSession();
+        let path =
+          session.user.role === Constants.ROLES.ADMIN
+            ? `/admin/tickets`
+            : `/dashboard`;
         router
-          .push({
-            locale: `${session?.user?.settings?.language}/dashboard`,
+          .push(path, path, {
+            locale: session.user.settings.language,
           })
           .then(() => setLoading(false));
       }
@@ -56,6 +61,10 @@ const Signin = () => {
       <Card
         sx={{
           padding: 5,
+          marginX: {
+            xs: "15px",
+            md: "0px",
+          },
           border: "2px solid #f0eeeb",
           borderRadius: "30px",
         }}

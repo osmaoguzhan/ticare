@@ -20,7 +20,6 @@
   "accountActivated": "Your account has been activated. You may sign in  to your account.",
   "goToYourAccount": "Go to your account",
   "dashboard": "Dashboard",
-  "brands": "Brands",
   "purchases": "Purchases",
   "sales": "Sales",
   "products": "Products",
@@ -44,9 +43,6 @@
   "active": "Active",
   "inactive": "Inactive",
   "isActive": "Is Active?",
-  "brandName": "Brand Name",
-  "addANewBrand": "Add a New Brand",
-  "editBrand": "Edit Brand",
   "description": "Description",
   "status": "Status",
   "deleteConfirmation": "Are you sure you want to delete this item?",
@@ -115,5 +111,8 @@
   "top5Customers": "Top 5 Customers",
   "createdAt": "Created At",
   "amount": "Amount",
-  "noDataAvailable": "No data available"
+  "noDataAvailable": "No data available",
+  "company": "Company",
+  "companies": "Companies",
+  "noOptionsText": "No options"
 }

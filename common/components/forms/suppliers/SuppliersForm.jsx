@@ -8,6 +8,10 @@ import { useSubmitSupplier } from "@/hooks/query/useSupplier";
 import { useSnackbar } from "notistack";
 import Loading from "@/components/general/Loading";
 import { useRouter } from "next/router";
+import { useSession } from "@/lib/sessionQuery";
+import SelectInput from "@/components/inputs/SelectInput";
+import { useCompanies } from "@/hooks/query/useCompanies";
+import Constants from "@/utils/Constants";
 
 const SuppliersForm = ({ values }) => {
   const { t } = useTranslation("label");
@@ -20,18 +24,36 @@ const SuppliersForm = ({ values }) => {
   const router = useRouter();
   const { locale } = router;
   const validator = Validator("supplier/customer");
+  const [session, loading] = useSession();
   const { mutate: submitSupplier, isLoading: isSubmitSupplierLoading } =
     useSubmitSupplier({
       onSuccess: (message) => {
         enqueueSnackbar(message, { variant: "success" });
-        router.push(`/${locale}/suppliers`);
+        let path =
+          session?.user?.role === Constants.ROLES.ADMIN
+            ? `/${locale}/admin/suppliers`
+            : `/${locale}/suppliers`;
+        router.push(path);
       },
       onError: (message) => {
         enqueueSnackbar(message, { variant: "error" });
       },
     });
+  const { isCompaniesLoading, isCompaniesError, companies } = useCompanies(
+    locale,
+    session?.user?.role
+  );
 
-  if (isSubmitSupplierLoading) return <Loading />;
+  if (
+    loading ||
+    isSubmitSupplierLoading ||
+    (session?.user?.role === Constants.ROLES.ADMIN && isCompaniesLoading)
+  )
+    return <Loading />;
+
+  if (isCompaniesError) {
+    enqueueSnackbar(t("error:general"), { variant: "error" });
+  }
 
   return (
     <Grid container spacing={2}>
@@ -39,6 +61,20 @@ const SuppliersForm = ({ values }) => {
         <Typography variant="h6">{t("generalInfo")}</Typography>
         <Divider />
       </Grid>
+      {session?.user?.role === Constants.ROLES.ADMIN && (
+        <Grid item xs={12}>
+          <SelectInput
+            name={"companies"}
+            label={t("companies")}
+            id={"companies"}
+            control={control}
+            options={companies}
+            tooltip={t("tooltip:companiesField")}
+            value={values?.company || null}
+            disabled={!!values?.company}
+          />
+        </Grid>
+      )}
       <Grid item xs={12}>
         <FormInput
           label={t("supplierName")}

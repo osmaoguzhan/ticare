@@ -34,5 +34,6 @@
   "confirmPassword": " Yeni şifrenizi tekrar girin.",
   "companyName": "Şirket adı gereklidir. Uzunluk 2 ile 64 karakter arasında olmalıdır.",
   "companyWebsite": "Şirket web sitesi opsiyoneldir. Website formatı doğru olmalıdır. Örnek: https://www.example.com.",
-  "companyDescription": "Şirket açıklaması opsiyoneldir. Uzunluk en fazla 1000 karakter olmalıdır."
+  "companyDescription": "Şirket açıklaması opsiyoneldir. Uzunluk en fazla 1000 karakter olmalıdır.",
+  "companiesField": "Lütfen şirket seçin. Şirket zorunludur."
 }

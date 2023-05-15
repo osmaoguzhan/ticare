@@ -1,7 +1,12 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import Constants from "@/utils/Constants";
 
-const getSuppliers = async (locale) => {
-  const res = await fetch("/api/suppliers", {
+const getSuppliers = async (locale, session, companyId) => {
+  const path =
+    session?.user?.role === Constants.ROLES.ADMIN
+      ? `/api/suppliers?companyId=${companyId}`
+      : "/api/suppliers";
+  const res = await fetch(path, {
     headers: {
       locale,
     },
@@ -37,22 +42,37 @@ export const useSupplierById = ({ locale, supplierId }) => {
   };
 };
 
-export const useSupplier = (locale) => {
-  const { isError, isLoading, data } = useQuery(
+export const useSupplier = (
+  locale,
+  session,
+  companyId,
+  isSuppliersPage = true
+) => {
+  const { isError, isLoading, data, refetch, isRefetching } = useQuery(
     ["suppliers"],
-    () => getSuppliers(locale),
+    () => getSuppliers(locale, session, companyId),
     {
       refetchOnMount: true,
       refetchOnReconnect: true,
       refetchOnWindowFocus: true,
+      enabled:
+        session?.user?.role === Constants.ROLES.USER ||
+        (session?.user?.role === Constants.ROLES.ADMIN && !!companyId) ||
+        isSuppliersPage,
     }
   );
   const suppliers = data?.data;
-  return { isSupplierLoading: isLoading, isSupplierError: isError, suppliers };
+  return {
+    isSupplierLoading: isLoading,
+    isSupplierError: isError,
+    suppliers,
+    supplierRefectch: refetch,
+    isRefetchingSupplier: isRefetching,
+  };
 };
 
 const submitSupplier = async ({ locale, data, supplierId }) => {
-  data = {
+  let reformatted = {
     name: data.name.trim(),
     surname: data.surname.trim(),
     phoneNumber: data.phoneNumber.trim(),
@@ -60,6 +80,9 @@ const submitSupplier = async ({ locale, data, supplierId }) => {
     addressLine1: data.addressLine1.trim(),
     addressLine2: data.addressLine2.trim(),
   };
+  if (data?.companies) {
+    reformatted.companyId = data.companies.key.trim();
+  }
   let ep = supplierId
     ? `/api/suppliers/edit/${supplierId}`
     : "/api/suppliers/add";
@@ -71,7 +94,7 @@ const submitSupplier = async ({ locale, data, supplierId }) => {
         locale,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(reformatted),
     })
   ).json();
   if (!response.success) {

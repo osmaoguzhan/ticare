@@ -14,9 +14,9 @@ const SignUp = () => {
   const { t } = useTranslation("label");
   const validator = Validator("signup");
   const router = useRouter();
-  const { setLoading } = useLoading();
+  //const { setLoading } = useLoading();
   const handleOnSubmit = async (formData) => {
-    setLoading(true);
+    //setLoading(true);
     formData.password = await bcrypt.hash(formData.password, 10);
     delete formData.passwordRepeat;
     const response = await fetch("/api/auth/signup", {
@@ -43,7 +43,7 @@ const SignUp = () => {
         confirmButtonText: "OK",
       });
     }
-    setLoading(false);
+    //setLoading(false);
   };
 
   return (
@@ -60,6 +60,10 @@ const SignUp = () => {
       <Card
         sx={{
           padding: 5,
+          marginX: {
+            xs: "20px",
+            md: "0px",
+          },
           border: "2px solid #f0eeeb",
           borderRadius: "30px",
         }}

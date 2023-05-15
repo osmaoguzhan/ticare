@@ -5,17 +5,16 @@ const Loading = () => {
   return (
     <Box
       sx={{
-        position: "fixed",
+        position: "absolute",
         zIndex: 999,
         height: "2em",
         width: "2em",
         overflow: "show",
-        margin: "auto",
         top: "50%",
         left: "50%",
       }}
     >
-      <CircularProgress />
+      <CircularProgress disableShrink />
     </Box>
   );
 };

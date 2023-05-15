@@ -27,10 +27,11 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import Main from "@/components/general/Main";
 import Constants from "@/utils/Constants";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useCompany } from "@/hooks/query/useCompanySettings";
-import Loading from "../general/Loading";
-import useLocalStorage from "@/hooks/useLocalStorage";
+import Loading from "@/components/general/Loading";
+import { useSession } from "@/lib/sessionQuery";
+import { useCompanies } from "@/hooks/query/useCompanies";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -67,9 +68,12 @@ const Layout = ({ children }) => {
   const { t } = useTranslation("label");
   const router = useRouter();
   const { locale } = router;
-  const { data: session } = useSession();
-  const { company, isCompanyLoading } = useCompany(locale);
-  const [_, user, clear] = useLocalStorage("user", session?.user);
+  const [session, loading] = useSession();
+  const { company, isCompanyLoading } = useCompany(locale, session?.user?.role);
+  const { isCompaniesLoading, companies } = useCompanies(
+    locale,
+    session?.user?.role
+  );
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -92,12 +96,15 @@ const Layout = ({ children }) => {
   const handleCloseUserMenu = (key) => {
     setUserMenu(null);
     if (key === "logout") {
-      clear("user");
       signOut({
         callbackUrl: `/${router.locale}/auth/signin`,
       });
     } else if (key === "profile") {
-      router.push("/profile");
+      let path =
+        session.user.role === Constants.ROLES.ADMIN
+          ? "/admin/profile"
+          : "/profile";
+      router.push(path);
     }
   };
 
@@ -110,7 +117,12 @@ const Layout = ({ children }) => {
     cb();
   }, [cb]);
 
-  if (isCompanyLoading) return <Loading />;
+  if (
+    loading ||
+    (session?.user?.role === Constants.ROLES.USER && isCompanyLoading) ||
+    (session?.user?.role === Constants.ROLES.ADMIN && isCompaniesLoading)
+  )
+    return <Loading />;
 
   return (
     <Box component={"div"} sx={{ display: "flex", overflowY: "hidden" }}>
@@ -231,17 +243,27 @@ const Layout = ({ children }) => {
           </Grid>
         </DrawerHeader>
         <List>
-          {Constants.menuItems.map(({ key, icon, divider }) => (
+          {Constants.getMenuItems(
+            session?.user?.role,
+            companies?.length || 0
+          ).map(({ key, icon, divider }) => (
             <ListItem
               key={t(key)}
               sx={{
-                display: divider ? "flex" : company ? "flex" : "none",
+                display:
+                  divider || session?.user?.role === "ADMIN"
+                    ? "flex"
+                    : company
+                    ? "flex"
+                    : "none",
               }}
             >
               <ListItemButton
                 onClick={() => {
                   if (width < 600) setOpen(false);
-                  router.push(`/${key}`);
+                  let path = `/${key}`;
+                  if (session?.user?.role === "ADMIN") path = `/admin/${key}`;
+                  router.push(path);
                 }}
               >
                 <FontAwesomeIcon icon={icon} fixedWidth color={"#f4f4f4"} />

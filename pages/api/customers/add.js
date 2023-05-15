@@ -14,7 +14,9 @@ export default async function handler(req, res) {
   } else {
     try {
       const data = req.body;
-      data.companyId = session?.user?.company.id;
+      if (session?.user?.role === Constants.ROLES.USER) {
+        data.companyId = session?.user?.company.id;
+      }
       const customer = await prisma.customer.create({ data });
       res.status(200).json({
         success: true,

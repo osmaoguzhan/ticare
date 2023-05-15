@@ -20,7 +20,6 @@
   "accountActivated": "Swoje konto zostało aktywowane. Możesz się teraz zalogować.",
   "goToYourAccount": "Przejdź do swojego konta",
   "dashboard": "Deska rozdzielcza",
-  "brands": "Marki",
   "purchases": "Zakupy",
   "sales": "Sprzedaż",
   "products": "Produkty",
@@ -44,9 +43,6 @@
   "active": "Aktywny",
   "inactive": "Nieaktywny",
   "isActive": "Jest aktywny?",
-  "brandName": "Nazwa marki",
-  "addANewBrand": "Dodaj nową markę",
-  "editBrand": "Edytuj markę",
   "description": "Opis",
   "status": "Status",
   "deleteConfirmation": "Czy na pewno chcesz usunąć?",
@@ -115,5 +111,8 @@
   "top5Customers": "Top 5 klientów",
   "createdAt": "Utworzono w",
   "amount": "Ilość",
-  "noDataAvailable": "Brak dostępnych danych"
+  "noDataAvailable": "Brak dostępnych danych",
+  "company": "Firma",
+  "companies": "Firmy",
+  "noOptionsText": "Brak dostępnych opcji"
 }

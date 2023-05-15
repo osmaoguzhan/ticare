@@ -6,12 +6,17 @@ import { useSupplier } from "@/hooks/query/useSupplier";
 import Loading from "../Loading";
 import { useSnackbar } from "notistack";
 import { Tooltip, Typography } from "@mui/material";
+import { useSession } from "@/lib/sessionQuery";
+import { useRouter } from "next/router";
 
 const SupplierTable = () => {
   const { t } = useTranslation("label");
   const { enqueueSnackbar } = useSnackbar();
+  const { locale } = useRouter();
+  const [session, loading] = useSession();
+
   const columns = useMemo(() => {
-    return [
+    let cols = [
       {
         field: "name",
         headerName: t("supplierName"),
@@ -63,11 +68,26 @@ const SupplierTable = () => {
         },
       },
     ];
+    if (session?.user?.role === "ADMIN")
+      cols.push({
+        field: "companyName",
+        headerName: t("company"),
+        flex: 1,
+        editable: false,
+        renderCell: (params) => {
+          return (
+            <Tooltip title={params.row.companyName} placement="top">
+              <Typography noWrap>{params.row.companyName}</Typography>
+            </Tooltip>
+          );
+        },
+      });
+    return cols;
   }, []);
 
-  const { isSupplierLoading, isSupplierError, suppliers } = useSupplier();
+  const { isSupplierLoading, isSupplierError, suppliers } = useSupplier(locale);
 
-  if (isSupplierLoading) return <Loading />;
+  if (isSupplierLoading || loading) return <Loading />;
 
   if (isSupplierError)
     enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });

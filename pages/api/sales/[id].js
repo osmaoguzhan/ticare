@@ -1,6 +1,7 @@
 import { Messages } from "@/utils/Messages";
 import prisma from "@/lib/prismaConnector";
 import { getSession } from "next-auth/react";
+import { getUniqueSale } from "@/lib/dbQueries/sale";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -13,73 +14,15 @@ export default async function handler(req, res) {
     });
   } else {
     const { id } = req.query;
-    let sale = (
-      await prisma.sale.aggregateRaw({
-        pipeline: [
-          {
-            $match: {
-              _id: { $oid: id },
-            },
-          },
-          {
-            $lookup: {
-              from: "ProductSale",
-              localField: "_id",
-              foreignField: "saleId",
-              as: "productSales",
-            },
-          },
-          {
-            $lookup: {
-              from: "Product",
-              localField: "productSales.productId",
-              foreignField: "_id",
-              as: "products",
-            },
-          },
-          {
-            $project: {
-              _id: 0,
-              id: { $toString: "$_id" },
-              title: 1,
-              description: 1,
-              totalPrice: 1,
-              status: 1,
-              companyId: { $toString: "$companyId" },
-              createdAt: { $toString: "$createdAt" },
-              products: {
-                $map: {
-                  input: "$products",
-                  as: "product",
-                  in: {
-                    id: { $toString: "$$product._id" },
-                    description: "$$product.description",
-                    name: "$$product.name",
-                    productType: "$$product.productType",
-                    purchasePrice: "$$product.purchasePrice",
-                    salePrice: "$$product.salePrice",
-                  },
-                },
-              },
-              productSales: {
-                $map: {
-                  input: "$productSales",
-                  as: "sale",
-                  in: {
-                    id: { $toString: "$$sale._id" },
-                    quantity: "$$sale.quantity",
-                    price: "$$sale.price",
-                    productId: {
-                      $toString: "$$sale.productId",
-                    },
-                  },
-                },
-              },
-            },
-          },
-        ],
-      })
-    )[0];
+    let sale = (await prisma.sale.aggregateRaw(getUniqueSale(id)))[0];
+    sale["company"] = {
+      key: sale.companyId,
+      label: sale.companyName,
+    };
+    sale["customer"] = {
+      key: sale.customerId,
+      label: sale.customerNameSurname,
+    };
     if (!sale) {
       res.status(404).json({
         success: false,

@@ -4,16 +4,18 @@ import DataTable from "./DataTable";
 import { useMemo } from "react";
 import Loading from "../Loading";
 import { useSnackbar } from "notistack";
-import useLocalStorage from "@/hooks/useLocalStorage";
 import { useProducts } from "@/hooks/query/useProduct";
 import { useRouter } from "next/router";
+import { useSession } from "@/lib/sessionQuery";
+import Constants from "@/utils/Constants";
 
 const ProductTable = () => {
   const { t } = useTranslation("label");
   const { enqueueSnackbar } = useSnackbar();
   const { locale } = useRouter();
+  const [session, loading] = useSession();
   const columns = useMemo(() => {
-    return [
+    let cols = [
       {
         field: "name",
         headerName: t("name"),
@@ -45,10 +47,19 @@ const ProductTable = () => {
         editable: false,
       },
     ];
+    if (session?.user?.role === Constants.ROLES.ADMIN) {
+      cols.push({
+        field: "companyName",
+        headerName: t("company"),
+        flex: 1,
+        editable: false,
+      });
+    }
+    return cols;
   }, []);
   const { isProductLoading, isProductError, products } = useProducts(locale);
 
-  if (isProductLoading) return <Loading />;
+  if (loading || isProductLoading) return <Loading />;
 
   if (isProductError)
     enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });

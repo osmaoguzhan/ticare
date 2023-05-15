@@ -60,7 +60,7 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <InfoTable
-            title={"Latest 5 Completed Purchases"}
+            title={t("latest5CompletedPurchases")}
             headers={[t("title"), t("totalPrice"), t("createdAt")]}
             rows={analytics?.latestFiveCompletedPurchases || []}
           />

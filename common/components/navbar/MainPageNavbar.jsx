@@ -1,4 +1,9 @@
-import { faBoxOpen, faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBoxOpen,
+  faBars,
+  faSignIn,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   AppBar,
@@ -9,20 +14,39 @@ import {
   Button,
   darken,
   useTheme,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import SelectLanguage from "../inputs/SelectLanguage";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import { useEffect, useState } from "react";
+import useScreen from "@/hooks/useScreen";
 
 const Navbar = () => {
   const router = useRouter();
+
   const { t } = useTranslation();
   const theme = useTheme();
+  const [userMenu, setUserMenu] = useState(null);
+  const { width } = useScreen();
+
+  const handleOpenUserMenu = (event) => {
+    setUserMenu(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setUserMenu(null);
+  };
 
   const isHidden = {
     signin: router.pathname === "/auth/signin",
     signup: router.pathname === "/auth/signup",
   };
+
+  useEffect(() => {
+    handleCloseUserMenu();
+  }, [width]);
 
   return (
     <AppBar
@@ -121,14 +145,9 @@ const Navbar = () => {
               flexGrow: 1,
               justifyContent: "flex-end",
               alignItems: "center",
-              mr: 1,
             }}
           >
-            <Box
-              sx={{
-                mr: 1,
-              }}
-            >
+            <Box>
               <Button
                 sx={{
                   color: "#f8f8f8e6",
@@ -136,13 +155,48 @@ const Navbar = () => {
                     backgroundColor: darken(theme.palette.primary.main, 0.1),
                   },
                 }}
+                onClick={handleOpenUserMenu}
               >
                 <FontAwesomeIcon icon={faBars} size="2x" />
               </Button>
-              {/* <Menu anchorEl={null} open={true}>
-             <MenuItem>Signin</MenuItem>
-             <MenuItem>Signup</MenuItem>
-           </Menu> */}
+              <Menu
+                anchorEl={userMenu}
+                open={Boolean(userMenu)}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                onClose={handleCloseUserMenu}
+              >
+                <MenuItem
+                  onClick={() => {
+                    router.push("/auth/signin");
+                    handleCloseUserMenu();
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faSignIn}
+                    style={{
+                      marginRight: "0.5rem",
+                    }}
+                  />{" "}
+                  {t("signIn")}
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    router.push("/auth/signup");
+                    handleCloseUserMenu();
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faUserPlus}
+                    style={{
+                      marginRight: "0.5rem",
+                    }}
+                  />{" "}
+                  {t("signUp")}
+                </MenuItem>
+              </Menu>
             </Box>
           </Box>
         </Toolbar>

@@ -1,6 +1,7 @@
 import { Messages } from "@/utils/Messages";
 import { getSession } from "next-auth/react";
 import prisma from "@/lib/prismaConnector";
+import { getProducts } from "@/lib/dbQueries/product";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -13,67 +14,10 @@ export default async function handler(req, res) {
     });
   } else {
     try {
-      const products = await prisma.product.aggregateRaw({
-        pipeline: [
-          {
-            $lookup: {
-              from: "ProductSale",
-              localField: "_id",
-              foreignField: "productId",
-              as: "productSales",
-            },
-          },
-          {
-            $lookup: {
-              from: "ProductPurchase",
-              localField: "_id",
-              foreignField: "productId",
-              as: "productPurchases",
-            },
-          },
-          {
-            $project: {
-              _id: 0,
-              id: { $toString: "$_id" },
-              name: 1,
-              description: 1,
-              salePrice: 1,
-              purchasePrice: 1,
-              productType: 1,
-              productSales: {
-                $map: {
-                  input: "$productSales",
-                  as: "sale",
-                  in: {
-                    saleId: "$$sale.saleId",
-                    quantity: "$$sale.quantity",
-                  },
-                },
-              },
-              productPurchases: {
-                $map: {
-                  input: "$productPurchases",
-                  as: "purchase",
-                  in: {
-                    purchaseId: "$$purchase.purchaseId",
-                    quantity: "$$purchase.quantity",
-                  },
-                },
-              },
-              quantity: {
-                $subtract: [
-                  {
-                    $sum: "$productPurchases.quantity",
-                  },
-                  {
-                    $sum: "$productSales.quantity",
-                  },
-                ],
-              },
-            },
-          },
-        ],
-      });
+      const params = req.query;
+      const products = await prisma.product.aggregateRaw(
+        getProducts(session, params)
+      );
       res.status(200).json({
         success: true,
         data: products,

@@ -90,36 +90,30 @@ const SignupForm = ({ handleOnSubmit, t, validator }) => {
                 validation={validator.email}
               />
             </Grid>
-            <Grid
-              item
-              container
-              xs={12}
-              sx={{ display: "flex", justifyContent: "space-between" }}
-            >
-              <Grid item xs={5.9}>
-                <PasswordInput
-                  autoComplete={"password"}
-                  name={"password"}
-                  id={"password"}
-                  label={t("password")}
-                  fullWidth
-                  control={control}
-                  errors={errors}
-                  validation={validator.password}
-                />
-              </Grid>
-              <Grid item xs={5.9}>
-                <PasswordInput
-                  autoComplete={"passwordRepeat"}
-                  name={"passwordRepeat"}
-                  id={"passwordRepeat"}
-                  label={t("passwordRepeat")}
-                  fullWidth
-                  control={control}
-                  errors={errors}
-                  validation={validator.passwordRepeat(watch("password"))}
-                />
-              </Grid>
+
+            <Grid item xs={12} md={6} lg={6}>
+              <PasswordInput
+                autoComplete={"password"}
+                name={"password"}
+                id={"password"}
+                label={t("password")}
+                fullWidth
+                control={control}
+                errors={errors}
+                validation={validator.password}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} lg={6}>
+              <PasswordInput
+                autoComplete={"passwordRepeat"}
+                name={"passwordRepeat"}
+                id={"passwordRepeat"}
+                label={t("passwordRepeat")}
+                fullWidth
+                control={control}
+                errors={errors}
+                validation={validator.passwordRepeat(watch("password"))}
+              />
             </Grid>
           </Grid>
           <Button
