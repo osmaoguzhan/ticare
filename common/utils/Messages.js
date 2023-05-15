@@ -27,6 +27,9 @@ export const Messages = {
     purchaseCreated: "Purchase created successfully.",
     purchaseUpdated: "Purchase updated successfully.",
     purchaseNotFount: "Purchase not found.",
+    productDeleted: "Product(s) deleted successfully.",
+    customerDeleted: "Customer(s) deleted successfully.",
+    supplierDeleted: "Supplier(s) deleted successfully.",
   },
   tr: {
     userActivated: "Kullanıcı başarıyla aktifleştirildi.",
@@ -57,6 +60,9 @@ export const Messages = {
     purchaseCreated: "Satın alma başarıyla oluşturuldu.",
     purchaseUpdated: "Satın alma başarıyla güncellendi.",
     purchaseNotFount: "Satın alma bulunamadı.",
+    productDeleted: "Ürün(ler) başarıyla silindi.",
+    customerDeleted: "Müşteri(ler) başarıyla silindi.",
+    supplierDeleted: "Tedarikçi(ler) başarıyla silindi.",
   },
   pl: {
     userActivated: "Użytkownik został pomyślnie aktywowany.",
@@ -86,5 +92,8 @@ export const Messages = {
     purchaseCreated: "Zakup został pomyślnie utworzony.",
     purchaseUpdated: "Zakup został pomyślnie zaktualizowany.",
     purchaseNotFount: "Zakup nie znaleziony.",
+    productDeleted: "Produkt(y) został(y) pomyślnie usunięty(y).",
+    customerDeleted: "Klient(y) został(y) pomyślnie usunięty(y).",
+    supplierDeleted: "Dostawca(y) został(y) pomyślnie usunięty(y).",
   },
 };

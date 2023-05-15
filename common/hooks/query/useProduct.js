@@ -118,3 +118,33 @@ export const useSubmitProduct = ({ onSuccess, onError }) => {
     },
   });
 };
+
+const deleteProduct = async ({ locale, ids }) => {
+  const response = await (
+    await fetch(`/api/products/delete`, {
+      method: "POST",
+      headers: {
+        locale,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ids),
+    })
+  ).json();
+  if (!response.success) {
+    throw new Error(response.message);
+  }
+  return response;
+};
+
+export const useDeleteProduct = ({ onSuccess, onError }) => {
+  const queryClient = useQueryClient();
+  return useMutation(deleteProduct, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries("products");
+      onSuccess(data.message);
+    },
+    onError: (error) => {
+      onError(error.message);
+    },
+  });
+};

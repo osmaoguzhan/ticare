@@ -19,6 +19,11 @@ export function getProducts(session, params) {
   let query = {
     pipeline: [
       {
+        $match: {
+          isActive: true,
+        },
+      },
+      {
         $lookup: {
           from: "Company",
           localField: "companyId",
@@ -93,17 +98,56 @@ export function getProducts(session, params) {
     !_.isNil(params?.companyId)
   ) {
     let companyId = params?.companyId || session?.user?.company.id;
-    query = {
-      ...query,
-      pipeline: [
-        {
-          $match: {
-            companyId: { $oid: companyId },
-          },
-        },
-        ...query.pipeline,
-      ],
-    };
+    query.pipeline[0].$match.companyId = { $oid: companyId };
   }
   return query;
+}
+
+export function productRelationsQuery(ids) {
+  return {
+    pipeline: [
+      {
+        $match: {
+          _id: {
+            $in: ids.map((id) => {
+              return { $oid: id };
+            }),
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: "ProductSale",
+          localField: "_id",
+          foreignField: "productId",
+          as: "ProductSale",
+        },
+      },
+      {
+        $lookup: {
+          from: "ProductPurchase",
+          localField: "_id",
+          foreignField: "productId",
+          as: "ProductPurchase",
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          id: { $toString: "$_id" },
+          isDeletable: {
+            $eq: [
+              {
+                $add: [
+                  { $size: "$ProductSale" },
+                  { $size: "$ProductPurchase" },
+                ],
+              },
+              0,
+            ],
+          },
+        },
+      },
+    ],
+  };
 }
