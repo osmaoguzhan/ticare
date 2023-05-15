@@ -7,6 +7,10 @@ import { useSnackbar } from "notistack";
 import Loading from "@/components/general/Loading";
 import { useRouter } from "next/router";
 import { useSubmitProduct } from "@/hooks/query/useProduct";
+import { useSession } from "@/lib/sessionQuery";
+import SelectInput from "@/components/inputs/SelectInput";
+import { useCompanies } from "@/hooks/query/useCompanies";
+import Constants from "@/utils/Constants";
 
 const ProductsForm = ({ values }) => {
   const { t } = useTranslation(["label", "tooltip"]);
@@ -19,22 +23,51 @@ const ProductsForm = ({ values }) => {
   const router = useRouter();
   const { locale } = router;
   const validator = Validator("product");
+  const [session, loading] = useSession();
 
   const { mutateAsync: submitProduct, isLoading: isSubmitProductLoading } =
     useSubmitProduct({
       onSuccess: (message) => {
         enqueueSnackbar(message, { variant: "success" });
-        router.push(`/${locale}/products`);
+        let path =
+          session?.user?.role === Constants.ROLES.ADMIN
+            ? `/${locale}/admin/products`
+            : `/${locale}/products`;
+        router.push(path);
       },
       onError: (message) => {
         enqueueSnackbar(message, { variant: "error" });
       },
     });
+  const { isCompaniesLoading, isCompaniesError, companies } = useCompanies(
+    locale,
+    session?.user?.role
+  );
 
-  if (isSubmitProductLoading) return <Loading />;
+  if (loading || isCompaniesLoading || isSubmitProductLoading) {
+    return <Loading />;
+  }
+
+  if (isCompaniesError) {
+    enqueueSnackbar(t("error:general"), { variant: "error" });
+  }
 
   return (
     <Grid container spacing={2}>
+      {session?.user?.role === Constants.ROLES.ADMIN && (
+        <Grid item xs={12}>
+          <SelectInput
+            name={"companies"}
+            label={t("companies")}
+            id={"companies"}
+            control={control}
+            options={companies}
+            tooltip={t("tooltip:companiesField")}
+            value={values?.company || null}
+            disabled={!!values?.company}
+          />
+        </Grid>
+      )}
       <Grid item xs={12}>
         <FormInput
           label={t("name")}

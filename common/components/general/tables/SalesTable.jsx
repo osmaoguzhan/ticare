@@ -5,18 +5,21 @@ import { useMemo, useState } from "react";
 import { useSales } from "@/hooks/query/useSales";
 import Loading from "../Loading";
 import { useSnackbar } from "notistack";
-import { Typography, lighten } from "@mui/material";
+import { Typography, lighten, Tooltip } from "@mui/material";
 import { useRouter } from "next/router";
 import useModal from "@/hooks/useModal";
 import { useTheme } from "@emotion/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faHourglass1 } from "@fortawesome/free-solid-svg-icons";
+import { useSession } from "@/lib/sessionQuery";
+import Constants from "@/utils/Constants";
 
 const SalesTable = () => {
   const { t } = useTranslation("label");
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const theme = useTheme();
+  const [session, loading] = useSession();
 
   const style = {
     "& .MuiDataGrid-row": {
@@ -34,7 +37,7 @@ const SalesTable = () => {
   const [Modal, toggle, open] = useModal(false);
   const [currentSelected, setCurrentSelected] = useState(null);
   const columns = useMemo(() => {
-    return [
+    let cols = [
       {
         field: "title",
         headerName: t("title"),
@@ -106,11 +109,28 @@ const SalesTable = () => {
         },
       },
     ];
+    if (session?.user?.role === Constants.ROLES.ADMIN) {
+      cols.push({
+        field: "companyName",
+        headerName: t("company"),
+        flex: 1,
+        editable: false,
+        renderCell: (params) => {
+          return (
+            <Tooltip title={params.row.companyName} placement="top">
+              <Typography noWrap>{params.row.companyName}</Typography>
+            </Tooltip>
+          );
+        },
+      });
+    }
+
+    return cols;
   }, []);
 
   const { isSaleLoading, isSaleError, sales } = useSales(locale);
 
-  if (isSaleLoading) return <Loading />;
+  if (isSaleLoading || loading) return <Loading />;
 
   if (isSaleError)
     enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
@@ -129,7 +149,9 @@ const SalesTable = () => {
           setCurrentSelected(params.row.sales);
           toggle(!open);
         }}
-        isRowSelectable={(params) => params.row.status !== "COMPLETED"}
+        isRowSelectable={(params) =>
+          params.row.status !== "COMPLETED" || session?.user?.role === "ADMIN"
+        }
         sx={style}
       />
       <Modal title={t("saleDetails")} content={currentSelected} />

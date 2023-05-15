@@ -1,4 +1,5 @@
 import { Autocomplete, TextField, Tooltip } from "@mui/material";
+import { useTranslation } from "next-i18next";
 import { Controller } from "react-hook-form";
 
 const SelectInput = (props) => {
@@ -15,6 +16,8 @@ const SelectInput = (props) => {
     tooltip,
     ...other
   } = props;
+
+  const { t } = useTranslation("label");
 
   const setError = () => {
     return errors && errors[name] && errors[name].message
@@ -37,6 +40,7 @@ const SelectInput = (props) => {
           value={props.field.value}
           isOptionEqualToValue={(option, value) => option.key === value.key}
           getOptionLabel={(option) => option.label}
+          noOptionsText={t("noOptionsText")}
           renderInput={(params) => (
             <Tooltip title={tooltip}>
               <TextField

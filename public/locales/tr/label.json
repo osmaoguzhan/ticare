@@ -20,7 +20,6 @@
   "accountActivated": "Hesabınız aktifleştirildi. Hesabınıza giriş yapabilirsiniz.",
   "goToYourAccount": "Hesabınıza gidin",
   "dashboard": "Kontrol Paneli",
-  "brands": "Markalar",
   "purchases": "Alışlar",
   "sales": "Satışlar",
   "products": "Ürünler",
@@ -44,9 +43,6 @@
   "active": "Aktif",
   "inactive": "Pasif",
   "isActive": "Aktif mi?",
-  "brandName": "Marka Adı",
-  "addANewBrand": "Yeni Marka Ekle",
-  "editBrand": "Markayı Düzenle",
   "description": "Açıklama",
   "status": "Durum",
   "deleteConfirmation": "Silmek istediğinize emin misiniz?",
@@ -115,5 +111,8 @@
   "top5Customers": "En Çok Alış Yapan 5 Müşteri",
   "createdAt": "Oluşturulma Tarihi",
   "amount": "Miktar",
-  "noDataAvailable": "Veri Yok"
+  "noDataAvailable": "Veri Yok",
+  "company": "Şirket",
+  "companies": "Şirketler",
+  "noOptionsText": "Seçenek Yok"
 }

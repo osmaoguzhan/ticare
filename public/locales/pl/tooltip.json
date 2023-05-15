@@ -34,5 +34,6 @@
   "confirmPassword": "Potwierdź hasło jest takie samo jak nowe hasło.",
   "companyName": "Nazwa firmy jest wymagana. Długość musi zawierać się w przedziale od 2 do 64 znaków.",
   "companyWebsite": "Strona firmowa jest opcjonalna. Format powinien być prawidłowy. Były. https://www.example.com.",
-  "companyDescription": "Opis firmy jest opcjonalny. Maksymalna długość to 1000 znaków."
+  "companyDescription": "Opis firmy jest opcjonalny. Maksymalna długość to 1000 znaków.",
+  "companiesField": "Proszę wybrać firmy. Firmy są wymagane."
 }

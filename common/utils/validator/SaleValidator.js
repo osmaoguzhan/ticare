@@ -47,6 +47,12 @@ const SaleValidator = () => {
         message: t("requiredCustomer"),
       },
     },
+    product: {
+      required: {
+        value: true,
+        message: t("atLeastOneProduct"),
+      },
+    },
   };
 };
 

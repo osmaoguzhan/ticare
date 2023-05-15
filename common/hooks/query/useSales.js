@@ -47,6 +47,16 @@ export const useSales = (locale) => {
 };
 
 const submitSale = async ({ locale, data, saleId = undefined }) => {
+  let reformatted = {
+    customerId: data.customer.key.trim(),
+    products: data.products,
+    description: data.description.trim(),
+    title: data.title.trim(),
+    status: data.status,
+  };
+  if (data?.companies) {
+    reformatted.companyId = data.companies.key.trim();
+  }
   let ep = saleId ? `/api/sales/edit/${saleId}` : "/api/sales/add";
   let method = saleId ? "PUT" : "POST";
   const response = await (
@@ -56,7 +66,7 @@ const submitSale = async ({ locale, data, saleId = undefined }) => {
         locale,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(reformatted),
     })
   ).json();
   if (!response.success) {

@@ -1,7 +1,12 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import Constants from "@/utils/Constants";
 
-const getProducts = async (locale) => {
-  const res = await fetch("/api/products", {
+const getProducts = async (locale, session, companyId = "") => {
+  const path =
+    session?.user?.role === Constants.ROLES.ADMIN
+      ? `/api/products?companyId=${companyId}`
+      : "/api/products";
+  const res = await fetch(path, {
     headers: {
       locale,
     },
@@ -9,18 +14,33 @@ const getProducts = async (locale) => {
   return res.json();
 };
 
-export const useProducts = (locale) => {
-  const { isError, isLoading, data } = useQuery(
+export const useProducts = (
+  locale,
+  session,
+  companyId,
+  isProductsPage = true
+) => {
+  const { isError, isLoading, data, refetch, isRefetching } = useQuery(
     ["products"],
-    () => getProducts(locale),
+    () => getProducts(locale, session, companyId),
     {
       refetchOnMount: true,
       refetchOnReconnect: true,
       refetchOnWindowFocus: true,
+      enabled:
+        session?.user?.role === Constants.ROLES.USER ||
+        (session?.user?.role === Constants.ROLES.ADMIN && !!companyId) ||
+        isProductsPage,
     }
   );
   const products = data?.data;
-  return { isProductLoading: isLoading, isProductError: isError, products };
+  return {
+    isProductLoading: isLoading,
+    isProductError: isError,
+    products,
+    productsRefetch: refetch,
+    isRefetchingProducts: isRefetching,
+  };
 };
 
 const getProduct = async ({ locale, productId }) => {
@@ -52,7 +72,7 @@ export const useProductById = ({ locale, productId }) => {
 };
 
 const submitProduct = async ({ locale, data, productId }) => {
-  data = {
+  let reformatted = {
     name: data.name.trim(),
     description: data.description.trim(),
     productType: data.productType.trim(),
@@ -65,6 +85,9 @@ const submitProduct = async ({ locale, data, productId }) => {
         ? Number(data.salePrice.trim())
         : data.salePrice,
   };
+  if (data?.companies) {
+    reformatted.companyId = data.companies.key.trim();
+  }
   let ep = productId ? `/api/products/edit/${productId}` : "/api/products/add";
   let method = productId ? "PUT" : "POST";
   const response = await (
@@ -74,7 +97,7 @@ const submitProduct = async ({ locale, data, productId }) => {
         locale,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(reformatted),
     })
   ).json();
   if (!response.success) {

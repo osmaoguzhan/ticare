@@ -1,6 +1,7 @@
 import { Messages } from "@/utils/Messages";
 import { getSession } from "next-auth/react";
 import prisma from "@/lib/prismaConnector";
+import { getSuppliers } from "@/lib/dbQueries/supplier";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -13,10 +14,13 @@ export default async function handler(req, res) {
     });
   } else {
     try {
-      const suppliers = await prisma.supplier.findMany({
-        where: {
-          companyId: session?.user?.companyId,
-        },
+      const params = req.query;
+      const suppliers = await prisma.supplier.findMany(
+        getSuppliers(session, params)
+      );
+      suppliers.forEach((supplier) => {
+        supplier.companyName = supplier.company.name;
+        delete supplier.company;
       });
       res.status(200).json({
         success: true,

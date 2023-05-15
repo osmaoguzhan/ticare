@@ -7,13 +7,15 @@ import Loading from "../Loading";
 import { useSnackbar } from "notistack";
 import { useRouter } from "next/router";
 import { Tooltip, Typography } from "@mui/material";
+import { useSession } from "@/lib/sessionQuery";
 
 const CustomerTable = () => {
   const { t } = useTranslation("label");
   const { enqueueSnackbar } = useSnackbar();
   const { locale } = useRouter();
+  const [session, loading] = useSession();
   const columns = useMemo(() => {
-    return [
+    let cols = [
       {
         field: "name",
         headerName: t("customerName"),
@@ -67,11 +69,26 @@ const CustomerTable = () => {
         },
       },
     ];
+    if (session?.user?.role === "ADMIN")
+      cols.push({
+        field: "companyName",
+        headerName: t("company"),
+        flex: 1,
+        editable: false,
+        renderCell: (params) => {
+          return (
+            <Tooltip title={params.row.companyName} placement="top">
+              <Typography noWrap>{params.row.companyName}</Typography>
+            </Tooltip>
+          );
+        },
+      });
+    return cols;
   }, []);
 
   const { isCustomerLoading, isCustomerError, customers } = useCustomer(locale);
 
-  if (isCustomerLoading) return <Loading />;
+  if (isCustomerLoading || loading) return <Loading />;
 
   if (isCustomerError)
     enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });

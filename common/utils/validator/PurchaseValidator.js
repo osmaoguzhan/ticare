@@ -47,6 +47,12 @@ const PurchaseValidator = () => {
         message: t("requiredSupplier"),
       },
     },
+    product: {
+      required: {
+        value: true,
+        message: t("atLeastOneProduct"),
+      },
+    },
   };
 };
 

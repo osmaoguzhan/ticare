@@ -34,5 +34,6 @@
   "confirmPassword": "Confirm password is the same as the new password.",
   "companyName": "Company name is required. The length must be between 2 and 64 characters.",
   "companyWebsite": "Company website is optional. The format should be valid. Ex. https://www.example.com.",
-  "companyDescription": "Company description is optional. Maximum length is 1000 characters."
+  "companyDescription": "Company description is optional. Maximum length is 1000 characters.",
+  "companiesField": "Please select the company. The company is required."
 }

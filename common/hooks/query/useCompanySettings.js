@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Constants from "@/utils/Constants";
 
 const submitCompany = async ({ locale, data, companyId }) => {
   data = {
@@ -51,7 +52,7 @@ const getComapny = async (locale) => {
   return res.json();
 };
 
-export const useCompany = (locale) => {
+export const useCompany = (locale, role = "USER") => {
   const { isError, isLoading, data } = useQuery(
     ["settings"],
     () => getComapny(locale),
@@ -59,6 +60,7 @@ export const useCompany = (locale) => {
       refetchOnMount: true,
       refetchOnReconnect: false,
       refetchOnWindowFocus: false,
+      enabled: role === Constants.ROLES.USER,
     }
   );
   const company = data?.data;

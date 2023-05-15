@@ -1,6 +1,7 @@
 import { Messages } from "@/utils/Messages";
 import { getSession } from "next-auth/react";
 import prisma from "@/lib/prismaConnector";
+import { createSaleProductQuery, createSaleQuery } from "@/lib/dbQueries/sale";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -14,39 +15,12 @@ export default async function handler(req, res) {
   } else {
     try {
       const data = req.body;
-      const sale = await prisma.sale.create({
-        data: {
-          title: data.title,
-          description: data.description,
-          totalPrice: data.products.reduce(
-            (acc, product) => acc + product.salePrice * product.quantity,
-            0
-          ),
-          status: data.status,
-          customerId: data.customer.key,
-          companyId: session?.user?.company.id,
-        },
+      const sale = await prisma.sale.create(createSaleQuery(data, session));
+      res.status(200).json({
+        success: true,
+        message: Messages[locale || "gb"].saleCreated,
+        data: sale,
       });
-      if (sale) {
-        const productSales = await prisma.productSale.createMany({
-          data: data.products.map((product) => ({
-            productId: product.id,
-            saleId: sale.id,
-            quantity: product.quantity,
-            price: product.salePrice,
-          })),
-        });
-        res.status(200).json({
-          success: true,
-          message: Messages[locale || "gb"].saleCreated,
-          data: [productSales, sale],
-        });
-      } else {
-        res.status(500).json({
-          success: false,
-          message: Messages[locale || "gb"].somethingWentWrong,
-        });
-      }
     } catch (error) {
       res.status(500).json({
         success: false,

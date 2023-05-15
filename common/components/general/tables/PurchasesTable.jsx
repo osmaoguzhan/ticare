@@ -11,12 +11,14 @@ import { useTheme } from "@emotion/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faHourglass1 } from "@fortawesome/free-solid-svg-icons";
 import { usePurchases } from "@/hooks/query/usePurchase";
+import { useSession } from "@/lib/sessionQuery";
 
 const PurchasesTable = () => {
   const { t } = useTranslation("label");
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const theme = useTheme();
+  const [session, loading] = useSession();
 
   const style = {
     "& .MuiDataGrid-row": {
@@ -111,7 +113,7 @@ const PurchasesTable = () => {
   const { isPurchaseLoading, isPurchaseError, purchases } =
     usePurchases(locale);
 
-  if (isPurchaseLoading) return <Loading />;
+  if (isPurchaseLoading || loading) return <Loading />;
 
   if (isPurchaseError)
     enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
@@ -130,7 +132,9 @@ const PurchasesTable = () => {
           setCurrentSelected(params.row.purchases);
           toggle(!open);
         }}
-        isRowSelectable={(params) => params.row.status !== "COMPLETED"}
+        isRowSelectable={(params) =>
+          params.row.status !== "COMPLETED" || session?.user?.role === "ADMIN"
+        }
         sx={style}
       />
       <Modal title={t("purchaseDetails")} content={currentSelected} />

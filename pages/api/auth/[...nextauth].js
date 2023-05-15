@@ -4,6 +4,7 @@ import prisma from "@/lib/prismaConnector";
 import bcrypt from "bcryptjs";
 import { decrypt } from "@/utils/helpers/cipher";
 import { Messages } from "@/utils/Messages";
+import { signIn } from "next-auth/react";
 
 export const authOptions = {
   session: {

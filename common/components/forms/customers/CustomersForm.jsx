@@ -5,9 +5,13 @@ import { useForm } from "react-hook-form";
 import Validator from "@/utils/validator/Validator";
 import AddressAutoComplete from "@/components/inputs/AddressAutoComplete";
 import { useSnackbar } from "notistack";
-import Loading from "@/components/general/Loading";
 import { useRouter } from "next/router";
 import { useSubmitCustomer } from "@/hooks/query/useCustomer";
+import { useSession } from "@/lib/sessionQuery";
+import SelectInput from "@/components/inputs/SelectInput";
+import { useCompanies } from "@/hooks/query/useCompanies";
+import Constants from "@/utils/Constants";
+import Loading from "@/components/general/Loading";
 
 const CustomersForm = ({ values }) => {
   const { t } = useTranslation(["label", "tooltip"]);
@@ -20,18 +24,37 @@ const CustomersForm = ({ values }) => {
   const router = useRouter();
   const { locale } = router;
   const validator = Validator("supplier/customer");
+  const [session, loading] = useSession();
   const { mutate: submitCustomer, isLoading: isSubmitCustomerLoading } =
     useSubmitCustomer({
       onSuccess: (message) => {
         enqueueSnackbar(message, { variant: "success" });
-        router.push(`/${locale}/customers`);
+        let path =
+          session?.user?.role === Constants.ROLES.ADMIN
+            ? `/${locale}/admin/customers`
+            : `/${locale}/customers`;
+        router.push(path);
       },
       onError: (message) => {
         enqueueSnackbar(message, { variant: "error" });
       },
     });
+  const { isCompaniesLoading, isCompaniesError, companies } = useCompanies(
+    locale,
+    session?.user?.role
+  );
 
-  if (isSubmitCustomerLoading) return <Loading />;
+  if (
+    loading ||
+    (session?.user?.role === Constants.ROLES.ADMIN && isCompaniesLoading) ||
+    isSubmitCustomerLoading
+  ) {
+    return <Loading />;
+  }
+
+  if (isCompaniesError) {
+    enqueueSnackbar(t("error:general"), { variant: "error" });
+  }
 
   return (
     <Grid container spacing={2}>
@@ -39,6 +62,20 @@ const CustomersForm = ({ values }) => {
         <Typography variant="h6">{t("generalInfo")}</Typography>
         <Divider />
       </Grid>
+      {session?.user?.role === Constants.ROLES.ADMIN && (
+        <Grid item xs={12}>
+          <SelectInput
+            name={"companies"}
+            label={t("companies")}
+            id={"companies"}
+            control={control}
+            options={companies}
+            tooltip={t("tooltip:companiesField")}
+            value={values?.company || null}
+            disabled={!!values?.company}
+          />
+        </Grid>
+      )}
       <Grid item xs={12}>
         <FormInput
           label={t("customerName")}
@@ -107,7 +144,6 @@ const CustomersForm = ({ values }) => {
           tooltip={t("tooltip:addressLine2")}
         />
       </Grid>
-
       <Grid item xs={12} mt={1}>
         <Button
           fullWidth

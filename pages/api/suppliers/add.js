@@ -1,6 +1,7 @@
 import { Messages } from "@/utils/Messages";
 import { getSession } from "next-auth/react";
 import prisma from "@/lib/prismaConnector";
+import Constants from "@/utils/Constants";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -14,7 +15,9 @@ export default async function handler(req, res) {
   } else {
     try {
       const data = req.body;
-      data.companyId = session?.user?.company.id;
+      if (session?.user?.role === Constants.ROLES.USER) {
+        data.companyId = session?.user?.company.id;
+      }
       const supplier = await prisma.supplier.create({ data });
       res.status(200).json({
         success: true,

@@ -41,15 +41,25 @@ export default function Home() {
               xs: "90%",
               md: "950px",
             },
-            display: "flex",
-            justifyContent: "space-between",
           }}
         >
-          <Grid item xs={12} md={6}>
+          <Grid
+            item
+            md={6}
+            sx={{
+              display: {
+                xs: "none",
+                md: "block",
+                lg: "block",
+              },
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
             <Card style={{ borderRadius: "20px" }}>
               <CardMedia
                 component={"img"}
-                src={"/images/business.jpg"}
+                src={"/images/business.webp"}
                 height={"650px"}
               />
             </Card>

@@ -1,7 +1,11 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
-
-const getCustomers = async (locale) => {
-  const res = await fetch("/api/customers", {
+import Constants from "@/utils/Constants";
+const getCustomers = async (locale, session, companyId = "") => {
+  const path =
+    session?.user?.role === Constants.ROLES.ADMIN
+      ? `/api/customers?companyId=${companyId}`
+      : "/api/customers";
+  const res = await fetch(path, {
     headers: {
       locale,
     },
@@ -18,18 +22,33 @@ const getCustomer = async ({ locale, customerId }) => {
   return res.json();
 };
 
-export const useCustomer = (locale) => {
-  const { isError, isLoading, data } = useQuery(
+export const useCustomer = (
+  locale,
+  session,
+  companyId,
+  isCustomersPage = true
+) => {
+  const { isError, isLoading, data, refetch, isRefetching } = useQuery(
     ["customers"],
-    () => getCustomers(locale),
+    () => getCustomers(locale, session, companyId),
     {
       refetchOnMount: true,
       refetchOnReconnect: true,
       refetchOnWindowFocus: true,
+      enabled:
+        session?.user?.role === Constants.ROLES.USER ||
+        (session?.user?.role === Constants.ROLES.ADMIN && !!companyId) ||
+        isCustomersPage,
     }
   );
   const customers = data?.data;
-  return { isCustomerLoading: isLoading, isCustomerError: isError, customers };
+  return {
+    isCustomerLoading: isLoading,
+    isCustomerError: isError,
+    customers,
+    customersRefetch: refetch,
+    isRefetchingCustomers: isRefetching,
+  };
 };
 
 export const useCustomerById = ({ locale, customerId }) => {
@@ -52,7 +71,7 @@ export const useCustomerById = ({ locale, customerId }) => {
 };
 
 const submitCustomer = async ({ locale, data, customerId }) => {
-  data = {
+  let reformatted = {
     name: data.name.trim(),
     surname: data.surname.trim(),
     phoneNumber: data.phoneNumber.trim(),
@@ -60,6 +79,9 @@ const submitCustomer = async ({ locale, data, customerId }) => {
     addressLine1: data.addressLine1.trim(),
     addressLine2: data.addressLine2.trim(),
   };
+  if (data?.companies) {
+    reformatted.companyId = data.companies.key.trim();
+  }
   let ep = customerId
     ? `/api/customers/edit/${customerId}`
     : "/api/customers/add";
@@ -71,7 +93,7 @@ const submitCustomer = async ({ locale, data, customerId }) => {
         locale,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(reformatted),
     })
   ).json();
   if (!response.success) {
