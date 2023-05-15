@@ -114,3 +114,33 @@ export const useSubmitCustomer = ({ onSuccess, onError }) => {
     },
   });
 };
+
+const deleteCustomer = async ({ locale, ids }) => {
+  const response = await (
+    await fetch(`/api/customers/delete`, {
+      method: "POST",
+      headers: {
+        locale,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ids),
+    })
+  ).json();
+  if (!response.success) {
+    throw new Error(response.message);
+  }
+  return response;
+};
+
+export const useDeleteCustomer = ({ onSuccess, onError }) => {
+  const queryClient = useQueryClient();
+  return useMutation(deleteCustomer, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries("customers");
+      onSuccess(data.message);
+    },
+    onError: (error) => {
+      onError(error.message);
+    },
+  });
+};

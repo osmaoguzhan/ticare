@@ -22,6 +22,7 @@ const DataTable = ({
   columns,
   rows,
   disabledCheckboxSelection = false,
+  deleteFunc,
   ...other
 }) => {
   const [selectedRows, setSelectedRows] = useState([]);
@@ -57,7 +58,12 @@ const DataTable = ({
       disableSelectionOnClick
       components={{
         Toolbar: () => (
-          <CustomToolbar selectedRows={selectedRows} router={router} />
+          <CustomToolbar
+            setSelectedRows={setSelectedRows}
+            selectedRows={selectedRows}
+            router={router}
+            deleteFunc={deleteFunc}
+          />
         ),
       }}
       onSelectionModelChange={(ids) => {
@@ -82,7 +88,12 @@ const DataTable = ({
   );
 };
 
-const CustomToolbar = ({ selectedRows, router }) => {
+const CustomToolbar = ({
+  setSelectedRows,
+  selectedRows,
+  router,
+  deleteFunc,
+}) => {
   const { t } = useTranslation("label");
   const theme = useTheme();
   return (
@@ -129,10 +140,13 @@ const CustomToolbar = ({ selectedRows, router }) => {
                 cancelButtonColor: theme.palette.primary.error,
                 confirmButtonText: t("yes"),
                 cancelButtonText: t("no"),
-              }).then((result) => {
+              }).then(async (result) => {
                 if (result.isConfirmed) {
+                  await deleteFunc({
+                    locale: router.locale,
+                    ids: selectedRows.map((row) => row.id),
+                  });
                   setSelectedRows([]);
-                  Swal.fire(t("deleted"), t("deletedSuccessfully"), "success");
                 }
               });
             }}

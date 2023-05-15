@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import { useTranslation } from "next-i18next";
 import DataTable from "./DataTable";
 import { useMemo } from "react";
-import { useCustomer } from "@/hooks/query/useCustomer";
+import { useCustomer, useDeleteCustomer } from "@/hooks/query/useCustomer";
 import Loading from "../Loading";
 import { useSnackbar } from "notistack";
 import { useRouter } from "next/router";
@@ -87,8 +87,18 @@ const CustomerTable = () => {
   }, []);
 
   const { isCustomerLoading, isCustomerError, customers } = useCustomer(locale);
+  const { mutateAsync: deleteCustomer, isLoading: isDeleteCustomerLoading } =
+    useDeleteCustomer({
+      onSuccess: (message) => {
+        enqueueSnackbar(message, { variant: "success" });
+      },
+      onError: (message) => {
+        enqueueSnackbar(message, { variant: "error" });
+      },
+    });
 
-  if (isCustomerLoading || loading) return <Loading />;
+  if (isCustomerLoading || loading || isDeleteCustomerLoading)
+    return <Loading />;
 
   if (isCustomerError)
     enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
@@ -100,7 +110,11 @@ const CustomerTable = () => {
         width: "100%",
       }}
     >
-      <DataTable rows={customers} columns={columns} />
+      <DataTable
+        rows={customers}
+        columns={columns}
+        deleteFunc={deleteCustomer}
+      />
     </Box>
   );
 };

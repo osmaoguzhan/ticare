@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import { useTranslation } from "next-i18next";
 import DataTable from "./DataTable";
 import { useMemo } from "react";
-import { useSupplier } from "@/hooks/query/useSupplier";
+import { useDeleteSupplier, useSupplier } from "@/hooks/query/useSupplier";
 import Loading from "../Loading";
 import { useSnackbar } from "notistack";
 import { Tooltip, Typography } from "@mui/material";
@@ -14,7 +14,6 @@ const SupplierTable = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { locale } = useRouter();
   const [session, loading] = useSession();
-
   const columns = useMemo(() => {
     let cols = [
       {
@@ -86,8 +85,18 @@ const SupplierTable = () => {
   }, []);
 
   const { isSupplierLoading, isSupplierError, suppliers } = useSupplier(locale);
+  const { mutateAsync: deleteSupplier, isLoading: isDeleteSupplierLoading } =
+    useDeleteSupplier({
+      onSuccess: (message) => {
+        enqueueSnackbar(message, { variant: "success" });
+      },
+      onError: (message) => {
+        enqueueSnackbar(message, { variant: "error" });
+      },
+    });
 
-  if (isSupplierLoading || loading) return <Loading />;
+  if (isSupplierLoading || loading || isDeleteSupplierLoading)
+    return <Loading />;
 
   if (isSupplierError)
     enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
@@ -99,7 +108,11 @@ const SupplierTable = () => {
         width: "100%",
       }}
     >
-      <DataTable rows={suppliers} columns={columns} />
+      <DataTable
+        rows={suppliers}
+        columns={columns}
+        deleteFunc={deleteSupplier}
+      />
     </Box>
   );
 };

@@ -115,3 +115,33 @@ export const useSubmitSupplier = ({ onSuccess, onError }) => {
     },
   });
 };
+
+const deleteSupplier = async ({ locale, ids }) => {
+  const response = await (
+    await fetch(`/api/suppliers/delete`, {
+      method: "POST",
+      headers: {
+        locale,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ids),
+    })
+  ).json();
+  if (!response.success) {
+    throw new Error(response.message);
+  }
+  return response;
+};
+
+export const useDeleteSupplier = ({ onSuccess, onError }) => {
+  const queryClient = useQueryClient();
+  return useMutation(deleteSupplier, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries("suppliers");
+      onSuccess(data.message);
+    },
+    onError: (error) => {
+      onError(error.message);
+    },
+  });
+};

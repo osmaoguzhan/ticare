@@ -4,7 +4,7 @@ import DataTable from "./DataTable";
 import { useMemo } from "react";
 import Loading from "../Loading";
 import { useSnackbar } from "notistack";
-import { useProducts } from "@/hooks/query/useProduct";
+import { useDeleteProduct, useProducts } from "@/hooks/query/useProduct";
 import { useRouter } from "next/router";
 import { useSession } from "@/lib/sessionQuery";
 import Constants from "@/utils/Constants";
@@ -58,8 +58,17 @@ const ProductTable = () => {
     return cols;
   }, []);
   const { isProductLoading, isProductError, products } = useProducts(locale);
+  const { mutateAsync: deleteProducts, isLoading: isDeleteProductLoading } =
+    useDeleteProduct({
+      onSuccess: (message) => {
+        enqueueSnackbar(message, { variant: "success" });
+      },
+      onError: (message) => {
+        enqueueSnackbar(message, { variant: "error" });
+      },
+    });
 
-  if (loading || isProductLoading) return <Loading />;
+  if (loading || isProductLoading || isDeleteProductLoading) return <Loading />;
 
   if (isProductError)
     enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
@@ -71,7 +80,11 @@ const ProductTable = () => {
         width: "100%",
       }}
     >
-      <DataTable rows={products} columns={columns} />
+      <DataTable
+        rows={products}
+        columns={columns}
+        deleteFunc={deleteProducts}
+      />
     </Box>
   );
 };
