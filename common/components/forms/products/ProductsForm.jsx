@@ -44,7 +44,11 @@ const ProductsForm = ({ values }) => {
     session?.user?.role
   );
 
-  if (loading || isCompaniesLoading || isSubmitProductLoading) {
+  if (
+    loading ||
+    (session?.user?.role === Constants.ROLES.ADMIN && isCompaniesLoading) ||
+    isSubmitProductLoading
+  ) {
     return <Loading />;
   }
 

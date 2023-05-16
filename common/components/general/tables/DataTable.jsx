@@ -51,7 +51,7 @@ const DataTable = ({
 
   return (
     <DataGrid
-      rows={rows}
+      rows={rows || []}
       columns={columns}
       pageSize={10}
       rowsPerPageOptions={[10]}
