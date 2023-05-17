@@ -114,5 +114,13 @@
   "noDataAvailable": "No data available",
   "company": "Company",
   "companies": "Companies",
-  "noOptionsText": "No options"
+  "noOptionsText": "No options",
+  "easyDescription": "Experience the ease and simplicity of our inventory control management solution, designed to seamlessly organize and track your inventory with just a few clicks.",
+  "fastDescription": "Accelerate your business operations with our high-speed inventory control management system, enabling you to efficiently manage stock levels, streamline workflows, and ensure prompt order fulfillment.",
+  "freeDescription": "Unlock the power of efficient inventory management without spending a dime. Our feature-rich and cost-free inventory control software empowers businesses of all sizes to optimize stock levels, reduce waste, and maximize profitability.",
+  "forgotPasswordQuestion": "Forgot your password?",
+  "forgottenPassword": "Forgotten Password",
+  "forgotPasswordDescription": "Enter your email address and we'll send you a link to reset your password.",
+  "submit": "Submit",
+  "resetPassword": "Reset Password"
 }

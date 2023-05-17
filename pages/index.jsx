@@ -45,27 +45,21 @@ export default function Home() {
         >
           <Grid
             item
-            md={6}
+            xs={12}
             sx={{
-              display: {
-                xs: "none",
-                md: "block",
-                lg: "block",
-              },
-              flexDirection: "column",
-              justifyContent: "center",
+              mb: 2,
             }}
           >
-            <Card style={{ borderRadius: "20px" }}>
+            <Card
+              sx={{
+                borderRadius: "20px",
+              }}
+            >
               <CardMedia
                 component={"img"}
                 src={"/images/business.webp"}
-                height={"650px"}
+                height={"250px"}
               />
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={6} sx={{ mb: 2 }}>
-            <Card sx={{ borderRadius: "20px" }}>
               <CardContent>
                 <FontAwesomeIcon
                   icon={faBaby}
@@ -75,13 +69,12 @@ export default function Home() {
                 <Typography
                   component={"div"}
                   color={theme.palette.primary.text}
-                  style={{ marginBottom: "10%" }}
+                  style={{ marginBottom: "5%" }}
                 >
                   <Typography variant="h6">
                     {t("easy").toUpperCase()}
                   </Typography>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam, quae. Lorem ipsum dolor sit amet consectetur
+                  {t("easyDescription")}
                 </Typography>
                 <FontAwesomeIcon
                   icon={faTruckFast}
@@ -91,14 +84,12 @@ export default function Home() {
                 <Typography
                   component={"div"}
                   color={theme.palette.primary.text}
-                  style={{ marginBottom: "10%" }}
+                  style={{ marginBottom: "5%" }}
                 >
                   <Typography variant="h6" color={theme.palette.primary.text}>
                     {t("fast").toUpperCase()}
                   </Typography>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam, quae. Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Quisquam, quae. Lorem ipsum dolor sit amet
+                  {t("fastDescription")}
                 </Typography>
                 <FontAwesomeIcon
                   icon={faCreativeCommonsNcEu}
@@ -108,14 +99,12 @@ export default function Home() {
                 <Typography
                   component={"div"}
                   color={theme.palette.primary.text}
-                  style={{ marginBottom: "10%" }}
+                  style={{ marginBottom: "5%" }}
                 >
                   <Typography variant="h6" color={theme.palette.primary.text}>
                     {t("free").toUpperCase()}
                   </Typography>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam, quae. Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Quisquam, quae. Lorem ipsum dolor sit amet
+                  {t("freeDescription")}
                 </Typography>
               </CardContent>
             </Card>

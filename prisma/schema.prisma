@@ -18,17 +18,18 @@ enum Status {
 }
 
 model User {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String                @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   surname     String
-  email       String   @unique
+  email       String                @unique
   password    String
-  role        Role     @default(USER)
+  role        Role                  @default(USER)
   phoneNumber String?
-  settings    Json     @default("{\"language\": \"en\", \"currency\": \"USD\",  \"timezone\": \"UTC\", \"theme\": \"light\"}")
-  isActivated Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  settings    Json                  @default("{\"language\": \"en\", \"currency\": \"USD\"}")
+  isActivated Boolean               @default(false)
+  resetTokens ResetPasswordTokens[]
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
   company     Company?
 }
 
@@ -104,7 +105,7 @@ model Sale {
   id          String        @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   description String?
-  totalPrice Float
+  totalPrice  Float
   company     Company       @relation(fields: [companyId], references: [id])
   companyId   String        @db.ObjectId
   customer    Customer      @relation(fields: [customerId], references: [id])
@@ -119,7 +120,7 @@ model Purchase {
   id              String            @id @default(auto()) @map("_id") @db.ObjectId
   title           String
   description     String?
-  totalPrice     Float
+  totalPrice      Float
   company         Company           @relation(fields: [companyId], references: [id])
   companyId       String            @db.ObjectId
   supplier        Supplier          @relation(fields: [supplierId], references: [id])
@@ -173,4 +174,13 @@ model Timezone {
   isdst  Boolean
   text   String
   utc    Json[]
+}
+
+model ResetPasswordTokens {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  token          String   @unique
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String   @db.ObjectId
+  isUsed         Boolean  @default(false)
+  expireDatetime DateTime
 }

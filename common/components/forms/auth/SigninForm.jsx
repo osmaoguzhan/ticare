@@ -4,6 +4,10 @@ import FormInput from "../../inputs/FormInput";
 import PasswordInput from "../../inputs/PasswordInput";
 import { useForm } from "react-hook-form";
 import { useTheme } from "@emotion/react";
+import Swal from "sweetalert2";
+import Constants from "@/utils/Constants";
+import _ from "lodash";
+import { useRouter } from "next/router";
 
 const SigninForm = ({ handleOnSubmit, t }) => {
   const {
@@ -12,6 +16,7 @@ const SigninForm = ({ handleOnSubmit, t }) => {
     formState: { errors },
   } = useForm();
   const theme = useTheme();
+  const router = useRouter();
 
   return (
     <Grid
@@ -75,6 +80,51 @@ const SigninForm = ({ handleOnSubmit, t }) => {
         <Grid container justifyContent={"flex-end"}>
           <Grid item>
             <Link href={"/auth/signup"}>{t("dontYouHaveAnAccount")}</Link>
+          </Grid>
+        </Grid>
+        <Grid container justifyContent={"flex-end"}>
+          <Grid item>
+            <Link
+              href={""}
+              onClick={(e) => {
+                e.preventDefault();
+                Swal.fire({
+                  title: t("forgottenPassword"),
+                  html: t("forgotPasswordDescription"),
+                  input: "text",
+                  icon: "info",
+                  showCancelButton: true,
+                  confirmButtonText: t("submit"),
+                  cancelButtonText: t("cancel"),
+                  preConfirm: (email) => {
+                    if (_.isNil(email.match(Constants.emailRegex))) {
+                      Swal.showValidationMessage(t("error:invalidEmail"));
+                      return;
+                    }
+                    return email;
+                  },
+                }).then(async (result) => {
+                  if (result.isConfirmed) {
+                    const response = await (
+                      await fetch(`/api/auth/forgot-password/${result.value}`, {
+                        method: "GET",
+                        headers: {
+                          locale: router.locale,
+                          "Content-Type": "application/json",
+                        },
+                      })
+                    ).json();
+                    Swal.fire({
+                      title: response.success ? t("success") : t("error"),
+                      text: response.message,
+                      icon: response.success ? "success" : "error",
+                    });
+                  }
+                });
+              }}
+            >
+              {t("forgotPasswordQuestion")}
+            </Link>
           </Grid>
         </Grid>
       </Box>

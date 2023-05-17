@@ -4,7 +4,7 @@ import DataTable from "./DataTable";
 import { useMemo, useState } from "react";
 import Loading from "../Loading";
 import { useSnackbar } from "notistack";
-import { Typography, lighten } from "@mui/material";
+import { Typography, lighten, Tooltip } from "@mui/material";
 import { useRouter } from "next/router";
 import useModal from "@/hooks/useModal";
 import { useTheme } from "@emotion/react";
@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faHourglass1 } from "@fortawesome/free-solid-svg-icons";
 import { usePurchases } from "@/hooks/query/usePurchase";
 import { useSession } from "@/lib/sessionQuery";
+import Constants from "@/utils/Constants";
 
 const PurchasesTable = () => {
   const { t } = useTranslation("label");
@@ -36,7 +37,7 @@ const PurchasesTable = () => {
   const [Modal, toggle, open] = useModal(false);
   const [currentSelected, setCurrentSelected] = useState(null);
   const columns = useMemo(() => {
-    return [
+    let cols = [
       {
         field: "title",
         headerName: t("title"),
@@ -108,6 +109,23 @@ const PurchasesTable = () => {
         },
       },
     ];
+    if (session?.user?.role === Constants.ROLES.ADMIN) {
+      cols.push({
+        field: "companyName",
+        headerName: t("company"),
+        flex: 1,
+        editable: false,
+        renderCell: (params) => {
+          return (
+            <Tooltip title={params.row.companyName} placement="top">
+              <Typography noWrap>{params.row.companyName}</Typography>
+            </Tooltip>
+          );
+        },
+      });
+    }
+
+    return cols;
   }, []);
 
   const { isPurchaseLoading, isPurchaseError, purchases } =

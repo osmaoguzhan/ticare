@@ -114,5 +114,13 @@
   "noDataAvailable": "Brak dostępnych danych",
   "company": "Firma",
   "companies": "Firmy",
-  "noOptionsText": "Brak dostępnych opcji"
+  "noOptionsText": "Brak dostępnych opcji",
+  "easyDescription": "Doświadcz łatwości i prostoty naszego systemu zarządzania kontrolą zapasów, zaprojektowanego do intuicyjnego organizowania i śledzenia twoich zapasów za pomocą zaledwie kilku kliknięć.",
+  "fastDescription": "Przyspiesz swoje operacje biznesowe dzięki naszemu szybkiemu systemowi zarządzania kontrolą zapasów, umożliwiającemu skuteczne zarządzanie poziomami zapasów, optymalizację procesów pracy i zapewnienie promptowego wypełnienia zamówień.",
+  "freeDescription": "Odblokuj potencjał efektywnego zarządzania zapasami, nie wydając ani grosza. Nasze funkcjonalne i bezpłatne oprogramowanie do kontroli zapasów umożliwia przedsiębiorstwom w dowolnym rozmiarze optymalizację poziomów zapasów, redukcję marnotrawstwa i maksymalizację zysków.",
+  "forgotPasswordQuestion": "Zapomniałeś hasła?",
+  "forgotPassword": "Zapomniane hasło",
+  "forgotPasswordDescription": "Wprowadź adres e-mail powiązany z Twoim kontem, a my wyślemy Ci link do resetowania hasła.",
+  "submit": "Zatwierdź",
+  "resetPassword": "Zresetuj hasło"
 }

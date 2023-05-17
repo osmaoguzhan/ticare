@@ -13,7 +13,7 @@ import Constants from "@/utils/Constants";
 
 const Signin = () => {
   const { setLoading } = useLoading();
-  const { t } = useTranslation("label");
+  const { t } = useTranslation(["label", "error"]);
   const router = useRouter();
 
   const handleOnSubmit = async (formData) => {
