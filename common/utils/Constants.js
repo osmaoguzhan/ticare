@@ -3,13 +3,11 @@ import {
   faCubes,
   faDashboard,
   faEuro,
-  faTags,
   faSignOut,
   faUser,
   faTruck,
   faPerson,
   faCashRegister,
-  faTicketAlt,
   faTicket,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -121,9 +119,9 @@ const Constants = {
     ];
     switch (role) {
       case "ADMIN":
-        let tickets = { key: "tickets", icon: faTicket };
+        //let tickets = { key: "tickets", icon: faTicket };
         if (companyCount > 0) {
-          return [...commonMenuItems, tickets];
+          return [...commonMenuItems];
         }
         return [tickets];
       case "USER":
@@ -258,6 +256,47 @@ const Constants = {
   ROLES: {
     ADMIN: "ADMIN",
     USER: "USER",
+  },
+  resetPasswordTemplate: (language, token) => {
+    switch (language) {
+      case "pl":
+        return {
+          subject: "Zresetuj hasło",
+          html: `
+            <h3>Witaj,</h3>
+            <p>Jeśli chcesz zresetować hasło, kliknij w poniższy link:</p>
+            <p><a target="_" href="${process.env.NEXTAUTH_URL}/pl/auth/reset-password/${token}">${process.env.NEXTAUTH_URL}/pl/auth/reset-password/${token}</a></p>
+            <p>Jeśli nie chcesz zresetować hasła, zignoruj tę wiadomość.</p>
+            <p>Pozdrawiamy,</p>
+            <p>Zespół wsparcia Ticare</p>
+          `,
+        };
+      case "tr":
+        return {
+          subject: "Şifreyi sıfırla",
+          html: `
+            <h3>Merhaba,</h3>
+            <p>Şifrenizi sıfırlamak istiyorsanız, aşağıdaki bağlantıya tıklayın:</p>
+            <p><a target="_" href="${process.env.NEXTAUTH_URL}/tr/auth/reset-password/${token}">${process.env.NEXTAUTH_URL}/tr/auth/reset-password/${token}</a></p>
+            <p>Şifrenizi sıfırlamak istemiyorsanız, bu mesajı görmezden gelin.</p>
+            <p>İyi günler,</p>
+            <p>Ticare Destek Ekibi</p>
+          `,
+        };
+      case "gb":
+      default:
+        return {
+          subject: "Reset password",
+          html: `
+            <h3>Hello,</h3>
+            <p>If you want to reset your password, click on the link below:</p>
+            <p><a target="_" href="${process.env.NEXTAUTH_URL}/gb/auth/reset-password/${token}">${process.env.NEXTAUTH_URL}/gb/auth/reset-password/${token}</a></p>
+            <p>If you don't want to reset your password, ignore this message.</p>
+            <p>Best regards,</p>
+            <p>Ticare Support Team</p>
+          `,
+        };
+    }
   },
 };
 

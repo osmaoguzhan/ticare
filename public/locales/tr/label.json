@@ -114,5 +114,13 @@
   "noDataAvailable": "Veri Yok",
   "company": "Şirket",
   "companies": "Şirketler",
-  "noOptionsText": "Seçenek Yok"
+  "noOptionsText": "Seçenek Yok",
+  "easyDescription": "Envanter kontrol yönetimimizin kullanımı kolay ve sezgisel arayüzüyle envanterinizi kolayca düzenleyin ve takip edin.",
+  "fastDescription": "Işık hızında envanter kontrol yönetim sistemimizle iş süreçlerinizi hızlandırın; stok seviyelerinizi verimli bir şekilde yönetin, iş akışlarınızı optimize edin ve hızlı sipariş yerleştirme sağlayın.",
+  "freeDescription": "Bir kuruş harcamadan envanterinizi kontrol altına alın. Özellikleriyle dolu ve ücretsiz envanter kontrol yazılımımız, her ölçekteki işletmelerin stok seviyelerini optimize etmesine, israfı azaltmasına ve karlılığı maksimize etmesine olanak sağlar.",
+  "forgotPasswordQuestion": "Parolanızı mı unuttunuz?",
+  "forgottenPassword": "Parolamı Unuttum",
+  "forgotPasswordDescription": "Parolanızı sıfırlamak için e-posta adresinizi girin. Size bir e-posta göndereceğiz.",
+  "submit": "Gönder",
+  "resetPassword": "Parolayı Sıfırla"
 }

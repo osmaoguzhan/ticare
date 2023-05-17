@@ -1,6 +1,7 @@
 import { Messages } from "@/utils/Messages";
 import { getSession } from "next-auth/react";
 import prisma from "@/lib/prismaConnector";
+import Constants from "@/utils/Constants";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });

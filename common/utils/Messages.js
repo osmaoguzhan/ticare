@@ -30,6 +30,10 @@ export const Messages = {
     productDeleted: "Product(s) deleted successfully.",
     customerDeleted: "Customer(s) deleted successfully.",
     supplierDeleted: "Supplier(s) deleted successfully.",
+    methodNotAllowed: "Method not allowed.",
+    resetPasswordEmailSent:
+      "Reset password email sent successfully. Please check your email.",
+    noEmailFound: "No account found with this email.",
   },
   tr: {
     userActivated: "Kullanıcı başarıyla aktifleştirildi.",
@@ -63,6 +67,10 @@ export const Messages = {
     productDeleted: "Ürün(ler) başarıyla silindi.",
     customerDeleted: "Müşteri(ler) başarıyla silindi.",
     supplierDeleted: "Tedarikçi(ler) başarıyla silindi.",
+    methodNotAllowed: "İzin verilmeyen metod.",
+    resetPasswordEmailSent:
+      "Parola sıfırlama e-postası başarıyla gönderildi. Lütfen e-postanızı kontrol edin.",
+    noEmailFound: "Bu e-posta ile hesap bulunamadı.",
   },
   pl: {
     userActivated: "Użytkownik został pomyślnie aktywowany.",
@@ -95,5 +103,9 @@ export const Messages = {
     productDeleted: "Produkt(y) został(y) pomyślnie usunięty(y).",
     customerDeleted: "Klient(y) został(y) pomyślnie usunięty(y).",
     supplierDeleted: "Dostawca(y) został(y) pomyślnie usunięty(y).",
+    methodNotAllowed: "Metoda niedozwolona.",
+    resetPasswordEmailSent:
+      "E-mail resetowania hasła został pomyślnie wysłany. Proszę sprawdzić swoją pocztę.",
+    noEmailFound: "Nie znaleziono konta z tym adresem e-mail.",
   },
 };

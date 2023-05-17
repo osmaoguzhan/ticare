@@ -1,6 +1,5 @@
 import { LoadingProvider } from "@/contexts/loadingContext";
 import { appWithTranslation } from "next-i18next";
-import { SessionProvider } from "next-auth/react";
 import { CssBaseline } from "@mui/material";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -16,11 +15,10 @@ function Ticare({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <>
       <Head>
-        <title>TICARE </title>
+        <title>TICARE</title>
       </Head>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        {/* <SessionProvider session={session} refetchInterval={60 * 60}> */}
         <ThemeProvider theme={theme}>
           <SnackbarProvider
             maxSnack={3}
@@ -42,7 +40,6 @@ function Ticare({ Component, pageProps: { session, ...pageProps } }) {
             </LoadingProvider>
           </SnackbarProvider>
         </ThemeProvider>
-        {/* </SessionProvider> */}
       </QueryClientProvider>
     </>
   );

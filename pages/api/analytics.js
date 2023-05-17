@@ -242,7 +242,7 @@ export default async function handler(req, res) {
         correctedSale[key] = _.sum(correctedSale[key]);
       });
       Object.keys(correctedPurchase).forEach((key) => {
-        correctedPurchase[key] = _.sum(correctedPurchase[key]);
+        correctedPurchase[key] = -1 * _.sum(correctedPurchase[key]);
       });
 
       data.profitSinceTheBeginningOfTheMonth = _.mergeWith(
