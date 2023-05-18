@@ -11,6 +11,7 @@ import { useSession } from "@/lib/sessionQuery";
 import SelectInput from "@/components/inputs/SelectInput";
 import { useCompanies } from "@/hooks/query/useCompanies";
 import Constants from "@/utils/Constants";
+import { useCompany } from "@/hooks/query/useCompanySettings";
 
 const ProductsForm = ({ values }) => {
   const { t } = useTranslation(["label", "tooltip"]);
@@ -22,6 +23,10 @@ const ProductsForm = ({ values }) => {
   } = useForm();
   const router = useRouter();
   const { locale } = router;
+  const { company: settings } = useCompany({
+    locale,
+    enabled: false,
+  });
   const validator = Validator("product");
   const [session, loading] = useSession();
 
@@ -113,7 +118,11 @@ const ProductsForm = ({ values }) => {
           errors={errors}
           value={values?.salePrice || ""}
           InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+            startAdornment: (
+              <InputAdornment position="start">
+                {settings?.currency?.symbol}
+              </InputAdornment>
+            ),
           }}
           validation={validator.salePrice}
           type="number"
@@ -128,7 +137,11 @@ const ProductsForm = ({ values }) => {
           errors={errors}
           value={values?.purchasePrice || ""}
           InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+            startAdornment: (
+              <InputAdornment position="start">
+                {settings?.currency?.symbol}
+              </InputAdornment>
+            ),
           }}
           validation={validator.purchasePrice}
           type="number"

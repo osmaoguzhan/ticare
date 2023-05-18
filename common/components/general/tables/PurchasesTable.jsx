@@ -13,6 +13,7 @@ import { faCircleCheck, faHourglass1 } from "@fortawesome/free-solid-svg-icons";
 import { usePurchases } from "@/hooks/query/usePurchase";
 import { useSession } from "@/lib/sessionQuery";
 import Constants from "@/utils/Constants";
+import { useCompany } from "@/hooks/query/useCompanySettings";
 
 const PurchasesTable = () => {
   const { t } = useTranslation("label");
@@ -20,6 +21,11 @@ const PurchasesTable = () => {
   const router = useRouter();
   const theme = useTheme();
   const [session, loading] = useSession();
+  const { locale } = router;
+  const { company: settings } = useCompany({
+    locale,
+    enabled: false,
+  });
 
   const style = {
     "& .MuiDataGrid-row": {
@@ -33,7 +39,7 @@ const PurchasesTable = () => {
         outline: "none",
       },
   };
-  const { locale } = router;
+
   const [Modal, toggle, open] = useModal(false);
   const [currentSelected, setCurrentSelected] = useState(null);
   const columns = useMemo(() => {
@@ -55,7 +61,7 @@ const PurchasesTable = () => {
       },
       {
         field: "totalPrice",
-        headerName: t("totalPrice"),
+        headerName: t("totalPrice") + " (" + settings?.currency?.symbol + ")",
         flex: 1,
         editable: false,
       },

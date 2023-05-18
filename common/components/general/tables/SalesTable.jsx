@@ -13,6 +13,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faHourglass1 } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "@/lib/sessionQuery";
 import Constants from "@/utils/Constants";
+import { useQuery } from "@tanstack/react-query";
+import { set } from "lodash";
+import { useCompany } from "@/hooks/query/useCompanySettings";
 
 const SalesTable = () => {
   const { t } = useTranslation("label");
@@ -20,6 +23,11 @@ const SalesTable = () => {
   const router = useRouter();
   const theme = useTheme();
   const [session, loading] = useSession();
+  const { locale } = router;
+  const { company: settings } = useCompany({
+    locale,
+    enabled: false,
+  });
 
   const style = {
     "& .MuiDataGrid-row": {
@@ -33,7 +41,7 @@ const SalesTable = () => {
         outline: "none",
       },
   };
-  const { locale } = router;
+
   const [Modal, toggle, open] = useModal(false);
   const [currentSelected, setCurrentSelected] = useState(null);
   const columns = useMemo(() => {
@@ -55,7 +63,7 @@ const SalesTable = () => {
       },
       {
         field: "totalPrice",
-        headerName: t("totalPrice"),
+        headerName: t("totalPrice") + " (" + settings?.currency?.symbol + ")",
         flex: 1,
         editable: false,
       },
