@@ -7,7 +7,9 @@ import Validator from "@/utils/validator/Validator";
 import { useRouter } from "next/router";
 import { useCompany, useSubmitCompany } from "@/hooks/query/useCompanySettings";
 import { useSnackbar } from "notistack";
-import AddressAutoComplete from "../../inputs/AddressAutoComplete";
+import AddressAutoComplete from "@/components/inputs/AddressAutoComplete";
+import { useCurrency } from "@/hooks/query/useCurrency";
+import SelectInput from "@/components/inputs/SelectInput";
 
 const SettingsForm = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -20,8 +22,9 @@ const SettingsForm = () => {
   const validator = Validator("company");
   const router = useRouter();
   const { locale } = router;
-  const { company, isCompanyLoading, isCompanyError } = useCompany(locale);
-
+  const { company, isCompanyLoading, isCompanyError } = useCompany({ locale });
+  const { currencies, isCurrencyError, isCurrencyLoading } =
+    useCurrency(locale);
   const { mutate: submitCompany, isLoading: isSumbmitCompanyLoading } =
     useSubmitCompany({
       onSuccess: (message) => {
@@ -32,12 +35,11 @@ const SettingsForm = () => {
       },
     });
 
-  if (isCompanyError)
-    enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
-
-  if (isCompanyLoading || isSumbmitCompanyLoading) {
+  if (isCompanyLoading || isSumbmitCompanyLoading || isCurrencyLoading) {
     return <Loading />;
   }
+  if (isCompanyError || isCurrencyError)
+    enqueueSnackbar(t("error:somethingWentWrong"), { variant: "error" });
 
   return (
     <Grid container spacing={2}>
@@ -98,6 +100,17 @@ const SettingsForm = () => {
           errors={errors}
           validation={validator.website}
           tooltip={t("tooltip:companyWebsite")}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <SelectInput
+          name={"currency"}
+          label={t("currency")}
+          id={"currency"}
+          control={control}
+          value={currencies?.find((c) => c.key === company?.currency?.short)}
+          options={currencies}
+          tooltip={t("tooltip:profileCurrency")}
         />
       </Grid>
       <Grid item xs={12}>

@@ -8,12 +8,17 @@ import { useDeleteProduct, useProducts } from "@/hooks/query/useProduct";
 import { useRouter } from "next/router";
 import { useSession } from "@/lib/sessionQuery";
 import Constants from "@/utils/Constants";
+import { useCompany } from "@/hooks/query/useCompanySettings";
 
 const ProductTable = () => {
   const { t } = useTranslation("label");
   const { enqueueSnackbar } = useSnackbar();
   const { locale } = useRouter();
   const [session, loading] = useSession();
+  const { company: settings } = useCompany({
+    locale,
+    enabled: false,
+  });
   const columns = useMemo(() => {
     let cols = [
       {
@@ -36,13 +41,14 @@ const ProductTable = () => {
       },
       {
         field: "purchasePrice",
-        headerName: t("purchasePrice"),
+        headerName:
+          t("purchasePrice") + " (" + settings?.currency?.symbol + ")",
         flex: 1,
         editable: false,
       },
       {
         field: "salePrice",
-        headerName: t("salePrice"),
+        headerName: t("salePrice") + " (" + settings?.currency?.symbol + ")",
         flex: 1,
         editable: false,
       },

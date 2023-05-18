@@ -28,6 +28,7 @@ import { useSupplier } from "@/hooks/query/useSupplier";
 import { useSession } from "@/lib/sessionQuery";
 import { useCompanies } from "@/hooks/query/useCompanies";
 import Constants from "@/utils/Constants";
+import { useCompany } from "@/hooks/query/useCompanySettings";
 
 const PurchasesForm = ({ values }) => {
   const { t } = useTranslation(["label", "tooltip"]);
@@ -47,6 +48,10 @@ const PurchasesForm = ({ values }) => {
   } = useForm();
   const router = useRouter();
   const { locale } = router;
+  const { company: settings } = useCompany({
+    locale,
+    enabled: false,
+  });
   const {
     products: stock,
     isProductLoading,
@@ -94,7 +99,7 @@ const PurchasesForm = ({ values }) => {
     },
     {
       field: "purchasePrice",
-      headerName: t("price"),
+      headerName: t("price") + " (" + settings?.currency?.symbol + ")",
       flex: 1,
     },
     {
@@ -401,7 +406,12 @@ const PurchasesForm = ({ values }) => {
                   d = {
                     ...d,
                     products: products,
-                    status: d.paid ? "COMPLETED" : "PENDING",
+                    status:
+                      values?.status === "COMPLETED"
+                        ? values?.status
+                        : d.paid
+                        ? "COMPLETED"
+                        : "PENDING",
                   };
                   submitPurchase({
                     data: d,

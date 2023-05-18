@@ -25,7 +25,7 @@ model User {
   password    String
   role        Role                  @default(USER)
   phoneNumber String?
-  settings    Json                  @default("{\"language\": \"en\", \"currency\": \"USD\"}")
+  settings    Json                  @default("{\"language\": \"en\"}")
   isActivated Boolean               @default(false)
   resetTokens ResetPasswordTokens[]
   createdAt   DateTime              @default(now())
@@ -49,6 +49,7 @@ model Company {
   products     Product[]
   sales        Sale[]
   purchases    Purchase[]
+  currency     Json       @default("{\"short\": \"USD\", \"symbol\": \"$\"}")
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 }

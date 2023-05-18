@@ -24,10 +24,11 @@ import SelectInput from "@/components/inputs/SelectInput";
 import DataTable from "@/components/general/tables/DataTable";
 import { useSubmitSale } from "@/hooks/query/useSales";
 import { useCustomer } from "@/hooks/query/useCustomer";
-import _, { isNumber, uniqueId } from "lodash";
+import _, { uniqueId } from "lodash";
 import { useSession } from "@/lib/sessionQuery";
 import Constants from "@/utils/Constants";
 import { useCompanies } from "@/hooks/query/useCompanies";
+import { useCompany } from "@/hooks/query/useCompanySettings";
 
 const SalesForm = ({ values }) => {
   const { t } = useTranslation(["label", "tooltip"]);
@@ -47,6 +48,10 @@ const SalesForm = ({ values }) => {
   } = useForm();
   const router = useRouter();
   const { locale } = router;
+  const { company: settings } = useCompany({
+    locale,
+    enabled: false,
+  });
   const {
     products: stock,
     isProductLoading,
@@ -70,6 +75,9 @@ const SalesForm = ({ values }) => {
       enqueueSnackbar(message, { variant: "error" });
     },
   });
+  console.log("====================================");
+  console.log(values);
+  console.log("====================================");
   const {
     isCustomerLoading,
     isCustomerError,
@@ -96,7 +104,7 @@ const SalesForm = ({ values }) => {
     },
     {
       field: "salePrice",
-      headerName: t("price"),
+      headerName: t("price") + " (" + settings?.currency?.symbol + ")",
       flex: 1,
       editable: false,
     },
@@ -444,7 +452,12 @@ const SalesForm = ({ values }) => {
                   d = {
                     ...d,
                     products: products,
-                    status: d.paid ? "COMPLETED" : "PENDING",
+                    status:
+                      values?.status === "COMPLETED"
+                        ? values?.status
+                        : d.paid
+                        ? "COMPLETED"
+                        : "PENDING",
                   };
                   submitSale({
                     data: d,

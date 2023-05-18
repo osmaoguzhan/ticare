@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import { uniqueId } from "lodash";
 import { useTranslation } from "next-i18next";
+import { useCompany } from "@/hooks/query/useCompanySettings";
+import { useRouter } from "next/router";
 
 const style = {
   position: "absolute",
@@ -26,7 +28,11 @@ const style = {
 
 const TableModal = ({ title, content, isOpen, onClose }) => {
   const { t } = useTranslation("label");
-
+  const { locale } = useRouter();
+  const { company: settings } = useCompany({
+    locale,
+    enabled: false,
+  });
   return (
     <Modal
       open={isOpen}
@@ -46,9 +52,13 @@ const TableModal = ({ title, content, isOpen, onClose }) => {
               <TableHead>
                 <TableRow>
                   <TableCell align="center">{t("productName")}</TableCell>
-                  <TableCell align="center">{t("price")}</TableCell>
+                  <TableCell align="center">
+                    {t("price") + " (" + settings?.currency?.symbol + ")"}
+                  </TableCell>
                   <TableCell align="center">{t("quantity")}</TableCell>
-                  <TableCell align="center">{t("subtotal")}</TableCell>
+                  <TableCell align="center">
+                    {t("subtotal") + " (" + settings?.currency?.symbol + ")"}
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -71,10 +81,12 @@ const TableModal = ({ title, content, isOpen, onClose }) => {
                     <strong>{t("totalPrice")}: </strong>
                   </TableCell>
                   <TableCell align="right">
-                    {content
-                      ?.map((item) => item.price * item.quantity)
-                      .reduce((acc, value) => acc + value)
-                      .toFixed(2)}
+                    {settings?.currency?.symbol +
+                      " " +
+                      content
+                        ?.map((item) => item.price * item.quantity)
+                        .reduce((acc, value) => acc + value)
+                        .toFixed(2)}
                   </TableCell>
                 </TableRow>
               </TableBody>

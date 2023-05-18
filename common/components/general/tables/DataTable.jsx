@@ -126,7 +126,9 @@ const CustomToolbar = ({
             {t("edit")}
           </Button>
         ) : null}
-        {selectedRows.length > 0 ? (
+        {selectedRows.length > 0 &&
+        !router.pathname.includes("purchases") &&
+        !router.pathname.includes("sales") ? (
           <Button
             startIcon={<FontAwesomeIcon icon={faTrash} />}
             sx={{ fontSize: "0.8rem", color: theme.palette.primary.main }}
