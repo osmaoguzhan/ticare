@@ -12,9 +12,9 @@ export default async function handler(req, res) {
           key: timezone.value,
         };
       });
-      res.status(200).json({ success: true, data: timezones });
+      return res.status(200).json({ success: true, data: timezones });
     } catch (error) {
-      res
+      return res
         .status(500)
         .json({ success: false, message: Messages[locale].somethingWentWrong });
     }

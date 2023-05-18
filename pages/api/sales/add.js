@@ -8,24 +8,23 @@ export default async function handler(req, res) {
   const { locale } = req.headers;
   const userid = session?.user?.id;
   if (!session || !userid) {
-    res.status(401).send({
+    return res.status(401).send({
       success: false,
       message: Messages[locale || "gb"].notPermitted,
     });
-  } else {
-    try {
-      const data = req.body;
-      const sale = await prisma.sale.create(createSaleQuery(data, session));
-      res.status(200).json({
-        success: true,
-        message: Messages[locale || "gb"].saleCreated,
-        data: sale,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: Messages[locale || "gb"].somethingWentWrong,
-      });
-    }
+  }
+  try {
+    const data = req.body;
+    const sale = await prisma.sale.create(createSaleQuery(data, session));
+    return res.status(200).json({
+      success: true,
+      message: Messages[locale || "gb"].saleCreated,
+      data: sale,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: Messages[locale || "gb"].somethingWentWrong,
+    });
   }
 }

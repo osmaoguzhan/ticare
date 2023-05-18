@@ -75,9 +75,6 @@ const SalesForm = ({ values }) => {
       enqueueSnackbar(message, { variant: "error" });
     },
   });
-  console.log("====================================");
-  console.log(values);
-  console.log("====================================");
   const {
     isCustomerLoading,
     isCustomerError,

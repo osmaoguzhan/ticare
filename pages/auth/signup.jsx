@@ -1,5 +1,4 @@
 import SignupForm from "@/components/forms/auth/SignupForm";
-import { Box, Card } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import Validator from "@/utils/validator/Validator";
@@ -47,34 +46,7 @@ const SignUp = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "85vh",
-        bgcolor: "primary.main",
-      }}
-    >
-      <Card
-        sx={{
-          padding: 5,
-          marginX: {
-            xs: "20px",
-            md: "0px",
-          },
-          border: "2px solid #f0eeeb",
-          borderRadius: "30px",
-        }}
-      >
-        <SignupForm
-          handleOnSubmit={handleOnSubmit}
-          t={t}
-          validator={validator}
-        />
-      </Card>
-    </Box>
+    <SignupForm handleOnSubmit={handleOnSubmit} t={t} validator={validator} />
   );
 };
 

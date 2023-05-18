@@ -1,5 +1,4 @@
 import SigninForm from "@/components/forms/auth/SigninForm";
-import { Box, Card } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { getSession, signIn } from "next-auth/react";
@@ -37,7 +36,7 @@ const Signin = () => {
         const session = await getSession();
         let path =
           session.user.role === Constants.ROLES.ADMIN
-            ? `/admin/tickets`
+            ? `/admin/sales`
             : `/dashboard`;
         router
           .push(path, path, {
@@ -47,32 +46,7 @@ const Signin = () => {
       }
     });
   };
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "85vh",
-        bgcolor: "primary.main",
-      }}
-    >
-      <Card
-        sx={{
-          padding: 5,
-          marginX: {
-            xs: "15px",
-            md: "0px",
-          },
-          border: "2px solid #f0eeeb",
-          borderRadius: "30px",
-        }}
-      >
-        <SigninForm handleOnSubmit={handleOnSubmit} t={t} />
-      </Card>
-    </Box>
-  );
+  return <SigninForm handleOnSubmit={handleOnSubmit} t={t} />;
 };
 
 export const getServerSideProps = async (ctx) => {

@@ -34,6 +34,9 @@ export const Messages = {
     resetPasswordEmailSent:
       "Reset password email sent successfully. Please check your email.",
     noEmailFound: "No account found with this email.",
+    thankYouForContactingUs:
+      "Thank you for contacting us. We will get back to you as soon as possible.",
+    facedSomeIssues: "We faced some issues. Please try again later.",
   },
   tr: {
     userActivated: "Kullanıcı başarıyla aktifleştirildi.",
@@ -71,6 +74,10 @@ export const Messages = {
     resetPasswordEmailSent:
       "Parola sıfırlama e-postası başarıyla gönderildi. Lütfen e-postanızı kontrol edin.",
     noEmailFound: "Bu e-posta ile hesap bulunamadı.",
+    thankYouForContactingUs:
+      "Bize ulaştığınız için teşekkür ederiz. En kısa sürede size geri döneceğiz.",
+    facedSomeIssues:
+      "Bazı sorunlarla karşılaştık. Lütfen daha sonra tekrar deneyin.",
   },
   pl: {
     userActivated: "Użytkownik został pomyślnie aktywowany.",
@@ -107,5 +114,9 @@ export const Messages = {
     resetPasswordEmailSent:
       "E-mail resetowania hasła został pomyślnie wysłany. Proszę sprawdzić swoją pocztę.",
     noEmailFound: "Nie znaleziono konta z tym adresem e-mail.",
+    thankYouForContactingUs:
+      "Dziękujemy za kontakt. Odpowiemy najszybciej jak to możliwe.",
+    facedSomeIssues:
+      "Napotkaliśmy pewne problemy. Proszę spróbować ponownie później.",
   },
 };

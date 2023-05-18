@@ -8,7 +8,7 @@ import {
   faTruck,
   faPerson,
   faCashRegister,
-  faTicket,
+  faBuilding,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Constants = {
@@ -23,7 +23,7 @@ const Constants = {
   phoneNumberRegex: /^\+[1-9]\d{10,14}$/,
   postalCodeRegex: /^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]$/,
   websiteRegex:
-    /^(https?:\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(\#[-a-z\d_]*)?$/i,
+    /^(https?:\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(#[-a-z\d_]*)?$/i,
   companyNameMin: 2,
   companyNameMax: 64,
   addressLineMin: 3,
@@ -119,11 +119,10 @@ const Constants = {
     ];
     switch (role) {
       case "ADMIN":
-        //let tickets = { key: "tickets", icon: faTicket };
         if (companyCount > 0) {
           return [...commonMenuItems];
         }
-        return [tickets];
+        return [];
       case "USER":
       default:
         return [
@@ -132,25 +131,6 @@ const Constants = {
           { key: "settings", icon: faCogs, divider: true },
         ];
     }
-  },
-  menuItems: {
-    ADMIN: [
-      { key: "purchases", icon: faCashRegister },
-      { key: "sales", icon: faEuro },
-      { key: "products", icon: faCubes },
-      { key: "customers", icon: faPerson },
-      { key: "suppliers", icon: faTruck },
-      { key: "tickets", icon: faTicket },
-    ],
-    USER: [
-      { key: "dashboard", icon: faDashboard },
-      { key: "purchases", icon: faCashRegister },
-      { key: "sales", icon: faEuro },
-      { key: "products", icon: faCubes },
-      { key: "customers", icon: faPerson },
-      { key: "suppliers", icon: faTruck },
-      { key: "settings", icon: faCogs, divider: true },
-    ],
   },
   avatarOnClick: [
     { key: "profile", icon: faUser },

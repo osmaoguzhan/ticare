@@ -20,7 +20,7 @@ export default withAuth(
         token?.user?.role === Constants.ROLES.ADMIN &&
         !req.nextUrl.pathname.includes("/admin")
       ) {
-        req.nextUrl.pathname = `/admin/tickets`;
+        req.nextUrl.pathname = `/admin/sales`;
         return NextResponse.redirect(req.nextUrl);
       }
 
