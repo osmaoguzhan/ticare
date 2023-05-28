@@ -27,7 +27,6 @@
   "profileEmail": "Email can't be updated. If you want to change it, you must contact the support team.",
   "profilePhoneNumber": "Phone number is optional. It must be E.164 format. Example: +12345678901.",
   "language": "You can choose the language you want to use. The default language is English.",
-  "profileTimezone": "You can choose the timezone you want to use. The default timezone is UTC.",
   "profileCurrency": "You can choose the currency you want to use. The default currency is USD. This currency will be used for all calculations.",
   "currentPassword": "Current password.",
   "newPassword": "New password is the password you want to use. It must be between 6 and 18 characters. It must contain at least one uppercase letter, one lowercase letter and one number. It can't be the same as the current password.",

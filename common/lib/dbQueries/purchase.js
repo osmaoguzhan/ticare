@@ -292,9 +292,7 @@ export function updatePurchaseQuery(data, session, id, productPurchases) {
       supplierId: data.supplierId,
       companyId,
       productPurchase: {
-        deleteMany: toBeDeleted.map((d) => ({
-          id: d.id,
-        })),
+        deleteMany: toBeDeleted.map((d) => ({ id: d.id })),
         updateMany: toBeUpdated.map((d) => ({
           where: { id: d.id },
           data: {
@@ -305,11 +303,7 @@ export function updatePurchaseQuery(data, session, id, productPurchases) {
         create: toBeAdded.map((d) => ({
           quantity: d.quantity,
           price: d.purchasePrice,
-          product: {
-            connect: {
-              id: d.id,
-            },
-          },
+          product: { connect: { id: d.id } },
         })),
       },
     },

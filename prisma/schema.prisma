@@ -167,16 +167,6 @@ model Country {
   states           Json[]
 }
 
-model Timezone {
-  id     String  @id @default(auto()) @map("_id") @db.ObjectId
-  value  String
-  abbr   String
-  offset Int
-  isdst  Boolean
-  text   String
-  utc    Json[]
-}
-
 model ResetPasswordTokens {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   token          String   @unique

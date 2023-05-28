@@ -44,7 +44,6 @@ const SignUp = () => {
     }
     setLoading(false);
   };
-
   return (
     <SignupForm handleOnSubmit={handleOnSubmit} t={t} validator={validator} />
   );

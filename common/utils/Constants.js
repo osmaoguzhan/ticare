@@ -47,33 +47,6 @@ const Constants = {
   purchaseTitleMax: 100,
   purchaseDescriptionMin: 3,
   purchaseDescriptionMax: 100,
-  defaultSettings: (language) => {
-    let defaultSettings = {
-      theme: "light",
-      language: "gb",
-      currency: "GBP",
-      timezone: "Europe/London",
-    };
-    switch (language) {
-      case "pl":
-        return {
-          theme: "light",
-          language: "pl",
-          currency: "PLN",
-          timezone: "Europe/Warsaw",
-        };
-      case "tr":
-        return {
-          theme: "light",
-          language: "tr",
-          currency: "TRY",
-          timezone: "Europe/Istanbul",
-        };
-      case "gb":
-      default:
-        return defaultSettings;
-    }
-  },
   getMailTemplate: (language, fullname, id) => {
     switch (language) {
       case "pl":

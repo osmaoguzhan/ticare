@@ -27,9 +27,6 @@ export default async function handler(req, res) {
           result.states = country.states.map((state) => {
             return { key: state.id, label: state.name };
           });
-          result.timezones = country.timezones.map((timezone) => {
-            return { key: timezone.gmtOffset, label: timezone.zoneName };
-          });
           result.curreny = `${country.currency} - ${country.currency_symbol}`;
           result = {
             ...result,
