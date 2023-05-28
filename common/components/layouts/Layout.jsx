@@ -13,6 +13,7 @@ import {
   Grid,
   Menu,
   MenuItem,
+  Fab,
 } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,6 +21,7 @@ import {
   faBars,
   faBoxOpen,
   faChevronLeft,
+  faQuestion,
 } from "@fortawesome/free-solid-svg-icons";
 import useScreen from "@/hooks/useScreen";
 import { useState, useEffect, useCallback } from "react";
@@ -32,6 +34,7 @@ import { useCompany } from "@/hooks/query/useCompanySettings";
 import Loading from "@/components/general/Loading";
 import { useSession } from "@/lib/sessionQuery";
 import { useCompanies } from "@/hooks/query/useCompanies";
+import Swal from "sweetalert2";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -276,6 +279,7 @@ const Layout = ({ children }) => {
           ))}
         </List>
       </Drawer>
+
       <Main open={open}>
         <Toolbar />
         {children}
@@ -303,6 +307,34 @@ const Layout = ({ children }) => {
           </MenuItem>
         ))}
       </Menu>
+      <Fab
+        sx={{
+          display:
+            session?.user?.role === Constants.ROLES.ADMIN ? "none" : "block",
+          position: "fixed",
+          bottom: theme.spacing(2),
+          right: theme.spacing(2),
+        }}
+        color="primary"
+        aria-label="add"
+        onClick={() => {
+          let split = router.pathname.split("/");
+          if (split.length > 2) {
+            router.push(`/${split[1]}/add`);
+          }
+          Swal.fire({
+            title: t("label:help"),
+            html:
+              '<p style="text-align: justify;text-justify: inter-word;">' +
+              t(`label:${router.pathname}`) +
+              "</p>",
+            icon: "question",
+            confirmButtonText: "OK",
+          });
+        }}
+      >
+        <FontAwesomeIcon icon={faQuestion} fixedWidth />
+      </Fab>
     </Box>
   );
 };

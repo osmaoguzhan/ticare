@@ -27,9 +27,6 @@ export default async function handler(req, res) {
           result.states = country.states.map((state) => {
             return { key: state.id, label: state.name };
           });
-          result.timezones = country.timezones.map((timezone) => {
-            return { key: timezone.gmtOffset, label: timezone.zoneName };
-          });
           result.curreny = `${country.currency} - ${country.currency_symbol}`;
           result = {
             ...result,
@@ -40,7 +37,7 @@ export default async function handler(req, res) {
             name: translationOfTheCountry,
           };
         }
-        res.status(200).json({ success: true, data: result });
+        return res.status(200).json({ success: true, data: result });
       } else {
         const returnData = [];
         const countries = await prisma.country.findMany({
@@ -77,10 +74,10 @@ export default async function handler(req, res) {
             });
             break;
         }
-        res.status(200).json({ success: true, data: returnData });
+        return res.status(200).json({ success: true, data: returnData });
       }
     } catch (error) {
-      res
+      return res
         .status(500)
         .json({ success: false, message: Messages[locale].somethingWentWrong });
     }

@@ -27,7 +27,6 @@
   "profileEmail": "Nie można zaktualizować adresu e-mail. Jeśli chcesz to zmienić, musisz skontaktować się z zespołem pomocy technicznej.",
   "profilePhoneNumber": "Telefon jest opcjonalny. Musi to być format E.164. Przykład: +12345678901.",
   "language": "Możesz wybrać język, którego chcesz używać. Domyślnym językiem jest angielski.",
-  "profileTimezone": "Możesz wybrać strefę czasową, w której chcesz pracować. Domyślną strefą czasową jest UTC.",
   "profileCurrency": "Możesz wybrać walutę, której chcesz używać. Domyślną walutą jest USD. Ta waluta będzie używana do wszystkich obliczeń.",
   "currentPassword": "Aktualne hasło.",
   "newPassword": "Nowe hasło to hasło, którego chcesz użyć. Musi mieć od 6 do 18 znaków. Musi zawierać co najmniej jedną wielką literę, jedną małą literę i jedną cyfrę. Nie może być takie samo jak aktualne hasło.",

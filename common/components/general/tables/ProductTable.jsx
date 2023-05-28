@@ -52,6 +52,12 @@ const ProductTable = () => {
         flex: 1,
         editable: false,
       },
+      {
+        field: "quantity",
+        headerName: t("quantity"),
+        flex: 1,
+        editable: false,
+      },
     ];
     if (session?.user?.role === Constants.ROLES.ADMIN) {
       cols.push({

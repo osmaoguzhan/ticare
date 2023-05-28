@@ -29,9 +29,9 @@ export default async function handler(req, res) {
           key: currency.split(" - ")[0],
         };
       });
-      res.status(200).json({ success: true, data: currencies });
+      return res.status(200).json({ success: true, data: currencies });
     } catch (error) {
-      res
+      return res
         .status(500)
         .json({ success: false, message: Messages[locale].somethingWentWrong });
     }

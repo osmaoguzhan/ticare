@@ -1,11 +1,8 @@
 import { Button, Grid, Box, Typography, darken } from "@mui/material/";
-import Link from "next/link";
-import FormInput from "../../inputs/FormInput";
 import PasswordInput from "../../inputs/PasswordInput";
 import { useForm } from "react-hook-form";
 import { useTheme } from "@emotion/react";
 import Swal from "sweetalert2";
-import Constants from "@/utils/Constants";
 import _ from "lodash";
 import { useTranslation } from "next-i18next";
 import Validator from "@/utils/validator/Validator";
@@ -14,7 +11,7 @@ import bcrypt from "bcryptjs";
 import useLoading from "@/hooks/useLoading";
 import { useRouter } from "next/router";
 
-const ForgotPasswordForm = ({ userid, token }) => {
+const ResetPasswordForm = ({ userid, token }) => {
   const {
     handleSubmit,
     control,
@@ -125,4 +122,4 @@ const ForgotPasswordForm = ({ userid, token }) => {
   );
 };
 
-export default ForgotPasswordForm;
+export default ResetPasswordForm;

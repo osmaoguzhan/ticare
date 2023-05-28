@@ -27,7 +27,6 @@
   "profileEmail": "E-posta adresi değiştirilemez. Eğer e-posta adresinizi değiştirmek istiyorsanız destek ekibimizle iletişime geçin.",
   "profilePhoneNumber": "Telefon numarası opsiyoneldir. E.164 formatında olmalıdır. Örnek: +12345678901.",
   "language": "Uygulamayı kullanmak istediğiniz bir dili seçebilirsiniz. Varsayılan dil İngilizce'dir.",
-  "profileTimezone": "Uygulamayı kullanmak istediğiniz bir saat dilimi seçebilirsiniz. Varsayılan saat dilimi UTC'dir.",
   "profileCurrency": "Uygulamayı kullanmak istediğiniz bir para birimi seçebilirsiniz. Varsayılan para birimi USD'dir. Seçilen para birimi uygulamadaki hesaplamalar için kullanılacaktır.",
   "currentPassword": "Mevcut şifre.",
   "newPassword": "Kullanmak istediğiniz yeni şifre. Uzunluk 6 ile 18 karakter arasında olmalıdır. Şifre en az bir büyük harf, bir küçük harf ve bir rakam içermelidir. Şu anki şifrenizle aynı olmamalıdır.",

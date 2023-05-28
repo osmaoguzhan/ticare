@@ -10,7 +10,7 @@ const getCompanies = async (locale) => {
   return res.json();
 };
 
-export const useCompanies = (locale, role = "USER") => {
+export const useCompanies = (locale, role = Constants.ROLES.USER) => {
   const { isError, isLoading, data } = useQuery(
     ["companies"],
     () => getCompanies(locale),

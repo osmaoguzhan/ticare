@@ -39,7 +39,7 @@ export default function Home() {
           sx={{
             maxWidth: {
               xs: "90%",
-              md: "950px",
+              md: "75%",
             },
           }}
         >
@@ -69,7 +69,7 @@ export default function Home() {
                 <Typography
                   component={"div"}
                   color={theme.palette.primary.text}
-                  style={{ marginBottom: "5%" }}
+                  style={{ marginBottom: "1%" }}
                 >
                   <Typography variant="h6">
                     {t("easy").toUpperCase()}
@@ -84,7 +84,7 @@ export default function Home() {
                 <Typography
                   component={"div"}
                   color={theme.palette.primary.text}
-                  style={{ marginBottom: "5%" }}
+                  style={{ marginBottom: "1%" }}
                 >
                   <Typography variant="h6" color={theme.palette.primary.text}>
                     {t("fast").toUpperCase()}
@@ -99,7 +99,6 @@ export default function Home() {
                 <Typography
                   component={"div"}
                   color={theme.palette.primary.text}
-                  style={{ marginBottom: "5%" }}
                 >
                   <Typography variant="h6" color={theme.palette.primary.text}>
                     {t("free").toUpperCase()}

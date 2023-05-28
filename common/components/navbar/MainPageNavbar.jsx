@@ -3,6 +3,9 @@ import {
   faBars,
   faSignIn,
   faUserPlus,
+  faContactCard,
+  faContactBook,
+  faMessage,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -42,6 +45,7 @@ const Navbar = () => {
   const isHidden = {
     signin: router.pathname === "/auth/signin",
     signup: router.pathname === "/auth/signup",
+    contact: router.pathname === "/contact",
   };
 
   useEffect(() => {
@@ -101,6 +105,24 @@ const Navbar = () => {
             }}
           >
             <SelectLanguage />
+            <Box
+              sx={{
+                mr: 1,
+                display: isHidden.contact ? "none" : "flex",
+              }}
+            >
+              <Button
+                onClick={() => router.push("/contact")}
+                sx={{
+                  color: "white",
+                  ":hover": {
+                    backgroundColor: darken(theme.palette.primary.main, 0.1),
+                  },
+                }}
+              >
+                {t("label:contactUs")}
+              </Button>
+            </Box>
             <Box
               sx={{
                 mr: 1,
@@ -195,6 +217,20 @@ const Navbar = () => {
                     }}
                   />{" "}
                   {t("signUp")}
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    router.push("/contact");
+                    handleCloseUserMenu();
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faMessage}
+                    style={{
+                      marginRight: "0.5rem",
+                    }}
+                  />{" "}
+                  {t("contactUs")}
                 </MenuItem>
               </Menu>
             </Box>

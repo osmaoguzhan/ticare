@@ -1,7 +1,6 @@
 import NewPasswordForm from "@/components/forms/profile/NewPasswordForm";
 import UserSettingsForm from "@/components/forms/profile/UserSettingsForm";
 import Layout from "@/components/layouts/Layout";
-import { Grid, Typography } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import TabMenu from "@/components/profile/TabMenu";

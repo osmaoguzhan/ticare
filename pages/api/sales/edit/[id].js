@@ -9,39 +9,35 @@ export default async function handler(req, res) {
   const { locale } = req.headers;
   const userid = session?.user?.id;
   if (!session || !userid) {
-    res.status(401).send({
+    return res.status(401).send({
       success: false,
       message: Messages[locale || "gb"].notPermitted,
     });
-  } else {
-    try {
-      let data = req.body;
-      let { id } = req.query;
-      const sale = await prisma.sale.findUnique({
-        where: { id },
-      });
-      if (!sale) {
-        res.status(404).json({
-          success: false,
-          message: Messages[locale || "gb"].saleNotFound,
-        });
-      } else {
-        const productSales = await prisma.productSale.findMany({
-          where: { saleId: id },
-        });
-        await prisma.sale.update(
-          updateSaleQuery(data, session, id, productSales)
-        );
-        res.status(200).json({
-          success: true,
-          message: Messages[locale || "gb"].saleUpdated,
-        });
-      }
-    } catch (error) {
-      res.status(500).json({
+  }
+  try {
+    let data = req.body;
+    let { id } = req.query;
+    const sale = await prisma.sale.findUnique({
+      where: { id },
+    });
+    if (!sale) {
+      return res.status(404).json({
         success: false,
-        message: Messages[locale || "gb"].somethingWentWrong,
+        message: Messages[locale || "gb"].saleNotFound,
       });
     }
+    const productSales = await prisma.productSale.findMany({
+      where: { saleId: id },
+    });
+    await prisma.sale.update(updateSaleQuery(data, session, id, productSales));
+    return res.status(200).json({
+      success: true,
+      message: Messages[locale || "gb"].saleUpdated,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: Messages[locale || "gb"].somethingWentWrong,
+    });
   }
 }
